@@ -1,0 +1,47 @@
+
+
+List of all the Powers:
+
+http://www.comicvine.com/api/powers/?
+api_key=f6539c8aca297ac9f221c04eb1d0fa3937e02354
+&
+field_list=name
+&
+format=json
+
+Look for a speciic superhero:
+
+http://www.comicvine.com/api/characters/?
+api_key=f6539c8aca297ac9f221c04eb1d0fa3937e02354
+&
+filter=name:batman
+&
+format=json
+
+Pulls down the name and unique id of characters
+
+http://www.comicvine.com/api/characters/?
+api_key=f6539c8aca297ac9f221c04eb1d0fa3937e02354
+&
+field_list=id,name
+&
+filter=name:batman
+&
+format=
+
+
+
+http://www.comicvine.com/api/search/?
+api_key=f6539c8aca297ac9f221c04eb1d0fa3937e02354
+&
+query=spawn
+&
+format=json
+
+
+Get individual character 
+
+http://www.comicvine.com/api/character/4005-1253/?
+api_key=f6539c8aca297ac9f221c04eb1d0fa3937e02354
+&
+format=json
