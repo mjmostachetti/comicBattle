@@ -1,0 +1,11 @@
+Outline of MVP:
+
+Wireframe:
+
+Which APIs:
+
+
+Areas of Responsibility:
+
+Initial BDD Descriptions:
+

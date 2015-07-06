@@ -1,0 +1,8 @@
+username
+hash
+salt
+win
+loss
+superhero1
+superhero2
+superhero3
