@@ -53,34 +53,13 @@ router.post('/signup', function(request,response){
 			})
 		}	
 	})
-	/*
-	db.post('userData',{
-		"username" : username,
-		"salt" : 	,
-		"hash" :  ,
-		"win" :  ,
-		"loss" :  ,
-		"hero1" :  ,
-		"hero2" :  ,
-		"hero3" :  
-	})
-	*/
 })
 
 router.post('/login', function(request,response){
 	var username = request.body.username
 	var password = request.body.password
-	db.post('userData',{
-		"username" : username,
-		"salt" : 	"",
-		"hash" :  "",
-		"win" :  0,
-		"loss" :  0,
-		"hero1" : "",
-		"hero2" :  "",
-		"hero3" :  ""
-	})
-	response.redirect('/')
+
+	response.render('main')
 })
 
 module.exports = router;
