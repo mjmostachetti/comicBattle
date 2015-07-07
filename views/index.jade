@@ -2,7 +2,8 @@ extends layout
 
 block content
   h1= title
-  form(action="/signup")
+  p= message
+  form(action="/signup" method="post")
     label Username : 
     input(name="username" type="text" placeholder="Enter Username")
     br
@@ -11,7 +12,7 @@ block content
     br
     input(type="submit" value="Signup")
 
-  form(action="/login")
+  form(action="/login" method="post")
     label Username : 
     input(name="username" type="text" placeholder="Enter Username")
     br
