@@ -2,4 +2,20 @@ extends layout
 
 block content
   h1= title
-  p Welcome to #{title}
+  form(action="/signup")
+    label Username : 
+    input(name="username" type="text" placeholder="Enter Username")
+    br
+    label Password : 
+    input(name="password" type="text" placeholder="Enter Password")
+    br
+    input(type="submit" value="Signup")
+
+  form(action="/login")
+    label Username : 
+    input(name="username" type="text" placeholder="Enter Username")
+    br
+    label Password : 
+    input(name="password" type="text" placeholder="Enter Password")
+    br
+    input(type="submit" value="Login")
