@@ -2,6 +2,10 @@ var express = require('express');
 var router = express.Router();
 var db = require('orchestrate')('5504b916-9df4-4a5c-9d58-c2da0c4f06f8')
 var pass = require('pwd');
+var characterIDs = require('../characterID')
+
+console.log(characterIDs)
+console.log(characterIDs[0])
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -58,8 +62,24 @@ router.post('/signup', function(request,response){
 router.post('/login', function(request,response){
 	var username = request.body.username
 	var password = request.body.password
+	db.search('userData', 'value.username: ' + username)
+	.then(function(resp){
+		console.log(resp.body.results[0].value)
+		var userHash = resp.body.results[0].value.hash
+		var userSalt = resp.body.results[0].value.salt
+		pass.hash(password,userSalt,function (err,hash){
+			if(userHash === hash){
+				response.render('main', { username : resp.body.results[0].value.username})
+			}else{
+				response.render('index',{ message : 'FU'})
+			}
+		})
+	})
+	//response.render('main')
+})
 
-	response.render('main')
+router.get('/characters',function(request,response){
+
 })
 
 module.exports = router;

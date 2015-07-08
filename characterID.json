@@ -1,0 +1,4 @@
+module.extends = {
+	"batman" : "1699",
+	"daredevil" : "24694"
+}

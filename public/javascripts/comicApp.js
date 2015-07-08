@@ -13,6 +13,13 @@ $(document).ready(function(){
 		}
 	})
 
+	var CharacterCollection = Backbone.Collection.extend({
+		model: Character,
+		url: '/characters'
+	})
+
+	var characterList = new CharacterCollection;
+
 	var CharacterView = Backbone.View.extend({
 		template: _.template($(#character-info).html()),
 		render : function(){
@@ -20,11 +27,15 @@ $(document).ready(function(){
 		}
 	})
 
+
+
 	var MainAppView = Backbone.View.extend({
-		el: $('comicapp'),
+		el: $('#comicapp'),
 		initialize: function(){
-			
+			characterList.fetch()
 		}
 	})
+
+	var App = new MainAppView;
 
 })

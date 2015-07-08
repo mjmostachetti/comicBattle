@@ -46,5 +46,12 @@ api_key=f6539c8aca297ac9f221c04eb1d0fa3937e02354
 &
 format=json
 
+OG CALL
 
+http://www.comicvine.com/api/character/4005-24694/?
+api_key=f6539c8aca297ac9f221c04eb1d0fa3937e02354
+&
+field_list=name,powers
+&
+format=json
 
