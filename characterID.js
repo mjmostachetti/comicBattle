@@ -39,4 +39,12 @@ module.exports = [
 	"name" : "billy-batson",
 	"id" : "2350"
 },
+{
+	"name" : "carnage",
+	"id" : "1490"
+},
+{
+	"name" : "sabretooth",
+	"id" : "4563"
+}
 ]
