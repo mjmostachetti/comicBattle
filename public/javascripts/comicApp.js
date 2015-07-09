@@ -45,8 +45,6 @@ $(document).ready(function(){
 		}
 	})
 
-
-
 	var MainAppView = Backbone.View.extend({
 		el: $('#comicapp'),
 		initialize: function(){
