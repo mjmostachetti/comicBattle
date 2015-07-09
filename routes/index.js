@@ -86,8 +86,19 @@ router.post('/login', function(request,response){
 	//response.render('main')
 })
 
-router.get('/characters',function(request,response){
+/*
+ * This function is used to fill out our database!
+ */
+router.get('/fillOut', function(request,response){
 
 })
+
+
+router.get('/characters',function(request,response){
+	console.log(characterIDs)
+})
+
+//define api 'GET' request to return all the users
+router.get('/users')
 
 module.exports = router;

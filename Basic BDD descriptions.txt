@@ -1,0 +1,34 @@
+Basic BDD descriptions:
+
+User should be able to create an account
+
+User should be able to login in the event they have an account.
+
+When a user logs in, they should be taken to the character select view.
+
+When a user selects a character, that character's portrait should appear in the team window.
+
+When a user selects all three characters, they should be able to select the team they wish to fight.
+
+When all characters have been selected, the fight button can be pressed.
+
+When the fight button is pressed, the view should transition to the vs screen.
+
+When the vs View has loaded, the user should be transitioned to the fight screen.
+
+Test that the rock, paper, scissors mechanic is working.
+
+When a character is defeated, the next character should be pushed to the screen.
+
+When all three members of a team have been defeated, user should be sent back to character select.
+
+When a user wins, their win/loss record should update.
+
+When a user selects leaderboards, they should see the top scores (wins might be easier to track as a score value)
+
+When a user selects profile, they should see all of their profile information.
+
+When a user updates their profile, those changes are saved.
+
+When a user uploads an avatar image, that image should be saved.
+
