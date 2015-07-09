@@ -18,3 +18,45 @@ html
 				<li><img src=<%=this.model.attributes.image.thumb_url%>/></li>
 				<li><%=this.model.attributes.deck%></li>
 			</ul>
+extends layout
+block content
+    html
+        head
+            script(type='text/javascript' src='../javascripts/jquery-2.1.4.js')
+            script(type='text/javascript' src='../javascripts/underscore.js')
+            script(type='text/javascript' src='../javascripts/backbone.js')
+            script(type='text/javascript' src='../javascripts/comicApp.js')
+
+            //- script(type='text/javascript' src='../stylesheets/style.css')
+        body
+            div(id="comicapp")
+                p= "Sup, " + username
+
+                button(class="button" id="button").
+                    be awesome
+
+
+                header.container#header
+                     div.span-24#socialLinks
+                        ul.right#right
+                          li Follow us:
+                          li
+                            a(href='http://www.twitter.com')
+                              img(src="img/bat.jpg")
+                          li
+                            a(href='http://www.facebook.com')
+                              img(src="img/bat2.jpg")
+                     div.span-25#titleContent
+                        ul.left#left
+                          li Set 1
+                          li
+                            a(href='http://www.everydaycarry.com')
+                               img(src="img/claw.jpg")
+                          li
+                            a(href='http://www.everydaycarry.com')
+                               img(src="img/clip.jpg")
+
+
+
+
+            //- script(type="text/template" id="character-info").

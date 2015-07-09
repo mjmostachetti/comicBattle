@@ -1,17 +1,29 @@
 var express = require('express');
 var router = express.Router();
-var db = require('orchestrate')('5504b916-9df4-4a5c-9d58-c2da0c4f06f8')
+var db = require('orchestrate')('5504b916-9df4-4a5c-9d58-c2da0c4f06f8');
 var pass = require('pwd');
+<<<<<<< HEAD
 var characterIDs = require('../characterID')
 var http = require('http')
+=======
+var characterIDs = require('../characterID');
+
+>>>>>>> 7d35680292bb415d73caa7d4eaa966eaa20fa862
 
 console.log(characterIDs)
 console.log(characterIDs[0])
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Welcome to Comic Rock Paper Sciccors' });
+  res.render('index', { title: 'Comic Rock Paper Sciccors' });
 });
+
+router.get('/teams', function(req, res, next){
+    res.render('select', { title: 'Select Yo Teams Bitch' });
+});
+
+
+
 
 router.post('/signup', function(request,response){
 	
