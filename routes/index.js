@@ -116,7 +116,7 @@ router.get('/api/characters', function(request,response){
 	characterIDs.forEach(function(item){
 		http.get('http://www.comicvine.com/api/character/' +
 			'4005-'+item.id+'/?api_key=f6539c8aca297ac9f221c04eb1d0fa3937e02354&' +
-			'field_list=name,image,powers,id&format=json',
+			'field_list=name,image,powers,deck,id&format=json',
 			function(res){
 				var writeToThis = '';
 				res.on('data', function (chunk) {
@@ -124,10 +124,12 @@ router.get('/api/characters', function(request,response){
 			  });
 			  res.on('end', function(){
 			  	var charJSON = JSON.parse(writeToThis)
+			  	console.log(charJSON.results)
+			  	var resultsJSON = charJSON.results
 			  	counter++;
 			  	console.log("The counter is now: " + counter)
 			  	console.log("When the counter is: " + characterIDs.length + ", return JSON of all characters.")
-			  	arrayOfCharacterObjs.push(charJSON)
+			  	arrayOfCharacterObjs.push(resultsJSON)
 			  	if(counter === characterIDs.length){
 						response.json(arrayOfCharacterObjs)
 					}
