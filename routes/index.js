@@ -3,6 +3,7 @@ var router = express.Router();
 var db = require('orchestrate')('5504b916-9df4-4a5c-9d58-c2da0c4f06f8')
 var pass = require('pwd');
 var characterIDs = require('../characterID')
+var http = require('http')
 
 console.log(characterIDs)
 console.log(characterIDs[0])
@@ -82,12 +83,27 @@ router.post('/login', function(request,response){
  * This function is used to fill out our database!
  */
 router.get('/fillOut', function(request,response){
-
+	console.log("This is an array of the character IDs : ")
+	console.log(characterIDs)
+	characterIDs.forEach(function(item){
+		http.get('http://www.comicvine.com/api/character/' +
+			'4005-'+item.id+'/?api_key=f6539c8aca297ac9f221c04eb1d0fa3937e02354&' +
+			'field_list=name,image,powers&format=json',
+			function(res){
+				var writeToThis = '';
+				res.on('data', function (chunk) {
+			    writeToThis += chunk
+			  });
+			  res.on('end', function(){
+			  	console.log(typeof writeToThis)
+			  })
+		})
+	})
 })
 
 
 router.get('/characters',function(request,response){
-	console.log(characterIDs)
+
 })
 
 //define api 'GET' request to return all the users
