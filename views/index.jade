@@ -1,22 +1,29 @@
 extends layout
 
 block content
-  h1= title
-  p= message
-  form(action="/signup" method="post")
-    label Username : 
-    input(name="username" type="text" placeholder="Enter Username")
-    br
-    label Password : 
-    input(name="password" type="password" placeholder="Enter Password")
-    br
-    input(type="submit" value="Signup")
+  
+  div.title
+    h1= title
+    p= message
 
-  form(action="/login" method="post")
-    label Username : 
-    input(name="username" type="text" placeholder="Enter Username")
-    br
-    label Password : 
-    input(name="password" type="text" placeholder="Enter Password")
-    br
-    input(type="submit" value="Login")
+  div.login
+
+    h1 Login :
+
+    form(action="/signup" method="post")
+      h1 Username : 
+      input(name="username" type="text" )
+      br
+      h1 Password : 
+      input(name="password" type="password" )
+      br
+      input(type="submit" value="Signup")
+
+    //- form(action="/login" method="post")
+    //-   label Username : 
+    //-   input(name="username" type="text" )
+    //-   br
+    //-   label Password : 
+    //-   input(name="password" type="text" )
+    //-   br
+    //-   input(type="submit" value="Login")
