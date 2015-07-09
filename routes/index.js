@@ -88,23 +88,55 @@ router.get('/fillOut', function(request,response){
 	characterIDs.forEach(function(item){
 		http.get('http://www.comicvine.com/api/character/' +
 			'4005-'+item.id+'/?api_key=f6539c8aca297ac9f221c04eb1d0fa3937e02354&' +
-			'field_list=name,image,powers&format=json',
+			'field_list=name,image,powers,id&format=json',
 			function(res){
 				var writeToThis = '';
 				res.on('data', function (chunk) {
 			    writeToThis += chunk
 			  });
 			  res.on('end', function(){
-			  	console.log(typeof writeToThis)
+			  	var charJSON = JSON.parse(writeToThis)
+			  	console.log(charJSON)
 			  })
 		})
 	})
 })
 
+// api call for the CharactersCollection
+router.get('/api/characters', function(request,response){
+	console.log("This is an array of the character IDs : ")
+	console.log(characterIDs)
+	var counter = 0;
+	var arrayOfCharacterObjs = []
+	// for each index in the characterID.js array, hit the api for the name, image,powers,id
+	// when all the data is sent back, push to the arrayOfCharacterObjs array
+	// since this is async, we need a counter to actually tell us when these things finish
+	// when the counter === characterIDs.length, send JSON to the frontend and backbone 
+	// will render the proper views!
+	characterIDs.forEach(function(item){
+		http.get('http://www.comicvine.com/api/character/' +
+			'4005-'+item.id+'/?api_key=f6539c8aca297ac9f221c04eb1d0fa3937e02354&' +
+			'field_list=name,image,powers,id&format=json',
+			function(res){
+				var writeToThis = '';
+				res.on('data', function (chunk) {
+			    writeToThis += chunk
+			  });
+			  res.on('end', function(){
+			  	var charJSON = JSON.parse(writeToThis)
+			  	counter++;
+			  	console.log("The counter is now: " + counter)
+			  	console.log("When the counter is: " + characterIDs.length + ", return JSON of all characters.")
+			  	arrayOfCharacterObjs.push(charJSON)
+			  	if(counter === characterIDs.length){
+						response.json(arrayOfCharacterObjs)
+					}
+			  })
+		})
 
-router.get('/characters',function(request,response){
-
+	})
 })
+
 
 //define api 'GET' request to return all the users
 router.get('/users')

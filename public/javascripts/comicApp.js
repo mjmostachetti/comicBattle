@@ -15,7 +15,7 @@ $(document).ready(function(){
 
 	var CharacterCollection = Backbone.Collection.extend({
 		model: Character,
-		url: '/characters'
+		url: '/api/characters'
 	})
 
 	var User = Backbone.Model.extend({
