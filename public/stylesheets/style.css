@@ -1,8 +1,33 @@
+
+
+
 body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background-color: #52DDFF;
 }
 
 a {
   color: #00B7FF;
+}
+
+
+
+
+
+.span-24 ul {
+	list-style: none;
+
+}
+
+.right {
+	float: right;
+}
+
+.span-25 ul {
+	list-style: none;
+}
+
+.left {
+	float: left;
 }

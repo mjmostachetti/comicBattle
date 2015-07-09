@@ -6,4 +6,13 @@ module.exports = [
 {
 	"name" : "daredevil",
 	"id" : "24694"
-}]
+},
+{
+	"name" : "superman",
+	"id" : "2345"
+
+}
+
+
+
+]
