@@ -8,15 +8,13 @@ module.exports = [
 	"id" : "24694"
 },
 {
-<<<<<<< HEAD
+
 	"name" : "superman",
 	"id" : "2345"
 
-}
+},
 
-
-
-=======
+{
 	"name" : "hulk",
 	"id" : "2267"
 },
@@ -56,5 +54,5 @@ module.exports = [
 	"name" : "sabretooth",
 	"id" : "4563"
 }
->>>>>>> master
+
 ]
