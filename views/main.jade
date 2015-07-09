@@ -1,23 +1,23 @@
 doctype html
 html
-	head
-		script(type='text/javascript' src='../javascripts/jquery-2.1.4.js')
-		script(type='text/javascript' src='../javascripts/underscore.js')
-		script(type='text/javascript' src='../javascripts/backbone.js')
-		script(type='text/javascript' src='../javascripts/comicApp.js')
-		script(type='text/css' src='../stylesheets/normalize.css')
-	body
-		div(id="comicapp")
-			p= "Sup, " + username
-			ul(id="characters-list")
+    head
+        script(type='text/javascript' src='../javascripts/jquery-2.1.4.js')
+        script(type='text/javascript' src='../javascripts/underscore.js')
+        script(type='text/javascript' src='../javascripts/backbone.js')
+        script(type='text/javascript' src='../javascripts/comicApp.js')
+        script(type='text/css' src='../stylesheets/normalize.css')
+    body
+        div(id="comicapp")
+            p= "Sup, " + username
+            ul(id="characters-list")
 
-		script(type="text/template" id="character-info").
-			<ul>
-				<li><%=this.model.attributes.name%></li>
-				<li><%=this.model.attributes.powers.length%></li>
-				<li><img src=<%=this.model.attributes.image.thumb_url%>/></li>
-				<li><%=this.model.attributes.deck%></li>
-			</ul>
+        script(type="text/template" id="character-info").
+            <ul>
+                <li><%=this.model.attributes.name%></li>
+                <li><%=this.model.attributes.powers.length%></li>
+                <li><img src=<%=this.model.attributes.image.thumb_url%>/></li>
+                <li><%=this.model.attributes.deck%></li>
+            </ul>
 extends layout
 block content
     html
