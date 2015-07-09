@@ -8,7 +8,35 @@ module.exports = [
 	"id" : "24694"
 },
 {
-	"name" :
-
+	"name" : "hulk",
+	"id" : "2267"
+},
+{
+	"name" : "spider-man",
+	"id" : "1443"
+},
+{
+	"name" : "superman",
+	"id" : "1807"
+},
+{
+	"name" : "cyclops",
+	"id" : "1459"
+},
+{
+	"name" : "martian-manhunter",
+	"id" : "2047"
+},
+{
+	"name" : "Thanos",
+	"id" : "7607"
+},
+{
+	"name" : "joker",
+	"id" : "1702"
+},
+{
+	"name" : "billy-batson",
+	"id" : "2350"
 },
 ]
