@@ -18,6 +18,24 @@ $(document).ready(function(){
 		url: '/characters'
 	})
 
+	var User = Backbone.Model.extend({
+		defaults : function(){
+			return {
+				username : '',
+				win : 0,
+				loss : 0,
+				hero1 : '',
+				hero2 : '',
+				hero3 : ''
+			}
+		}
+	})
+
+	var UserCollection = Backbone.Collection.extend({
+		model : User,
+		url: '/users'
+	})
+
 	var characterList = new CharacterCollection;
 
 	var CharacterView = Backbone.View.extend({

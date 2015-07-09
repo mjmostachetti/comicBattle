@@ -1,3 +1,5 @@
+userData
+
 id
 username
 hash
@@ -7,3 +9,13 @@ loss
 superhero1
 superhero2
 superhero3
+
+characterData
+
+
+id
+deck
+powers
+image
+
+
