@@ -49,6 +49,7 @@ $(document).ready(function(){
 
 	//creating a view for login
 	var LoginView = Backbone.View.extend({
+		el: $(),
 
 	})
 
