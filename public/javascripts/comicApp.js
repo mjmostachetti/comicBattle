@@ -47,6 +47,12 @@ $(document).ready(function(){
 
 	var viewArray = [];
 
+	//creating a view for login
+	var LoginView = Backbone.View.extend({
+		el: $(),
+
+	})
+
 	var MainAppView = Backbone.View.extend({
 		el: $('#comicapp'),
 		initialize: function(){

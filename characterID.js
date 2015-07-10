@@ -55,5 +55,4 @@ module.exports = [
 	"name" : "sabretooth",
 	"id" : "4563"
 }
-
 ]

@@ -1,7 +1,7 @@
 extends layout
 
 block content
-  
+
   div.title
     h1= title
     p= message
@@ -10,17 +10,17 @@ block content
 
     h1 Login/Signup :
 
-    form(action="/login" method="post")
-      h1 Username : 
-      input(name="username" type="text" )
+    form(id="login" action="/login" method="post")
+      h1 Username :
+      input(id="username" name="username" type="text" )
       br
-      h1 Password : 
-      input(name="password" type="password" )
+      h1 Password :
+      input(id="password" name="password" type="password" )
       br
       br
-      input(type="submit" value="Login")
-    form(action="/signup" method="post")
-      input(type="submit" value="Signup")
+      input(id="loginButton" type="submit" value="Login")
+    form(id= "signup" action="/signup" method="post")
+      input(id= "signupButton" type="submit" value="Signup")
 
       //- button(action="/login" method="post" value="Login").
       //-   Login
@@ -28,10 +28,10 @@ block content
 
 
     //- form(action="/login" method="post")
-    //-   label Username : 
+    //-   label Username :
     //-   input(name="username" type="text" )
     //-   br
-    //-   label Password : 
+    //-   label Password :
     //-   input(name="password" type="text" )
     //-   br
     //-   input(type="submit" value="Login")
