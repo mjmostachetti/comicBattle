@@ -19,6 +19,7 @@ $(document).ready(function(){
 
 	var User = Backbone.Model.extend({
 		defaults : {
+				id : 0,
 				username : '',
 				win : 0,
 				loss : 0,
@@ -53,6 +54,9 @@ $(document).ready(function(){
 
 	var MainAppView = Backbone.View.extend({
 		el: $('#comicapp'),
+		events : {
+			"click .addChar" : "addCharacterToUserAccount"
+		},
 		initialize: function(){
 			// listen to the characterList collection, when a model is added, run this.addCharacter
 			this.listenTo(characterList, 'add', this.addCharacter)
@@ -67,6 +71,9 @@ $(document).ready(function(){
 			console.log("This is an array of views : " + view)
       view.render()
 			this.$("#characters-list").append(view.$el);
+		},
+		addCharacterToUserAccount : function(){
+			console.log("run")
 		}
 	})
 
