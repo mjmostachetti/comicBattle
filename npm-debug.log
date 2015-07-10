@@ -18,6 +18,13 @@
 10 verbose pkgid comicApp@0.0.0
 11 verbose cwd /Users/juniorjoker/comicBattle
 12 error Darwin 14.1.1
+<<<<<<< HEAD
+=======
+=======
+11 verbose cwd /Users/Michael/Desktop/comicBattle
+12 error Darwin 14.3.0
+>>>>>>> 187500b2a579e7e6e68ffb9cd5e2b2dec27e3682
+>>>>>>> master
 13 error argv "node" "/usr/local/bin/npm" "start"
 14 error node v0.12.2
 15 error npm  v2.7.4
