@@ -18,8 +18,8 @@ $(document).ready(function(){
 	})
 
 	var User = Backbone.Model.extend({
-		defaults : function(){
-			return {
+		defaults : {
+				id : 0,
 				username : '',
 				win : 0,
 				loss : 0,
@@ -27,7 +27,6 @@ $(document).ready(function(){
 				hero2 : '',
 				hero3 : ''
 			}
-		}
 	})
 
 	var UserCollection = Backbone.Collection.extend({
@@ -60,8 +59,15 @@ $(document).ready(function(){
 	})
 
 	var MainAppView = Backbone.View.extend({
+<<<<<<< HEAD
 		//div in index.jade
 		el: $('#container'),
+=======
+		el: $('#comicapp'),
+		events : {
+			"click .addChar" : "addCharacterToUserAccount"
+		},
+>>>>>>> 54a1774945db7bf42e513c9998916c4341c6b1f2
 		initialize: function(){
 			this.$el.html('<div id="loginForm"></div>')
 			console.log("things are happening")
@@ -81,6 +87,9 @@ $(document).ready(function(){
    //    view.render()
 			//this.$("#characters-list").append(view.$el);
 		},
+		addCharacterToUserAccount : function(){
+			console.log("run")
+		}
 	})
 
 	var App = new MainAppView();
