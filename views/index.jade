@@ -6,7 +6,7 @@ block content
     h1= title
     p= message
 
-  div.login
+  div.login(id="comicapp")
 
     h1 Login/Signup :
 
@@ -21,6 +21,8 @@ block content
       input(id="loginButton" type="submit" value="Login")
     form(id= "signup" action="/signup" method="post")
       input(id= "signupButton" type="submit" value="Signup")
+
+      
 
       //- button(action="/login" method="post" value="Login").
       //-   Login
