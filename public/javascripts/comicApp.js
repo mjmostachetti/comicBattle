@@ -18,8 +18,7 @@ $(document).ready(function(){
 	})
 
 	var User = Backbone.Model.extend({
-		defaults : function(){
-			return {
+		defaults : {
 				username : '',
 				win : 0,
 				loss : 0,
@@ -27,7 +26,6 @@ $(document).ready(function(){
 				hero2 : '',
 				hero3 : ''
 			}
-		}
 	})
 
 	var UserCollection = Backbone.Collection.extend({
@@ -63,7 +61,7 @@ $(document).ready(function(){
 			console.log("This is an array of views : " + view)
       view.render()
 			this.$("#characters-list").append(view.$el);
-		},
+		}
 	})
 
 	var App = new MainAppView;

@@ -1,8 +1,79 @@
+
+
+
 body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background-image: url(../img/background.jpg);
+  background-image-width: 100%;
+  background-image-height: 100%;
+  background-repeat: no-repeat;
+
+  
+
+
+
 }
 
 a {
   color: #00B7FF;
 }
+
+
+
+#back {
+	background-color: blue;
+}
+
+.span-24 ul {
+	list-style: none;
+
+}
+
+.right {
+	float: right;
+}
+
+.span-25 ul {
+	list-style: none;
+}
+
+.left {
+	float: left;
+}
+
+.title {
+	text-align: center;
+	color: red;
+}
+
+.login {
+	background-color: blue;
+	border-radius: 25px;
+	padding: 15px;
+	opacity: 0.7;
+	color: red;
+	font-family: 'Bangers', cursive;
+	/*margin: 300px;
+*/
+}
+
+form {
+	color: red;
+}
+
+
+input {
+	s
+}
+
+
+
+
+
+
+
+
+
+
+

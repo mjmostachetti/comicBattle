@@ -1,23 +1,27 @@
 var express = require('express');
 var router = express.Router();
-var db = require('orchestrate')('5504b916-9df4-4a5c-9d58-c2da0c4f06f8')
+var db = require('orchestrate')('5504b916-9df4-4a5c-9d58-c2da0c4f06f8');
 var pass = require('pwd');
 var characterIDs = require('../characterID')
 var http = require('http')
+var characterIDs = require('../characterID');
 
 console.log(characterIDs)
 console.log(characterIDs[0])
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Welcome to Comic Rock Paper Sciccors' });
+  res.render('index', { title: 'Comic Rock Paper Sciccors' });
+});
+
+router.get('/teams', function(req, res, next){
+    res.render('select', { title: 'Select Yo Teams Bitch' });
 });
 
 router.post('/signup', function(request,response){
-	
+
 	// request.body is an object that contains all of the information
 	// that was passed to the backend via the form on the frontend
-
 
 	var username = request.body.username;
 	var password = request.body.password;
@@ -56,7 +60,7 @@ router.post('/signup', function(request,response){
 				})
 			})
 			})
-		}	
+		}
 	})
 })
 
@@ -111,7 +115,7 @@ router.get('/api/characters', function(request,response){
 	// for each index in the characterID.js array, hit the api for the name, image,powers,id
 	// when all the data is sent back, push to the arrayOfCharacterObjs array
 	// since this is async, we need a counter to actually tell us when these things finish
-	// when the counter === characterIDs.length, send JSON to the frontend and backbone 
+	// when the counter === characterIDs.length, send JSON to the frontend and backbone
 	// will render the proper views!
 	characterIDs.forEach(function(item){
 		http.get('http://www.comicvine.com/api/character/' +
