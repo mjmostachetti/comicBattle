@@ -8,16 +8,24 @@ block content
 
   div.login
 
-    h1 Login :
+    h1 Login/Signup :
 
-    form(action="/signup" method="post")
+    form(action="/login" method="post")
       h1 Username : 
       input(name="username" type="text" )
       br
       h1 Password : 
       input(name="password" type="password" )
       br
+      br
+      input(type="submit" value="Login")
+    form(action="/signup" method="post")
       input(type="submit" value="Signup")
+
+      //- button(action="/login" method="post" value="Login").
+      //-   Login
+
+
 
     //- form(action="/login" method="post")
     //-   label Username : 
