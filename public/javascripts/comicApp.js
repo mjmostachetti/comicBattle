@@ -50,18 +50,17 @@ $(document).ready(function(){
 	var LoginView = Backbone.View.extend({
 		el: '#loginForm',
 		initialize: function(){
-			this.$el.html('<form id="login" action="/login" method="post"><input id="username" name="username" type="text"><input id="password" name="password" type="password"><input id="loginButton" type="submit" value="Login">')
+			this.$el.html('<h1> Login / Signup </h1> <h1> Username : </h1> <input id="username" name="username" type="text"> <h1> Password : </h1>  <input id="password" name="password" type="password"> <br><br> <input id="loginButton" type="submit" value="Login"><input id="signupButton" type="submit" value="Signup">')
 			console.log(this.$el)
 		},
 		render: function(){
 			console.log("for real, things are working")
 		}
 	})
-
 	var MainAppView = Backbone.View.extend({
 		//div in index.jade
 		el: $('#container'),
-		el: $('#comicapp'),
+		// el: $('#comicapp'),
 		events : {
 			"click .addChar" : "addCharacterToUserAccount"
 		},
