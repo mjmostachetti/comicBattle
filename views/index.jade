@@ -10,19 +10,25 @@ block content
 
     h1 Login/Signup :
 
-    form(id="login" action="/login" method="post")
       h1 Username :
-      input(id="username" name="username" type="text" )
+
+      div(id="container")
       br
       h1 Password :
-      input(id="password" name="password" type="password" )
+
+      input(id="username" name="username" type="text" required)
+      br
+      h1 Password :
+      input(id="password" name="password" type="password" required)
+
       br
       br
-      input(id="loginButton" type="submit" value="Login")
     form(id= "signup" action="/signup" method="post")
       input(id= "signupButton" type="submit" value="Signup")
-
-      
+      script(type='text/javascript' src='../javascripts/jquery-2.1.4.js')
+      script(type='text/javascript' src='../javascripts/underscore.js')
+      script(type='text/javascript' src='../javascripts/backbone.js')
+      script(type='text/javascript' src='../javascripts/comicApp.js')
 
       //- button(action="/login" method="post" value="Login").
       //-   Login

@@ -12,14 +12,6 @@ module.exports = [
 	"id" : "2345"
 },
 {
-	"name" : "superman",
-	"id" : "2345"
-},
-{
-	"name" : "superman",
-	"id" : "2345"
-},
-{
 	"name" : "hulk",
 	"id" : "2267"
 },

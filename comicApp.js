@@ -14,7 +14,7 @@ $(document).ready(function(){
 	})
 
 	var CharacterView = Backbone.View.extend({
-		
+
 	})
 
 })
