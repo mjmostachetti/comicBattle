@@ -50,7 +50,7 @@ $(document).ready(function(){
 	var LoginView = Backbone.View.extend({
 		el: '#loginForm',
 		initialize: function(){
-			this.$el.html('<form id="login" action="/login" method="post"><input id="username" name="username" type="text"><input id="password" name="password" type="password"><input id="loginButton" type="submit" value="Login">')
+			this.$el.html('<h1>Login / Signup</h1><h1>Username :</h1><form id="login" action="/login" method="post"><input id="username" name="username" type="text"><h1>Password :</h1><form id="signup" action="/signup" method="post"><input id="password" name="password" type="password"><input id="loginButton" type="submit" value="Login"></form>')
 			console.log(this.$el)
 		},
 		render: function(){
@@ -59,15 +59,12 @@ $(document).ready(function(){
 	})
 
 	var MainAppView = Backbone.View.extend({
-<<<<<<< HEAD
 		//div in index.jade
 		el: $('#container'),
-=======
-		el: $('#comicapp'),
+		//el: $('#comicapp'),
 		events : {
 			"click .addChar" : "addCharacterToUserAccount"
 		},
->>>>>>> 54a1774945db7bf42e513c9998916c4341c6b1f2
 		initialize: function(){
 			this.$el.html('<div id="loginForm"></div>')
 			console.log("things are happening")
