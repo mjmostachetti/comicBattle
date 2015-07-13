@@ -53,9 +53,6 @@ $(document).ready(function(){
 		tagName : "div",
 		className : "login-view",
 		template : _.template($("#template-login").html()),
-		events : {
-			"click .signup" : "createUser"
-		}
 
 		initialize: function(){
 			console.log(this.$el);
@@ -87,6 +84,7 @@ $(document).ready(function(){
 		el: $('#comicapp'),
 
 		events : {
+			"click .signup" : "loadSignup",
 			"click .addChar" : "addCharacterToUserAccount"
 		},
 		//main app view initializes loginView, creates a div, and then loads the view.
