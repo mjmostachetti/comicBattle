@@ -69,6 +69,10 @@ h1 {
 */
 }
 
+.fixit {
+	cursor: pointer;
+}
+
 .signup {
 	cursor: pointer;
 }
