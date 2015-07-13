@@ -9,7 +9,7 @@ block content
   div.login(id="comicapp")
 
     div(id="container")
-    
+
       script(type="text/html" id="template-login")
         h1 Login
         form(id="login" action="/login" method="post")
@@ -18,10 +18,9 @@ block content
           h1 Password :
           input(id="password" name="password" type="password" required)
           input(id="loginButton" type="submit" value="Login")
-          input(id= "signupButton" type="submit" value="Signup")
           a( action="/signup" class="signup")
             p dont have an account?
-           
+
       script(type="text/html" id="template-signup")
         h1 Sign Up
         form(id="signup" action="/signup" method="post")
