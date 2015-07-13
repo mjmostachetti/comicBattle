@@ -11,11 +11,11 @@ console.log(characterIDs[0])
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Comic Rock Paper Sciccors' });
+	res.render('index', { title: 'Comic Rock Paper Sciccors' });
 });
 
 router.get('/teams', function(req, res, next){
-    res.render('select', { title: 'Select Yo Teams Bitch' });
+		res.render('select', { title: 'Select Yo Teams Bitch' });
 });
 
 router.post('/signup', function(request,response){
@@ -82,7 +82,7 @@ router.post('/login', function(request,response){
 			}
 		})
 	})
-	//response.render('main')
+	response.render('main')
 })
 
 /*
@@ -98,12 +98,12 @@ router.get('/fillOut', function(request,response){
 			function(res){
 				var writeToThis = '';
 				res.on('data', function (chunk) {
-			    writeToThis += chunk
-			  });
-			  res.on('end', function(){
-			  	var charJSON = JSON.parse(writeToThis)
-			  	console.log(charJSON)
-			  })
+					writeToThis += chunk
+				});
+				res.on('end', function(){
+					var charJSON = JSON.parse(writeToThis)
+					console.log(charJSON)
+				})
 		})
 	})
 })
@@ -126,20 +126,20 @@ router.get('/api/characters', function(request,response){
 			function(res){
 				var writeToThis = '';
 				res.on('data', function (chunk) {
-			    writeToThis += chunk
-			  });
-			  res.on('end', function(){
-			  	var charJSON = JSON.parse(writeToThis)
-			  	console.log(charJSON.results)
-			  	var resultsJSON = charJSON.results
-			  	counter++;
-			  	console.log("The counter is now: " + counter)
-			  	console.log("When the counter is: " + characterIDs.length + ", return JSON of all characters.")
-			  	arrayOfCharacterObjs.push(resultsJSON)
-			  	if(counter === characterIDs.length){
+					writeToThis += chunk
+				});
+				res.on('end', function(){
+					var charJSON = JSON.parse(writeToThis)
+					console.log(charJSON.results)
+					var resultsJSON = charJSON.results
+					counter++;
+					console.log("The counter is now: " + counter)
+					console.log("When the counter is: " + characterIDs.length + ", return JSON of all characters.")
+					arrayOfCharacterObjs.push(resultsJSON)
+					if(counter === characterIDs.length){
 						response.json(arrayOfCharacterObjs)
 					}
-			  })
+				})
 		})
 
 	})
