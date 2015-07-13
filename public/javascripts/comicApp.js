@@ -36,13 +36,13 @@ $(document).ready(function(){
 
 	var characterList = new CharacterCollection;
 
-	var CharacterView = Backbone.View.extend({
-		tagName: 'li',
-		template: _.template($('#character-info').html()),
-		render : function(){
-			this.$el.html(this.template(this.model))
-		}
-	})
+	// var CharacterView = Backbone.View.extend({
+	// 	tagName: 'li',
+	// 	template: _.template($('#character-info').html()),
+	// 	render : function(){
+	// 		this.$el.html(this.template(this.model))
+	// 	}
+	// })
 
 	// var viewArray = [];
 
@@ -62,7 +62,20 @@ $(document).ready(function(){
 		render: function(){
 			this.$el.html(this.template)
 		}
+	})
 
+	var SignupView = Backbone.View.extend({
+		tagName : "div",
+		className : "signup-view",
+		template : _.template($("#template-signup").html()),
+
+		initialize: function(){
+			this.render()
+		},
+
+		render: function(){
+			this.$el.html(this.template)
+		}
 	})
 
 	var MainAppView = Backbone.View.extend({
@@ -84,7 +97,11 @@ $(document).ready(function(){
 		},
 		//handles loading the login view and html elements
 		loadLogin : function(){
-			var view = new LoginView();
+			var view = new LoginView()
+			this.$el.html(view.$el)
+		},
+		loadSignup : function(){
+			var view = new SignupView()
 			this.$el.html(view.$el)
 		},
 		addCharacter : function(character){

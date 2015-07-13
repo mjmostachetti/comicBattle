@@ -6,24 +6,46 @@ block content
     h1= title
     p= message
 
-  div.login
+  div.login(id="comicapp")
 
     div(id="container")
-    h1 Login/Signup :
-
-      h1 Username :
-      div(id="container")
-    form(id= "signup" action="/signup" method="post")
-      input(id= "signupButton" type="submit" value="Signup")
 
     script(type="text/html" id="template-login")
+      h1 Login
       form(id="login" action="/login" method="post")
+        h1 Username :
         input(id="username" name="username" type="text" required)
+        h1 Password :
         input(id="password" name="password" type="password" required)
         input(id="loginButton" type="submit" value="Login")
+        //-input(id= "signupButton" type="submit" value="Signup")
+        //- form id signup
+    script(type="text/html" id="template-signup")
+      h1 Sign Up
+      form(id="signup" action="/signup" method="post")
+        h1 Pick Username :
+        input(id="username" name="username" type="text" required)
+        h1 Password :
+        input(id="password" name="password" type="password" required)
+        input(id= "signupButton" type="submit" value="Signup")
+
 
     script(type='text/javascript' src='../javascripts/jquery-2.1.4.js')
     script(type='text/javascript' src='../javascripts/underscore.js')
     script(type='text/javascript' src='../javascripts/backbone.js')
     script(type='text/javascript' src='../javascripts/comicApp.js')
     script(type='text/css' src='../stylesheets/normalize.css')
+
+      //- button(action="/login" method="post" value="Login").
+      //-   Login
+
+
+
+    //- form(action="/login" method="post")
+    //-   label Username :
+    //-   input(name="username" type="text" )
+    //-   br
+    //-   label Password :
+    //-   input(name="password" type="text" )
+    //-   br
+    //-   input(type="submit" value="Login")
