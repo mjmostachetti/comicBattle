@@ -55,13 +55,10 @@ $(document).ready(function(){
 		template : _.template($("#template-login").html()),
 
 		initialize: function(){
-<<<<<<< HEAD
 			this.$el.html('<h1> Login / Signup </h1> <h1> Username : </h1> <input id="username" name="username" type="text"> <h1> Password : </h1>  <input id="password" name="password" type="password"> <br><br> <input id="loginButton" type="submit" value="Login"><input id="signupButton" type="submit" value="Signup">')
 			console.log(this.$el)
-=======
 			console.log(this.$el);
 			this.render()
->>>>>>> master
 		},
 
 		render: function(){
@@ -72,17 +69,14 @@ $(document).ready(function(){
 	var MainAppView = Backbone.View.extend({
 		//div in index.jade
 		el: $('#container'),
-<<<<<<< HEAD
 		// el: $('#comicapp'),
 		events : {
 			"click .addChar" : "addCharacterToUserAccount"
 		},
-=======
 		events : {
 			"click .addChar" : "addCharacterToUserAccount"
 		},
 		//main app view initializes loginView, creates a div, and then loads the view. 
->>>>>>> master
 		initialize: function(){
 			this.$el.html('<div id="loginForm"></div>')
 			console.log("things are happening")
