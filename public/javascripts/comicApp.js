@@ -55,6 +55,8 @@ $(document).ready(function(){
 		template : _.template($("#template-login").html()),
 
 		initialize: function(){
+			this.$el.html('<h1> Login / Signup </h1> <h1> Username : </h1> <input id="username" name="username" type="text"> <h1> Password : </h1>  <input id="password" name="password" type="password"> <br><br> <input id="loginButton" type="submit" value="Login"><input id="signupButton" type="submit" value="Signup">')
+			console.log(this.$el)
 			console.log(this.$el);
 			this.render()
 		},
@@ -77,12 +79,19 @@ $(document).ready(function(){
 			this.$el.html(this.template)
 		}
 	})
-
 	var MainAppView = Backbone.View.extend({
 		//div in index.jade
+<<<<<<< HEAD
+		el: $('#container'),
+		// el: $('#comicapp'),
+		events : {
+			"click .addChar" : "addCharacterToUserAccount"
+		},
+=======
 		//el: $('#container'),
 		el: $('#comicapp'),
 
+>>>>>>> 7eb098334940f916588e44d8b544f1790f21be91
 		events : {
 			"click .addChar" : "addCharacterToUserAccount"
 		},
