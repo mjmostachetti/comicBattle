@@ -46,9 +46,9 @@ $(document).ready(function(){
 
 	// var viewArray = [];
 
-	//creating a view for login
-	//view creates a div with a tag name to house html
-	//elements in the jade template
+	/* creating a view for login
+	view creates a div with a tag name to house html
+	elements in the jade template */
 	var LoginView = Backbone.View.extend({
 		tagName : "div",
 		className : "login-view",
