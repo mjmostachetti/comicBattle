@@ -1,22 +1,27 @@
 var express = require('express');
 var router = express.Router();
-var db = require('orchestrate')('5504b916-9df4-4a5c-9d58-c2da0c4f06f8')
+var db = require('orchestrate')('5504b916-9df4-4a5c-9d58-c2da0c4f06f8');
 var pass = require('pwd');
 var characterIDs = require('../characterID')
+var http = require('http')
+var characterIDs = require('../characterID');
 
 console.log(characterIDs)
 console.log(characterIDs[0])
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Welcome to Comic Rock Paper Sciccors' });
+	res.render('index', { title: 'Comic Rock Paper Sciccors' });
+});
+
+router.get('/teams', function(req, res, next){
+		res.render('select', { title: 'Select Yo Teams Bitch' });
 });
 
 router.post('/signup', function(request,response){
-	
+
 	// request.body is an object that contains all of the information
 	// that was passed to the backend via the form on the frontend
-
 
 	var username = request.body.username;
 	var password = request.body.password;
@@ -55,7 +60,7 @@ router.post('/signup', function(request,response){
 				})
 			})
 			})
-		}	
+		}
 	})
 })
 
@@ -75,11 +80,71 @@ router.post('/login', function(request,response){
 			}
 		})
 	})
-	//response.render('main')
+	response.render('main')
 })
 
-router.get('/characters',function(request,response){
-
+/*
+ * This function is used to fill out our database!
+ */
+router.get('/fillOut', function(request,response){
+	console.log("This is an array of the character IDs : ")
+	console.log(characterIDs)
+	characterIDs.forEach(function(item){
+		http.get('http://www.comicvine.com/api/character/' +
+			'4005-'+item.id+'/?api_key=f6539c8aca297ac9f221c04eb1d0fa3937e02354&' +
+			'field_list=name,image,powers,id&format=json',
+			function(res){
+				var writeToThis = '';
+				res.on('data', function (chunk) {
+					writeToThis += chunk
+				});
+				res.on('end', function(){
+					var charJSON = JSON.parse(writeToThis)
+					console.log(charJSON)
+				})
+		})
+	})
 })
+
+// api call for the CharactersCollection
+router.get('/api/characters', function(request,response){
+	console.log("This is an array of the character IDs : ")
+	console.log(characterIDs)
+	var counter = 0;
+	var arrayOfCharacterObjs = []
+	// for each index in the characterID.js array, hit the api for the name, image,powers,id
+	// when all the data is sent back, push to the arrayOfCharacterObjs array
+	// since this is async, we need a counter to actually tell us when these things finish
+	// when the counter === characterIDs.length, send JSON to the frontend and backbone
+	// will render the proper views!
+	characterIDs.forEach(function(item){
+		http.get('http://www.comicvine.com/api/character/' +
+			'4005-'+item.id+'/?api_key=f6539c8aca297ac9f221c04eb1d0fa3937e02354&' +
+			'field_list=name,image,powers,deck,id&format=json',
+			function(res){
+				var writeToThis = '';
+				res.on('data', function (chunk) {
+					writeToThis += chunk
+				});
+				res.on('end', function(){
+					var charJSON = JSON.parse(writeToThis)
+					console.log(charJSON.results)
+					var resultsJSON = charJSON.results
+					counter++;
+					console.log("The counter is now: " + counter)
+					console.log("When the counter is: " + characterIDs.length + ", return JSON of all characters.")
+					arrayOfCharacterObjs.push(resultsJSON)
+					if(counter === characterIDs.length){
+						response.json(arrayOfCharacterObjs)
+					}
+				})
+		})
+
+	})
+})
+
+
+//define api 'GET' request to return all the users
+router.get('/users')
 
 module.exports = router;
