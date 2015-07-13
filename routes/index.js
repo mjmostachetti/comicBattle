@@ -65,7 +65,9 @@ router.post('/signup', function(request,response){
 })
 
 router.post('/login', function(request,response){
+	console.log("we done logged in")
 	var username = request.body.username
+	console.log(request.body)
 	var password = request.body.password
 	db.search('userData', 'value.username: ' + username)
 	.then(function(resp){

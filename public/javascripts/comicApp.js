@@ -47,7 +47,7 @@ $(document).ready(function(){
 	// var viewArray = [];
 
 	//creating a view for login
-	//view creates a div with a tag name to house html 
+	//view creates a div with a tag name to house html
 	//elements in the jade template
 	var LoginView = Backbone.View.extend({
 		tagName : "div",
@@ -62,16 +62,31 @@ $(document).ready(function(){
 		render: function(){
 			this.$el.html(this.template)
 		}
+	})
 
+	var SignupView = Backbone.View.extend({
+		tagName : "div",
+		className : "signup-view",
+		template : _.template($("#template-signup").html()),
+
+		initialize: function(){
+			this.render()
+		},
+
+		render: function(){
+			this.$el.html(this.template)
+		}
 	})
 
 	var MainAppView = Backbone.View.extend({
 		//div in index.jade
 		el: $('#container'),
+		//el: $('#comicapp'),
+
 		events : {
 			"click .addChar" : "addCharacterToUserAccount"
 		},
-		//main app view initializes loginView, creates a div, and then loads the view. 
+		//main app view initializes loginView, creates a div, and then loads the view.
 		initialize: function(){
 			this.$el.html('<div id="loginForm"></div>')
 			console.log("things are happening")
@@ -82,7 +97,11 @@ $(document).ready(function(){
 		},
 		//handles loading the login view and html elements
 		loadLogin : function(){
-			var view = new LoginView();
+			var view = new LoginView()
+			this.$el.html(view.$el)
+		},
+		loadSignup : function(){
+			var view = new SignupView()
 			this.$el.html(view.$el)
 		},
 		addCharacter : function(character){
