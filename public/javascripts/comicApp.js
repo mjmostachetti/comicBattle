@@ -78,18 +78,18 @@ $(document).ready(function(){
         }
     })
 
-    var CharacterView = Backbone.View.extend({
-    	tagName : "div",
-    	className : "characterSelect",
-    	template : _.template($("#template-characterSelect").html()),
+    // var CharacterView = Backbone.View.extend({
+    // 	tagName : "div",
+    // 	className : "characterSelect",
+    // 	template : _.template($("#template-characterSelect").html()),
 
-    	initialize: function(){
-    		this.render()
-    	},
-    	render: function(){
-    		this.$el.html(this.template)
-    	}
-    })
+    // 	initialize: function(){
+    // 		this.render()
+    // 	},
+    // 	render: function(){
+    // 		this.$el.html(this.template)
+    // 	}
+    // })
 
     var MainAppView = Backbone.View.extend({
         //div in index.jade
@@ -121,10 +121,10 @@ $(document).ready(function(){
             var view = new SignupView()
             this.$el.html(view.$el)
         },
-        loadCharacterSelection : function(){
-        	var characterSelection = new CharacterView()
-        	this.$el.html(view.$el)
-        },
+        // loadCharacterSelection : function(){
+        // 	var characterSelection = new CharacterView()
+        // 	this.$el.html(view.$el)
+        // },
         addCharacter : function(character){
             //create new view for this musician
             console.log(character)
