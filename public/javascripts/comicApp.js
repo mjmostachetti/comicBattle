@@ -1,5 +1,4 @@
 $(document).ready(function(){
-
     //define the character model
 
     var Character = Backbone.Model.extend({
@@ -87,7 +86,7 @@ $(document).ready(function(){
         events : {
             "click .addChar" : "addCharacterToUserAccount",
             "click .signup" : "loadSignup",
-            "click .login" : "loadLogin"
+            "click .fixit" : "loadLogin"
 
         },
         //main app view initializes loginView, creates a div, and then loads the view.
