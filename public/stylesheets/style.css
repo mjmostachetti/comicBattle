@@ -5,9 +5,10 @@ body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   background-image: url(../img/background.jpg);
-  background-image-width: 100%;
-  background-image-height: 100%;
+  /*background-image-width: 100%;
+  background-image-height: 100%;*/
   background-repeat: no-repeat;
+
 
   
 
