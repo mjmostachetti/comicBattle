@@ -80,8 +80,8 @@ $(document).ready(function(){
 
 	var MainAppView = Backbone.View.extend({
 		//div in index.jade
-		el: $('#container'),
-		//el: $('#comicapp'),
+		//el: $('#container'),
+		el: $('#comicapp'),
 
 		events : {
 			"click .addChar" : "addCharacterToUserAccount"
@@ -100,6 +100,7 @@ $(document).ready(function(){
 			var view = new LoginView()
 			this.$el.html(view.$el)
 		},
+		//uses Signup ctor to create SignupView
 		loadSignup : function(){
 			var view = new SignupView()
 			this.$el.html(view.$el)
