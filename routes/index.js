@@ -24,6 +24,7 @@ router.post('/signup', function(request,response){
 	// that was passed to the backend via the form on the frontend
 
 	var username = request.body.username;
+	console.log(username);
 	var password = request.body.password;
 	var userSalt = "";
 	var userHash = "";
