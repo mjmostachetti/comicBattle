@@ -30,10 +30,9 @@ block content
           input(id="password" name="password" type="password" required)
           input(id="loginButton" type="submit" value="Login")
           input(id= "signupButton" type="submit" value="Signup")
-          //- form id signup
-        form(id="signup" action="/signup" method="post")
-          //-input(id= "signupButton" type="submit" value="Signup")
-          //- form id signup
+          a( action="/signup" class="signup")
+            p dont have an account?
+           
       script(type="text/html" id="template-signup")
         h1 Sign Up
         form(id="signup" action="/signup" method="post")
@@ -42,6 +41,8 @@ block content
           h1 Password :
           input(id="password" name="password" type="password" required)
           input(id= "signupButton" type="submit" value="Signup")
+          a(action="/login" class="login")
+            p Have an account?
 
 
     script(type='text/javascript' src='../javascripts/jquery-2.1.4.js')

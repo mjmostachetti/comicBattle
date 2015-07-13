@@ -18,6 +18,11 @@ body {
 
 a {
   color: #00B7FF;
+  float: right;
+}
+
+a.hover {
+	color: red;
 }
 
 
@@ -63,6 +68,20 @@ h1 {
 	/*margin: 300px;
 */
 }
+
+.signup {
+	cursor: pointer;
+}
+
+#loginButton {
+	cursor: pointer;
+}
+
+#signupButton {
+	cursor: pointer;
+}
+
+
 
 
  
