@@ -53,6 +53,9 @@ $(document).ready(function(){
 		tagName : "div",
 		className : "login-view",
 		template : _.template($("#template-login").html()),
+		events : {
+			"click .signup" : "createUser"
+		}
 
 		initialize: function(){
 			console.log(this.$el);
