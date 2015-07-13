@@ -81,17 +81,17 @@ $(document).ready(function(){
 	})
 	var MainAppView = Backbone.View.extend({
 		//div in index.jade
-<<<<<<< HEAD
+
 		el: $('#container'),
 		// el: $('#comicapp'),
 		events : {
 			"click .addChar" : "addCharacterToUserAccount"
 		},
-=======
+
 		//el: $('#container'),
 		el: $('#comicapp'),
 
->>>>>>> 7eb098334940f916588e44d8b544f1790f21be91
+
 		events : {
 			"click .addChar" : "addCharacterToUserAccount"
 		},
