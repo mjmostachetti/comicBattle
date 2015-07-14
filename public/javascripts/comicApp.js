@@ -120,6 +120,8 @@ $(document).ready(function(){
         loadSignup : function(){
             var view = new SignupView()
             this.$el.html(view.$el)
+            //this should handle garbage collection, but isn't working.
+            $(".login-view").empty()
         },
         // loadCharacterSelection : function(){
         // 	var characterSelection = new CharacterView()
@@ -127,7 +129,7 @@ $(document).ready(function(){
         // },
         addCharacter : function(character){
             //create new view for this musician
-            console.log(character)
+            //console.log(character)
             //var view = new CharacterView({ model : character })
             //push the view into array for removal later
             //viewArray.push(view)
