@@ -5,19 +5,18 @@ body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   background-image: url(../img/background.jpg);
+ 
   /*background-image-width: 100%;
   background-image-height: 100%;*/
-  background-repeat: no-repeat;
-
-
-  
-
-
-
 }
 
 a {
   color: #00B7FF;
+  float: right;
+}
+
+a.hover {
+	color: red;
 }
 
 
@@ -57,28 +56,96 @@ h1 {
 	background: blue;
 	border-radius: 25px;
 	padding: 15px;
-	opacity: 0.7;
+	opacity: .7;
 	color: red;
 	font-family: 'Bangers', cursive;
 	/*margin: 300px;
 */
 }
 
+.hvr-grow {
+	cursor: pointer;
+	
+}
+
+.hvr-pulse {
+	cursor: pointer;
+}
+
+.signup {
+	cursor: pointer;
+	opacity: none;
+}
+
+#loginButton {
+	cursor: pointer;
+	font-weight: bold;
+	
+}
+
+#signupButton {
+	cursor: pointer;
+	opacity: none;
+}
+
+.login-view {
+
+
+}
+
+
+
+#grid{
+	font-size: 50px;
+	height: 500px;
+	width: 500px;
+	border: 5px solid purple;
+	margin: 0 auto;
+	font-family: 'Bangers';
+	background: black;
+
+}
+
+.row {
+	border: 2px solid white;
+    width: 50px;
+    height: 50px;
+    float: left;
+     
+}
+
+.row2 {
+	border: 2px solid blue;
+	width: 50px;
+	float: right;
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
