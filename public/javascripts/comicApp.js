@@ -87,8 +87,8 @@ $(document).ready(function(){
 
         events : {
             "click .addChar" : "addCharacterToUserAccount",
-            "click .signup" : "loadSignup",
-            "click .fixit" : "loadLogin"
+            "click .hvr-pulse" : "loadSignup",
+            "click .hvr-grow" : "loadLogin"
 
         },
         //main app view initializes loginView, creates a div, and then loads the view.
@@ -109,11 +109,13 @@ $(document).ready(function(){
         loadSignup : function(){
             var view = new SignupView()
             this.$el.html(view.$el)
+            //this should handle garbage collection, but isn't working.
+            $(".login-view").empty()
         },
 
         addCharacter : function(character){
             //create new view for this musician
-            console.log(character)
+            //console.log(character)
             //var view = new CharacterView({ model : character })
             //push the view into array for removal later
             //viewArray.push(view)

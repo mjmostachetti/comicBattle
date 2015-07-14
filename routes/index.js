@@ -112,7 +112,7 @@ router.get('/fillOut', function(request,response){
 // api call for the CharactersCollection
 router.get('/api/characters', function(request,response){
 	console.log("This is an array of the character IDs : ")
-	console.log(characterIDs)
+	//console.log(characterIDs)
 	var counter = 0;
 	var arrayOfCharacterObjs = []
 	// for each index in the characterID.js array, hit the api for the name, image,powers,id
@@ -131,11 +131,11 @@ router.get('/api/characters', function(request,response){
 				});
 				res.on('end', function(){
 					var charJSON = JSON.parse(writeToThis)
-					console.log(charJSON.results)
+					//console.log(charJSON.results)
 					var resultsJSON = charJSON.results
 					counter++;
-					console.log("The counter is now: " + counter)
-					console.log("When the counter is: " + characterIDs.length + ", return JSON of all characters.")
+					//console.log("The counter is now: " + counter)
+					//console.log("When the counter is: " + characterIDs.length + ", return JSON of all characters.")
 					arrayOfCharacterObjs.push(resultsJSON)
 					if(counter === characterIDs.length){
 						response.json(arrayOfCharacterObjs)

@@ -7,18 +7,9 @@ block content
     p= message
 
   div.login(id="comicapp")
+    
 
 
-   
-    div(id="container")
-    
-    
-    
-    br
-    
-    //- form(id= "signup" action="/signup" method="post")
-    //- input(id= "signupButton" type="submit" value="Signup")
-  
     div(id="container")
     
       script(type="text/html" id="template-login")
@@ -41,7 +32,7 @@ block content
           input(id="password" name="password" type="password" required)
           input(id= "signupButton" type="submit" value="Signup")
           a(action="/signup" class="signup")
-            p Have an account?
+
 
 
     script(type='text/javascript' src='../javascripts/jquery-2.1.4.js')
@@ -49,3 +40,20 @@ block content
     script(type='text/javascript' src='../javascripts/backbone.js')
     script(type='text/javascript' src='../javascripts/comicApp.js')
     script(type='text/css' src='../stylesheets/normalize.css')
+
+      //- button(action="/login" method="post" value="Login").
+      //-   Login
+
+
+
+    //- form(action="/login" method="post")
+    //-   label Username :
+    //-   input(name="username" type="text" )
+    //-   br
+    //-   label Password :
+    //-   input(name="password" type="text" )
+    //-   br
+    //-   input(type="submit" value="Login")
+   
+      
+    //-   input(type="submit" value="Login")
