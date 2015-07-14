@@ -6,35 +6,34 @@ var characterIDs = require('../characterID')
 var http = require('http')
 var characterIDs = require('../characterID');
 
-console.log(characterIDs)
-console.log(characterIDs[0])
+
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-	res.render('index', { title: 'Comic Rock Paper Sciccors' });
+	res.render('index', { title: 'Comic Rock Paper Scissors' });
 });
+console.log("index.js is running");
 
 router.get('/teams', function(req, res, next){
-		res.render('select', { title: 'Select Yo Teams Bitch' });
+		res.render('select', { title: 'Select Yo Teams' });
 });
 
 router.post('/signup', function(request,response){
+	console.log("youve signed up");
 
 	// request.body is an object that contains all of the information
 	// that was passed to the backend via the form on the frontend
 
 	var username = request.body.username;
-	console.log(username);
 	var password = request.body.password;
 	var userSalt = "";
 	var userHash = "";
 	//check if username already in the database
 	db.search('userData', 'value.username: ' + username)
 	.then(function(result){
-		console.log(result.body.count)
 		if(result.body.count === 1){
 			response.render('index', {
-				title : "Welcome to Comic Rock Paper Sciccors",
+				title : "Welcome to Comic Rock Paper Scissors",
 				message : "Username already exists."})
 		}
 		//user doesn't exist, add it!
@@ -44,8 +43,6 @@ router.post('/signup', function(request,response){
 				pass.hash(password, function (err, salt, hash){
 					userSalt = salt;
 					userHash = hash;
-					console.log(hash)
-					console.log(salt)
 					db.post('userData',{
 					"id" : userTotal,
 					"username" : username,
