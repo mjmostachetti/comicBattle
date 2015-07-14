@@ -1,5 +1,4 @@
 $(document).ready(function(){
-
     //define the character model
 
     var Character = Backbone.Model.extend({
@@ -53,7 +52,7 @@ $(document).ready(function(){
         tagName : "div",
         className : "login-view",
         template : _.template($("#template-login").html()),
-       
+
 
         initialize: function(){
             console.log(this.$el);
@@ -78,6 +77,19 @@ $(document).ready(function(){
             this.$el.html(this.template)
         }
     })
+
+    // var CharacterView = Backbone.View.extend({
+    // 	tagName : "div",
+    // 	className : "characterSelect",
+    // 	template : _.template($("#template-characterSelect").html()),
+
+    // 	initialize: function(){
+    // 		this.render()
+    // 	},
+    // 	render: function(){
+    // 		this.$el.html(this.template)
+    // 	}
+    // })
 
     var MainAppView = Backbone.View.extend({
         //div in index.jade
@@ -109,6 +121,10 @@ $(document).ready(function(){
             var view = new SignupView()
             this.$el.html(view.$el)
         },
+        // loadCharacterSelection : function(){
+        // 	var characterSelection = new CharacterView()
+        // 	this.$el.html(view.$el)
+        // },
         addCharacter : function(character){
             //create new view for this musician
             console.log(character)
