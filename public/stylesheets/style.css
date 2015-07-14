@@ -69,7 +69,11 @@ h1 {
 */
 }
 
-.fixit {
+.hvr-grow {
+	cursor: pointer;
+}
+
+.hvr-pulse {
 	cursor: pointer;
 }
 
@@ -79,29 +83,17 @@ h1 {
 
 #loginButton {
 	cursor: pointer;
+	font-weight: bold;
+	opacity: ;
 }
 
 #signupButton {
 	cursor: pointer;
+	opacity: none;
 }
+
 
 
 
 
  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

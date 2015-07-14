@@ -86,8 +86,8 @@ $(document).ready(function(){
 
         events : {
             "click .addChar" : "addCharacterToUserAccount",
-            "click .signup" : "loadSignup",
-            "click .fixit" : "loadLogin"
+            "click .hvr-pulse" : "loadSignup",
+            "click .hvr-grow" : "loadLogin"
 
         },
         //main app view initializes loginView, creates a div, and then loads the view.

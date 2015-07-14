@@ -7,17 +7,7 @@ block content
     p= message
 
   div.login(id="comicapp")
-
-   
-    div(id="container")
     
-    
-    
-    br
-    
-    //- form(id= "signup" action="/signup" method="post")
-    //- input(id= "signupButton" type="submit" value="Signup")
-  
 
     div(id="container")
     
@@ -28,11 +18,11 @@ block content
           input(id="username" name="username" type="text" required)
           h1 Password :
           input(id="password" name="password" type="password" required)
-          input(id="loginButton" type="submit" value="Login")
-          input(id= "signupButton" type="submit" value="Signup")
-          a( action="/signup" class="signup")
+          br
+          br
+          input(id="loginButton" type="submit" value="Login" class="hvr-grow")
+          a( action="/signup" class="hvr-pulse")
             p dont have an account?
-           
       script(type="text/html" id="template-signup")
         h1 Sign Up
         form(id="signup" action="/signup" method="post")
@@ -40,8 +30,10 @@ block content
           input(id="username" name="username" type="text" required)
           h1 Password :
           input(id="password" name="password" type="password" required)
-          input(id= "signupButton" type="submit" value="Signup")
-          a( action="/login" class="fixit")
+          br
+          br
+          input(id= "signupButton" type="submit" value="Signup" class="hvr-grow")
+          a( action="/login" class="hvr-grow")
             p Have an account?
 
 
