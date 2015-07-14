@@ -79,6 +79,7 @@ $(document).ready(function(){
         }
     })
 
+
     var MainAppView = Backbone.View.extend({
         //div in index.jade
         //el: $('#container'),
@@ -87,7 +88,7 @@ $(document).ready(function(){
         events : {
             "click .addChar" : "addCharacterToUserAccount",
             "click .signup" : "loadSignup",
-            "click .login" : "loadLogin"
+            "click .fixit" : "loadLogin"
 
         },
         //main app view initializes loginView, creates a div, and then loads the view.
@@ -109,6 +110,7 @@ $(document).ready(function(){
             var view = new SignupView()
             this.$el.html(view.$el)
         },
+
         addCharacter : function(character){
             //create new view for this musician
             console.log(character)
