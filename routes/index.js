@@ -11,15 +11,15 @@ console.log(characterIDs[0])
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-	res.render('index', { title: 'Comic Rock Paper Sciccors' });
+	res.render('index', { title: 'Comic Rock Paper Scissors' });
 });
 
 router.get('/teams', function(req, res, next){
-		res.render('select', { title: 'Select Yo Teams Bitch' });
+		res.render('select', { title: 'Select Yo Teams' });
 });
 
 router.post('/signup', function(request,response){
-
+console.log('you done signed up');
 	// request.body is an object that contains all of the information
 	// that was passed to the backend via the form on the frontend
 
@@ -34,7 +34,7 @@ router.post('/signup', function(request,response){
 		console.log(result.body.count)
 		if(result.body.count === 1){
 			response.render('index', {
-				title : "Welcome to Comic Rock Paper Sciccors",
+				title : "Welcome to Comic Rock Paper Scissors",
 				message : "Username already exists."})
 		}
 		//user doesn't exist, add it!

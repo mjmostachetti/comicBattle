@@ -29,8 +29,7 @@ block content
           h1 Password :
           input(id="password" name="password" type="password" required)
           input(id="loginButton" type="submit" value="Login")
-          input(id= "signupButton" type="submit" value="Signup")
-          a( action="/signup" class="signup")
+          a( action="/login" class="login")
             p dont have an account?
            
       script(type="text/html" id="template-signup")
@@ -41,7 +40,7 @@ block content
           h1 Password :
           input(id="password" name="password" type="password" required)
           input(id= "signupButton" type="submit" value="Signup")
-          a(action="/login" class="login")
+          a(action="/signup" class="signup")
             p Have an account?
 
 
