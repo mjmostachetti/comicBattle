@@ -87,8 +87,8 @@ $(document).ready(function(){
         events : {
 
             "click .addChar" : "addCharacterToUserAccount",
-            "click .hvr-pulse" : "loadSignup",
-            "click .hvr-grow" : "loadLogin"
+            "click #loadSignup" : "loadSignup",
+            "click #loadLogin" : "loadLogin"
 
 
         },

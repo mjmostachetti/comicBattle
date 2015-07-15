@@ -8,30 +8,31 @@ block content
 
   div.login(id="comicapp")
     
-
-
-    div(id="container")
-    
-      script(type="text/html" id="template-login")
-        h1 Login
-        form(id="login" action="/login" method="post")
-          h1 Username :
-          input(id="username" name="username" type="text" required)
-          h1 Password :
-          input(id="password" name="password" type="password" required)
-          input(id="loginButton" type="submit" value="Login")
-          a( action="/login" class="login")
-            p dont have an account?
-           
-      script(type="text/html" id="template-signup")
-        h1 Sign Up
-        form(id="signup" action="/signup" method="post")
-          h1 Pick Username :
-          input(id="username" name="username" type="text" required)
-          h1 Password :
-          input(id="password" name="password" type="password" required)
-          input(id= "signupButton" type="submit" value="Signup")
-          a(action="/signup" class="signup")
+    script(type="text/html" id="template-login")
+      h1 Login
+      form(id="login" action="/login" method="post")
+        h1 Username :
+        input(id="username" name="username" type="text" required)
+        h1 Password :
+        input(id="password" name="password" type="password" required)
+        br
+        br
+        input(id="loginButton" type="submit" value="Login")
+        a( id="loadSignup" action="/signup" class="hvr-grow")
+          p dont have an account?
+         
+    script(type="text/html" id="template-signup")
+      h1 Sign Up
+      form(id="signup" action="/signup" method="post")
+        h1 Pick Username :
+        input(id="username" name="username" type="text" required)
+        h1 Password :
+        input(id="password" name="password" type="password" required)
+        br
+        br
+        input(id= "signupButton" type="submit" value="Signup")
+        a(id="loadLogin" action="/login" class="hvr-grow")
+          p already have an account?
 
 
 

@@ -32,7 +32,7 @@ router.post('/signup', function(request,response){
 	db.search('userData', 'value.username: ' + username)
 	.then(function(result){
 		if(result.body.count === 1){
-			window.alert('User already exists.');
+			response.render('index', {message:'User already exists.'});
 		}
 		//user doesn't exist, add it!
 		else {
@@ -72,7 +72,7 @@ router.post('/login', function(request,response){
 				console.log("we done logged in");
 				response.render('main', { username : resp.body.results[0].value.username})
 			}else{
-				window.alert('Incorrect info, give it another go.');
+				response.render('index', { message: 'Incorrect info, give it another go.'});
 			}
 		})
 	})
