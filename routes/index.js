@@ -83,7 +83,6 @@ router.post('/login', function(request,response){
 			}
 		})
 	})
-	response.render('main')
 })
 
 /*
