@@ -1,4 +1,5 @@
 $(document).ready(function(){
+
     //define the character model
 
     var Character = Backbone.Model.extend({
@@ -77,19 +78,19 @@ $(document).ready(function(){
         }
     })
 
-    // var CharacterView = Backbone.View.extend({
-    // 	tagName : "div",
-    // 	className : "characterSelect-view",
-    // 	template : _.template($("#template-characterSelect").html()),
-    //
-    // 	initialize: function(){
-    //     console.log(this.$el)
-    // 		this.render()
-    // 	},
-    // 	render: function(){
-    // 		this.$el.html(this.template)
-    // 	}
-    // })
+    var CharacterView = Backbone.View.extend({
+    	tagName : "div",
+    	className : "characterSelect-view",
+    	template : _.template($("#template-characterSelect").html()),
+
+    	initialize: function(){
+        console.log(this.$el)
+    		this.render()
+    	},
+    	render: function(){
+    		this.$el.html(this.template)
+    	}
+    })
 
     var MainAppView = Backbone.View.extend({
         //div in index.jade
