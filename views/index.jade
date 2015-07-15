@@ -1,5 +1,4 @@
 extends layout
-
 block content
 
   div.title
@@ -7,34 +6,31 @@ block content
     p= message
 
   div.login(id="comicapp")
-    
 
-    div(id="container")
-    
-      script(type="text/html" id="template-login")
-        h1 Login
-        form(id="login" action="/login" method="post")
-          h1 Username :
-          input(id="username" name="username" type="text" required)
-          h1 Password :
-          input(id="password" name="password" type="password" required)
-          br
-          br
-          input(id="loginButton" type="submit" value="Login" class="hvr-grow")
-          a( action="/signup" class="hvr-pulse")
-            p dont have an account?
-      script(type="text/html" id="template-signup")
-        h1 Sign Up
-        form(id="signup" action="/signup" method="post")
-          h1 Pick Username :
-          input(id="username" name="username" type="text" required)
-          h1 Password :
-          input(id="password" name="password" type="password" required)
-          br
-          br
-          input(id= "signupButton" type="submit" value="Signup")
-          a( action="/login" class="hvr-grow")
-            p Have an account?
+    script(type="text/html" id="template-login")
+      h1 Login
+      form(id="login" action="/login" method="post")
+        h1 Username :
+        input(id="username" name="username" type="text" required)
+        h1 Password :
+        input(id="password" name="password" type="password" required)
+        br
+        br
+        input(id="loginButton" type="submit" value="Login" class="hvr-grow")
+        a( action="/signup" class="hvr-pulse")
+          p dont have an account?
+    script(type="text/html" id="template-signup")
+      h1 Sign Up
+      form(id="signup" action="/signup" method="post")
+        h1 Pick Username :
+        input(id="username" name="username" type="text" required)
+        h1 Password :
+        input(id="password" name="password" type="password" required)
+        br
+        br
+        input(id= "signupButton" type="submit" value="Signup")
+        a( action="/login" class="hvr-grow")
+          p Have an account?
 
 
     script(type='text/javascript' src='../javascripts/jquery-2.1.4.js')
@@ -42,20 +38,4 @@ block content
     script(type='text/javascript' src='../javascripts/backbone.js')
     script(type='text/javascript' src='../javascripts/comicApp.js')
     script(type='text/css' src='../stylesheets/normalize.css')
-
-      //- button(action="/login" method="post" value="Login").
-      //-   Login
-
-
-
-    //- form(action="/login" method="post")
-    //-   label Username :
-    //-   input(name="username" type="text" )
-    //-   br
-    //-   label Password :
-    //-   input(name="password" type="text" )
-    //-   br
-    //-   input(type="submit" value="Login")
-   
-      
-    //-   input(type="submit" value="Login")
+    

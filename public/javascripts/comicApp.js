@@ -53,7 +53,6 @@ $(document).ready(function(){
         className : "login-view",
         template : _.template($("#template-login").html()),
 
-
         initialize: function(){
             console.log(this.$el);
             this.render()
@@ -80,10 +79,11 @@ $(document).ready(function(){
 
     // var CharacterView = Backbone.View.extend({
     // 	tagName : "div",
-    // 	className : "characterSelect",
+    // 	className : "characterSelect-view",
     // 	template : _.template($("#template-characterSelect").html()),
-
+    //
     // 	initialize: function(){
+    //     console.log(this.$el)
     // 		this.render()
     // 	},
     // 	render: function(){
@@ -99,34 +99,40 @@ $(document).ready(function(){
         events : {
             "click .addChar" : "addCharacterToUserAccount",
             "click .hvr-pulse" : "loadSignup",
-            "click .hvr-grow" : "loadLogin"
+            "click .hvr-grow" : "loadLogin",
+            "click #loginButton" : "loadCharacterSelection"
 
         },
         //main app view initializes loginView, creates a div, and then loads the view.
         initialize: function(){
             this.$el.html('<div id="loginForm"></div>')
             console.log("things are happening")
+            this.currentView = new LoginView()
+            this.$el.html(this.currentView.$el)
             // listen to the characterList collection, when a model is added, run this.addCharacter
-            this.loadLogin();
             this.listenTo(characterList, 'add', this.addCharacter)
             characterList.fetch()
         },
         //handles loading the login view and html elements
         loadLogin : function(){
-            var view = new LoginView()
-            this.$el.html(view.$el)
+          this.currentView.$el.remove()
+          this.currentView.remove()
+          this.currentView = new LoginView()
+          this.$el.html(this.currentView.$el)
         },
         //uses Signup ctor to create SignupView
         loadSignup : function(){
-            var view = new SignupView()
-            this.$el.html(view.$el)
-            //this should handle garbage collection, but isn't working.
-            $(".login-view").empty()
+          this.currentView.$el.remove()
+          this.currentView.remove()
+          this.currentView = new SignupView()
+          this.$el.html(this.currentView.$el)
         },
-        // loadCharacterSelection : function(){
-        // 	var characterSelection = new CharacterView()
-        // 	this.$el.html(view.$el)
-        // },
+          loadCharacterSelection : function(){
+            this.currentView.$el.remove()
+            this.currentView.remove()
+          	this.currentView = new CharacterView()
+          	this.$el.html(this.currentView.$el)
+          },
         addCharacter : function(character){
             //create new view for this musician
             //console.log(character)
