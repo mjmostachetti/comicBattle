@@ -32,9 +32,7 @@ router.post('/signup', function(request,response){
 	db.search('userData', 'value.username: ' + username)
 	.then(function(result){
 		if(result.body.count === 1){
-			response.render('index', {
-				title : "Welcome to Comic Rock Paper Scissors",
-				message : "Username already exists."})
+			window.alert('User already exists.');
 		}
 		//user doesn't exist, add it!
 		else {
@@ -63,20 +61,18 @@ router.post('/signup', function(request,response){
 })
 
 router.post('/login', function(request,response){
-	console.log("we done logged in")
 	var username = request.body.username
-	console.log(request.body)
 	var password = request.body.password
 	db.search('userData', 'value.username: ' + username)
 	.then(function(resp){
-		console.log(resp.body.results[0].value)
 		var userHash = resp.body.results[0].value.hash
 		var userSalt = resp.body.results[0].value.salt
 		pass.hash(password,userSalt,function (err,hash){
 			if(userHash === hash){
+				console.log("we done logged in");
 				response.render('main', { username : resp.body.results[0].value.username})
 			}else{
-				response.render('index',{ message : 'FU'})
+				window.alert('Incorrect info, give it another go.');
 			}
 		})
 	})
