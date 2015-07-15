@@ -1,4 +1,13 @@
 module.extends = {
 	"batman" : "1699",
-	"daredevil" : "24694"
+	"daredevil" : "24694",
+	"hulk" : "1449",
+	"flash" : "1489",
+	"superman" : "1807",
+	"jean grey" : "3552",
+	"dr. strange" : "1456",
+	"nova" : "2105",
+	"thor" : "2268",
+	"martian manhunter" : "2047",
+	"silver surfer" : "2502"
 }
