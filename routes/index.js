@@ -81,9 +81,9 @@ router.post('/login', function(request,response){
 		// 	}else{
 		// 		response.render('index',{ message : 'FU'})
 		// 	}
-		// })
+		 })
 	})
-	// response.render('main')
+	//response.render('main')
 })
 
 /*

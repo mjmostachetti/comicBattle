@@ -129,6 +129,7 @@ $(document).ready(function(){
           this.$el.html(this.currentView.$el)
         },
           loadCharacterSelection : function(){
+            console.log("the character selection loaded")
             this.currentView.$el.remove()
             this.currentView.remove()
           	this.currentView = new CharacterView()
