@@ -75,12 +75,12 @@ router.post('/login', function(request,response){
 		var userHash = resp.body.results[0].value.hash
 		var userSalt = resp.body.results[0].value.salt
 		pass.hash(password,userSalt,function (err,hash){
-			if(userHash === hash){
-				response.render('main', { username : resp.body.results[0].value.username})
-			}else{
-				response.render('index',{ message : 'FU'})
-			}
-		})
+		// 	if(userHash === hash){
+		// 		response.render('main', { username : resp.body.results[0].value.username})
+		// 	}else{
+		// 		response.render('index',{ message : 'FU'})
+		// 	}
+		// })
 	})
 	
 })
