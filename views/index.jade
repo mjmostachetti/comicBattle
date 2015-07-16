@@ -33,12 +33,11 @@ block content
           p Have an account?
           
     script(type="text/html" id="template-characterSelect")
-     p= "Sup, " + username
      ul(id="characters-list")
        div#grid
          div.row 
-            //-  a(href="http://www.dccomics.com/characters/batman")
-            //-   img(src="img/batman.png")
+             a(href="http://www.dccomics.com/characters/batman")
+              img(src="img/batman.png")
          div.row 
              a(href="http://www.dccomics.com/characters/superman")
               img(src="img/superman.png")
@@ -68,12 +67,11 @@ block content
               img(src="img/punisher.png")
          div.row  
          div.row 
-         div.row 
-         div.row 
-         div.row 
-         div.row 
-         div.row 
-         div.row
+    
+    script(type="text/html" id="character-info")
+      p= "dude, this may have worked"  
+      ul(id="characters-list")
+        div#grid   
 
     script(type='text/javascript' src='../javascripts/jquery-2.1.4.js')
     script(type='text/javascript' src='../javascripts/underscore.js')
