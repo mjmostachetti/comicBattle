@@ -130,10 +130,7 @@ $(document).ready(function(){
         },
         //main app view initializes loginView, creates a div, and then loads the view.
         initialize: function(){
-          this.setCurrentView(new LoginView())
-            // this.$el.html('<div id="loginForm"></div>')
-            // this.currentView = new LoginView()
-            // this.$el.html(this.currentView.$el)
+            this.setCurrentView(new LoginView())
             characterList.fetch("http://localhost:3000/fillOut", function(charData){
               console.log("charData")
             })
@@ -154,8 +151,16 @@ $(document).ready(function(){
           this.setCurrentView(new CharacterView())
           //console.log("the character selection loaded")
         },
+        //uses Signup ctor to create SignupView
+        loadSignup : function(){
+            this.setCurrentView(new SignupView())
+        },
+        loadCharacterSelection : function(){
+            this.setCurrentView(new CharacterView())
+            // console.log("the character selection loaded")
+        },
         setCurrentView : function(newView) {
-            if(this.currentView)this.currentView.remove()
+            if (this.currentView) this.currentView.remove()
             this.currentView = newView
             this.$el.html(newView.$el)
         }
