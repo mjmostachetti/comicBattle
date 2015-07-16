@@ -29,6 +29,7 @@ router.post('/signup', function(request,response){
 	var userSalt = "";
 	var userHash = "";
 	//check if username already in the database
+	//TODO(justin): use db.get instead and have a separate .then fn for 404
 	db.search('userData', 'value.username: ' + username)
 	.then(function(result){
 		if(result.body.count === 1){
@@ -36,8 +37,8 @@ router.post('/signup', function(request,response){
 		}
 		//user doesn't exist, add it!
 		else {
-			db.search('userData','*').then(function(resp){
-				var userTotal = resp.body.count + 1;
+			db.search('userData', '*').then(function(resp){
+				var userTotal = resp.body.total_count + 1;
 				pass.hash(password, function (err, salt, hash){
 					userSalt = salt;
 					userHash = hash;
