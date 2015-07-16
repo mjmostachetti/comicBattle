@@ -56,7 +56,7 @@ h1 {
 	background: blue;
 	border-radius: 25px;
 	padding: 15px;
-	opacity: .7;
+	opacity: 1;
 	color: red;
 	font-family: 'Bangers', cursive;
 	/*margin: 300px;
@@ -88,38 +88,46 @@ h1 {
 	opacity: none;
 }
 
-.login-view {
-
-
-}
 
 
 
 #grid{
-	font-size: 50px;
-	height: 500px;
+	height: 800px;
 	width: 500px;
-	border: 5px solid purple;
+	border: 5px solid #52DDFF;
 	margin: 0 auto;
 	font-family: 'Bangers';
-	background: black;
+	background: white;
+	/*float: left;*/
+	opacity: none;
+	display: inline-block;
 
 }
 
 .row {
-	border: 2px solid white;
+	border: 2px solid #52DDFF;
     width: 50px;
     height: 50px;
-    float: left;
+    float: left; 
+    padding: 15px;
+    margin: 15px 15px 15px 15px;
      
 }
 
-.row2 {
-	border: 2px solid blue;
-	width: 50px;
-	float: right;
+#options {
+	border-bottom: 2px solid #52DDFF;
+	
 
 }
+
+/*.row2 {
+	border: 2px solid blue;
+	width: 50px;
+	float: right;*/
+
+}
+
+
 
 
 

@@ -7,6 +7,7 @@ block content
 
   div.login(id="comicapp")
 
+
     script(type="text/html" id="template-login")
       h1 Login
       form(id="login" action="/login" method="post")
@@ -35,17 +36,24 @@ block content
 
           
     script(type="text/html" id="template-characterSelect")
+        a( action="/login" class="hvr-grow")
+          p Have an account?
+
+  
+          
+    script(type="text/html" id="template-characterSelect")
+     //- p= "Sup, " + username
      ul(id="characters-list")
-       div#grid
+       div(id="grid")
+        div(id="options")
+          h1 Hero Select
+          h1 Profile
          div.row 
              a(href="http://www.dccomics.com/characters/batman")
               img(src="img/batman.png")
          div.row 
              a(href="http://www.dccomics.com/characters/superman")
               img(src="img/superman.png")
-         div.row 
-             a(href="http://www.dccomics.com/characters/shazam")
-              img(src="img/marvel.png")
          div.row 
              a(href="http://www.dccomics.com/characters/green-lantern")
               img(src="img/greenlantern.png")
@@ -70,10 +78,7 @@ block content
          div.row  
          div.row 
     
-    script(type="text/html" id="character-info")
-      p= "dude, this may have worked"  
-      ul(id="characters-list")
-        div#grid   
+    
 
 
     script(type='text/javascript' src='../javascripts/jquery-2.1.4.js')
@@ -81,4 +86,6 @@ block content
     script(type='text/javascript' src='../javascripts/backbone.js')
     script(type='text/javascript' src='../javascripts/comicApp.js')
     script(type='text/css' src='../stylesheets/normalize.css')
+
+      "how do we connect to the comicvine api? is that what the API key is for then once we get one we can use there stuff online?"
     

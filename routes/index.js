@@ -79,6 +79,8 @@ router.post('/login', function(request,response){
 	})
 	//response.render('main')
 })
+	  
+
 
 /*
  * This function is used to fill out our database!

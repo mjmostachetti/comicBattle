@@ -114,7 +114,7 @@ $(document).ready(function(){
             "click .addChar" : "addCharacterToUserAccount",
 
             "click #loadSignup" : "loadSignup",
-            "click #loadLogin" : "loadLogin"
+            "click #loadLogin" : "loadLogin",
             "click #loginButton" : "loadCharacterSelection"
 
 
@@ -123,10 +123,14 @@ $(document).ready(function(){
         initialize: function(){
             this.$el.html('<div id="loginForm"></div>')
             this.currentView = new LoginView()
+            this.$el.html('<div id="characters-list"></div>')
+            console.log("things are happening")
+            this.currentView = new CharacterView()
             this.$el.html(this.currentView.$el)
             // listen to the characterList collection, when a model is added, run this.addCharacter
             this.listenTo(characterList, 'add', this.addCharacter)
             characterList.fetch()
+            $.get('/fillout')
         },
         //handles loading the login view and html elements
         loadLogin : function(){
