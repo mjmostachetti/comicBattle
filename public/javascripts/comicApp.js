@@ -89,6 +89,8 @@ $(document).ready(function(){
     	},
     	render: function(){
     		this.$el.html(this.template)
+        //attempting to pull character data from api
+        $http.get("http://www.comicvine.com/api/characters/?api_key=f6539c8aca297ac9f221c04eb1d0fa3937e02354&field_list=id,name,image&filter=name:batman&format=json")
     	}
     })
 
