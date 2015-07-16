@@ -16,9 +16,10 @@ block content
         input(id="password" name="password" type="password" required)
         br
         br
-        input(id="loginButton" type="submit" value="Login" class="hvr-grow")
-        a( action="/signup" class="hvr-pulse")
+        input(id="loginButton" type="submit" value="Login")
+        a( id="loadSignup" action="/signup" class="hvr-grow")
           p dont have an account?
+         
     script(type="text/html" id="template-signup")
       h1 Sign Up
       form(id="signup" action="/signup" method="post")
@@ -29,8 +30,9 @@ block content
         br
         br
         input(id= "signupButton" type="submit" value="Signup")
-        a( action="/login" class="hvr-grow")
-          p Have an account?
+        a(id="loadLogin" action="/login" class="hvr-grow")
+          p already have an account?
+
           
     script(type="text/html" id="template-characterSelect")
      ul(id="characters-list")
@@ -72,6 +74,7 @@ block content
       p= "dude, this may have worked"  
       ul(id="characters-list")
         div#grid   
+
 
     script(type='text/javascript' src='../javascripts/jquery-2.1.4.js')
     script(type='text/javascript' src='../javascripts/underscore.js')

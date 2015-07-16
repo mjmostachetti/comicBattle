@@ -6,46 +6,42 @@ var characterIDs = require('../characterID')
 var http = require('http')
 var characterIDs = require('../characterID');
 
-console.log(characterIDs)
-console.log(characterIDs[0])
+
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
 	res.render('index', { title: 'Comic Rock Paper Scissors' });
 });
+console.log("index.js is running");
 
 router.get('/teams', function(req, res, next){
 		res.render('select', { title: 'Select Yo Teams' });
 });
 
 router.post('/signup', function(request,response){
-console.log('you done signed up');
+	console.log("youve signed up");
+
 	// request.body is an object that contains all of the information
 	// that was passed to the backend via the form on the frontend
 
 	var username = request.body.username;
-	console.log(username);
 	var password = request.body.password;
 	var userSalt = "";
 	var userHash = "";
 	//check if username already in the database
+	//TODO(justin): use db.get instead and have a separate .then fn for 404
 	db.search('userData', 'value.username: ' + username)
 	.then(function(result){
-		console.log(result.body.count)
 		if(result.body.count === 1){
-			response.render('index', {
-				title : "Welcome to Comic Rock Paper Scissors",
-				message : "Username already exists."})
+			response.render('index', {message:'User already exists.'});
 		}
 		//user doesn't exist, add it!
 		else {
-			db.search('userData','*').then(function(resp){
-				var userTotal = resp.body.count + 1;
+			db.search('userData', '*').then(function(resp){
+				var userTotal = resp.body.total_count + 1;
 				pass.hash(password, function (err, salt, hash){
 					userSalt = salt;
 					userHash = hash;
-					console.log(hash)
-					console.log(salt)
 					db.post('userData',{
 					"id" : userTotal,
 					"username" : username,
@@ -66,22 +62,20 @@ console.log('you done signed up');
 })
 
 router.post('/login', function(request,response){
-	console.log("we done logged in")
 	var username = request.body.username
-	console.log(request.body)
 	var password = request.body.password
 	db.search('userData', 'value.username: ' + username)
 	.then(function(resp){
-		console.log(resp.body.results[0].value)
 		var userHash = resp.body.results[0].value.hash
 		var userSalt = resp.body.results[0].value.salt
 		pass.hash(password,userSalt,function (err,hash){
-		// 	if(userHash === hash){
-		// 		response.render('main', { username : resp.body.results[0].value.username})
-		// 	}else{
-		// 		response.render('index',{ message : 'FU'})
-		// 	}
-		 })
+			if(userHash === hash){
+				console.log("we done logged in");
+				response.render('main', { username : resp.body.results[0].value.username})
+			}else{
+				response.render('index', { message: 'Incorrect info, give it another go.'});
+			}
+		})
 	})
 	//response.render('main')
 })

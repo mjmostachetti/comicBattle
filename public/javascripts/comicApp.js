@@ -122,10 +122,13 @@ $(document).ready(function(){
         el: $('#comicapp'),
 
         events : {
+
             "click .addChar" : "addCharacterToUserAccount",
-            "click .hvr-pulse" : "loadSignup",
-            "click .hvr-grow" : "loadLogin",
+
+            "click #loadSignup" : "loadSignup",
+            "click #loadLogin" : "loadLogin"
             "click #loginButton" : "loadCharacterSelection"
+
 
         },
         //main app view initializes loginView, creates a div, and then loads the view.
