@@ -9,7 +9,7 @@ module.exports = [
 },
 {
 	"name" : "superman",
-	"id" : "2345"
+	"id" : "1807"
 },
 {
 	"name" : "hulk",

@@ -92,6 +92,7 @@ router.post('/login', function(request,response){
 router.get('/fillOut', function(request,response){
 	console.log("This is an array of the character IDs : ")
 	console.log(characterIDs)
+	var charJSON;
 	characterIDs.forEach(function(item){
 		http.get('http://www.comicvine.com/api/character/' +
 			'4005-'+item.id+'/?api_key=f6539c8aca297ac9f221c04eb1d0fa3937e02354&' +
@@ -102,11 +103,12 @@ router.get('/fillOut', function(request,response){
 					writeToThis += chunk
 				});
 				res.on('end', function(){
-					var charJSON = JSON.parse(writeToThis)
+					charJSON = JSON.parse(writeToThis)
 					console.log(charJSON)
 				})
 		})
 	})
+					response.sendFile(charJSON)
 })
 
 // api call for the CharactersCollection
