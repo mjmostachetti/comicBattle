@@ -1,14 +1,14 @@
 $(document).ready(function(){
 
     //define the character model
-
     var Character = Backbone.Model.extend({
         defaults : {
                 name : "",
                 energy : 0,
                 strength : 0,
                 magic : 0,
-                deck : ""
+                deck : "",
+                image: ""
             }
     })
 
@@ -35,16 +35,20 @@ $(document).ready(function(){
     })
 
     var characterList = new CharacterCollection;
-
+    // currently not working. Console flips out about the #character-info
     // var CharacterView = Backbone.View.extend({
-    //     tagName: 'li',
-    //     template: _.template($('#character-info').html()),
+    //     tagName: "div",
+    //     className: "character"
+    //     template: _.template($("#character-info").html()),
     //     render : function(){
-    //         this.$el.html(this.template(this.model))
+    //       this.$el.html(this.template(this.model))
+    //     },
+    //     initialize : function() {
+    //       this.render()
     //     }
     // })
 
-    // var viewArray = [];
+    var viewArray = [];
 
     //creating a view for login
     //view creates a div with a tag name to house html
@@ -78,6 +82,27 @@ $(document).ready(function(){
         }
     })
 
+    var CharacterView = Backbone.View.extend({
+    	tagName : "div",
+    	className : "characterSelect-view",
+    	template : _.template($("#template-characterSelect").html()),
+
+    	initialize: function(){
+        this.listenTo(this.collection, 'add', this.addView);
+        console.log(this.$el)
+    		this.render()
+    	},
+    	render: function(){
+    		this.$el.html(this.template)
+    	},
+      addModel : function () {
+        this.collection.add({});
+      },
+      addView : function(){
+        var view = new CharacterView({model : newModel})
+        this.render()
+      },
+    })
 
     var MainAppView = Backbone.View.extend({
         //div in index.jade
@@ -87,42 +112,52 @@ $(document).ready(function(){
         events : {
 
             "click .addChar" : "addCharacterToUserAccount",
+
             "click #loadSignup" : "loadSignup",
             "click #loadLogin" : "loadLogin"
+            "click #loginButton" : "loadCharacterSelection"
 
 
         },
         //main app view initializes loginView, creates a div, and then loads the view.
         initialize: function(){
             this.$el.html('<div id="loginForm"></div>')
-            console.log("things are happening")
+            this.currentView = new LoginView()
+            this.$el.html(this.currentView.$el)
             // listen to the characterList collection, when a model is added, run this.addCharacter
-            this.loadLogin();
             this.listenTo(characterList, 'add', this.addCharacter)
             characterList.fetch()
         },
         //handles loading the login view and html elements
         loadLogin : function(){
-            var view = new LoginView()
-            this.$el.html(view.$el)
+          this.currentView.$el.remove()
+          this.currentView.remove()
+          this.currentView = new LoginView()
+          this.$el.html(this.currentView.$el)
         },
         //uses Signup ctor to create SignupView
         loadSignup : function(){
-            var view = new SignupView()
-            this.$el.html(view.$el)
-            //this should handle garbage collection, but isn't working.
-            $(".login-view").empty()
+          this.currentView.$el.remove()
+          this.currentView.remove()
+          this.currentView = new SignupView()
+          this.$el.html(this.currentView.$el)
         },
-
+          loadCharacterSelection : function(){
+            this.currentView.$el.remove()
+            this.currentView.remove()
+          	this.currentView = new CharacterView()
+          	this.$el.html(this.currentView.$el)
+            console.log("the character selection loaded")
+          },
         addCharacter : function(character){
-            //create new view for this musician
-            //console.log(character)
-            //var view = new CharacterView({ model : character })
+            //create new view for this character
+            console.log(character)
+            var view = new CharacterView({ model : character })
             //push the view into array for removal later
-            //viewArray.push(view)
-            // console.log("This is an array of views : " + view)
-     //    view.render()
-            //this.$("#characters-list").append(view.$el);
+            viewArray.push(view)
+            console.log("This is an array of views : " + view)
+            this.render()
+            this.$("#characters-list").append(view.$el);
         },
         addCharacterToUserAccount : function(){
             console.log("run")
