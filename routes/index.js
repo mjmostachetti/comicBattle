@@ -82,12 +82,11 @@ router.post('/login', function(request,response){
 		// 		response.render('index',{ message : 'FU'})
 		// 	}
 		// })
-	})
+		})
 	
-		 })
-	})
-	//response.render('main')
-})
+		})
+   })
+
 
 /*
  * This function is used to fill out our database!
