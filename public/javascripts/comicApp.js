@@ -133,9 +133,7 @@ $(document).ready(function(){
         },
         //main app view initializes loginView, creates a div, and then loads the view.
         initialize: function(){
-            this.$el.html('<div id="loginForm"></div>')
-            this.currentView = new LoginView()
-            this.$el.html(this.currentView.$el)
+            this.setCurrentView(new LoginView())
             characterList.fetch("http://localhost:3000/fillOut", function(charData){
               console.log("charData")
             })
@@ -146,25 +144,21 @@ $(document).ready(function(){
         },
         //handles loading the login view and html elements
         loadLogin : function(){
-          this.currentView.$el.remove()
-          this.currentView.remove()
-          this.currentView = new LoginView()
-          this.$el.html(this.currentView.$el)
+            this.setCurrentView(new LoginView())
         },
         //uses Signup ctor to create SignupView
         loadSignup : function(){
-          this.currentView.$el.remove()
-          this.currentView.remove()
-          this.currentView = new SignupView()
-          this.$el.html(this.currentView.$el)
+            this.setCurrentView(new SignupView())
         },
         loadCharacterSelection : function(){
-          this.currentView.$el.remove()
-          this.currentView.remove()
-        	this.currentView = new CharacterView()
-        	this.$el.html(this.currentView.$el)
-          //console.log("the character selection loaded")
-          }
+            this.setCurrentView(new CharacterView())
+            // console.log("the character selection loaded")
+        },
+        setCurrentView : function(newView) {
+            if (this.currentView) this.currentView.remove()
+            this.currentView = newView
+            this.$el.html(newView.$el)
+        }
     })
 
     var App = new MainAppView();
