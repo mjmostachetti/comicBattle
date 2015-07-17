@@ -13,8 +13,10 @@ function(){
             }
     })
 
+
     var CharacterCollection = Backbone.Collection.extend({
         model: Character,
+        //url: '/fillOut'
         url: '/api/characters'
     })
 
@@ -36,18 +38,18 @@ function(){
     })
 
     var characterList = new CharacterCollection;
-    // currently not working. Console flips out about the #character-info
-    // var CharacterView = Backbone.View.extend({
-    //     tagName: "div",
-    //     className: "character"
-    //     template: _.template($("#character-info").html()),
-    //     render : function(){
-    //       this.$el.html(this.template(this.model))
-    //     },
-    //     initialize : function() {
-    //       this.render()
-    //     }
-    // })
+    //currently not working. Console flips out about the #character-info
+    var CharacterView = Backbone.View.extend({
+        tagName: "div",
+        className: "character",
+        template: _.template($("#character-info").html()),
+        render : function(){
+          this.$el.html(this.template(this.model))
+        },
+        initialize : function() {
+          this.render()
+        }
+    })
 
     var viewArray = [];
 
@@ -60,7 +62,7 @@ function(){
         template : _.template($("#template-login").html()),
 
         initialize: function(){
-            console.log(this.$el);
+            //console.log(this.$el);
             this.render()
         },
 
@@ -87,11 +89,23 @@ function(){
     	tagName : "div",
     	className : "characterSelect-view",
     	template : _.template($("#template-characterSelect").html()),
-
+      addCharacter : function(character){
+        //create new view for this character
+        //console.log(character)
+        var view = new CharacterView({ model : character })
+        //push the view into array for removal later
+        viewArray.push(view)
+        //console.log("This is an array of views : " + view)
+        this.$("#characters-list").append(view.$el);
+      },
     	initialize: function(){
+        var that = this
         this.listenTo(this.collection, 'add', this.addView);
-        console.log(this.$el)
-    		this.render()
+        //console.log(this.$el)
+        characterList.fetch({success: function(charData) {
+      		that.render()
+          console.log(charData)
+        }})
     	},
     	render: function(){
     		this.$el.html(this.template)
@@ -103,6 +117,9 @@ function(){
         var view = new CharacterView({model : newModel})
         this.render()
       },
+      addCharacterToUserAccount : function(){
+          //console.log("run")
+      }
     })
 
     var MainAppView = Backbone.View.extend({
@@ -111,57 +128,34 @@ function(){
         el: $('#comicapp'),
 
         events : {
-
             "click .addChar" : "addCharacterToUserAccount",
-
             "click #loadSignup" : "loadSignup",
             "click #loadLogin" : "loadLogin",
             "click #loginButton" : "loadCharacterSelection"
-
-
         },
         //main app view initializes loginView, creates a div, and then loads the view.
         initialize: function(){
-            this.$el.html('<div id="loginForm"></div>')
-            this.currentView = new LoginView()
-            this.$el.html(this.currentView.$el)
-            // listen to the characterList collection, when a model is added, run this.addCharacter
-            this.listenTo(characterList, 'add', this.addCharacter)
-            characterList.fetch()
+          this.setCurrentView(new LoginView())
+          // listen to the characterList collection, when a model is added, run this.addCharacter
+          this.listenTo(characterList, 'add', this.addCharacter)
         },
         //handles loading the login view and html elements
-        loadLogin : function(){
-          this.currentView.$el.remove()
-          this.currentView.remove()
-          this.currentView = new LoginView()
-          this.$el.html(this.currentView.$el)
+        loadLogin : function() {
+          this.setCurrentView(new LoginView())
         },
         //uses Signup ctor to create SignupView
-        loadSignup : function(){
-          this.currentView.$el.remove()
-          this.currentView.remove()
-          this.currentView = new SignupView()
-          this.$el.html(this.currentView.$el)
+        loadSignup : function() {
+          this.setCurrentView(new SignupView())
         },
-          loadCharacterSelection : function(){
-            this.currentView.$el.remove()
-            this.currentView.remove()
-          	this.currentView = new CharacterView()
-          	this.$el.html(this.currentView.$el)
-            console.log("the character selection loaded")
-          },
-        addCharacter : function(character){
-            //create new view for this character
-            console.log(character)
-            var view = new CharacterView({ model : character })
-            //push the view into array for removal later
-            viewArray.push(view)
-            console.log("This is an array of views : " + view)
-            this.render()
-            this.$("#characters-list").append(view.$el);
+        loadCharacterSelection : function(event) {
+          event.preventDefault()
+          this.setCurrentView(new CharacterView())
+          //console.log("the character selection loaded")
         },
-        addCharacterToUserAccount : function(){
-            console.log("run")
+        setCurrentView : function(newView) {
+          if (this.currentView) this.currentView.remove()
+          this.currentView = newView
+          this.$el.html(newView.$el)
         }
     })
 

@@ -4,9 +4,6 @@ var db = require('orchestrate')('5504b916-9df4-4a5c-9d58-c2da0c4f06f8');
 var pass = require('pwd');
 var characterIDs = require('../characterID')
 var http = require('http')
-var characterIDs = require('../characterID');
-
-
 
 
 /* GET home page. */
@@ -88,6 +85,7 @@ router.post('/login', function(request,response){
 router.get('/fillOut', function(request,response){
 	console.log("This is an array of the character IDs : ")
 	console.log(characterIDs)
+	var charJSON;
 	characterIDs.forEach(function(item){
 		console.log('fetching' + item)
 		http.get('http://www.comicvine.com/api/character/' +
@@ -99,11 +97,11 @@ router.get('/fillOut', function(request,response){
 					writeToThis += chunk
 				});
 				res.on('end', function(){
-					console.log('working???');
-					var charJSON = JSON.parse(writeToThis);
+					charJSON = JSON.parse(writeToThis)
 				})
 		})
 	})
+					response.sendFile(charJSON)
 })
 
 // api call for the CharactersCollection
