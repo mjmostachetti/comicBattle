@@ -3,11 +3,11 @@ block content
 
   div.title
     h1= title
-    p= message
+  
 
   div.login(id="comicapp")
 
-
+    
     script(type="text/html" id="template-login")
       h1 Login
       form(id="login" action="/login" method="post")
@@ -39,9 +39,12 @@ block content
      //- p= "Sup, " + username
      ul(id="characters-list")
        div(id="grid")
-        div(id="options")
-          h1 Hero Select
-          h1 Profile
+        nav(id="options")
+          ul
+            li Hero Select
+            li Profile
+            li bull
+          
          div.row 
              a(href="http://www.dccomics.com/characters/batman")
               img(src="img/batman.png")
@@ -78,6 +81,8 @@ block content
          div.row 
              a(href="")
              img(src="img/venom.png")
+
+      div
 
     script(type='text/javascript' src='../javascripts/jquery-2.1.4.js')
     script(type='text/javascript' src='../javascripts/underscore.js')

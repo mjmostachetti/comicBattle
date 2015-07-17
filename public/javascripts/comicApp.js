@@ -106,9 +106,9 @@ $(document).ready(function(){
         },
         //main app view initializes loginView, creates a div, and then loads the view.
         initialize: function(){
-            this.$el.html('<div id="characters-list"></div>')
+            this.$el.html('<div id="loginForm"></div>')
             console.log("things are happening")
-            this.currentView = new CharacterView()
+            this.currentView = new LoginView()
             this.$el.html(this.currentView.$el)
             // listen to the characterList collection, when a model is added, run this.addCharacter
             this.listenTo(characterList, 'add', this.addCharacter)
