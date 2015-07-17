@@ -4,9 +4,6 @@ var db = require('orchestrate')('5504b916-9df4-4a5c-9d58-c2da0c4f06f8');
 var pass = require('pwd');
 var characterIDs = require('../characterID')
 var http = require('http')
-var characterIDs = require('../characterID');
-
-
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -98,7 +95,7 @@ router.get('/fillOut', function(request,response){
 				});
 				res.on('end', function(){
 					charJSON = JSON.parse(writeToThis)
-					console.log(charJSON)
+					//console.log(charJSON)
 				})
 		})
 	})

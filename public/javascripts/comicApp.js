@@ -15,6 +15,7 @@ $(document).ready(function(){
 
     var CharacterCollection = Backbone.Collection.extend({
         model: Character,
+        //url: '/fillOut'
         url: '/api/characters'
     })
 
@@ -97,9 +98,13 @@ $(document).ready(function(){
         this.$("#characters-list").append(view.$el);
       },
     	initialize: function(){
+        var that = this
         this.listenTo(this.collection, 'add', this.addView);
         //console.log(this.$el)
-    		this.render()
+        characterList.fetch({success: function(charData) {
+      		that.render()
+          console.log(charData)
+        }})
     	},
     	render: function(){
     		this.$el.html(this.template)
@@ -122,7 +127,6 @@ $(document).ready(function(){
         el: $('#comicapp'),
 
         events : {
-
             "click .addChar" : "addCharacterToUserAccount",
             "click #loadSignup" : "loadSignup",
             "click #loadLogin" : "loadLogin",
@@ -130,39 +134,27 @@ $(document).ready(function(){
         },
         //main app view initializes loginView, creates a div, and then loads the view.
         initialize: function(){
-            this.setCurrentView(new LoginView())
-            characterList.fetch("http://localhost:3000/fillOut", function(charData){
-              console.log("charData")
-            })
-
-            // listen to the characterList collection, when a model is added, run this.addCharacter
-            this.listenTo(characterList, 'add', this.addCharacter)
-            characterList.fetch()
+          this.setCurrentView(new LoginView())
+          // listen to the characterList collection, when a model is added, run this.addCharacter
+          this.listenTo(characterList, 'add', this.addCharacter)
         },
         //handles loading the login view and html elements
-        loadLogin : function(){
+        loadLogin : function() {
           this.setCurrentView(new LoginView())
         },
         //uses Signup ctor to create SignupView
-        loadSignup : function(){
+        loadSignup : function() {
           this.setCurrentView(new SignupView())
         },
-        loadCharacterSelection : function(){
+        loadCharacterSelection : function(event) {
+          event.preventDefault()
           this.setCurrentView(new CharacterView())
           //console.log("the character selection loaded")
         },
-        //uses Signup ctor to create SignupView
-        loadSignup : function(){
-            this.setCurrentView(new SignupView())
-        },
-        loadCharacterSelection : function(){
-            this.setCurrentView(new CharacterView())
-            // console.log("the character selection loaded")
-        },
         setCurrentView : function(newView) {
-            if (this.currentView) this.currentView.remove()
-            this.currentView = newView
-            this.$el.html(newView.$el)
+          if (this.currentView) this.currentView.remove()
+          this.currentView = newView
+          this.$el.html(newView.$el)
         }
     })
 
