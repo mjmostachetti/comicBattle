@@ -1,4 +1,5 @@
-$(document).ready(function(){
+
+function(){
 
     //define the character model
     var Character = Backbone.Model.extend({
@@ -114,7 +115,7 @@ $(document).ready(function(){
             "click .addChar" : "addCharacterToUserAccount",
 
             "click #loadSignup" : "loadSignup",
-            "click #loadLogin" : "loadLogin"
+            "click #loadLogin" : "loadLogin",
             "click #loginButton" : "loadCharacterSelection"
 
 
@@ -166,4 +167,4 @@ $(document).ready(function(){
 
     var App = new MainAppView();
 
-})
+}

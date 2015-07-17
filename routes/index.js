@@ -8,6 +8,7 @@ var characterIDs = require('../characterID');
 
 
 
+
 /* GET home page. */
 router.get('/', function(req, res, next) {
 	res.render('index', { title: 'Comic Rock Paper Scissors' });
@@ -83,10 +84,12 @@ router.post('/login', function(request,response){
 /*
  * This function is used to fill out our database!
  */
+
 router.get('/fillOut', function(request,response){
 	console.log("This is an array of the character IDs : ")
 	console.log(characterIDs)
 	characterIDs.forEach(function(item){
+		console.log('fetching' + item)
 		http.get('http://www.comicvine.com/api/character/' +
 			'4005-'+item.id+'/?api_key=f6539c8aca297ac9f221c04eb1d0fa3937e02354&' +
 			'field_list=name,image,powers,id&format=json',
@@ -96,8 +99,8 @@ router.get('/fillOut', function(request,response){
 					writeToThis += chunk
 				});
 				res.on('end', function(){
-					var charJSON = JSON.parse(writeToThis)
-					console.log(charJSON)
+					console.log('working???');
+					var charJSON = JSON.parse(writeToThis);
 				})
 		})
 	})
