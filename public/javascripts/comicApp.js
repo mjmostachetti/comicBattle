@@ -37,7 +37,7 @@ $(document).ready(function(){
     })
 
     var characterList = new CharacterCollection;
-    //currently not working. Console flips out about the #character-info
+    //works, sorta. Not sure this is doing what I want
     var CharacterView = Backbone.View.extend({
         tagName: "div",
         className: "character",
