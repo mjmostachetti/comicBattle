@@ -1,9 +1,10 @@
 extends layout
 block content
 
+  h1 Welcome to Nerd Battle 2015
   div.title
-    h1= title
     p= message
+
 
   div.login(id="comicapp")
 
@@ -35,57 +36,69 @@ block content
           p already have an account?
 
           
-    script(type="text/html" id="template-characterSelect")
-        a( action="/login" class="hvr-grow")
-          p Have an account?
+          script(type="text/html" id="template-characterSelect")
+           //- p= "Sup, " + username
+           ul(id="characters-list")
+             div(id="grid")
+              div(id="options")
+                h1 Hero Select
+                h1 Profile
+               div.row 
+                   a(href="http://www.dccomics.com/characters/batman")
+                    img(src="img/batman.png")
+               div.row 
+                   a(href="http://www.dccomics.com/characters/superman")
+                    img(src="img/superman.png")
+               div.row 
+                   a(href="http://www.dccomics.com/characters/green-lantern")
+                    img(src="img/greenlantern.png")
+               div.row
+                   a(href="")
+                    img(src="img/cap.png")
+               div.row
+                   a(href="") 
+                    img(src="img/spiderman.png") 
+               div.row 
+                   a(href="")
+                    img(src="img/shield.png")
+               div.row
+                   a(href="")
+                    img(src="img/deadpool.png")
+               div.row 
+                   a(href="")
+                    img(src="img/flash.png")
+               div.row 
+                   a(href="")
+                    img(src="img/punisher.png")
+               div.row  
+               div.row 
+          
+          
+
+
+          script(type='text/javascript' src='../javascripts/jquery-2.1.4.js')
+          script(type='text/javascript' src='../javascripts/underscore.js')
+          script(type='text/javascript' src='../javascripts/backbone.js')
+          script(type='text/javascript' src='../javascripts/comicApp.js')
+          script(type='text/css' src='../stylesheets/normalize.css')
+
+    
+    
+  //- include components/login.jade
+  //- include components/signup.jade
+  //- include components/select.jade
+  //- include components/characterInfo.jade
 
   
-          
-    script(type="text/html" id="template-characterSelect")
-     //- p= "Sup, " + username
-     ul(id="characters-list")
-       div(id="grid")
-        div(id="options")
-          h1 Hero Select
-          h1 Profile
-         div.row 
-             a(href="http://www.dccomics.com/characters/batman")
-              img(src="img/batman.png")
-         div.row 
-             a(href="http://www.dccomics.com/characters/superman")
-              img(src="img/superman.png")
-         div.row 
-             a(href="http://www.dccomics.com/characters/green-lantern")
-              img(src="img/greenlantern.png")
-         div.row
-             a(href="")
-              img(src="img/cap.png")
-         div.row
-             a(href="") 
-              img(src="img/spiderman.png") 
-         div.row 
-             a(href="")
-              img(src="img/shield.png")
-         div.row
-             a(href="")
-              img(src="img/deadpool.png")
-         div.row 
-             a(href="")
-              img(src="img/flash.png")
-         div.row 
-             a(href="")
-              img(src="img/punisher.png")
-         div.row  
-         div.row 
-    
-    
-
-
-    script(type='text/javascript' src='../javascripts/jquery-2.1.4.js')
-    script(type='text/javascript' src='../javascripts/underscore.js')
-    script(type='text/javascript' src='../javascripts/backbone.js')
-    script(type='text/javascript' src='../javascripts/comicApp.js')
-    script(type='text/css' src='../stylesheets/normalize.css')
-
-      "how do we connect to the comicvine api? is that what the API key is for then once we get one we can use there stuff online?"
-    
+  
+  script(type="text/html" id="template-login")
+  script(type="text/html" id="template-signup")
+  script(type="text/html" id="template-characterSelect")
+  script(type="text/html" id="character-info")
+  
+  //- script(type='text/javascript' src='../javascripts/jquery-2.1.4.js')
+  //- script(type='text/javascript' src='../javascripts/underscore.js')
+  //- script(type='text/javascript' src='../javascripts/backbone.js')
+  //- script(type='text/javascript' src='../javascripts/comicApp.js')
+  //- script(rel='stylesheet', href='../stylesheets/normalize.css')
+  //- script(rel='stylesheet', href='../stylesheets/style.css')
