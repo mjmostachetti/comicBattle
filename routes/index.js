@@ -76,8 +76,6 @@ router.post('/login', function(request,response){
 	})
 	//response.render('main')
 })
-	  
-
 
 /*
  * This function is used to fill out our database!
@@ -101,7 +99,7 @@ router.get('/fillOut', function(request,response){
 				})
 		})
 	})
-					response.sendFile(charJSON)
+					response.render('select', {characters: charJSON});
 })
 
 // api call for the CharactersCollection

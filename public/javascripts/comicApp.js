@@ -84,42 +84,79 @@ $(document).ready(function(){
         }
     })
 
-    var CharacterView = Backbone.View.extend({
-    	tagName : "div",
-    	className : "characterSelect-view",
-    	template : _.template($("#template-characterSelect").html()),
-      addCharacter : function(character){
-        //create new view for this character
-        //console.log(character)
-        var view = new CharacterView({ model : character })
-        //push the view into array for removal later
-        viewArray.push(view)
-        //console.log("This is an array of views : " + view)
-        this.$("#characters-list").append(view.$el);
-      },
-    	initialize: function(){
-        var that = this
-        this.listenTo(this.collection, 'add', this.addView);
-        //console.log(this.$el)
-        characterList.fetch({success: function(charData) {
-      		that.render()
-          console.log(charData)
-        }})
-    	},
-    	render: function(){
-    		this.$el.html(this.template)
-    	},
-      addModel : function () {
-        this.collection.add({});
-      },
-      addView : function(){
-        var view = new CharacterView({model : newModel})
-        this.render()
-      },
-      addCharacterToUserAccount : function(){
-          //console.log("run")
-      }
-    })
+    // var CharacterView = Backbone.View.extend({
+    //  tagName : "div",
+    //  className : "characterSelect-view",
+    //  template : _.template($("#template-characterSelect").html()),
+    //   addCharacter : function(character){
+    //     //create new view for this character
+    //     //console.log(character)
+    //     var view = new CharacterView({ model : character })
+    //     //push the view into array for removal later
+    //     viewArray.push(view)
+    //     //console.log("This is an array of views : " + view)
+    //     this.$("#characters-list").append(view.$el);
+    //   },
+    //  initialize: function(){
+    //     var that = this
+    //     this.listenTo(this.collection, 'add', this.addView);
+    //     //console.log(this.$el)
+    //     characterList.fetch({success: function(charData) {
+    //          that.render()
+    //       console.log(charData)
+    //     }})
+    //  },
+    //  render: function(){
+    //      this.$el.html(this.template)
+    //  },
+    //   addModel : function () {
+    //     this.collection.add({});
+    //   },
+    //   addView : function(){
+    //     var view = new CharacterView({model : newModel})
+    //     this.render()
+    //   },
+    //   addCharacterToUserAccount : function(){
+    //       //console.log("run")
+    //   }
+    // })
+
+    var CharactersView = Backbone.View.extend({
+    collection: CharacterCollection,
+    el: "#characters",
+    intialize: function(){
+      this.render();
+    },
+    render: function(){
+      this.$el.html('<table id="chargrid"></table>');
+      this.collection.each(function(model){
+        new CharacterView({model: model});
+      });
+    },
+    events: {
+      "click .character": "selectCharacter"
+    },
+    selectCharacter: function selectCharacter(evt) {
+      var characterData = $(evt.currentTarget).data();
+      alert("Clicked " + characterData.characterId);
+    }
+  })
+
+  var CharacterView = Backbone.View.extend({
+        tagName : "div",
+        className : "characterSelect-view",
+        template : _.template($("#template-characterSelect").html()),
+    model: Character,
+    intialize: function(){
+      this.render();
+    },
+    render: function(){
+      var template = _.template('<td class="character" data-character-id="<%-id%>"><%-name%></td>');
+      this.$el.html(template({id: this.model.id, name: this.model.name}));
+      return this;
+      $('#chargrid').append(template);
+    }
+  })
 
     var MainAppView = Backbone.View.extend({
         //div in index.jade
@@ -134,17 +171,9 @@ $(document).ready(function(){
         },
         //main app view initializes loginView, creates a div, and then loads the view.
         initialize: function(){
-            this.$el.html('<div id="loginForm"></div>')
-            this.currentView = new LoginView()
-            this.$el.html('<div id="characters-list"></div>')
-            console.log("things are happening")
-            this.currentView = new CharacterView()
-            this.$el.html(this.currentView.$el)
-            // listen to the characterList collection, when a model is added, run this.addCharacter
-            this.listenTo(characterList, 'add', this.addCharacter)
-            characterList.fetch()
-            $.get('/fillout')
-
+          this.setCurrentView(new LoginView())
+          // listen to the characterList collection, when a model is added, run this.addCharacter
+          this.listenTo(characterList, 'add', this.addCharacter)
         },
         //handles loading the login view and html elements
         loadLogin : function() {
