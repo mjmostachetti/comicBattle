@@ -84,43 +84,7 @@ $(document).ready(function(){
         }
     })
 
-    // var CharacterView = Backbone.View.extend({
-    // 	tagName : "div",
-    // 	className : "characterSelect-view",
-    // 	template : _.template($("#template-characterSelect").html()),
-    //   addCharacter : function(character){
-    //     //create new view for this character
-    //     //console.log(character)
-    //     var view = new CharacterView({ model : character })
-    //     //push the view into array for removal later
-    //     viewArray.push(view)
-    //     //console.log("This is an array of views : " + view)
-    //     this.$("#characters-list").append(view.$el);
-    //   },
-    // 	initialize: function(){
-    //     var that = this
-    //     this.listenTo(this.collection, 'add', this.addView);
-    //     //console.log(this.$el)
-    //     characterList.fetch({success: function(charData) {
-    //   		that.render()
-    //       console.log(charData)
-    //     }})
-    // 	},
-    // 	render: function(){
-    // 		this.$el.html(this.template)
-    // 	},
-    //   addModel : function () {
-    //     this.collection.add({});
-    //   },
-    //   addView : function(){
-    //     var view = new CharacterView({model : newModel})
-    //     this.render()
-    //   },
-    //   addCharacterToUserAccount : function(){
-    //       //console.log("run")
-    //   }
-    // })
-
+  
     var CharactersView = Backbone.View.extend({
     collection: CharacterCollection,
     el: "#characters",
@@ -143,6 +107,7 @@ $(document).ready(function(){
   })
 
   var CharacterView = Backbone.View.extend({
+
     	tagName : "div",
     	className : "characterSelect-view",
     	template : _.template($("#template-characterSelect").html()),
