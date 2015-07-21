@@ -1,25 +1,20 @@
 extends layout
+
 block content
+	h1 Welcome to Nerd Battle 2015
+	div.title
+		p= message
 
- h1 Welcome to Nerd Battle 2015
- div.title
-   p= message
-   
- include components/login.jade
- include components/signup.jade
- include components/select.jade
- include components/characterInfo.jade
+	#comicapp.login
 
- div.login(id="comicapp")
- 
- script(type="text/html" id="template-login")
- script(type="text/html" id="template-signup")
- script(type="text/html" id="template-characterSelect")
- script(type="text/html" id="character-info")
- 
- script(type='text/javascript' src='../javascripts/jquery-2.1.4.js')
- script(type='text/javascript' src='../javascripts/underscore.js')
- script(type='text/javascript' src='../javascripts/backbone.js')
- script(type='text/javascript' src='../javascripts/comicApp.js')
- script(rel='stylesheet', href='../stylesheets/normalize.css')
- script(rel='stylesheet', href='../stylesheets/style.css')
+block templates
+	script(type="text/html")#template-login: include components/login.jade
+	script(type="text/html")#template-signup: include components/signup.jade
+	script(type="text/html")#template-characterSelect: include components/select.jade
+	script(type="text/html")#character-info: include components/characterInfo.jade
+
+block scripts
+	script(type='text/javascript' src='../javascripts/jquery-2.1.4.js')
+	script(type='text/javascript' src='../javascripts/underscore.js')
+	script(type='text/javascript' src='../javascripts/backbone.js')
+	script(type='text/javascript' src='../javascripts/comicApp.js')
