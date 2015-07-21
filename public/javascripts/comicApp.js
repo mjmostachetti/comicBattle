@@ -4,33 +4,21 @@ $(document).ready(function() {
   var Character = Backbone.Model.extend({
     defaults: {
       name: "",
-      energy: 0,
-      strength: 0,
-      magic: 0,
+      type: "",
       deck: "",
       image: ""
     },
-    attribute: function(type) {
-      if (name === "batman" || "daredevil" || "hulk" || "joker") {
-        type = strength
-      } else if (name === "superman" || "spider-man" || "cyclops" ||
-        "carnage") {
-        type = energy
+    attribute: function() {
+      if (this.name === "batman" || this.name === "daredevil" || this
+        .name === "hulk" || this.name === "joker") {
+        this.set(type, "strength")
+      } else if (this.name === "superman" || this.name ===
+        "spider-man" || this.name === "cyclops" ||
+        this.name === "carnage") {
+        this.set(type, "energy")
       } else {
-        type = magic
+        this.set(type, "magic")
       }
-    },
-    fightLogic: function() {
-      if (character1.type === character2.type) {
-        console.log("Draw")
-      } else if (character1.type === strength && character2.type ===
-        energy) {
-        console.log(character1.name + " wins!")
-      } else if (character1.type === strength && character2.type ===
-        magic)
-        console.log(character2.name + " wins!")
-    } else {
-
     }
   })
 
@@ -56,12 +44,7 @@ $(document).ready(function() {
     defaults: {
       character1: null,
       character2: null,
-
     }
-    var strength =
-      var energy =
-        var magic =
-          if ()
   })
 
   var UserCollection = Backbone.Collection.extend({
@@ -69,19 +52,38 @@ $(document).ready(function() {
     url: '/users'
   })
 
+  var fightView = Backbone.View.extend({
+    tagName: "div",
+    className: "fight-view",
+    template: _.template($("#fight-view").html()),
+    initialize: function() {
+      this.render()
+    },
+    render: function() {
+      this.$el.html(this.template)
+    },
+    fight: function() {
+      if (character1.type === character2.type) {
+        console.log("Draw")
+      } else if (character1.type === "strength" && character2.type ===
+        "energy") {
+        console.log(character1.name + " wins!")
+      } else if (character1.type === "strength" && character2.type ===
+        "magic") {
+        console.log(character2.name + " wins!")
+      } else if (character1.type === "energy" && character2.type ===
+        "strength") {
+        console.log(character2.name + " wins!")
+      } else if (character1.type === "energy" && character2.type ===
+        "magic") {
+        console.log(character1.name + " wins!")
+      } else {
+        console.log(character1.name + " wins!")
+      }
+    }
+  })
+
   var characterList = new CharacterCollection;
-  //works, sorta. Not sure this is doing what I want
-  // var CharacterView = Backbone.View.extend({
-  //     tagName: "div",
-  //     className: "character",
-  //     template: _.template($("#character-info").html()),
-  //     render : function(){
-  //       this.$el.html(this.template(this.model))
-  //     },
-  //     initialize : function() {
-  //       this.render()
-  //     }
-  // })
 
   var viewArray = [];
 
@@ -180,7 +182,7 @@ $(document).ready(function() {
   var CharacterView = Backbone.View.extend({
     tagName: "div",
     className: "characterSelect-view",
-    template: _.template($("#template-characterSelect").html()),
+    //  _.template($("#template-characterSelect").html()),
     model: Character,
     intialize: function() {
       this.render();
