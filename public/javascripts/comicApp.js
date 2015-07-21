@@ -38,7 +38,7 @@ function(){
     })
 
     var characterList = new CharacterCollection;
-    //currently not working. Console flips out about the #character-info
+    //works, sorta. Not sure this is doing what I want
     var CharacterView = Backbone.View.extend({
         tagName: "div",
         className: "character",
@@ -85,42 +85,44 @@ function(){
         }
     })
 
-    var CharacterView = Backbone.View.extend({
+  
+    var CharactersView = Backbone.View.extend({
+    collection: CharacterCollection,
+    el: "#characters",
+    intialize: function(){
+      this.render();
+    },
+    render: function(){
+      this.$el.html('<table id="chargrid"></table>');
+      this.collection.each(function(model){
+        new CharacterView({model: model});
+      });
+    },
+    events: {
+      "click .character": "selectCharacter"
+    },
+    selectCharacter: function selectCharacter(evt) {
+      var characterData = $(evt.currentTarget).data();
+      alert("Clicked " + characterData.characterId);
+    }
+  })
+
+  var CharacterView = Backbone.View.extend({
+
     	tagName : "div",
     	className : "characterSelect-view",
     	template : _.template($("#template-characterSelect").html()),
-      addCharacter : function(character){
-        //create new view for this character
-        //console.log(character)
-        var view = new CharacterView({ model : character })
-        //push the view into array for removal later
-        viewArray.push(view)
-        //console.log("This is an array of views : " + view)
-        this.$("#characters-list").append(view.$el);
-      },
-    	initialize: function(){
-        var that = this
-        this.listenTo(this.collection, 'add', this.addView);
-        //console.log(this.$el)
-        characterList.fetch({success: function(charData) {
-      		that.render()
-          console.log(charData)
-        }})
-    	},
-    	render: function(){
-    		this.$el.html(this.template)
-    	},
-      addModel : function () {
-        this.collection.add({});
-      },
-      addView : function(){
-        var view = new CharacterView({model : newModel})
-        this.render()
-      },
-      addCharacterToUserAccount : function(){
-          //console.log("run")
-      }
-    })
+    model: Character,
+    intialize: function(){
+      this.render();
+    },
+    render: function(){
+      var template = _.template('<td class="character" data-character-id="<%-id%>"><%-name%></td>');
+      this.$el.html(template({id: this.model.id, name: this.model.name}));
+      return this;
+      $('#chargrid').append(template);
+    }
+  })
 
     var MainAppView = Backbone.View.extend({
         //div in index.jade

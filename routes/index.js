@@ -101,7 +101,7 @@ router.get('/fillOut', function(request,response){
 				})
 		})
 	})
-					response.sendFile(charJSON)
+					response.render('select', {characters: charJSON});
 })
 
 // api call for the CharactersCollection
