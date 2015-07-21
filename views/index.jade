@@ -1,37 +1,25 @@
 extends layout
-
 block content
 
-  div.title
-    h1= title
-    p= message
+ h1 Welcome to Nerd Battle 2015
+ div.title
+   p= message
+   
+ include components/login.jade
+ include components/signup.jade
+ include components/select.jade
+ include components/characterInfo.jade
 
-  div.login(id="comicapp")
-
-    div(id="container")
-
-    script(type="text/html" id="template-login")
-      h1 Login
-      form(id="login" action="/login" method="post")
-        h1 Username :
-        input(id="username" name="username" type="text" required)
-        h1 Password :
-        input(id="password" name="password" type="password" required)
-        input(id="loginButton" type="submit" value="Login")
-
-    script(type="text/html" id="template-signup")
-      h1 Sign Up
-      form(id="signup" action="/signup" method="post")
-        h1 Pick Username :
-        input(id="username" name="username" type="text" required)
-        h1 Password :
-        input(id="password" name="password" type="password" required)
-        input(id= "signupButton" type="submit" value="Signup")
-
-    script(type='text/javascript' src='../javascripts/jquery-2.1.4.js')
-    script(type='text/javascript' src='../javascripts/underscore.js')
-    script(type='text/javascript' src='../javascripts/backbone.js')
-    script(type='text/javascript' src='../javascripts/comicApp.js')
-    script(type='text/css' src='../stylesheets/normalize.css')
-
-
+ div.login(id="comicapp")
+ 
+ script(type="text/html" id="template-login")
+ script(type="text/html" id="template-signup")
+ script(type="text/html" id="template-characterSelect")
+ script(type="text/html" id="character-info")
+ 
+ script(type='text/javascript' src='../javascripts/jquery-2.1.4.js')
+ script(type='text/javascript' src='../javascripts/underscore.js')
+ script(type='text/javascript' src='../javascripts/backbone.js')
+ script(type='text/javascript' src='../javascripts/comicApp.js')
+ script(rel='stylesheet', href='../stylesheets/normalize.css')
+ script(rel='stylesheet', href='../stylesheets/style.css')

@@ -1,23 +1,29 @@
 
-
+html{ 
+  background: url(../img/background.jpg) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
 
 body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-  background-image: url(../img/background.jpg);
+  /*background-image: url(../img/background.jpg);
+  background-size: cover;*/
   /*background-image-width: 100%;
   background-image-height: 100%;*/
-  background-repeat: no-repeat;
-
-
-  
-
-
-
 }
+
 
 a {
   color: #00B7FF;
+  float: right;
+}
+
+a.hover {
+	color: red;
 }
 
 
@@ -50,6 +56,7 @@ a {
 
 h1 {
 	color: red;
+	font-family: 'Bangers';
 	
 }
 
@@ -57,28 +64,109 @@ h1 {
 	background: blue;
 	border-radius: 25px;
 	padding: 15px;
-	opacity: 0.7;
+	opacity: 1;
 	color: red;
 	font-family: 'Bangers', cursive;
-	/*margin: 300px;
-*/
+	width: 30%;
+
+}
+
+.hvr-grow {
+	cursor: pointer;
+	
+}
+
+.hvr-pulse {
+	cursor: pointer;
+}
+
+.signup {
+	cursor: pointer;
+	opacity: none;
+}
+
+#loginButton {
+	cursor: pointer;
+	font-weight: bold;
+	
+}
+
+#signupButton {
+	cursor: pointer;
+	opacity: none;
 }
 
 
+
+
+#grid{
+	height: 800px;
+	width: 500px;
+	border: 5px solid #52DDFF;
+	margin: 0 auto;
+	font-family: 'Bangers';
+	background: white;
+	/*float: left;*/
+	opacity: none;
+	display: inline-block;
+
+}
+
+.row {
+	border: 2px solid #52DDFF;
+    width: 50px;
+    height: 50px;
+    float: left; 
+    padding: 15px;
+    margin: 15px 15px 15px 15px;
+    background: black;
+     
+}
+
+#options {
+	border-bottom: 2px solid #52DDFF;
+	background: black;
+	
+	
+}
+
+nav ul {
+	list-style: none;
+	text-align: center;
+}
+
+nav li {
+	display: inline-block;
+}
+
+li {
+	padding: 10px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

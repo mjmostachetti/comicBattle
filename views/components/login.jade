@@ -1,0 +1,16 @@
+doctype html
+html
+
+  script(type="text/html" id="template-login")
+    h1 Login
+    form(id="login" action="/login" method="post")
+      h1 Username :
+      input(id="username" name="username" type="text" required)
+      h1 Password :
+      input(id="password" name="password" type="password" required)
+      br
+      br
+      input(id="loginButton" type="submit" value="Login")
+      a( id="loadSignup" action="/signup" class="hvr-grow")
+        p dont have an account?
+      

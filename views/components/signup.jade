@@ -1,0 +1,15 @@
+doctype html
+html
+
+  script(type="text/html" id="template-signup")
+   h1 Sign Up
+   form(id="signup" action="/signup" method="post")
+     h1 Pick Username :
+     input(id="username" name="username" type="text" required)
+     h1 Password :
+     input(id="password" name="password" type="password" required)
+     br
+     br
+     input(id= "signupButton" type="submit" value="Signup")
+     a(id="loadLogin" action="/login" class="hvr-grow")
+       p already have an account?
