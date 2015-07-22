@@ -22,6 +22,28 @@ $(document).ready(function() {
     }
   })
 
+  var RoundModel = Backbone.Model.extend({
+    defaults: {
+      leftCharacter: null,
+      rightCharacter: null
+    },
+    initialize: function() {
+
+    }
+  })
+
+  var MatchModel = Backbone.Model.extend({
+    defaults: {
+      rounds: []
+    }
+  })
+
+  var FightLogic = Backbone.Model.extend({
+    defaults: {
+      ko: false,
+    },
+  })
+
   var CharacterCollection = Backbone.Collection.extend({
     model: Character,
     //url: '/fillOut'
@@ -29,21 +51,14 @@ $(document).ready(function() {
   })
 
   var User = Backbone.Model.extend({
-      defaults: {
-        id: 0,
-        username: '',
-        win: 0,
-        loss: 0,
-        hero1: '',
-        hero2: '',
-        hero3: ''
-      }
-    })
-    //model for base rock, paper, scissor combat
-  var fightModel = Backbone.Model.extend({
     defaults: {
-      character1: null,
-      character2: null,
+      id: 0,
+      username: '',
+      win: 0,
+      loss: 0,
+      hero1: '',
+      hero2: '',
+      hero3: ''
     }
   })
 
@@ -63,22 +78,22 @@ $(document).ready(function() {
       this.$el.html(this.template)
     },
     fight: function() {
-      if (character1.type === character2.type) {
+      if (leftCharacter.type === rightCharacter.type) {
         console.log("Draw")
-      } else if (character1.type === "strength" && character2.type ===
+      } else if (leftCharacter.type === "strength" && rightCharacter.type ===
         "energy") {
-        console.log(character1.name + " wins!")
-      } else if (character1.type === "strength" && character2.type ===
+        console.log(leftCharacter.name + " wins!")
+      } else if (leftCharacter.type === "strength" && rightCharacter.type ===
         "magic") {
         console.log(character2.name + " wins!")
-      } else if (character1.type === "energy" && character2.type ===
+      } else if (leftCharacter.type === "energy" && rightCharacter.type ===
         "strength") {
         console.log(character2.name + " wins!")
-      } else if (character1.type === "energy" && character2.type ===
+      } else if (leftCharacter.type === "energy" && rightCharacter.type ===
         "magic") {
-        console.log(character1.name + " wins!")
+        console.log(leftCharacter.name + " wins!")
       } else {
-        console.log(character1.name + " wins!")
+        console.log(leftCharacter.name + " wins!")
       }
     }
   })
@@ -209,7 +224,8 @@ $(document).ready(function() {
       "click .addChar": "addCharacterToUserAccount",
       "click #loadSignup": "loadSignup",
       "click #loadLogin": "loadLogin",
-      "click #loginButton": "loadCharacterSelection"
+      "click #loginButton": "loadCharacterSelection",
+      //"click #fightButton": "loadFightScreen"
     },
     //main app view initializes loginView, creates a div, and then loads the view.
     initialize: function() {
@@ -231,6 +247,10 @@ $(document).ready(function() {
       console.log(characterList);
       //console.log("the character selection loaded")
     },
+    // loadFightScreen: function(event) {
+    //   event.preventDefault()
+    //   this.setCurrentView(new FightView())
+    // }
     setCurrentView: function(newView) {
       if (this.currentView) this.currentView.remove()
       this.currentView = newView
