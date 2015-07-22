@@ -28,7 +28,8 @@ $(document).ready(function() {
       rightCharacter: null
     },
     initialize: function() {
-
+      leftCharacter = new Character()
+      rightCharacter = new Character()
     }
   })
 
@@ -36,6 +37,23 @@ $(document).ready(function() {
     defaults: {
       rounds: []
     }
+  })
+
+  var match = new MatchModel({
+    rounds: [
+      new RoundModel({
+        leftCharacter: new Character(this.character),
+        rightCharacter: new Character(this.character)
+      }),
+      new RoundModel({
+        leftCharacter: new Character(this.character),
+        rightCharacter: new Character(this.character)
+      }),
+      new RoundModel({
+        leftCharacter: new Character(this.character),
+        rightCharacter: new Character(this.character)
+      }),
+    ]
   })
 
   var FightLogic = Backbone.Model.extend({
@@ -247,10 +265,10 @@ $(document).ready(function() {
       console.log(characterList);
       //console.log("the character selection loaded")
     },
-    // loadFightScreen: function(event) {
-    //   event.preventDefault()
-    //   this.setCurrentView(new FightView())
-    // }
+    loadFightScreen: function(event) {
+      event.preventDefault()
+      this.setCurrentView(new FightView())
+    },
     setCurrentView: function(newView) {
       if (this.currentView) this.currentView.remove()
       this.currentView = newView
