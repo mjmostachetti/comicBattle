@@ -3,64 +3,71 @@ $(document).ready(function() {
   //define the character model
   var Character = Backbone.Model.extend({
     defaults: {
+      ko: false,
       name: "",
       type: "",
       deck: "",
       image: ""
     },
     attribute: function() {
-      if (this.name === "batman" || this.name === "daredevil" || this
-        .name === "hulk" || this.name === "joker") {
-        this.set(type, "strength")
-      } else if (this.name === "superman" || this.name ===
-        "spider-man" || this.name === "cyclops" ||
-        this.name === "carnage") {
-        this.set(type, "energy")
+      if (this.get("name") === "batman" || this.get("name") ===
+        "daredevil" || this
+        .get("name") === "hulk" || this.get("name") === "joker") {
+        this.set("type", "strength")
+      } else if (this.get("name") === "superman" || this.get("name") ===
+        "spider-man" || this.get("name") === "cyclops" ||
+        this.get("name") === "carnage") {
+        this.set("type", "energy")
       } else {
-        this.set(type, "magic")
+        this.set("type", "magic")
       }
     }
   })
 
-  var RoundModel = Backbone.Model.extend({
-    defaults: {
-      leftCharacter: null,
-      rightCharacter: null
-    },
-    initialize: function() {
-      leftCharacter = new Character()
-      rightCharacter = new Character()
-    }
+  var leftCharacter = new Character()
+  leftCharacter.set({
+    name: "batman"
   })
+  leftCharacter.attribute()
+  var rightCharacter = new Character()
+  rightCharacter.set({
+    name: "cyclops"
+  })
+  rightCharacter.attribute()
 
-  var MatchModel = Backbone.Model.extend({
-    defaults: {
-      rounds: []
-    }
-  })
-
-  var match = new MatchModel({
-    rounds: [
-      new RoundModel({
-        leftCharacter: new Character(this.character),
-        rightCharacter: new Character(this.character)
-      }),
-      new RoundModel({
-        leftCharacter: new Character(this.character),
-        rightCharacter: new Character(this.character)
-      }),
-      new RoundModel({
-        leftCharacter: new Character(this.character),
-        rightCharacter: new Character(this.character)
-      }),
-    ]
-  })
-
-  var FightLogic = Backbone.Model.extend({
-    defaults: {
-      ko: false,
-    },
-  })
+  // var RoundModel = Backbone.Model.extend({
+  //   defaults: {
+  //     leftCharacter: null,
+  //     rightCharacter: null
+  //   },
+  //   initialize: function() {
+  //     leftCharacter = new Character()
+  //     rightCharacter = new Character()
+  //   }
+  // })
+  //
+  // var MatchModel = Backbone.Model.extend({
+  //   defaults: {
+  //     rounds: []
+  //   }
+  // })
+  //
+  // var match = new MatchModel({
+  //   rounds: [
+  //     new RoundModel({
+  //       leftCharacter: new Character(this.character),
+  //       rightCharacter: new Character(this.character)
+  //     }),
+  //     new RoundModel({
+  //       leftCharacter: new Character(this.character),
+  //       rightCharacter: new Character(this.character)
+  //     }),
+  //     new RoundModel({
+  //       leftCharacter: new Character(this.character),
+  //       rightCharacter: new Character(this.character)
+  //     }),
+  //   ]
+  // })
 
   var CharacterCollection = Backbone.Collection.extend({
     model: Character,
@@ -85,7 +92,7 @@ $(document).ready(function() {
     url: '/users'
   })
 
-  var fightView = Backbone.View.extend({
+  var FightView = Backbone.View.extend({
     tagName: "div",
     className: "fight-view",
     template: _.template($("#fight-view").html()),
@@ -96,23 +103,39 @@ $(document).ready(function() {
       this.$el.html(this.template)
     },
     fight: function() {
-      if (leftCharacter.type === rightCharacter.type) {
+      console.log(rightCharacter.get("type"))
+      if (leftCharacter.get("type") === rightCharacter.get("type")) {
         console.log("Draw")
-      } else if (leftCharacter.type === "strength" && rightCharacter.type ===
+        leftCharacter.set("ko", true)
+        rightCharacter.set("ko", true)
+      } else if (leftCharacter.get("type") === "strength" &&
+        rightCharacter.get("type") ===
         "energy") {
-        console.log(leftCharacter.name + " wins!")
-      } else if (leftCharacter.type === "strength" && rightCharacter.type ===
+        console.log(leftCharacter.get("name") + " wins!")
+        rightCharacter.set("ko", true)
+      } else if (leftCharacter.get("type") === "strength" &&
+        rightCharacter.get("type") ===
         "magic") {
-        console.log(character2.name + " wins!")
-      } else if (leftCharacter.type === "energy" && rightCharacter.type ===
+        console.log(rightCharacter.get("name") + " wins!")
+        leftCharacter.set("ko", true)
+      } else if (leftCharacter.get("type") === "energy" &&
+        rightCharacter.get("type") ===
         "strength") {
-        console.log(character2.name + " wins!")
-      } else if (leftCharacter.type === "energy" && rightCharacter.type ===
+        console.log(rightCharacter.get("name") + " wins!")
+        leftCharacter.set("ko", true)
+      } else if (leftCharacter.get("type") === "energy" &&
+        rightCharacter.get("type") ===
         "magic") {
-        console.log(leftCharacter.name + " wins!")
+        console.log(leftCharacter.get("name") + " wins!")
+        rightCharacter.set("ko", true)
       } else {
-        console.log(leftCharacter.name + " wins!")
+        console.log(leftCharacter.get("name") + " wins!")
+        rightCharacter.set("ko", true)
       }
+      console.log(rightCharacter)
+    },
+    events: {
+      "click #fight": "fight"
     }
   })
 
@@ -169,10 +192,10 @@ $(document).ready(function() {
   //     var that = this
   //     that.listenTo(that.collection, 'add', that.addView);
   //     //console.log(this.$el)
-  //     characterList.fetch({success: function(charData) {
+  //     characterList.fetch({success: render
   //   		that.render()
   //       console.log(charData)
-  //     }})
+  //     })
   // 	},
   // 	render: function(){
   // 		this.$el.html(this.template)
@@ -242,7 +265,8 @@ $(document).ready(function() {
       "click .addChar": "addCharacterToUserAccount",
       "click #loadSignup": "loadSignup",
       "click #loadLogin": "loadLogin",
-      "click #loginButton": "loadCharacterSelection",
+      //  "click #loginButton": "loadCharacterSelection",
+      "click #loginButton": "loadFightScreen",
       //"click #fightButton": "loadFightScreen"
     },
     //main app view initializes loginView, creates a div, and then loads the view.
