@@ -1,19 +1,8 @@
 
-html{ 
-  background: url(../img/background.jpg) no-repeat center center fixed; 
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-}
 
 body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-  /*background-image: url(../img/background.jpg);
-  background-size: cover;*/
-  /*background-image-width: 100%;
-  background-image-height: 100%;*/
 }
 
 
@@ -23,97 +12,108 @@ a {
 }
 
 a.hover {
-	color: red;
+    color: red;
 }
 
 
 
 #back {
-	background-color: blue;
+    background-color: blue;
 }
 
 .span-24 ul {
-	list-style: none;
+    list-style: none;
 
 }
 
 .right {
-	float: right;
+    float: right;
 }
 
 .span-25 ul {
-	list-style: none;
+    list-style: none;
 }
 
 .left {
-	float: left;
+    float: left;
 }
 
 .title {
-	text-align: center;
-	color: red;
+    text-align: center;
+    color: red;
 }
 
 h1 {
-	color: red;
-	font-family: 'Bangers';
-	
+    color: red;
+    font-family: 'Bangers';
+    
 }
 
 .login {
-	background: blue;
-	border-radius: 25px;
-	padding: 15px;
-	opacity: 1;
-	color: red;
-	font-family: 'Bangers', cursive;
-	width: 30%;
+    background: blue;
+    border-radius: 25px;
+    padding: 15px;
+    opacity: 1;
+    color: red;
+    font-family: 'Bangers', cursive;
+    width: 30%;
 
 }
 
+#BG {
+  background: url(../img/heroHeader.jpg) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+ /*// ../img/background.jpg //*/
+}
+
+
+
 .hvr-grow {
-	cursor: pointer;
-	
+    cursor: pointer;
+    
 }
 
 .hvr-pulse {
-	cursor: pointer;
+    cursor: pointer;
 }
 
 .signup {
-	cursor: pointer;
-	opacity: none;
+    cursor: pointer;
+    opacity: none;
 }
 
 #loginButton {
-	cursor: pointer;
-	font-weight: bold;
-	
+    cursor: pointer;
+    font-weight: bold;
+    
 }
 
 #signupButton {
-	cursor: pointer;
-	opacity: none;
+    cursor: pointer;
+    opacity: none;
 }
 
 
 
 
 #grid{
-	height: 800px;
-	width: 500px;
-	border: 5px solid #52DDFF;
-	margin: 0 auto;
-	font-family: 'Bangers';
-	background: white;
-	/*float: left;*/
-	opacity: none;
-	display: inline-block;
+    height: 800px;
+    width: 500px;
+    border: 5px solid #52DDFF;
+    margin: 0 auto;
+    font-family: 'Bangers';
+    background: white;
+    /*float: left;*/
+    opacity: none;
+    display: inline-block;
 
 }
 
 .row {
-	border: 2px solid #52DDFF;
+    border: 2px solid #52DDFF;
     width: 50px;
     height: 50px;
     float: left; 
@@ -124,25 +124,34 @@ h1 {
 }
 
 #options {
-	border-bottom: 2px solid #52DDFF;
-	background: black;
-	
-	
+    border-bottom: 2px solid #52DDFF;
+    background: black;
+    
+    
 }
 
 nav ul {
-	list-style: none;
-	text-align: center;
+    list-style: none;
+    text-align: center;
 }
 
 nav li {
-	display: inline-block;
+    display: inline-block;
 }
 
 li {
-	padding: 10px;
+    padding: 10px;
 }
 
+
+#selectBG {
+  background: url(../../websiteImages/imagesForSite/heroHeader.jpg) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+
+}
 
 
 
