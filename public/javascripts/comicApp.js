@@ -2,33 +2,43 @@ $(document).ready(function() {
 
   //define the character model
   var Character = Backbone.Model.extend({
-      defaults: {
-        ko: false,
-        name: "",
-        type: "",
-        deck: "",
-        image: ""
-      },
-      attribute: function() {
-        if (this.get("name") === "batman" || this.get("name") ===
-          "daredevil" || this
-          .get("name") === "hulk" || this.get("name") === "joker") {
-          this.set("type", "strength")
-        } else if (this.get("name") === "superman" || this.get("name") ===
-          "spider-man" || this.get("name") === "cyclops" ||
-          this.get("name") === "carnage") {
-          this.set("type", "energy")
-        } else {
-          this.set("type", "magic")
-        }
+    defaults: {
+      ko: false,
+      name: "",
+      type: "",
+      deck: "",
+      image: ""
+    },
+    attribute: function() {
+      if (this.get("name") === "batman" || this.get("name") ===
+        "daredevil" || this
+        .get("name") === "hulk" || this.get("name") === "joker") {
+        this.set("type", "strength")
+      } else if (this.get("name") === "superman" || this.get("name") ===
+        "spider-man" || this.get("name") === "cyclops" ||
+        this.get("name") === "carnage") {
+        this.set("type", "energy")
+      } else {
+        this.set("type", "magic")
       }
-    })
-    // start of test data for testing fight logic
-  var leftCharacter = new Character()
-  leftCharacter.set({
+    }
+  })
+
+  var CharacterCollection = Backbone.Collection.extend({
+    model: Character,
+    //url: '/fillOut'
+    url: '/api/characters'
+  })
+
+  var leftTeam = new CharacterCollection()
+  var rightTeam = new CharacterCollection()
+
+  // start of test data for testing fight logic
+  var batman = new Character()
+  batman.set({
     name: "batman"
   })
-  leftCharacter.attribute()
+  batman.attribute()
 
   var carnage = new Character()
   carnage.set({
@@ -42,11 +52,11 @@ $(document).ready(function() {
   })
   superman.attribute()
 
-  var rightCharacter = new Character()
-  rightCharacter.set({
+  var cyclops = new Character()
+  cyclops.set({
     name: "cyclops"
   })
-  rightCharacter.attribute()
+  cyclops.attribute()
 
   var shazaam = new Character()
   shazaam.set({
@@ -62,10 +72,17 @@ $(document).ready(function() {
 
   // end of test logic
 
+  // leftTeam.add([batman, carnage, superman])
+  // rightTeam.add([cyclops, shazaam, martianManhunter])
+  //
+  // console.log(leftTeam)
+  // console.log(rightTeam)
+  //
+  //
   // var RoundModel = Backbone.Model.extend({
   //   initialize: function() {
-  //     leftCharacter = new Character()
-  //     rightCharacter = new Character()
+  //     leftCharacter = _.first(leftTeam)
+  //     rightCharacter = _.first(rightTeam)
   //   }
   // })
   //
@@ -78,8 +95,8 @@ $(document).ready(function() {
   // var match = new MatchModel({
   //   rounds: [
   //     new RoundModel({
-  //       leftCharacter: new Character(),
-  //       rightCharacter: new Character()
+  //       leftCharacter: _.first(leftTeam),
+  //       rightCharacter: _.first(rightTeam)
   //     }),
   //     new RoundModel({
   //       leftCharacter: new Character(),
@@ -92,12 +109,6 @@ $(document).ready(function() {
   //   ]
   // })
 
-  var CharacterCollection = Backbone.Collection.extend({
-    model: Character,
-    //url: '/fillOut'
-    url: '/api/characters'
-  })
-
   var User = Backbone.Model.extend({
     defaults: {
       id: 0,
@@ -109,13 +120,6 @@ $(document).ready(function() {
       hero3: ''
     }
   })
-
-  var leftTeam = new CharacterCollection()
-
-  var rightTeam = new CharacterCollection()
-
-  leftTeam.add([leftCharacter, carnage, superman])
-  rightTeam.add([rightCharacter, shazaam, martianManhunter])
 
   var UserCollection = Backbone.Collection.extend({
     model: User,
