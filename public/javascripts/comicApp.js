@@ -62,35 +62,35 @@ $(document).ready(function() {
 
   // end of test logic
 
-  var RoundModel = Backbone.Model.extend({
-    initialize: function() {
-      leftCharacter = new Character()
-      rightCharacter = new Character()
-    }
-  })
-
-  var MatchModel = Backbone.Model.extend({
-    defaults: {
-      rounds: []
-    }
-  })
-
-  var match = new MatchModel({
-    rounds: [
-      new RoundModel({
-        leftCharacter: new Character(),
-        rightCharacter: new Character()
-      }),
-      new RoundModel({
-        leftCharacter: new Character(),
-        rightCharacter: new Character()
-      }),
-      new RoundModel({
-        leftCharacter: new Character(),
-        rightCharacter: new Character()
-      }),
-    ]
-  })
+  // var RoundModel = Backbone.Model.extend({
+  //   initialize: function() {
+  //     leftCharacter = new Character()
+  //     rightCharacter = new Character()
+  //   }
+  // })
+  //
+  // var MatchModel = Backbone.Model.extend({
+  //   defaults: {
+  //     rounds: []
+  //   }
+  // })
+  //
+  // var match = new MatchModel({
+  //   rounds: [
+  //     new RoundModel({
+  //       leftCharacter: new Character(),
+  //       rightCharacter: new Character()
+  //     }),
+  //     new RoundModel({
+  //       leftCharacter: new Character(),
+  //       rightCharacter: new Character()
+  //     }),
+  //     new RoundModel({
+  //       leftCharacter: new Character(),
+  //       rightCharacter: new Character()
+  //     }),
+  //   ]
+  // })
 
   var CharacterCollection = Backbone.Collection.extend({
     model: Character,
