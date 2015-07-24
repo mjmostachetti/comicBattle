@@ -1,5 +1,8 @@
+
 #character-container
 ul(id="characters")
 	!="<% _.each(characters, function(character) { %>"
 		li.character(data-character-id!="<%=character.id%>")
 	!="<% }); %>"
+
+body(id="selectBG")

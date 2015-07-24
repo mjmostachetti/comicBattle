@@ -13,9 +13,12 @@ router.get('/', function(req, res, next) {
 });
 console.log("index.js is running");
 
-// router.get('/teams', function(req, res, next){
-// 		res.render('select', { title: 'Select Yo Teams' });
-// });
+router.get('/teams', function(req, res, next) {
+	res.render('select', {
+		title: 'Select Yo Teams'
+	});
+});
+console.log("teams reading");
 
 router.post('/signup', function(request, response) {
 	console.log("youve signed up");
