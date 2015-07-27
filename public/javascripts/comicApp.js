@@ -1,5 +1,4 @@
 
-function(){
 
     //define the character model
     var Character = Backbone.Model.extend({
@@ -196,4 +195,3 @@ function(){
         }
     })
     var App = new MainAppView();
-}
