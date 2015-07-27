@@ -73,8 +73,8 @@ $(document).ready(function() {
   leftTeam.add([batman, carnage, superman])
   rightTeam.add([cyclops, shazaam, martianManhunter])
 
-  leftCharacter = leftTeam.first()
-  rightCharacter = rightTeam.first()
+  leftCharacter = leftTeam.get("c1")
+  rightCharacter = rightTeam.get("c4")
 
   console.log(leftCharacter)
   console.log(rightCharacter)
@@ -85,8 +85,8 @@ $(document).ready(function() {
 
   var RoundModel = Backbone.Model.extend({
     initialize: function() {
-      leftCharacter = leftTeam.first()
-      rightCharacter = rightTeam.first()
+      leftCharacter = leftTeam.get("c1")
+      rightCharacter = rightTeam.get("c4")
     }
   })
 
@@ -99,16 +99,16 @@ $(document).ready(function() {
   var match = new MatchModel({
     rounds: [
       new RoundModel({
-        leftCharacter: leftTeam.first(),
-        rightCharacter: rightTeam.first()
+        leftCharacter: leftTeam.get("c1"),
+        rightCharacter: rightTeam.get("c4")
       }),
       new RoundModel({
-        leftCharacter: new Character(),
-        rightCharacter: new Character()
+        leftCharacter: leftTeam.get("c2"),
+        rightCharacter: rightTeam.get("c5")
       }),
       new RoundModel({
-        leftCharacter: new Character(),
-        rightCharacter: new Character()
+        leftCharacter: leftTeam.get("c3"),
+        rightCharacter: rightTeam.get("c6")
       }),
     ]
   })
@@ -210,43 +210,6 @@ $(document).ready(function() {
       this.$el.html(this.template)
     }
   })
-
-  // var CharacterView = Backbone.View.extend({
-  // 	tagName : "div",
-  // 	className : "characterSelect-view",
-  // 	template : _.template($("#template-characterSelect").html()),
-  //   addCharacter : function(character){
-  //     //create new view for this character
-  //     //console.log(character)
-  //     var view = new CharacterView({ model : character })
-  //     //push the view into array for removal later
-  //     viewArray.push(view)
-  //     //console.log("This is an array of views : " + view)
-  //     this.$("#characters-list").append(view.$el);
-  //   },
-  // 	initialize: function(){
-  //     var that = this
-  //     that.listenTo(that.collection, 'add', that.addView);
-  //     //console.log(this.$el)
-  //     characterList.fetch({success: render
-  //   		that.render()
-  //       console.log(charData)
-  //     })
-  // 	},
-  // 	render: function(){
-  // 		this.$el.html(this.template)
-  // 	},
-  //   addModel : function () {
-  //     this.collection.add({});
-  //   },
-  //   addView : function(){
-  //     var view = new CharacterView({model : newModel})
-  //     this.render()
-  //   },
-  //   addCharacterToUserAccount : function(){
-  //       //console.log("run")
-  //   }
-  // })
 
   var CharactersView = Backbone.View.extend({
     collection: CharacterCollection,
