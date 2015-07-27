@@ -70,50 +70,48 @@ $(document).ready(function() {
   })
   martianManhunter.attribute()
 
-  // end of test logic
-
   leftTeam.add([batman, carnage, superman])
   rightTeam.add([cyclops, shazaam, martianManhunter])
 
-  var leftCharacter = _.first([leftTeam])
-  var rightCharacter = _.first([rightTeam])
+  leftCharacter = leftTeam.first()
+  rightCharacter = rightTeam.first()
 
   console.log(leftCharacter)
   console.log(rightCharacter)
 
   console.log(leftTeam)
   console.log(rightTeam)
+    // end of test logic
 
+  var RoundModel = Backbone.Model.extend({
+    initialize: function() {
+      leftCharacter = leftTeam.first()
+      rightCharacter = rightTeam.first()
+    }
+  })
 
-  // var RoundModel = Backbone.Model.extend({
-  //   initialize: function() {
-  //     leftCharacter = _.first(leftTeam)
-  //     rightCharacter = _.first(rightTeam)
-  //   }
-  // })
-  //
-  // var MatchModel = Backbone.Model.extend({
-  //   defaults: {
-  //     rounds: []
-  //   }
-  // })
-  //
-  // var match = new MatchModel({
-  //   rounds: [
-  //     new RoundModel({
-  //       leftCharacter: _.first(leftTeam),
-  //       rightCharacter: _.first(rightTeam)
-  //     }),
-  //     new RoundModel({
-  //       leftCharacter: new Character(),
-  //       rightCharacter: new Character()
-  //     }),
-  //     new RoundModel({
-  //       leftCharacter: new Character(),
-  //       rightCharacter: new Character()
-  //     }),
-  //   ]
-  // })
+  var MatchModel = Backbone.Model.extend({
+    defaults: {
+      rounds: []
+    }
+  })
+
+  var match = new MatchModel({
+    rounds: [
+      new RoundModel({
+        leftCharacter: leftTeam.first(),
+        rightCharacter: rightTeam.first()
+      }),
+      new RoundModel({
+        leftCharacter: new Character(),
+        rightCharacter: new Character()
+      }),
+      new RoundModel({
+        leftCharacter: new Character(),
+        rightCharacter: new Character()
+      }),
+    ]
+  })
 
   var User = Backbone.Model.extend({
     defaults: {
