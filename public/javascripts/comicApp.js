@@ -171,6 +171,7 @@ $(document).ready(function() {
         rightCharacter.set("ko", true)
       }
       console.log(rightCharacter)
+      console.log(leftCharacter)
     },
     events: {
       "click #fight": "fight"
