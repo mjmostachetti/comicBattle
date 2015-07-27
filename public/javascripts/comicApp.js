@@ -72,13 +72,19 @@ $(document).ready(function() {
 
   // end of test logic
 
-  // leftTeam.add([batman, carnage, superman])
-  // rightTeam.add([cyclops, shazaam, martianManhunter])
-  //
-  // console.log(leftTeam)
-  // console.log(rightTeam)
-  //
-  //
+  leftTeam.add([batman, carnage, superman])
+  rightTeam.add([cyclops, shazaam, martianManhunter])
+
+  var leftCharacter = _.first([leftTeam])
+  var rightCharacter = _.first([rightTeam])
+
+  console.log(leftCharacter)
+  console.log(rightCharacter)
+
+  console.log(leftTeam)
+  console.log(rightTeam)
+
+
   // var RoundModel = Backbone.Model.extend({
   //   initialize: function() {
   //     leftCharacter = _.first(leftTeam)
