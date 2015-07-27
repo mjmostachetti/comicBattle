@@ -15,6 +15,7 @@ console.log("index.js is running");
 router.get('/teams', function(req, res, next){
 		res.render('select', { title: 'Select Yo Teams' });
 });
+console.log("teams reading");
 
 router.post('/signup', function(request,response){
 	console.log("youve signed up");
@@ -69,7 +70,7 @@ router.post('/login', function(request,response){
 		pass.hash(password,userSalt,function (err,hash){
 			if(userHash === hash){
 				console.log("we done logged in");
-				response.render('main', { username : resp.body.results[0].value.username})
+				response.render('index', { username : resp.body.results[0].value.username})
 			}else{
 				response.render('index', { message: 'Incorrect info, give it another go.'});
 			}
@@ -82,31 +83,9 @@ router.post('/login', function(request,response){
  * This function is used to fill out our database!
  */
 
-router.get('/fillOut', function(request,response){
-	console.log("This is an array of the character IDs : ")
-	console.log(characterIDs)
-	var charJSON;
-	characterIDs.forEach(function(item){
-		console.log('fetching' + item)
-		http.get('http://www.comicvine.com/api/character/' +
-			'4005-'+item.id+'/?api_key=f6539c8aca297ac9f221c04eb1d0fa3937e02354&' +
-			'field_list=name,image,powers,id&format=json',
-			function(res){
-				var writeToThis = '';
-				res.on('data', function (chunk) {
-					writeToThis += chunk
-				});
-				res.on('end', function(){
-					charJSON = JSON.parse(writeToThis)
-				})
-		})
-	})
-					response.render('select', {characters: charJSON});
-})
-
 // api call for the CharactersCollection
 router.get('/api/characters', function(request,response){
-	console.log("This is an array of the character IDs : ")
+	//console.log("This is an array of the character IDs : ")
 	//console.log(characterIDs)
 	var counter = 0;
 	var arrayOfCharacterObjs = []
@@ -139,6 +118,7 @@ router.get('/api/characters', function(request,response){
 		})
 
 	})
+					response.render('components/select', {characters: charJSON});
 })
 
 

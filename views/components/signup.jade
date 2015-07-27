@@ -1,22 +1,12 @@
-doctype html
-html
-
-  script(type="text/html" id="template-signup")
-   h1 Sign Up
-   form(id="signup" action="/signup" method="post")
-     h1 Pick Username :
-     input(id="username" name="username" type="text" required)
-     h1 Password :
-     input(id="password" name="password" type="password" required)
-     br
-     br
-     input(id= "signupButton" type="submit" value="Signup")
-     a(id="loadLogin" action="/login" class="hvr-grow")
-       p already have an account?
-
-  script(type='text/javascript' src='../javascripts/jquery-2.1.4.js')
-  script(type='text/javascript' src='../javascripts/underscore.js')
-  script(type='text/javascript' src='../javascripts/backbone.js')
-  script(type='text/javascript' src='../javascripts/comicApp.js')
-  script(rel='stylesheet', href='../stylesheets/normalize.css')
-  script(rel='stylesheet', href='../stylesheets/style.css')
+#signup-container
+	h1 Sign Up
+	form#signup(action="/signup" method="post")
+		h1 Pick Username :
+		input#username(name="username" type="text" required)
+		h1 Password :
+		input#password(name="password" type="password" required)
+		br
+		br
+		input#signupButton(type="submit" value="Signup")
+		a#loadLogin(action="/login" class="hvr-grow")
+			p already have an account?
