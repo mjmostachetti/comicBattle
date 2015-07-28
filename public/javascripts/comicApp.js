@@ -271,6 +271,7 @@ $(document).ready(function() {
           i++;
         })
         html = html + '</tr></table>';
+        html = html + "<button id='removeCharacter'>Remove Character</button>"
         this.$el.html(html);
       }
     })
@@ -296,23 +297,45 @@ $(document).ready(function() {
       "click #loadSignup": "loadSignup",
       "click #loadLogin": "loadLogin",
       "click #loginButton" : "loadCharView",
-      "click .character": "selectCharacter"
+      "click .character": "selectCharacter",
+      "click #removeCharacter" : "removeCharacterFromTeam"
       //"click #loginButton": "loadFightScreen",
       //"click #fightButton": "loadFightScreen"
+    },
+    removeCharacterFromTeam: function(){
+      if(this.newUser.get("hero3") !== ""){
+        this.newUser.set("hero3","")
+      } else if(this.newUser.get("hero2") !== ""){
+        this.newUser.set("hero2","")
+      } else if(this.newUser.get("hero1") !== ""){
+        this.newUser.set("hero1","")
+      } else{
+        console.log("Your team is empty.")
+      }
+      console.log(this.newUser)
     },
     selectCharacter: function selectCharacter(evt) {
           var characterData = $(evt.currentTarget).data();
           alert("Clicked " + characterData.characterId);
-          this.newUser.set("hero1",characterData.characterId)
+          if(this.newUser.get("hero1") === ""){
+            this.newUser.set("hero1",characterData.characterId)  
+          } else if(this.newUser.get("hero2") === ""){
+            this.newUser.set("hero2",characterData.characterId)  
+          } else if (this.newUser.get("hero3") === ""){
+            this.newUser.set("hero3",characterData.characterId)  
+          } else{
+            console.log("Your Team is full. Please remove a character.")
+          }
           console.log(this.newUser)
     },
     //main app view initializes loginView, creates a div, and then loads the view.
     initialize: function() {
       this.setCurrentView(new LoginView())
       this.newUser = new User;
-      this.newUserView = new UserView({ model : newUser})
+      this.newUserView = new UserView({ model : this.newUser})
+      this.listenTo(this.newUser,"change",this.render)
       console.log("This is our user : ")
-      console.log(newUser)
+      console.log(this.newUser)
     },
     //handles loading the login view and html elements
     loadLogin: function() {
@@ -348,6 +371,9 @@ $(document).ready(function() {
       if (this.currentView) this.currentView.remove()
       this.currentView = newView
       this.$el.html(newView.$el)
+    },
+    render: function(){
+      console.log("The view has changed")
     }
   })
   var App = new MainAppView();
