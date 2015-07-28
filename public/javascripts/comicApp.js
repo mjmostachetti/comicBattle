@@ -26,7 +26,6 @@ $(document).ready(function() {
 
   var CharacterCollection = Backbone.Collection.extend({
     model: Character,
-    //url: '/fillOut'
     url: '/api/characters'
   })
 
@@ -76,7 +75,42 @@ $(document).ready(function() {
   leftCharacter = leftTeam.first()
   rightCharacter = rightTeam.first()
 
-  // end of test logic
+  console.log(leftCharacter)
+  console.log(rightCharacter)
+
+  console.log(leftTeam)
+  console.log(rightTeam)
+    // end of test logic
+
+  var RoundModel = Backbone.Model.extend({
+    initialize: function() {
+      leftCharacter = leftTeam.first()
+      rightCharacter = rightTeam.first()
+    }
+  })
+
+  var MatchModel = Backbone.Model.extend({
+    defaults: {
+      rounds: []
+    }
+  })
+
+  var match = new MatchModel({
+    rounds: [
+      new RoundModel({
+        leftCharacter: leftTeam.first(),
+        rightCharacter: rightTeam.first()
+      }),
+      new RoundModel({
+        leftCharacter: leftTeam.get(),
+        rightCharacter: rightTeam.get()
+      }),
+      new RoundModel({
+        leftCharacter: leftTeam.get("c3"),
+        rightCharacter: rightTeam.get("c6")
+      }),
+    ]
+  })
 
   var User = Backbone.Model.extend({
     defaults: {
@@ -202,7 +236,7 @@ $(document).ready(function() {
   var CharactersView = Backbone.View.extend({
       //collection: CharacterCollection,
       el: "#charZone",
-      template: _.template($("#template-characterSelect").html())
+      template: _.template($("#template-characterSelect").html()),
       //call render somewhere else
       initialize: function(){
           this.render();
@@ -249,9 +283,9 @@ $(document).ready(function() {
     events: {
       "click #loadSignup": "loadSignup",
       "click #loadLogin": "loadLogin",
-      "click #loginButton" : "loadCharView",
-      "click .character": "selectCharacter"
-      //"click #loginButton": "loadFightScreen",
+      //"click #loginButton" : "loadCharView",
+      "click .character": "selectCharacter",
+      "click #loginButton": "loadFightScreen",
       //"click #fightButton": "loadFightScreen"
     },
     selectCharacter: function selectCharacter(evt) {
@@ -261,8 +295,6 @@ $(document).ready(function() {
     //main app view initializes loginView, creates a div, and then loads the view.
     initialize: function() {
       this.setCurrentView(new LoginView())
-        // listen to the characterList collection, when a model is added, run this.addCharacter
-      this.listenTo(characterList, 'add', this.addCharacter)
     },
     //handles loading the login view and html elements
     loadLogin: function() {
