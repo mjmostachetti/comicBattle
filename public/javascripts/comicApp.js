@@ -77,36 +77,6 @@ $(document).ready(function() {
   rightCharacter = rightTeam.first()
 
   // end of test logic
-  //
-  // var RoundModel = Backbone.Model.extend({
-  //   initialize: function() {
-  //     leftCharacter = leftTeam.first()
-  //     rightCharacter = rightTeam.first()
-  //   }
-  // })
-  //
-  // var MatchModel = Backbone.Model.extend({
-  //   defaults: {
-  //     rounds: []
-  //   }
-  // })
-  //
-  // var match = new MatchModel({
-  //   rounds: [
-  //     new RoundModel({
-  //       leftCharacter: leftTeam.first(),
-  //       rightCharacter: rightTeam.first()
-  //     }),
-  //     new RoundModel({
-  //       leftCharacter: leftTeam.get(),
-  //       rightCharacter: rightTeam.get()
-  //     }),
-  //     new RoundModel({
-  //       leftCharacter: leftTeam.get("c3"),
-  //       rightCharacter: rightTeam.get("c6")
-  //     }),
-  //   ]
-  // })
 
   var User = Backbone.Model.extend({
     defaults: {
@@ -141,6 +111,7 @@ $(document).ready(function() {
       for (var i = 0; i < leftTeam.models.length; i++) {
         if (leftTeam.models[i].get("ko") != true) {
           leftCharacter = leftTeam.models[i]
+          console.log(leftCharacter)
         } else {
           rightTeam.win()
         }
@@ -148,6 +119,7 @@ $(document).ready(function() {
       for (var j = 0; j < rightTeam.models.length; j++) {
         if (rightTeam.models[j].get("ko") != true) {
           rightCharacter = rightTeam.models[j]
+          console.log(rightCharacter)
         } else {
           leftTeam.win()
         }
@@ -193,18 +165,6 @@ $(document).ready(function() {
       "click #fight": "findNextChar"
     }
   })
-
-  // var RoundView = Backbone.View.extend({
-  //   tagName: "div",
-  //   className: "round-view",
-  //   initialize: function() {
-  //     this.render()
-  //   },
-  //   render: function() {
-  //     this.$el.html(this.template)
-  //   },
-  // })
-
 
   var characterList = new CharacterCollection();
 
