@@ -124,6 +124,18 @@ $(document).ready(function() {
     }
   })
 
+  var UserView = Backbone.View.extend({
+    tagName: "div",
+    el: "#userInfo",
+    template: _.template($('#user-view').html()),
+    initialize: function(){
+      this.render();
+    },
+    render: function(){
+      this.$el.html(this.template)
+    }
+  })
+
   var UserCollection = Backbone.Collection.extend({
     model: User,
     url: '/users'
@@ -283,18 +295,24 @@ $(document).ready(function() {
     events: {
       "click #loadSignup": "loadSignup",
       "click #loadLogin": "loadLogin",
-      //"click #loginButton" : "loadCharView",
-      "click .character": "selectCharacter",
-      "click #loginButton": "loadFightScreen",
+      "click #loginButton" : "loadCharView",
+      "click .character": "selectCharacter"
+      //"click #loginButton": "loadFightScreen",
       //"click #fightButton": "loadFightScreen"
     },
     selectCharacter: function selectCharacter(evt) {
           var characterData = $(evt.currentTarget).data();
           alert("Clicked " + characterData.characterId);
+          this.newUser.set("hero1",characterData.characterId)
+          console.log(this.newUser)
     },
     //main app view initializes loginView, creates a div, and then loads the view.
     initialize: function() {
       this.setCurrentView(new LoginView())
+      this.newUser = new User;
+      this.newUserView = new UserView({ model : newUser})
+      console.log("This is our user : ")
+      console.log(newUser)
     },
     //handles loading the login view and html elements
     loadLogin: function() {
@@ -324,6 +342,7 @@ $(document).ready(function() {
           //creates charactersview with collection
           this.setCurrentView(new CharactersView({ collection: characterCol}))
           //console.log("the character selection loaded")
+          //create current user
     },
     setCurrentView: function(newView) {
       if (this.currentView) this.currentView.remove()
