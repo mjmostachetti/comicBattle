@@ -73,8 +73,8 @@ $(document).ready(function() {
   leftTeam.add([batman, carnage, superman])
   rightTeam.add([cyclops, shazaam, martianManhunter])
 
-  leftCharacter = leftTeam.get("c1")
-  rightCharacter = rightTeam.get("c4")
+  leftCharacter = leftTeam.first()
+  rightCharacter = rightTeam.first()
 
   console.log(leftCharacter)
   console.log(rightCharacter)
@@ -85,8 +85,8 @@ $(document).ready(function() {
 
   var RoundModel = Backbone.Model.extend({
     initialize: function() {
-      leftCharacter = leftTeam.get("c1")
-      rightCharacter = rightTeam.get("c4")
+      leftCharacter = leftTeam.first()
+      rightCharacter = rightTeam.first()
     }
   })
 
@@ -99,12 +99,12 @@ $(document).ready(function() {
   var match = new MatchModel({
     rounds: [
       new RoundModel({
-        leftCharacter: leftTeam.get("c1"),
-        rightCharacter: rightTeam.get("c4")
+        leftCharacter: leftTeam.first(),
+        rightCharacter: rightTeam.first()
       }),
       new RoundModel({
-        leftCharacter: leftTeam.get("c2"),
-        rightCharacter: rightTeam.get("c5")
+        leftCharacter: leftTeam.get(),
+        rightCharacter: rightTeam.get()
       }),
       new RoundModel({
         leftCharacter: leftTeam.get("c3"),
@@ -138,9 +138,34 @@ $(document).ready(function() {
       this.render()
     },
     render: function() {
+      console.log(this.el)
       this.$el.html(this.template)
+      var roundView = new RoundView()
     },
-    fight: function() {
+    findNextChar: function() {
+      var leftCharacter
+      var rightCharacter
+      for (var i = 0; i <= leftTeam.models.length; i++) {
+        if ("ko" != true) {
+          return (leftCharacter)
+        }
+      }
+    },
+    events: {
+      "click #fight": "findNextChar"
+    }
+  })
+
+  var RoundView = Backbone.View.extend({
+    tagName: "div",
+    className: "round-view",
+    initialize: function() {
+      this.render()
+    },
+    render: function() {
+      this.$el.html()
+    },
+    fight: function(leftCharacter, rightCharacter) {
       console.log(rightCharacter.get("type"))
       if (leftCharacter.get("type") === rightCharacter.get("type")) {
         console.log("Draw")
@@ -178,7 +203,7 @@ $(document).ready(function() {
     }
   })
 
-  var characterList = new CharacterCollection;
+  var characterList = new CharacterCollection();
 
   //creating a view for login
   //view creates a div with a tag name to house html
