@@ -9,7 +9,6 @@ $(document).ready(function() {
       deck: "",
       image: ""
     },
-    //  setting the type of superpower to the hero
     attribute: function() {
       if (this.get("name") === "batman" || this.get("name") ===
         "daredevil" || this
@@ -31,7 +30,6 @@ $(document).ready(function() {
     url: '/api/characters'
   })
 
-  //two mock character teams
   var leftTeam = new CharacterCollection()
   var rightTeam = new CharacterCollection()
 
@@ -78,42 +76,7 @@ $(document).ready(function() {
   leftCharacter = leftTeam.first()
   rightCharacter = rightTeam.first()
 
-  console.log(leftCharacter)
-  console.log(rightCharacter)
-
-  console.log(leftTeam)
-  console.log(rightTeam)
-    // end of test logic
-
-  var RoundModel = Backbone.Model.extend({
-    initialize: function() {
-      leftCharacter = leftTeam.first()
-      rightCharacter = rightTeam.first()
-    }
-  })
-
-  var MatchModel = Backbone.Model.extend({
-    defaults: {
-      rounds: []
-    }
-  })
-
-  var match = new MatchModel({
-    rounds: [
-      new RoundModel({
-        leftCharacter: leftTeam.first(),
-        rightCharacter: rightTeam.first()
-      }),
-      new RoundModel({
-        leftCharacter: leftTeam.get(),
-        rightCharacter: rightTeam.get()
-      }),
-      new RoundModel({
-        leftCharacter: leftTeam.get("c3"),
-        rightCharacter: rightTeam.get("c6")
-      }),
-    ]
-  })
+  // end of test logic
 
   var User = Backbone.Model.extend({
     defaults: {
@@ -140,32 +103,29 @@ $(document).ready(function() {
       this.render()
     },
     render: function() {
-      console.log(this.el)
       this.$el.html(this.template)
-      var roundView = new RoundView()
     },
     findNextChar: function() {
       var leftCharacter
       var rightCharacter
-      for (var i = 0; i <= leftTeam.models.length; i++) {
-        if ("ko" != true) {
-          return (leftCharacter)
+      for (var i = 0; i < leftTeam.models.length; i++) {
+        if (leftTeam.models[i].get("ko") != true) {
+          leftCharacter = leftTeam.models[i]
+          console.log(leftCharacter)
+        } else {
+          rightTeam.win()
         }
       }
-    },
-    events: {
-      "click #fight": "findNextChar"
-    }
-  })
-
-  var RoundView = Backbone.View.extend({
-    tagName: "div",
-    className: "round-view",
-    initialize: function() {
-      this.render()
-    },
-    render: function() {
-      this.$el.html()
+      for (var j = 0; j < rightTeam.models.length; j++) {
+        if (rightTeam.models[j].get("ko") != true) {
+          rightCharacter = rightTeam.models[j]
+          console.log(rightCharacter)
+        } else {
+          leftTeam.win()
+        }
+      }
+      this.fight(leftCharacter, rightCharacter)
+      this.findNextChar()
     },
     fight: function(leftCharacter, rightCharacter) {
       console.log(rightCharacter.get("type"))
@@ -201,11 +161,13 @@ $(document).ready(function() {
       console.log(leftCharacter)
     },
     events: {
-      "click #fight": "fight"
+      "click #findNextChar": "findNextChar",
+      //"click #fight": "fight"
     }
   })
 
-  var characterList = new CharacterCollection();
+  var characterList = new CharacterCollection()
+  var userList = new UserCollection()
 
   //creating a view for login
   //view creates a div with a tag name to house html
@@ -219,7 +181,6 @@ $(document).ready(function() {
       //console.log(this.$el);
       this.render()
     },
-
     render: function() {
       this.$el.html(this.template)
     }
@@ -229,11 +190,9 @@ $(document).ready(function() {
     tagName: "div",
     className: "signup-view",
     template: _.template($("#template-signup").html()),
-
     initialize: function() {
       this.render()
     },
-
     render: function() {
       this.$el.html(this.template)
     }
@@ -265,7 +224,6 @@ $(document).ready(function() {
   var CharacterView = Backbone.View.extend({
     tagName: "div",
     className: "characterSelect-view",
-    //  _.template($("#template-characterSelect").html()),
     model: Character,
     intialize: function() {
       this.render();
@@ -292,13 +250,14 @@ $(document).ready(function() {
       "click .addChar": "addCharacterToUserAccount",
       "click #loadSignup": "loadSignup",
       "click #loadLogin": "loadLogin",
-      "click #loginButton": "loadCharacterSelection",
-      //"click #loginButton": "loadFightScreen",
+      //"click #loginButton": "loadCharacterSelection",
+      "click #loginButton": "loadFightScreen",
       //"click #fightButton": "loadFightScreen"
     },
     //main app view initializes loginView, creates a div, and then loads the view.
     initialize: function() {
       this.setCurrentView(new LoginView())
+        //characterList.fetch()
         // listen to the characterList collection, when a model is added, run this.addCharacter
       this.listenTo(characterList, 'add', this.addCharacter)
     },
