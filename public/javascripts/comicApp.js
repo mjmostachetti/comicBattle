@@ -9,6 +9,7 @@ $(document).ready(function() {
       deck: "",
       image: ""
     },
+    //  setting the type of superpower to the hero
     attribute: function() {
       if (this.get("name") === "batman" || this.get("name") ===
         "daredevil" || this
@@ -30,6 +31,7 @@ $(document).ready(function() {
     url: '/api/characters'
   })
 
+  //two mock character teams
   var leftTeam = new CharacterCollection()
   var rightTeam = new CharacterCollection()
 
@@ -290,8 +292,8 @@ $(document).ready(function() {
       "click .addChar": "addCharacterToUserAccount",
       "click #loadSignup": "loadSignup",
       "click #loadLogin": "loadLogin",
-      //  "click #loginButton": "loadCharacterSelection",
-      "click #loginButton": "loadFightScreen",
+      "click #loginButton": "loadCharacterSelection",
+      //"click #loginButton": "loadFightScreen",
       //"click #fightButton": "loadFightScreen"
     },
     //main app view initializes loginView, creates a div, and then loads the view.
