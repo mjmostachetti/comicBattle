@@ -104,14 +104,12 @@ $(document).ready(function() {
     render: function() {
       this.$el.html(this.template)
     },
-
     findNextChar: function() {
       var leftCharacter
       var rightCharacter
       for (var i = 0; i < leftTeam.models.length; i++) {
         if (leftTeam.models[i].get("ko") != true) {
           leftCharacter = leftTeam.models[i]
-          console.log(leftCharacter)
         } else {
           rightTeam.win()
         }
@@ -119,7 +117,6 @@ $(document).ready(function() {
       for (var j = 0; j < rightTeam.models.length; j++) {
         if (rightTeam.models[j].get("ko") != true) {
           rightCharacter = rightTeam.models[j]
-          console.log(rightCharacter)
         } else {
           leftTeam.win()
         }
@@ -206,25 +203,6 @@ $(document).ready(function() {
     initialize: function() {
       this.render();
     },
-    var CharacterView = Backbone.View.extend({
-      tagName: "div",
-      className: "characterSelect-view",
-      model: Character,
-      intialize: function() {
-        this.render();
-      },
-      render: function() {
-        var template = _.template(
-          '<td class="character" data-character-id="<%-id%>"><%-name%></td>'
-        );
-        this.$el.html(template({
-          id: this.model.id,
-          name: this.model.name
-        }));
-        return this;
-        $('#chargrid').append(template);
-      }
-    })
     render: function() {
       console.log('rendering');
       //this.$el.html('<table id="chargrid"></table>');

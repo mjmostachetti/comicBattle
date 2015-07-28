@@ -12,7 +12,6 @@ router.get('/', function(req, res, next) {
 	console.log("index.js is running");
 });
 
-
 //router.get('/teams', function(req, res, next){
 //res.render('select', { title: 'Select Yo Teams' });
 //});
