@@ -105,6 +105,10 @@ $(document).ready(function() {
     render: function() {
       this.$el.html(this.template)
     },
+<<<<<<< HEAD
+    fight: function() {
+      console.log(rightCharacter)
+=======
     findNextChar: function() {
       var leftCharacter
       var rightCharacter
@@ -128,6 +132,7 @@ $(document).ready(function() {
       this.findNextChar()
     },
     fight: function(leftCharacter, rightCharacter) {
+>>>>>>> 753ac6c6f861615148ac87a9be556fc215ce0a50
       console.log(rightCharacter.get("type"))
       if (leftCharacter.get("type") === rightCharacter.get("type")) {
         console.log("Draw")
