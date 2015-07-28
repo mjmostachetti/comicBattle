@@ -76,40 +76,37 @@ $(document).ready(function() {
   leftCharacter = leftTeam.first()
   rightCharacter = rightTeam.first()
 
-  console.log(leftCharacter)
-  console.log(rightCharacter)
-
   // end of test logic
-
-  var RoundModel = Backbone.Model.extend({
-    initialize: function() {
-      leftCharacter = leftTeam.first()
-      rightCharacter = rightTeam.first()
-    }
-  })
-
-  var MatchModel = Backbone.Model.extend({
-    defaults: {
-      rounds: []
-    }
-  })
-
-  var match = new MatchModel({
-    rounds: [
-      new RoundModel({
-        leftCharacter: leftTeam.first(),
-        rightCharacter: rightTeam.first()
-      }),
-      new RoundModel({
-        leftCharacter: leftTeam.get(),
-        rightCharacter: rightTeam.get()
-      }),
-      new RoundModel({
-        leftCharacter: leftTeam.get("c3"),
-        rightCharacter: rightTeam.get("c6")
-      }),
-    ]
-  })
+  //
+  // var RoundModel = Backbone.Model.extend({
+  //   initialize: function() {
+  //     leftCharacter = leftTeam.first()
+  //     rightCharacter = rightTeam.first()
+  //   }
+  // })
+  //
+  // var MatchModel = Backbone.Model.extend({
+  //   defaults: {
+  //     rounds: []
+  //   }
+  // })
+  //
+  // var match = new MatchModel({
+  //   rounds: [
+  //     new RoundModel({
+  //       leftCharacter: leftTeam.first(),
+  //       rightCharacter: rightTeam.first()
+  //     }),
+  //     new RoundModel({
+  //       leftCharacter: leftTeam.get(),
+  //       rightCharacter: rightTeam.get()
+  //     }),
+  //     new RoundModel({
+  //       leftCharacter: leftTeam.get("c3"),
+  //       rightCharacter: rightTeam.get("c6")
+  //     }),
+  //   ]
+  // })
 
   var User = Backbone.Model.extend({
     defaults: {
@@ -132,18 +129,38 @@ $(document).ready(function() {
     tagName: "div",
     className: "fight-view",
     template: _.template($("#fight-view").html()),
-    events: {
-      "click #findNextChar": "findNextChar",
-      "click #fight": "fight"
-    },
     initialize: function() {
       this.render()
     },
     render: function() {
       this.$el.html(this.template)
     },
+<<<<<<< HEAD
     fight: function() {
       console.log(rightCharacter)
+=======
+    findNextChar: function() {
+      var leftCharacter
+      var rightCharacter
+      for (var i = 0; i < leftTeam.models.length; i++) {
+        if (leftTeam.models[i].get("ko") != true) {
+          leftCharacter = leftTeam.models[i]
+        } else {
+          rightTeam.win()
+        }
+      }
+      for (var j = 0; j < rightTeam.models.length; j++) {
+        if (rightTeam.models[j].get("ko") != true) {
+          rightCharacter = rightTeam.models[j]
+        } else {
+          leftTeam.win()
+        }
+      }
+      this.fight(leftCharacter, rightCharacter)
+      this.findNextChar()
+    },
+    fight: function(leftCharacter, rightCharacter) {
+>>>>>>> 753ac6c6f861615148ac87a9be556fc215ce0a50
       console.log(rightCharacter.get("type"))
       if (leftCharacter.get("type") === rightCharacter.get("type")) {
         console.log("Draw")
@@ -176,24 +193,9 @@ $(document).ready(function() {
       console.log(rightCharacter)
       console.log(leftCharacter)
     },
-    findNextChar: function() {
-      var leftCharacter
-      var rightCharacter
-      for (var i = 0; i < leftTeam.models.length; i++) {
-        if (leftTeam.models[i].get("ko") != true) {
-          leftCharacter = leftTeam.models[i]
-        } else {
-          rightTeam.win()
-        }
-      }
-      for (var j = 0; j < rightTeam.models.length; j++) {
-        if (rightTeam.models[j].get("ko") != true) {
-          rightCharacter = rightTeam.models[j]
-        } else {
-          leftTeam.win()
-        }
-      }
-      console.log(leftCharacter)
+    events: {
+      "click #findNextChar": "findNextChar",
+      "click #fight": "findNextChar"
     }
   })
 
