@@ -11,17 +11,14 @@ router.get('/', function(req, res, next) {
 		title: 'Comic Rock Paper Scissors'
 	});
 });
-console.log("index.js is running");
 
 router.get('/teams', function(req, res, next) {
 	res.render('select', {
 		title: 'Select Yo Teams'
 	});
 });
-console.log("teams reading");
 
 router.post('/signup', function(request, response) {
-	console.log("youve signed up");
 
 	// request.body is an object that contains all of the information
 	// that was passed to the backend via the form on the frontend

@@ -79,9 +79,7 @@ $(document).ready(function() {
   console.log(leftCharacter)
   console.log(rightCharacter)
 
-  console.log(leftTeam)
-  console.log(rightTeam)
-    // end of test logic
+  // end of test logic
 
   var RoundModel = Backbone.Model.extend({
     initialize: function() {
@@ -134,36 +132,15 @@ $(document).ready(function() {
     tagName: "div",
     className: "fight-view",
     template: _.template($("#fight-view").html()),
-    initialize: function() {
-      this.render()
-    },
-    render: function() {
-      console.log(this.el)
-      this.$el.html(this.template)
-      var roundView = new RoundView()
-    },
-    findNextChar: function() {
-      var leftCharacter
-      var rightCharacter
-      for (var i = 0; i <= leftTeam.models.length; i++) {
-        if ("ko" != true) {
-          return (leftCharacter)
-        }
-      }
-    },
     events: {
-      "click #fight": "findNextChar"
-    }
-  })
-
-  var RoundView = Backbone.View.extend({
-    tagName: "div",
-    className: "round-view",
+      "click #findNextChar": "findNextChar",
+      "click #fight": "fight"
+    },
     initialize: function() {
       this.render()
     },
     render: function() {
-      this.$el.html()
+      this.$el.html(this.template)
     },
     fight: function(leftCharacter, rightCharacter) {
       console.log(rightCharacter.get("type"))
@@ -198,10 +175,38 @@ $(document).ready(function() {
       console.log(rightCharacter)
       console.log(leftCharacter)
     },
-    events: {
-      "click #fight": "fight"
+    findNextChar: function() {
+      var leftCharacter
+      var rightCharacter
+      for (var i = 0; i < leftTeam.models.length; i++) {
+        if (leftTeam.models[i].get("ko") != true) {
+          leftCharacter = leftTeam.models[i]
+        } else {
+          rightTeam.win()
+        }
+      }
+      for (var j = 0; j < rightTeam.models.length; j++) {
+        if (rightTeam.models[j].get("ko") != true) {
+          rightCharacter = rightTeam.models[j]
+        } else {
+          leftTeam.win()
+        }
+      }
+      console.log(leftCharacter)
     }
   })
+
+  // var RoundView = Backbone.View.extend({
+  //   tagName: "div",
+  //   className: "round-view",
+  //   initialize: function() {
+  //     this.render()
+  //   },
+  //   render: function() {
+  //     this.$el.html(this.template)
+  //   },
+  // })
+
 
   var characterList = new CharacterCollection();
 
@@ -290,7 +295,7 @@ $(document).ready(function() {
       "click .addChar": "addCharacterToUserAccount",
       "click #loadSignup": "loadSignup",
       "click #loadLogin": "loadLogin",
-      //  "click #loginButton": "loadCharacterSelection",
+      //"click #loginButton": "loadCharacterSelection",
       "click #loginButton": "loadFightScreen",
       //"click #fightButton": "loadFightScreen"
     },
