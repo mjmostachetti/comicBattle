@@ -32,50 +32,50 @@ $(document).ready(function() {
   var leftTeam = new CharacterCollection()
   var rightTeam = new CharacterCollection()
 
-  // start of test data for testing fight logic
-  var batman = new Character()
-  batman.set({
-    name: "batman"
-  })
-  batman.attribute()
-
-  var carnage = new Character()
-  carnage.set({
-    name: "carnage"
-  })
-  carnage.attribute()
-
-  var superman = new Character()
-  superman.set({
-    name: "superman"
-  })
-  superman.attribute()
-
-  var cyclops = new Character()
-  cyclops.set({
-    name: "cyclops"
-  })
-  cyclops.attribute()
-
-  var shazaam = new Character()
-  shazaam.set({
-    name: "billy-batson"
-  })
-  shazaam.attribute()
-
-  var martianManhunter = new Character()
-  martianManhunter.set({
-    name: "martian-manhunter"
-  })
-  martianManhunter.attribute()
-
-  leftTeam.add([batman, carnage, superman])
-  rightTeam.add([cyclops, shazaam, martianManhunter])
-
-  leftCharacter = leftTeam.first()
-  rightCharacter = rightTeam.first()
-
-  // end of test logic
+  // // start of test data for testing fight logic
+  // var batman = new Character()
+  // batman.set({
+  //   name: "batman"
+  // })
+  // batman.attribute()
+  //
+  // var carnage = new Character()
+  // carnage.set({
+  //   name: "carnage"
+  // })
+  // carnage.attribute()
+  //
+  // var superman = new Character()
+  // superman.set({
+  //   name: "superman",
+  // })
+  // superman.attribute()
+  //
+  // var cyclops = new Character()
+  // cyclops.set({
+  //   name: "cyclops"
+  // })
+  // cyclops.attribute()
+  //
+  // var shazaam = new Character()
+  // shazaam.set({
+  //   name: "billy-batson"
+  // })
+  // shazaam.attribute()
+  //
+  // var martianManhunter = new Character()
+  // martianManhunter.set({
+  //   name: "martian-manhunter"
+  // })
+  // martianManhunter.attribute()
+  //
+  // leftTeam.add([batman, carnage, superman])
+  // rightTeam.add([cyclops, shazaam, martianManhunter])
+  //
+  // leftCharacter = leftTeam.first()
+  // rightCharacter = rightTeam.first()
+  //
+  // // end of test logic
 
   var User = Backbone.Model.extend({
     defaults: {
@@ -107,20 +107,12 @@ $(document).ready(function() {
     findNextChar: function() {
       var leftCharacter
       var rightCharacter
-      for (var i = 0; i < leftTeam.models.length; i++) {
-        if (leftTeam.models[i].get("ko") != true) {
-          leftCharacter = leftTeam.models[i]
-        } else {
-          rightTeam.win()
-        }
-      }
-      for (var j = 0; j < rightTeam.models.length; j++) {
-        if (rightTeam.models[j].get("ko") != true) {
-          rightCharacter = rightTeam.models[j]
-        } else {
-          leftTeam.win()
-        }
-      }
+      leftCharacter = leftTeam.findWhere({
+        ko: false
+      })
+      rightCharacter = rightTeam.findWhere({
+        ko: false
+      })
       this.fight(leftCharacter, rightCharacter)
       this.findNextChar()
     },
@@ -154,8 +146,6 @@ $(document).ready(function() {
         console.log(leftCharacter.get("name") + " wins!")
         rightCharacter.set("ko", true)
       }
-      console.log(rightCharacter)
-      console.log(leftCharacter)
     },
     events: {
       "click #findNextChar": "findNextChar",
