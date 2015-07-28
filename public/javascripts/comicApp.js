@@ -26,7 +26,6 @@ $(document).ready(function() {
 
   var CharacterCollection = Backbone.Collection.extend({
     model: Character,
-    //url: '/fillOut'
     url: '/api/characters'
   })
 
@@ -105,6 +104,7 @@ $(document).ready(function() {
     render: function() {
       this.$el.html(this.template)
     },
+
     findNextChar: function() {
       var leftCharacter
       var rightCharacter
@@ -199,45 +199,69 @@ $(document).ready(function() {
   })
 
   var CharactersView = Backbone.View.extend({
-    collection: CharacterCollection,
-    el: "#characters",
-    intialize: function() {
+    //collection: CharacterCollection,
+    el: "#charZone",
+    template: _.template($("#template-characterSelect").html()),
+    //call render somewhere else
+    initialize: function() {
       this.render();
     },
+    var CharacterView = Backbone.View.extend({
+      tagName: "div",
+      className: "characterSelect-view",
+      model: Character,
+      intialize: function() {
+        this.render();
+      },
+      render: function() {
+        var template = _.template(
+          '<td class="character" data-character-id="<%-id%>"><%-name%></td>'
+        );
+        this.$el.html(template({
+          id: this.model.id,
+          name: this.model.name
+        }));
+        return this;
+        $('#chargrid').append(template);
+      }
+    })
     render: function() {
-      this.$el.html('<table id="chargrid"></table>');
+      console.log('rendering');
+      //this.$el.html('<table id="chargrid"></table>');
+      var html = '<table id="chargrid"><tr>';
+      //var width isnt being used, should replace 4 in if function
+      var width = 4;
+      var i = 0;
       this.collection.each(function(model) {
-        new CharacterView({
+        if (i % 4 === 0 && i !== 0) {
+          html = html + '</tr><tr>';
+        }
+        var characterView = new CharacterView({
           model: model
         });
-      });
-    },
-    events: {
-      "click .character": "selectCharacter"
-    },
-    selectCharacter: function selectCharacter(evt) {
-      var characterData = $(evt.currentTarget).data();
-      alert("Clicked " + characterData.characterId);
+        characterView.render();
+        html = html + characterView.$el.html();
+        i++;
+      })
+      html = html + '</tr></table>';
+      this.$el.html(html);
     }
   })
 
   var CharacterView = Backbone.View.extend({
     tagName: "div",
-    className: "characterSelect-view",
+    className: "character-view",
     model: Character,
-    intialize: function() {
-      this.render();
-    },
+    //call render at some point
     render: function() {
       var template = _.template(
-        '<td class="character" data-character-id="<%-id%>"><%-name%></td>'
+        '<td class="character" data-character-id="<%-id%>"><img src="<%-image%>"></td>'
       );
       this.$el.html(template({
         id: this.model.id,
-        name: this.model.name
+        image: this.model.get('image').thumb_url
       }));
       return this;
-      $('#chargrid').append(template);
     }
   })
 
@@ -247,12 +271,17 @@ $(document).ready(function() {
     el: $('#comicapp'),
 
     events: {
-      "click .addChar": "addCharacterToUserAccount",
       "click #loadSignup": "loadSignup",
       "click #loadLogin": "loadLogin",
       //"click #loginButton": "loadCharacterSelection",
+      //"click #loginButton" : "loadCharView",
+      "click .character": "selectCharacter",
       "click #loginButton": "loadFightScreen",
       //"click #fightButton": "loadFightScreen"
+    },
+    selectCharacter: function selectCharacter(evt) {
+      var characterData = $(evt.currentTarget).data();
+      alert("Clicked " + characterData.characterId);
     },
     //main app view initializes loginView, creates a div, and then loads the view.
     initialize: function() {
@@ -278,6 +307,21 @@ $(document).ready(function() {
     loadFightScreen: function(event) {
       event.preventDefault()
       this.setCurrentView(new FightView())
+    },
+    loadCharView: function(event) {
+      //TODO(justin): this is really nasty and should probably occur outside this function
+      event.preventDefault()
+        //creates character collection
+      var characterCol = new CharacterCollection()
+        //calls the collection using index.js router.get /api/characters. async:false to prevent render until it gets all the info.
+      characterCol.fetch({
+          async: false
+        })
+        //creates charactersview with collection
+      this.setCurrentView(new CharactersView({
+          collection: characterCol
+        }))
+        //console.log("the character selection loaded")
     },
     setCurrentView: function(newView) {
       if (this.currentView) this.currentView.remove()
