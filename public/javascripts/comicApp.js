@@ -142,7 +142,8 @@ $(document).ready(function() {
     render: function() {
       this.$el.html(this.template)
     },
-    fight: function(leftCharacter, rightCharacter) {
+    fight: function() {
+      console.log(rightCharacter)
       console.log(rightCharacter.get("type"))
       if (leftCharacter.get("type") === rightCharacter.get("type")) {
         console.log("Draw")
