@@ -1,3 +1,5 @@
+var leftTeam, characterList;
+
 $(document).ready(function() {
 
   //define the character model
@@ -42,6 +44,12 @@ $(document).ready(function() {
       hero4: 0,
       hero5: 0,
       hero6: 0,
+      heroName1: '',
+      heroName2: '',
+      heroName3: '',
+      heroName4: '',
+      heroName5: '',
+      heroName6: '',
       heroNum: 0
     }
   })
@@ -92,7 +100,6 @@ $(document).ready(function() {
     render: function() {
       this.$el.html(this.template)
     },
-
     findNextChar: function() {
       var leftCharacter
       var rightCharacter
@@ -235,6 +242,8 @@ $(document).ready(function() {
       }
     })
 
+  characterList = new CharacterCollection;
+
   var MainAppView = Backbone.View.extend({
     //div in index.jade
     //el: $('#container'),
@@ -265,6 +274,7 @@ $(document).ready(function() {
           for(var x = 1; x <= 6; x++){
             if(this.newUser.get("hero" + x) === 0){
               this.newUser.set("hero" + x,characterData.characterImg)
+              this.newUser.set('heroName' + x, characterData.characterName)
               return;
             }
           }
@@ -277,6 +287,7 @@ $(document).ready(function() {
       this.newUserView = new UserView({ model : this.newUser})
       this.listenTo(this.newUser, "change:heroNum", this.addFightButton)      
       this.listenTo(this.newUser, "change", this.newUser.render)
+      characterList.fetch();
       console.log("This is our user : ")
       console.log(this.newUser)
     },
@@ -304,7 +315,20 @@ $(document).ready(function() {
     },
     loadFightScreen: function(event) {
       event.preventDefault()
-      this.setCurrentView(new FightView())
+      var leftTeamObj = {};
+      var rightTeamObj = {};
+      // search character collection to pull down the characters the user has selected!
+      var getThis = characterList.where({name:'Hulk'})
+      console.log(getThis)
+      for(var x = 1; x <= 6; x++){
+          leftTeamObj[x] = this.newUser.attributes['heroName' + x]
+      }
+      console.log(leftTeamObj)
+      console.log(rightTeamObj)
+      leftTeam = new CharacterCollection(leftTeamObj);
+      rightTeam = new CharacterCollection(rightTeamObj);
+      */
+      this.setCurrentView(new FightView({ collection : leftTeam}))
     },
     loadCharView : function(event) {
           //TODO(justin): this is really nasty and should probably occur outside this function
