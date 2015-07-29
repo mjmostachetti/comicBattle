@@ -1,4 +1,4 @@
-var leftTeam, characterList;
+var leftTeam, characterList, fightViewer;
 
 $(document).ready(function() {
 
@@ -12,13 +12,13 @@ $(document).ready(function() {
       image: ""
     },
     attribute: function() {
-      if (this.get("name") === "batman" || this.get("name") ===
+      if (this.get("name") === "Batman" || this.get("name") ===
         "daredevil" || this
-        .get("name") === "hulk" || this.get("name") === "joker") {
+        .get("name") === "Hulk" || this.get("name") === "Joker") {
         this.set("type", "strength")
-      } else if (this.get("name") === "superman" || this.get("name") ===
-        "spider-man" || this.get("name") === "cyclops" ||
-        this.get("name") === "carnage") {
+      } else if (this.get("name") === "Superman" || this.get("name") ===
+        "Spider-man" || this.get("name") === "Cyclops" ||
+        this.get("name") === "Carnage") {
         this.set("type", "energy")
       } else {
         this.set("type", "magic")
@@ -315,20 +315,21 @@ $(document).ready(function() {
     },
     loadFightScreen: function(event) {
       event.preventDefault()
-      var leftTeamObj = {};
-      var rightTeamObj = {};
+      var battleCharacters = new CharacterCollection;
       // search character collection to pull down the characters the user has selected!
       var getThis = characterList.where({name:'Hulk'})
       console.log(getThis)
       for(var x = 1; x <= 6; x++){
-          leftTeamObj[x] = this.newUser.attributes['heroName' + x]
+        var preAttributeModel = characterList.findWhere({name: this.newUser.attributes['heroName' + x]})
+        preAttributeModel.attribute()
+        console.log(preAttributeModel)
+        battleCharacters.add(preAttributeModel)
       }
-      console.log(leftTeamObj)
-      console.log(rightTeamObj)
-      leftTeam = new CharacterCollection(leftTeamObj);
-      rightTeam = new CharacterCollection(rightTeamObj);
-      */
-      this.setCurrentView(new FightView({ collection : leftTeam}))
+      console.log(battleCharacters)
+      //leftTeam = new CharacterCollection(leftTeamObj);
+      //rightTeam = new CharacterCollection(rightTeamObj);
+      fightViewer = new FightView({ collection : battleCharacters})
+      this.setCurrentView(fightViewer)
     },
     loadCharView : function(event) {
           //TODO(justin): this is really nasty and should probably occur outside this function
