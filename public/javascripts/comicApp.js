@@ -98,8 +98,8 @@ $(document).ready(function() {
       console.log(this.collection.slice(0,3))
       console.log(this.collection.slice(3,6))
 
-      this.leftTeamCollection = new CharacterCollection({ collection : this.collection.slice(0,3)})
-      this.rightTeamCollection = new CharacterCollection({ collection : this.collection.slice(3,6)})
+      this.leftTeamCollection = this.collection.slice(0,3)
+      this.rightTeamCollection = this.collection.slice(3,6)
       this.render()
     },
     render: function() {
@@ -110,64 +110,79 @@ $(document).ready(function() {
     findNextChar: function() {
       var leftCharacter;
       var rightCharacter;
-      leftCharacter = leftTeamCollection.findWhere({
-        ko: false
-      })
-      if(leftTeamCollection.where({ko:false}).length === 0){
-        this.win('right')
+      console.log(this.leftTeamCollection)
+      console.log(this.rightTeamCollection)
+
+      console.log("The left team has " + this.leftTeamCollection.length + " players left.")
+      console.log("The right team has " + this.rightTeamCollection.length + " players left.")
+
+      if(this.leftTeamCollection.length === 0 && this.rightTeamCollection.length === 0){
+        return this.win('Nobody')
       }
-      rightCharacter = rightTeamCollection.findWhere({
-        ko: false
-      })
-      if(leftTeamCollection.where({ko:false}).length === 0){
-        this.win('left')
+
+      if(this.leftTeamCollection.length === 0){
+        return this.win('Right')
+      } else{
+        leftCharacter = this.leftTeamCollection[0]
       }
-      if ("ko" === false) {
-        this.win(rightTeam)
+
+      if(this.rightTeamCollection.length === 0){
+        return this.win('Left')
+      } else{
+        rightCharacter = this.rightTeamCollection[0]
       }
-      
+      console.log("right here")
+      console.log(leftCharacter)
+      console.log(rightCharacter)
       this.fight(leftCharacter, rightCharacter)
       this.findNextChar()
     },
     win: function(team) {
-      console.log(team + "wins!")
+      console.log(team + " wins!")
     },
     fight: function(leftCharacter, rightCharacter) {
-      console.log(rightCharacter.get("type"))
+      console.log("The right character type is : " + rightCharacter.get("type"))
+      console.log("The left character type is : " + leftCharacter.get("type"))
       if (leftCharacter.get("type") === rightCharacter.get("type")) {
         console.log("Draw")
+        /*
         leftCharacter.set("ko", true)
         rightCharacter.set("ko", true)
+        */
+        this.leftTeamCollection.shift()
+        this.rightTeamCollection.shift()
       } else if (leftCharacter.get("type") === "strength" &&
         rightCharacter.get("type") ===
         "energy") {
         console.log(leftCharacter.get("name") + " wins!")
-        rightCharacter.set("ko", true)
+        //rightCharacter.set("ko", true)
+        this.rightTeamCollection.shift()
       } else if (leftCharacter.get("type") === "strength" &&
         rightCharacter.get("type") ===
         "magic") {
         console.log(rightCharacter.get("name") + " wins!")
-        leftCharacter.set("ko", true)
+        //leftCharacter.set("ko", true)
+        this.leftTeamCollection.shift()
       } else if (leftCharacter.get("type") === "energy" &&
         rightCharacter.get("type") ===
         "strength") {
         console.log(rightCharacter.get("name") + " wins!")
-        leftCharacter.set("ko", true)
+        //leftCharacter.set("ko", true)
+        this.leftTeamCollection.shift()
       } else if (leftCharacter.get("type") === "energy" &&
         rightCharacter.get("type") ===
         "magic") {
         console.log(leftCharacter.get("name") + " wins!")
-        rightCharacter.set("ko", true)
+        //rightCharacter.set("ko", true)
+        this.rightTeamCollection.shift()
       } else {
         console.log(leftCharacter.get("name") + " wins!")
         rightCharacter.set("ko", true)
       }
-      console.log(rightCharacter)
-      console.log(leftCharacter)
     },
     events: {
-      "click #findNextChar": "findNextChar",
-      //"click #fight": "fight"
+      //"click #findNextChar": "findNextChar",
+      "click #fight": "findNextChar"
     }
   })
 
