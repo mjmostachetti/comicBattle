@@ -29,53 +29,53 @@ $(document).ready(function() {
         url: '/api/characters'
       })
 
-      var leftTeam = new CharacterCollection()
-      var rightTeam = new CharacterCollection()
-
-      // start of test data for testing fight logic
-      var batman = new Character()
-      batman.set({
-        name: "batman"
-      })
-      batman.attribute()
-
-      var carnage = new Character()
-      carnage.set({
-        name: "carnage"
-      })
-      carnage.attribute()
-
-      var superman = new Character()
-      superman.set({
-        name: "superman"
-      })
-      superman.attribute()
-
-      var cyclops = new Character()
-      cyclops.set({
-        name: "cyclops"
-      })
-      cyclops.attribute()
-
-      var shazaam = new Character()
-      shazaam.set({
-        name: "billy-batson"
-      })
-      shazaam.attribute()
-
-      var martianManhunter = new Character()
-      martianManhunter.set({
-        name: "martian-manhunter"
-      })
-      martianManhunter.attribute()
-
-      leftTeam.add([batman, carnage, superman])
-      rightTeam.add([cyclops, shazaam, martianManhunter])
-
-      leftCharacter = leftTeam.first()
-      rightCharacter = rightTeam.first()
-
-      // end of test logic
+      // var leftTeam = new CharacterCollection()
+      // var rightTeam = new CharacterCollection()
+      //
+      // // start of test data for testing fight logic
+      // var batman = new Character()
+      // batman.set({
+      //   name: "batman"
+      // })
+      // batman.attribute()
+      //
+      // var carnage = new Character()
+      // carnage.set({
+      //   name: "carnage"
+      // })
+      // carnage.attribute()
+      //
+      // var superman = new Character()
+      // superman.set({
+      //   name: "superman"
+      // })
+      // superman.attribute()
+      //
+      // var cyclops = new Character()
+      // cyclops.set({
+      //   name: "cyclops"
+      // })
+      // cyclops.attribute()
+      //
+      // var shazaam = new Character()
+      // shazaam.set({
+      //   name: "billy-batson"
+      // })
+      // shazaam.attribute()
+      //
+      // var martianManhunter = new Character()
+      // martianManhunter.set({
+      //   name: "martian-manhunter"
+      // })
+      // martianManhunter.attribute()
+      //
+      // leftTeam.add([batman, carnage, superman])
+      // rightTeam.add([cyclops, shazaam, martianManhunter])
+      //
+      // leftCharacter = leftTeam.first()
+      // rightCharacter = rightTeam.first()
+      //
+      // // end of test logic
 
       var User = Backbone.Model.extend({
         defaults: {
@@ -273,11 +273,6 @@ $(document).ready(function() {
             alert("Clicked " + characterData.characterId);
             this.newUser.set("hero1", characterData.characterId)
             console.log(this.newUser)
-              //"click #loginButton": "loadCharacterSelection",
-              //"click #loginButton" : "loadCharView",
-            "click .character": "selectCharacter",
-            "click #loginButton": "loadFightScreen",
-            //"click #fightButton": "loadFightScreen"
           },
           //main app view initializes loginView, creates a div, and then loads the view.
           initialize: function() {
