@@ -15,18 +15,13 @@ $(document).ready(function() {
             .get("name") === "hulk" || this.get("name") === "joker") {
             this.set("type", "strength")
           } else if (this.get("name") === "superman" || this.get("name") ===
-            "spider-man" || this.get("name") === "cyclops" ||
+            "Spider-Man" || this.get("name") === "cyclops" ||
             this.get("name") === "carnage") {
             this.set("type", "energy")
           } else {
             this.set("type", "magic")
           }
         }
-      })
-
-      var CharacterCollection = Backbone.Collection.extend({
-        model: Character,
-        url: '/api/characters'
       })
 
       // var leftTeam = new CharacterCollection()
@@ -77,6 +72,11 @@ $(document).ready(function() {
       //
       // // end of test logic
 
+      var CharacterCollection = Backbone.Collection.extend({
+        model: Character,
+        url: '/api/characters'
+      })
+
       var User = Backbone.Model.extend({
         defaults: {
           id: 0,
@@ -115,26 +115,28 @@ $(document).ready(function() {
         },
         render: function() {
           this.$el.html(this.template)
+          console.log(this)
         },
         findNextChar: function() {
           var leftCharacter
           var rightCharacter
-          for (var i = 0; i < leftTeam.models.length; i++) {
-            if (leftTeam.models[i].get("ko") != true) {
-              leftCharacter = leftTeam.models[i]
-            } else {
-              rightTeam.win()
-            }
+          leftCharacter = leftTeam.findWhere({
+            ko: false
+          })
+          if ("ko" === false) {
+            this.win(leftTeam)
           }
-          for (var j = 0; j < rightTeam.models.length; j++) {
-            if (rightTeam.models[j].get("ko") != true) {
-              rightCharacter = rightTeam.models[j]
-            } else {
-              leftTeam.win()
-            }
+          rightCharacter = rightTeam.findWhere({
+            ko: false
+          })
+          if ("ko" === false) {
+            this.win(rightTeam)
           }
           this.fight(leftCharacter, rightCharacter)
           this.findNextChar()
+        },
+        win: function() {
+          console.log("you win a victory")
         },
         fight: function(leftCharacter, rightCharacter) {
           console.log(rightCharacter.get("type"))
@@ -174,7 +176,6 @@ $(document).ready(function() {
           //"click #fight": "fight"
         }
       })
-
       var characterList = new CharacterCollection()
       var userList = new UserCollection()
 
@@ -255,76 +256,137 @@ $(document).ready(function() {
         }
       })
 
-      var MainAppView = Backbone.View.extend({
-          //div in index.jade
-          //el: $('#container'),
-          el: $('#comicapp'),
-
-          events: {
-            "click #loadSignup": "loadSignup",
-            "click #loadLogin": "loadLogin",
-            "click #loginButton": "loadCharView",
-            "click .character": "selectCharacter"
-              //"click #loginButton": "loadFightScreen",
-              //"click #fightButton": "loadFightScreen"
-          },
-          selectCharacter: function selectCharacter(evt) {
-            var characterData = $(evt.currentTarget).data();
-            alert("Clicked " + characterData.characterId);
-            this.newUser.set("hero1", characterData.characterId)
-            console.log(this.newUser)
-          },
-          //main app view initializes loginView, creates a div, and then loads the view.
-          initialize: function() {
-            this.setCurrentView(new LoginView())
-            this.newUser = new User;
-            this.newUserView = new UserView({
-              model: newUser
+      events: {
+          "click #loadSignup": "loadSignup",
+          "click #loadLogin": "loadLogin",
+          "click #loginButton": "loadCharView",
+          "click .character": "selectCharacter"
+            //"click #loginButton": "loadFightScreen",
+            //"click #fightButton": "loadFightScreen"
+        },
+        selectCharacter: function selectCharacter(evt) {
+          var characterData = $(evt.currentTarget).data();
+          alert("Clicked " + characterData.characterId);
+          this.newUser.set("hero1", characterData.characterId)
+          console.log(this.newUser)
+        },
+        //main app view initializes loginView, creates a div, and then loads the view.
+        initialize: function() {
+          this.setCurrentView(new LoginView())
+          this.newUser = new User;
+          this.newUserView = new UserView({
+            model: newUser
+          })
+          console.log("This is our user : ")
+          console.log(newUser)
+            //characterList.fetch()
+            // listen to the characterList collection, when a model is added, run this.addCharacter
+          this.listenTo(characterList, 'add', this.addCharacter)
+        },
+        //handles loading the login view and html elements
+        loadLogin: function() {
+          this.setCurrentView(new LoginView())
+        },
+        //uses Signup ctor to create SignupView
+        loadSignup: function() {
+          this.setCurrentView(new SignupView())
+        },
+        loadCharacterSelection: function(event) {
+          event.preventDefault()
+          this.setCurrentView(new CharacterView())
+          console.log(characterList);
+          //console.log("the character selection loaded")
+        },
+        loadFightScreen: function(event) {
+          event.preventDefault()
+          this.setCurrentView(new FightView())
+        },
+        loadCharView: function(event) {
+          //TODO(justin): this is really nasty and should probably occur outside this function
+          event.preventDefault()
+            //creates character collection
+          var characterCol = new CharacterCollection()
+            //calls the collection using index.js router.get /api/characters. async:false to prevent render until it gets all the info.
+          characterCol.fetch({
+              async: false
             })
-            console.log("This is our user : ")
-            console.log(newUser)
-              //characterList.fetch()
-              // listen to the characterList collection, when a model is added, run this.addCharacter
-            this.listenTo(characterList, 'add', this.addCharacter)
-          },
-          //handles loading the login view and html elements
-          loadLogin: function() {
-            this.setCurrentView(new LoginView())
-          },
-          //uses Signup ctor to create SignupView
-          loadSignup: function() {
-            this.setCurrentView(new SignupView())
-          },
-          loadCharacterSelection: function(event) {
-            event.preventDefault()
-            this.setCurrentView(new CharacterView())
-            console.log(characterList);
+            //creates charactersview with collection
+          this.setCurrentView(new CharactersView({
+              collection: characterCol
+            }))
             //console.log("the character selection loaded")
-          },
-          loadFightScreen: function(event) {
-            event.preventDefault()
-            this.setCurrentView(new FightView())
-          },
-          loadCharView: function(event) {
-            //TODO(justin): this is really nasty and should probably occur outside this function
-            event.preventDefault()
-              //creates character collection
-            var characterCol = new CharacterCollection()
-              //calls the collection using index.js router.get /api/characters. async:false to prevent render until it gets all the info.
-            characterCol.fetch({
-                async: false
+            //create current user
+          var MainAppView = Backbone.View.extend({
+            //div in index.jade
+            //el: $('#container'),
+            el: $('#comicapp'),
+            events: {
+              "click #loadSignup": "loadSignup",
+              "click #loadLogin": "loadLogin",
+              //"click #loginButton": "loadCharView",
+              "click .character": "selectCharacter",
+              "click #loginButton": "loadFightScreen",
+              //"click #fightButton": "loadFightScreen"
+            },
+            selectCharacter: function selectCharacter(evt) {
+              var characterData = $(evt.currentTarget).data();
+              alert("Clicked " + characterData.characterId);
+              this.newUser.set("hero1", characterData.characterId)
+              console.log(this.newUser)
+            },
+            //main app view initializes loginView, creates a div, and then loads the view.
+            initialize: function() {
+              this.setCurrentView(new LoginView())
+              this.newUser = new User;
+              this.newUserView = new UserView({
+                model: newUser
               })
-              //creates charactersview with collection
-            this.setCurrentView(new CharactersView({
+              console.log("This is our user : ")
+              console.log(newUser)
+                //characterList.fetch()
+                // listen to the characterList collection, when a model is added, run this.addCharacter
+              this.listenTo(characterList, 'add', this.addCharacter)
+            },
+            //handles loading the login view and html elements
+            loadLogin: function() {
+              this.setCurrentView(new LoginView())
+            },
+            //uses Signup ctor to create SignupView
+            loadSignup: function() {
+              this.setCurrentView(new SignupView())
+            },
+            loadCharacterSelection: function(event) {
+              event.preventDefault()
+              this.setCurrentView(new CharacterView())
+              console.log(characterList);
+              //console.log("the character selection loaded")
+            },
+            loadFightScreen: function(event) {
+              event.preventDefault()
+              this.setCurrentView(new FightView())
+            },
+            loadCharView: function(event) {
+              //TODO(justin): this is really nasty and should probably occur outside this function
+              event.preventDefault()
+                //creates character collection
+              var characterCol = new CharacterCollection()
+                //calls the collection using index.js router.get /api/characters. async:false to prevent render until it gets all the info.
+              characterCol.fetch({
+                  async: false
+                })
+                //creates charactersview with collection
+              this.setCurrentView(new CharactersView({
                 collection: characterCol
               }))
-              //console.log("the character selection loaded")
-              //create current user
-
+            },
+            //console.log("the character selection loaded")
+            //create current user
             setCurrentView: function(newView) {
               if (this.currentView) this.currentView.remove()
               this.currentView = newView
+              newView.parentView = this;
               this.$el.html(newView.$el)
             }
-          }) var App = new MainAppView();
-      })
+          })
+          var App = new MainAppView();
+        })
