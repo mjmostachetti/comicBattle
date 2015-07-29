@@ -100,15 +100,17 @@ $(document).ready(function() {
     className: "fight-view",
     template: _.template($("#fight-view").html()),
     initialize: function() {
+      $('#userInfo').hide();
       console.log(this.collection.slice(0,3))
       console.log(this.collection.slice(3,6))
-
+      console.log(this.collection)
+      console.log(typeof this.collection)
       this.leftTeamCollection = this.collection.slice(0,3)
       this.rightTeamCollection = this.collection.slice(3,6)
       this.render()
     },
     render: function() {
-      this.$el.html(this.template)
+      this.$el.html(this.template(this.collection))
       console.log("I am logging this:")
       console.log(this)
     },
@@ -147,39 +149,30 @@ $(document).ready(function() {
       console.log("The left character type is : " + leftCharacter.get("type"))
       if (leftCharacter.get("type") === rightCharacter.get("type")) {
         console.log("Draw")
-        /*
-        leftCharacter.set("ko", true)
-        rightCharacter.set("ko", true)
-        */
         this.leftTeamCollection.shift()
         this.rightTeamCollection.shift()
       } else if (leftCharacter.get("type") === "strength" &&
         rightCharacter.get("type") ===
         "energy") {
         console.log(leftCharacter.get("name") + " wins!")
-        //rightCharacter.set("ko", true)
         this.rightTeamCollection.shift()
       } else if (leftCharacter.get("type") === "strength" &&
         rightCharacter.get("type") ===
         "magic") {
         console.log(rightCharacter.get("name") + " wins!")
-        //leftCharacter.set("ko", true)
         this.leftTeamCollection.shift()
       } else if (leftCharacter.get("type") === "energy" &&
         rightCharacter.get("type") ===
         "strength") {
         console.log(rightCharacter.get("name") + " wins!")
-        //leftCharacter.set("ko", true)
         this.leftTeamCollection.shift()
       } else if (leftCharacter.get("type") === "energy" &&
         rightCharacter.get("type") ===
         "magic") {
         console.log(leftCharacter.get("name") + " wins!")
-        //rightCharacter.set("ko", true)
         this.rightTeamCollection.shift()
       } else {
         console.log(leftCharacter.get("name") + " wins!")
-        //rightCharacter.set("ko", true)
         this.rightTeamCollection.shift()
       }
     },
@@ -360,6 +353,7 @@ $(document).ready(function() {
         newUser.attributes['hero' + x] = ''
         newUser.attributes['heroName' + x] = ''
       }
+      $('#userInfo').show();
       this.setCurrentView(new CharactersView({ collection : characterList}))
     },
     loadFightScreen: function(event) {
