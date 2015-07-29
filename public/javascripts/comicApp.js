@@ -29,52 +29,52 @@ $(document).ready(function() {
     url: '/api/characters'
   })
 
-  // // // start of test data for testing fight logic
-  // var batman = new Character()
-  // batman.set({
-  //   name: "batman"
-  // })
-  // batman.attribute()
-  //
-  // var carnage = new Character()
-  // carnage.set({
-  //   name: "carnage"
-  // })
-  // carnage.attribute()
-  //
-  // var superman = new Character()
-  // superman.set({
-  //   name: "superman",
-  // })
-  // superman.attribute()
-  //
-  // var cyclops = new Character()
-  // cyclops.set({
-  //   name: "cyclops"
-  // })
-  // cyclops.attribute()
-  //
-  // var shazaam = new Character()
-  // shazaam.set({
-  //   name: "billy-batson"
-  // })
-  // shazaam.attribute()
-  //
-  // var martianManhunter = new Character()
-  // martianManhunter.set({
-  //   name: "martian-manhunter"
-  // })
-  // martianManhunter.attribute()
-  //
-  // leftTeam = new CharacterCollection()
-  // rightTeam = new CharacterCollection()
-  //
-  // leftTeam.add([batman, shazaam, superman])
-  // rightTeam.add([cyclops, carnage, martianManhunter])
-  //
-  // leftCharacter = leftTeam.first()
-  // rightCharacter = rightTeam.first()
-  // // end of test logic
+  // // start of test data for testing fight logic
+  var batman = new Character()
+  batman.set({
+    name: "batman"
+  })
+  batman.attribute()
+
+  var carnage = new Character()
+  carnage.set({
+    name: "carnage"
+  })
+  carnage.attribute()
+
+  var superman = new Character()
+  superman.set({
+    name: "superman",
+  })
+  superman.attribute()
+
+  var cyclops = new Character()
+  cyclops.set({
+    name: "cyclops"
+  })
+  cyclops.attribute()
+
+  var shazaam = new Character()
+  shazaam.set({
+    name: "billy-batson"
+  })
+  shazaam.attribute()
+
+  var martianManhunter = new Character()
+  martianManhunter.set({
+    name: "martian-manhunter"
+  })
+  martianManhunter.attribute()
+
+  leftTeam = new CharacterCollection()
+  rightTeam = new CharacterCollection()
+
+  leftTeam.add([batman, shazaam, superman])
+  rightTeam.add([cyclops, carnage, martianManhunter])
+
+  leftCharacter = leftTeam.first()
+  rightCharacter = rightTeam.first()
+    // end of test logic
 
   var User = Backbone.Model.extend({
     defaults: {
@@ -122,13 +122,12 @@ $(document).ready(function() {
       leftCharacter = leftTeam.findWhere({
         ko: false
       })
-      if ("ko" === false) {
-        this.win(leftTeam)
-      }
       rightCharacter = rightTeam.findWhere({
         ko: false
       })
-      if ("ko" === false) {
+      if ("ko" != false) {
+        this.win(leftTeam)
+      } else {
         this.win(rightTeam)
       }
       this.fight(leftCharacter, rightCharacter)
