@@ -95,32 +95,42 @@ $(document).ready(function() {
     className: "fight-view",
     template: _.template($("#fight-view").html()),
     initialize: function() {
+      console.log(this.collection.slice(0,3))
+      console.log(this.collection.slice(3,6))
+
+      this.leftTeamCollection = new CharacterCollection({ collection : this.collection.slice(0,3)})
+      this.rightTeamCollection = new CharacterCollection({ collection : this.collection.slice(3,6)})
       this.render()
     },
     render: function() {
       this.$el.html(this.template)
+      console.log("I am logging this:")
       console.log(this)
     },
     findNextChar: function() {
       var leftCharacter;
       var rightCharacter;
-      leftCharacter = leftTeam.findWhere({
+      leftCharacter = leftTeamCollection.findWhere({
         ko: false
       })
-      if ("ko" === false) {
-        this.win(leftTeam)
+      if(leftTeamCollection.where({ko:false}).length === 0){
+        this.win('right')
       }
-      rightCharacter = rightTeam.findWhere({
+      rightCharacter = rightTeamCollection.findWhere({
         ko: false
       })
+      if(leftTeamCollection.where({ko:false}).length === 0){
+        this.win('left')
+      }
       if ("ko" === false) {
         this.win(rightTeam)
       }
+      
       this.fight(leftCharacter, rightCharacter)
       this.findNextChar()
     },
-    win: function() {
-      console.log("you win a victory")
+    win: function(team) {
+      console.log(team + "wins!")
     },
     fight: function(leftCharacter, rightCharacter) {
       console.log(rightCharacter.get("type"))
