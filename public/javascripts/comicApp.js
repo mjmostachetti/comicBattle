@@ -133,6 +133,9 @@ $(document).ready(function() {
       this.fight(leftCharacter, rightCharacter)
       this.findNextChar()
     },
+    win: function() {
+      console.log("you win a victory")
+    },
     fight: function(leftCharacter, rightCharacter) {
       console.log(rightCharacter.get("type"))
       if (leftCharacter.get("type") === rightCharacter.get("type")) {
