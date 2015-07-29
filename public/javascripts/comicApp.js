@@ -15,7 +15,7 @@ $(document).ready(function() {
         .get("name") === "hulk" || this.get("name") === "joker") {
         this.set("type", "strength")
       } else if (this.get("name") === "superman" || this.get("name") ===
-        "spider-man" || this.get("name") === "cyclops" ||
+        "Spider-Man" || this.get("name") === "cyclops" ||
         this.get("name") === "carnage") {
         this.set("type", "energy")
       } else {
@@ -29,7 +29,7 @@ $(document).ready(function() {
     url: '/api/characters'
   })
 
-  // // start of test data for testing fight logic
+  // // // start of test data for testing fight logic
   // var batman = new Character()
   // batman.set({
   //   name: "batman"
@@ -66,12 +66,14 @@ $(document).ready(function() {
   // })
   // martianManhunter.attribute()
   //
-  // leftTeam.add([batman, carnage, superman])
-  // rightTeam.add([cyclops, shazaam, martianManhunter])
+  // leftTeam = new CharacterCollection()
+  // rightTeam = new CharacterCollection()
+  //
+  // leftTeam.add([batman, shazaam, superman])
+  // rightTeam.add([cyclops, carnage, martianManhunter])
   //
   // leftCharacter = leftTeam.first()
   // rightCharacter = rightTeam.first()
-  //
   // // end of test logic
 
   var User = Backbone.Model.extend({
@@ -112,6 +114,7 @@ $(document).ready(function() {
     },
     render: function() {
       this.$el.html(this.template)
+      console.log(this)
     },
     findNextChar: function() {
       var leftCharacter
@@ -119,9 +122,15 @@ $(document).ready(function() {
       leftCharacter = leftTeam.findWhere({
         ko: false
       })
+      if ("ko" === false) {
+        this.win(leftTeam)
+      }
       rightCharacter = rightTeam.findWhere({
         ko: false
       })
+      if ("ko" === false) {
+        this.win(rightTeam)
+      }
       this.fight(leftCharacter, rightCharacter)
       this.findNextChar()
     },
@@ -166,7 +175,6 @@ $(document).ready(function() {
       //"click #fight": "fight"
     }
   })
-
   var characterList = new CharacterCollection()
   var userList = new UserCollection()
 
@@ -255,10 +263,10 @@ $(document).ready(function() {
     events: {
       "click #loadSignup": "loadSignup",
       "click #loadLogin": "loadLogin",
-      "click #loginButton": "loadCharView",
-      "click .character": "selectCharacter"
-        //"click #loginButton": "loadFightScreen",
-        //"click #fightButton": "loadFightScreen"
+      //"click #loginButton": "loadCharView",
+      "click .character": "selectCharacter",
+      "click #loginButton": "loadFightScreen",
+      //"click #fightButton": "loadFightScreen"
     },
     selectCharacter: function selectCharacter(evt) {
       var characterData = $(evt.currentTarget).data();
@@ -316,6 +324,7 @@ $(document).ready(function() {
     setCurrentView: function(newView) {
       if (this.currentView) this.currentView.remove()
       this.currentView = newView
+      newView.parentView = this;
       this.$el.html(newView.$el)
     }
   })
