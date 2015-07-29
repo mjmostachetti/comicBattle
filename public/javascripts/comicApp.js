@@ -39,12 +39,12 @@ $(document).ready(function() {
       win: 0,
       loss: 0,
       draw: 0,
-      hero1: 0,
-      hero2: 0,
-      hero3: 0,
-      hero4: 0,
-      hero5: 0,
-      hero6: 0,
+      hero1: '',
+      hero2: '',
+      hero3: '',
+      hero4: '',
+      hero5: '',
+      hero6: '',
       heroName1: '',
       heroName2: '',
       heroName3: '',
@@ -58,11 +58,11 @@ $(document).ready(function() {
   var UserView = Backbone.View.extend({
     el: "#userInfo",
     template: _.template(
-      '<h2>Team 1</h2>' +
+      '<h2>User Team</h2>' +
       '<img src=<%=hero1%>>' +
       '<img src=<%=hero2%>>' +
       '<img src=<%=hero3%>> <br>' +
-      '<h2>Team 2</h2>' +
+      '<h2>Computer Team</h2>' +
       '<img src=<%=hero4%>>' +
       '<img src=<%=hero5%>>' +
       '<img src=<%=hero6%>> <br>' +
@@ -81,7 +81,7 @@ $(document).ready(function() {
     countHeroes : function(model){
       var count = 0;
       for(var x = 1; x <= 6;x++){
-        if(model.attributes['hero' + x] !== 0){
+        if(model.attributes['hero' + x] !== ''){
           count++;
         }
       }
@@ -233,7 +233,6 @@ $(document).ready(function() {
   })
 
   var CharactersView = Backbone.View.extend({
-      //el: "#charZone",
       template: _.template($("#template-characterSelect").html()),
       //call render somewhere else
       initialize: function(){
@@ -302,8 +301,8 @@ $(document).ready(function() {
     },
     removeCharacterFromTeam: function(){
       for(var x = 6; x >= 1; x--){
-        if(newUser.get("hero" + x) !== 0){
-          newUser.set("hero" + x,0)
+        if(newUser.get("hero" + x) !== ''){
+          newUser.set("hero" + x,'')
           return;
         }
       }
@@ -314,7 +313,7 @@ $(document).ready(function() {
           console.log(characterData)
           //alert("Clicked " + characterData.characterImg);
           for(var x = 1; x <= 6; x++){
-            if(newUser.get("hero" + x) === 0){
+            if(newUser.get("hero" + x) === ''){
               newUser.set("hero" + x,characterData.characterImg)
               newUser.set('heroName' + x, characterData.characterName)
               return;
@@ -357,6 +356,10 @@ $(document).ready(function() {
       this.setCurrentView(new CharacterView())
     },
     loadCharacterSelectionRedirect: function() {
+      for(var x = 1; x <= 6; x++){
+        newUser.attributes['hero' + x] = ''
+        newUser.attributes['heroName' + x] = ''
+      }
       this.setCurrentView(new CharactersView({ collection : characterList}))
     },
     loadFightScreen: function(event) {
@@ -378,19 +381,7 @@ $(document).ready(function() {
       this.setCurrentView(fightViewer)
     },
     loadCharView : function(event) {
-          /*
-          //TODO(justin): this is really nasty and should probably occur outside this function
-          event.preventDefault()
-
-          //creates character collection
-          var characterCol = new CharacterCollection()
-          //calls the collection using index.js router.get /api/characters. async:false to prevent render until it gets all the info.
-          characterCol.fetch({async: false})
-          //creates charactersview with collection
-          */
-          this.setCurrentView(new CharactersView({ collection: characterList}))
-          //console.log("the character selection loaded")
-          //create current user
+      this.setCurrentView(new CharactersView({ collection: characterList}))
     },
     setCurrentView: function(newView) {
       if (this.currentView) this.currentView.remove()
