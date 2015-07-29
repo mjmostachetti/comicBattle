@@ -1,3 +1,5 @@
+var leftTeam, characterList, fightViewer;
+
 $(document).ready(function() {
 
   //define the character model
@@ -10,13 +12,13 @@ $(document).ready(function() {
       image: ""
     },
     attribute: function() {
-      if (this.get("name") === "batman" || this.get("name") ===
+      if (this.get("name") === "Batman" || this.get("name") ===
         "daredevil" || this
-        .get("name") === "hulk" || this.get("name") === "joker") {
+        .get("name") === "Hulk" || this.get("name") === "Joker") {
         this.set("type", "strength")
-      } else if (this.get("name") === "superman" || this.get("name") ===
-        "spider-man" || this.get("name") === "cyclops" ||
-        this.get("name") === "carnage") {
+      } else if (this.get("name") === "Superman" || this.get("name") ===
+        "Spider-man" || this.get("name") === "Cyclops" ||
+        this.get("name") === "Carnage") {
         this.set("type", "energy")
       } else {
         this.set("type", "magic")
@@ -24,92 +26,10 @@ $(document).ready(function() {
     }
   })
 
+
   var CharacterCollection = Backbone.Collection.extend({
     model: Character,
     url: '/api/characters'
-  })
-
-  var leftTeam = new CharacterCollection()
-  var rightTeam = new CharacterCollection()
-
-  // start of test data for testing fight logic
-  var batman = new Character()
-  batman.set({
-    name: "batman"
-  })
-  batman.attribute()
-
-  var carnage = new Character()
-  carnage.set({
-    name: "carnage"
-  })
-  carnage.attribute()
-
-  var superman = new Character()
-  superman.set({
-    name: "superman"
-  })
-  superman.attribute()
-
-  var cyclops = new Character()
-  cyclops.set({
-    name: "cyclops"
-  })
-  cyclops.attribute()
-
-  var shazaam = new Character()
-  shazaam.set({
-    name: "billy-batson"
-  })
-  shazaam.attribute()
-
-  var martianManhunter = new Character()
-  martianManhunter.set({
-    name: "martian-manhunter"
-  })
-  martianManhunter.attribute()
-
-  leftTeam.add([batman, carnage, superman])
-  rightTeam.add([cyclops, shazaam, martianManhunter])
-
-  leftCharacter = leftTeam.first()
-  rightCharacter = rightTeam.first()
-
-  console.log(leftCharacter)
-  console.log(rightCharacter)
-
-  console.log(leftTeam)
-  console.log(rightTeam)
-    // end of test logic
-
-  var RoundModel = Backbone.Model.extend({
-    initialize: function() {
-      leftCharacter = leftTeam.first()
-      rightCharacter = rightTeam.first()
-    }
-  })
-
-  var MatchModel = Backbone.Model.extend({
-    defaults: {
-      rounds: []
-    }
-  })
-
-  var match = new MatchModel({
-    rounds: [
-      new RoundModel({
-        leftCharacter: leftTeam.first(),
-        rightCharacter: rightTeam.first()
-      }),
-      new RoundModel({
-        leftCharacter: leftTeam.get(),
-        rightCharacter: rightTeam.get()
-      }),
-      new RoundModel({
-        leftCharacter: leftTeam.get("c3"),
-        rightCharacter: rightTeam.get("c6")
-      }),
-    ]
   })
 
   var User = Backbone.Model.extend({
@@ -118,21 +38,50 @@ $(document).ready(function() {
       username: '',
       win: 0,
       loss: 0,
-      hero1: '',
-      hero2: '',
-      hero3: ''
+      hero1: 0,
+      hero2: 0,
+      hero3: 0,
+      hero4: 0,
+      hero5: 0,
+      hero6: 0,
+      heroName1: '',
+      heroName2: '',
+      heroName3: '',
+      heroName4: '',
+      heroName5: '',
+      heroName6: '',
+      heroNum: 0
     }
   })
 
   var UserView = Backbone.View.extend({
-    tagName: "div",
     el: "#userInfo",
-    template: _.template($('#user-view').html()),
+    template: _.template(
+      '<h2>Team 1</h2>' +
+      '<img src=<%=hero1%>>' +
+      '<img src=<%=hero2%>>' +
+      '<img src=<%=hero3%>> <br>' +
+      '<h2>Team 2</h2>' +
+      '<img src=<%=hero4%>>' +
+      '<img src=<%=hero5%>>' +
+      '<img src=<%=hero6%>>' ),
     initialize: function(){
+      this.listenTo(this.model,'change',this.countHeroes)
+      this.listenTo(this.model,'change',this.render)
       this.render();
     },
     render: function(){
-      this.$el.html(this.template)
+      this.$el.html(this.template(this.model.attributes))
+    },
+    countHeroes : function(model){
+      var count = 0;
+      for(var x = 1; x <= 6;x++){
+        if(model.attributes['hero' + x] !== 0){
+          count++;
+        }
+      }
+      model.set('heroNum',count)
+      console.log(model)
     }
   })
 
@@ -150,29 +99,28 @@ $(document).ready(function() {
     },
     render: function() {
       this.$el.html(this.template)
+      console.log(this)
     },
-
     findNextChar: function() {
-      var leftCharacter
-      var rightCharacter
-      for (var i = 0; i < leftTeam.models.length; i++) {
-        if (leftTeam.models[i].get("ko") != true) {
-          leftCharacter = leftTeam.models[i]
-          console.log(leftCharacter)
-        } else {
-          rightTeam.win()
-        }
+      var leftCharacter;
+      var rightCharacter;
+      leftCharacter = leftTeam.findWhere({
+        ko: false
+      })
+      if ("ko" === false) {
+        this.win(leftTeam)
       }
-      for (var j = 0; j < rightTeam.models.length; j++) {
-        if (rightTeam.models[j].get("ko") != true) {
-          rightCharacter = rightTeam.models[j]
-          console.log(rightCharacter)
-        } else {
-          leftTeam.win()
-        }
+      rightCharacter = rightTeam.findWhere({
+        ko: false
+      })
+      if ("ko" === false) {
+        this.win(rightTeam)
       }
       this.fight(leftCharacter, rightCharacter)
       this.findNextChar()
+    },
+    win: function() {
+      console.log("you win a victory")
     },
     fight: function(leftCharacter, rightCharacter) {
       console.log(rightCharacter.get("type"))
@@ -209,7 +157,7 @@ $(document).ready(function() {
     },
     events: {
       "click #findNextChar": "findNextChar",
-      "click #fight": "findNextChar"
+      //"click #fight": "fight"
     }
   })
 
@@ -225,7 +173,6 @@ $(document).ready(function() {
       //console.log(this.$el);
       this.render()
     },
-
     render: function() {
       this.$el.html(this.template)
     }
@@ -276,16 +223,27 @@ $(document).ready(function() {
     })
 
     var CharacterView = Backbone.View.extend({
-        tagName : "div",
-      	className : "character-view",
+      tagName : "div",
+      className : "character-view",
       model: Character,
       //call render at some point
       render: function(){
-        var template = _.template('<td class="character" data-character-id="<%-id%>"><img src="<%-image%>"></td>');
-        this.$el.html(template({id: this.model.id, image: this.model.get('image').thumb_url}));
+        console.log(this.model)
+        var template = _.template('<td class="character"' +
+          'data-character-id="<%-id%>"' +
+          'data-character-img="<%-image%>"' +
+          'data-character-name="<%-name%>"' +
+          '><img src="<%-image%>"></td>');
+        this.$el.html(template({
+          id: this.model.id, 
+          image: this.model.get('image').thumb_url,
+          name: this.model.attributes.name
+        }));
         return this;
       }
     })
+
+  characterList = new CharacterCollection;
 
   var MainAppView = Backbone.View.extend({
     //div in index.jade
@@ -297,34 +255,29 @@ $(document).ready(function() {
       "click #loadLogin": "loadLogin",
       "click #loginButton" : "loadCharView",
       "click .character": "selectCharacter",
-      "click #removeCharacter" : "removeCharacterFromTeam"
+      "click #removeCharacter" : "removeCharacterFromTeam",
       //"click #loginButton": "loadFightScreen",
-      //"click #fightButton": "loadFightScreen"
+      "click #fightButton": "loadFightScreen"
     },
     removeCharacterFromTeam: function(){
-      if(this.newUser.get("hero3") !== ""){
-        this.newUser.set("hero3","")
-      } else if(this.newUser.get("hero2") !== ""){
-        this.newUser.set("hero2","")
-      } else if(this.newUser.get("hero1") !== ""){
-        this.newUser.set("hero1","")
-      } else{
-        console.log("Your team is empty.")
+      for(var x = 6; x >= 1; x--){
+        if(this.newUser.get("hero" + x) !== 0){
+          this.newUser.set("hero" + x,0)
+          return;
+        }
       }
       console.log(this.newUser)
     },
     selectCharacter: function selectCharacter(evt) {
           var characterData = $(evt.currentTarget).data();
           console.log(characterData)
-          alert("Clicked " + characterData.characterId);
-          if(this.newUser.get("hero1") === ""){
-            this.newUser.set("hero1",characterData.characterId)  
-          } else if(this.newUser.get("hero2") === ""){
-            this.newUser.set("hero2",characterData.characterId)  
-          } else if (this.newUser.get("hero3") === ""){
-            this.newUser.set("hero3",characterData.characterId)  
-          } else{
-            console.log("Your Team is full. Please remove a character.")
+          //alert("Clicked " + characterData.characterImg);
+          for(var x = 1; x <= 6; x++){
+            if(this.newUser.get("hero" + x) === 0){
+              this.newUser.set("hero" + x,characterData.characterImg)
+              this.newUser.set('heroName' + x, characterData.characterName)
+              return;
+            }
           }
           console.log(this.newUser)
     },
@@ -333,9 +286,19 @@ $(document).ready(function() {
       this.setCurrentView(new LoginView())
       this.newUser = new User;
       this.newUserView = new UserView({ model : this.newUser})
-      this.listenTo(this.newUser, "change", this.render)
+      this.listenTo(this.newUser, "change:heroNum", this.addFightButton)      
+      this.listenTo(this.newUser, "change", this.newUser.render)
+      characterList.fetch();
       console.log("This is our user : ")
       console.log(this.newUser)
+    },
+    addFightButton : function(model){
+      if(model.get('heroNum') === 6){
+        console.log("FIGHT!")
+        this.$el.append('<button id="fightButton">Let\'s get it on!</button>')
+      }else{
+        $('#fightButton').remove()
+      }
     },
     //handles loading the login view and html elements
     loadLogin: function() {
@@ -353,7 +316,21 @@ $(document).ready(function() {
     },
     loadFightScreen: function(event) {
       event.preventDefault()
-      this.setCurrentView(new FightView())
+      var battleCharacters = new CharacterCollection;
+      // search character collection to pull down the characters the user has selected!
+      var getThis = characterList.where({name:'Hulk'})
+      console.log(getThis)
+      for(var x = 1; x <= 6; x++){
+        var preAttributeModel = characterList.findWhere({name: this.newUser.attributes['heroName' + x]})
+        preAttributeModel.attribute()
+        console.log(preAttributeModel)
+        battleCharacters.add(preAttributeModel)
+      }
+      console.log(battleCharacters)
+      //leftTeam = new CharacterCollection(leftTeamObj);
+      //rightTeam = new CharacterCollection(rightTeamObj);
+      fightViewer = new FightView({ collection : battleCharacters})
+      this.setCurrentView(fightViewer)
     },
     loadCharView : function(event) {
           //TODO(justin): this is really nasty and should probably occur outside this function
@@ -371,11 +348,6 @@ $(document).ready(function() {
       if (this.currentView) this.currentView.remove()
       this.currentView = newView
       this.$el.html(newView.$el)
-    },
-    render: function(){
-      console.log("The view has changed")
-      //log out the character collection to search
-      console.log()
     }
   })
   var App = new MainAppView();
