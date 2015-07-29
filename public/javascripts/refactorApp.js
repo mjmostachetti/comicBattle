@@ -41,7 +41,8 @@ $(document).ready(function() {
       hero3: 0,
       hero4: 0,
       hero5: 0,
-      hero6: 0
+      hero6: 0,
+      heroNum: 0
     }
   })
 
@@ -57,12 +58,22 @@ $(document).ready(function() {
       '<img src=<%=hero5%>>' +
       '<img src=<%=hero6%>>' ),
     initialize: function(){
+      this.listenTo(this.model,'change',this.countHeroes)
       this.listenTo(this.model,'change',this.render)
       this.render();
     },
     render: function(){
-      console.log('change event!!!!')
       this.$el.html(this.template(this.model.attributes))
+    },
+    countHeroes : function(model){
+      var count = 0;
+      for(var x = 1; x <= 6;x++){
+        if(model.attributes['hero' + x] !== 0){
+          count++;
+        }
+      }
+      model.set('heroNum',count)
+      console.log(model)
     }
   })
 
@@ -154,7 +165,6 @@ $(document).ready(function() {
       //console.log(this.$el);
       this.render()
     },
-
     render: function() {
       this.$el.html(this.template)
     }
@@ -235,9 +245,9 @@ $(document).ready(function() {
       "click #loadLogin": "loadLogin",
       "click #loginButton" : "loadCharView",
       "click .character": "selectCharacter",
-      "click #removeCharacter" : "removeCharacterFromTeam"
+      "click #removeCharacter" : "removeCharacterFromTeam",
       //"click #loginButton": "loadFightScreen",
-      //"click #fightButton": "loadFightScreen"
+      "click #fightButton": "loadFightScreen"
     },
     removeCharacterFromTeam: function(){
       for(var x = 6; x >= 1; x--){
@@ -251,24 +261,13 @@ $(document).ready(function() {
     selectCharacter: function selectCharacter(evt) {
           var characterData = $(evt.currentTarget).data();
           console.log(characterData)
-          alert("Clicked " + characterData.characterImg);
+          //alert("Clicked " + characterData.characterImg);
           for(var x = 1; x <= 6; x++){
             if(this.newUser.get("hero" + x) === 0){
               this.newUser.set("hero" + x,characterData.characterImg)
               return;
             }
           }
-          /*
-          if(this.newUser.get("hero1") === 0){
-            this.newUser.set("hero1",characterData.characterImg)  
-          } else if(this.newUser.get("hero2") === 0){
-            this.newUser.set("hero2",characterData.characterImg)  
-          } else if (this.newUser.get("hero3") === 0){
-            this.newUser.set("hero3",characterData.characterImg)  
-          } else{
-            console.log("Your Team is full. Please remove a character.")
-          }
-          */
           console.log(this.newUser)
     },
     //main app view initializes loginView, creates a div, and then loads the view.
@@ -276,9 +275,18 @@ $(document).ready(function() {
       this.setCurrentView(new LoginView())
       this.newUser = new User;
       this.newUserView = new UserView({ model : this.newUser})
+      this.listenTo(this.newUser, "change:heroNum", this.addFightButton)      
       this.listenTo(this.newUser, "change", this.newUser.render)
       console.log("This is our user : ")
       console.log(this.newUser)
+    },
+    addFightButton : function(model){
+      if(model.get('heroNum') === 6){
+        console.log("FIGHT!")
+        this.$el.append('<button id="fightButton">Let\'s get it on!</button>')
+      }else{
+        $('#fightButton').remove()
+      }
     },
     //handles loading the login view and html elements
     loadLogin: function() {
