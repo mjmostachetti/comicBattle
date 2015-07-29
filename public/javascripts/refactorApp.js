@@ -24,92 +24,10 @@ $(document).ready(function() {
     }
   })
 
+
   var CharacterCollection = Backbone.Collection.extend({
     model: Character,
     url: '/api/characters'
-  })
-
-  var leftTeam = new CharacterCollection()
-  var rightTeam = new CharacterCollection()
-
-  // start of test data for testing fight logic
-  var batman = new Character()
-  batman.set({
-    name: "batman"
-  })
-  batman.attribute()
-
-  var carnage = new Character()
-  carnage.set({
-    name: "carnage"
-  })
-  carnage.attribute()
-
-  var superman = new Character()
-  superman.set({
-    name: "superman"
-  })
-  superman.attribute()
-
-  var cyclops = new Character()
-  cyclops.set({
-    name: "cyclops"
-  })
-  cyclops.attribute()
-
-  var shazaam = new Character()
-  shazaam.set({
-    name: "billy-batson"
-  })
-  shazaam.attribute()
-
-  var martianManhunter = new Character()
-  martianManhunter.set({
-    name: "martian-manhunter"
-  })
-  martianManhunter.attribute()
-
-  leftTeam.add([batman, carnage, superman])
-  rightTeam.add([cyclops, shazaam, martianManhunter])
-
-  leftCharacter = leftTeam.first()
-  rightCharacter = rightTeam.first()
-
-  console.log(leftCharacter)
-  console.log(rightCharacter)
-
-  console.log(leftTeam)
-  console.log(rightTeam)
-    // end of test logic
-
-  var RoundModel = Backbone.Model.extend({
-    initialize: function() {
-      leftCharacter = leftTeam.first()
-      rightCharacter = rightTeam.first()
-    }
-  })
-
-  var MatchModel = Backbone.Model.extend({
-    defaults: {
-      rounds: []
-    }
-  })
-
-  var match = new MatchModel({
-    rounds: [
-      new RoundModel({
-        leftCharacter: leftTeam.first(),
-        rightCharacter: rightTeam.first()
-      }),
-      new RoundModel({
-        leftCharacter: leftTeam.get(),
-        rightCharacter: rightTeam.get()
-      }),
-      new RoundModel({
-        leftCharacter: leftTeam.get("c3"),
-        rightCharacter: rightTeam.get("c6")
-      }),
-    ]
   })
 
   var User = Backbone.Model.extend({
@@ -118,21 +36,33 @@ $(document).ready(function() {
       username: '',
       win: 0,
       loss: 0,
-      hero1: '',
-      hero2: '',
-      hero3: ''
+      hero1: 0,
+      hero2: 0,
+      hero3: 0,
+      hero4: 0,
+      hero5: 0,
+      hero6: 0
     }
   })
 
   var UserView = Backbone.View.extend({
-    tagName: "div",
     el: "#userInfo",
-    template: _.template($('#user-view').html()),
+    template: _.template(
+      '<h2>Team 1</h2>' +
+      '<img src=<%=hero1%>>' +
+      '<img src=<%=hero2%>>' +
+      '<img src=<%=hero3%>> <br>' +
+      '<h2>Team 2</h2>' +
+      '<img src=<%=hero4%>>' +
+      '<img src=<%=hero5%>>' +
+      '<img src=<%=hero6%>>' ),
     initialize: function(){
+      this.listenTo(this.model,'change',this.render)
       this.render();
     },
     render: function(){
-      this.$el.html(this.template)
+      console.log('change event!!!!')
+      this.$el.html(this.template(this.model.attributes))
     }
   })
 
@@ -208,8 +138,7 @@ $(document).ready(function() {
       console.log(leftCharacter)
     },
     events: {
-      "click #findNextChar": "findNextChar",
-      "click #fight": "findNextChar"
+      "click #findNextChar": "findNextChar"
     }
   })
 
@@ -276,13 +205,22 @@ $(document).ready(function() {
     })
 
     var CharacterView = Backbone.View.extend({
-        tagName : "div",
-      	className : "character-view",
+      tagName : "div",
+      className : "character-view",
       model: Character,
       //call render at some point
       render: function(){
-        var template = _.template('<td class="character" data-character-id="<%-id%>"><img src="<%-image%>"></td>');
-        this.$el.html(template({id: this.model.id, image: this.model.get('image').thumb_url}));
+        console.log(this.model)
+        var template = _.template('<td class="character"' +
+          'data-character-id="<%-id%>"' +
+          'data-character-img="<%-image%>"' +
+          'data-character-name="<%-name%>"' +
+          '><img src="<%-image%>"></td>');
+        this.$el.html(template({
+          id: this.model.id, 
+          image: this.model.get('image').thumb_url,
+          name: this.model.attributes.name
+        }));
         return this;
       }
     })
@@ -302,30 +240,35 @@ $(document).ready(function() {
       //"click #fightButton": "loadFightScreen"
     },
     removeCharacterFromTeam: function(){
-      if(this.newUser.get("hero3") !== ""){
-        this.newUser.set("hero3","")
-      } else if(this.newUser.get("hero2") !== ""){
-        this.newUser.set("hero2","")
-      } else if(this.newUser.get("hero1") !== ""){
-        this.newUser.set("hero1","")
-      } else{
-        console.log("Your team is empty.")
+      for(var x = 6; x >= 1; x--){
+        if(this.newUser.get("hero" + x) !== 0){
+          this.newUser.set("hero" + x,0)
+          return;
+        }
       }
       console.log(this.newUser)
     },
     selectCharacter: function selectCharacter(evt) {
           var characterData = $(evt.currentTarget).data();
           console.log(characterData)
-          alert("Clicked " + characterData.characterId);
-          if(this.newUser.get("hero1") === ""){
-            this.newUser.set("hero1",characterData.characterId)  
-          } else if(this.newUser.get("hero2") === ""){
-            this.newUser.set("hero2",characterData.characterId)  
-          } else if (this.newUser.get("hero3") === ""){
-            this.newUser.set("hero3",characterData.characterId)  
+          alert("Clicked " + characterData.characterImg);
+          for(var x = 1; x <= 6; x++){
+            if(this.newUser.get("hero" + x) === 0){
+              this.newUser.set("hero" + x,characterData.characterImg)
+              return;
+            }
+          }
+          /*
+          if(this.newUser.get("hero1") === 0){
+            this.newUser.set("hero1",characterData.characterImg)  
+          } else if(this.newUser.get("hero2") === 0){
+            this.newUser.set("hero2",characterData.characterImg)  
+          } else if (this.newUser.get("hero3") === 0){
+            this.newUser.set("hero3",characterData.characterImg)  
           } else{
             console.log("Your Team is full. Please remove a character.")
           }
+          */
           console.log(this.newUser)
     },
     //main app view initializes loginView, creates a div, and then loads the view.
@@ -333,7 +276,7 @@ $(document).ready(function() {
       this.setCurrentView(new LoginView())
       this.newUser = new User;
       this.newUserView = new UserView({ model : this.newUser})
-      this.listenTo(this.newUser, "change", this.render)
+      this.listenTo(this.newUser, "change", this.newUser.render)
       console.log("This is our user : ")
       console.log(this.newUser)
     },
@@ -371,11 +314,6 @@ $(document).ready(function() {
       if (this.currentView) this.currentView.remove()
       this.currentView = newView
       this.$el.html(newView.$el)
-    },
-    render: function(){
-      console.log("The view has changed")
-      //log out the character collection to search
-      console.log()
     }
   })
   var App = new MainAppView();
