@@ -116,20 +116,12 @@ $(document).ready(function() {
     findNextChar: function() {
       var leftCharacter
       var rightCharacter
-      for (var i = 0; i < leftTeam.models.length; i++) {
-        if (leftTeam.models[i].get("ko") != true) {
-          leftCharacter = leftTeam.models[i]
-        } else {
-          rightTeam.win()
-        }
-      }
-      for (var j = 0; j < rightTeam.models.length; j++) {
-        if (rightTeam.models[j].get("ko") != true) {
-          rightCharacter = rightTeam.models[j]
-        } else {
-          leftTeam.win()
-        }
-      }
+      leftCharacter = leftTeam.findWhere({
+        ko: false
+      })
+      rightCharacter = rightTeam.findWhere({
+        ko: false
+      })
       this.fight(leftCharacter, rightCharacter)
       this.findNextChar()
     },
