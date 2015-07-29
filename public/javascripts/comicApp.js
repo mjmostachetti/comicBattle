@@ -107,7 +107,12 @@ $(document).ready(function() {
       console.log(typeof this.collection)
       this.leftTeamCollection = this.collection.slice(0,3)
       this.rightTeamCollection = this.collection.slice(3,6)
+      this.listenTo(this.collection,'change',this.test)
       this.render()
+    },
+    test : function(){
+      console.log(this.collection)
+      console.log('test!')
     },
     render: function() {
       this.$el.html(this.template(this.collection))
@@ -245,7 +250,19 @@ $(document).ready(function() {
         console.log(leftCharacter.get("name") + " wins!")
         this.rightTeamCollection.shift()
       }
-      console.log('Done with first round')
+      //this.collection.remove(this.collection.findWhere({name:'Superman'}))
+      console.log(this.collection.findWhere({name:'Superman'}))
+      // this removes the character from the collection
+      //this.collection.remove(this.collection.findWhere({name:'Superman'}))
+      /*
+      this.collection.findWhere({name:'Superman'}).set({
+        "name":'NOOOOB',
+        "image.url_thumb": "../img/cat.jpg"
+      })
+      */
+      console.log(this.collection)
+      console.log('Done with a round')
+      this.render()
     },
     events: {
       "click #slowFight": "stepThroughFight",
