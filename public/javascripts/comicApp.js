@@ -188,8 +188,67 @@ $(document).ready(function() {
       console.log(team + " wins!")
       newUser.set('win',newUser.get('win') + 1)
     },
+    stepThroughFight : function(){
+      // who is fighting
+      var leftCharacter;
+      var rightCharacter;
+
+      console.log("The left team has " + this.leftTeamCollection.length + " players left.")
+      console.log("The right team has " + this.rightTeamCollection.length + " players left.")
+
+      if(this.leftTeamCollection.length === 0 && this.rightTeamCollection.length === 0){
+        return this.draw('Nobody')
+      }
+
+      if(this.leftTeamCollection.length === 0){
+        return this.loss('Right')
+      } else{
+        leftCharacter = this.leftTeamCollection[0]
+      }
+
+      if(this.rightTeamCollection.length === 0){
+        return this.win('Left')
+      } else{
+        rightCharacter = this.rightTeamCollection[0]
+      }
+      console.log("right here")
+      console.log(leftCharacter)
+      console.log(rightCharacter)
+      // fight logic
+      console.log("The right character type is : " + rightCharacter.get("type"))
+      console.log("The left character type is : " + leftCharacter.get("type"))
+      if (leftCharacter.get("type") === rightCharacter.get("type")) {
+        console.log("Draw")
+        this.leftTeamCollection.shift()
+        this.rightTeamCollection.shift()
+      } else if (leftCharacter.get("type") === "strength" &&
+        rightCharacter.get("type") ===
+        "energy") {
+        console.log(leftCharacter.get("name") + " wins!")
+        this.rightTeamCollection.shift()
+      } else if (leftCharacter.get("type") === "strength" &&
+        rightCharacter.get("type") ===
+        "magic") {
+        console.log(rightCharacter.get("name") + " wins!")
+        this.leftTeamCollection.shift()
+      } else if (leftCharacter.get("type") === "energy" &&
+        rightCharacter.get("type") ===
+        "strength") {
+        console.log(rightCharacter.get("name") + " wins!")
+        this.leftTeamCollection.shift()
+      } else if (leftCharacter.get("type") === "energy" &&
+        rightCharacter.get("type") ===
+        "magic") {
+        console.log(leftCharacter.get("name") + " wins!")
+        this.rightTeamCollection.shift()
+      } else {
+        console.log(leftCharacter.get("name") + " wins!")
+        this.rightTeamCollection.shift()
+      }
+      console.log('Done with first round')
+    },
     events: {
-      //"click #findNextChar": "findNextChar",
+      "click #slowFight": "stepThroughFight",
       "click #fight": "findNextChar"
     }
   })
