@@ -1,4 +1,4 @@
-var leftTeam, characterList, fightViewer;
+var leftTeam, characterList, fightViewer, newUser;
 
 $(document).ready(function() {
 
@@ -38,6 +38,7 @@ $(document).ready(function() {
       username: '',
       win: 0,
       loss: 0,
+      draw: 0,
       hero1: 0,
       hero2: 0,
       hero3: 0,
@@ -64,7 +65,11 @@ $(document).ready(function() {
       '<h2>Team 2</h2>' +
       '<img src=<%=hero4%>>' +
       '<img src=<%=hero5%>>' +
-      '<img src=<%=hero6%>>' ),
+      '<img src=<%=hero6%>> <br>' +
+      '<h2> Wins : <%=win%></h2>' +
+      '<h2> Losses : <%=loss%></h2>' +
+      '<h2> Draws : <%=draw%></h2>'
+      ),
     initialize: function(){
       this.listenTo(this.model,'change',this.countHeroes)
       this.listenTo(this.model,'change',this.render)
@@ -117,11 +122,11 @@ $(document).ready(function() {
       console.log("The right team has " + this.rightTeamCollection.length + " players left.")
 
       if(this.leftTeamCollection.length === 0 && this.rightTeamCollection.length === 0){
-        return this.win('Nobody')
+        return this.draw('Nobody')
       }
 
       if(this.leftTeamCollection.length === 0){
-        return this.win('Right')
+        return this.loss('Right')
       } else{
         leftCharacter = this.leftTeamCollection[0]
       }
@@ -136,9 +141,6 @@ $(document).ready(function() {
       console.log(rightCharacter)
       this.fight(leftCharacter, rightCharacter)
       this.findNextChar()
-    },
-    win: function(team) {
-      console.log(team + " wins!")
     },
     fight: function(leftCharacter, rightCharacter) {
       console.log("The right character type is : " + rightCharacter.get("type"))
@@ -177,8 +179,21 @@ $(document).ready(function() {
         this.rightTeamCollection.shift()
       } else {
         console.log(leftCharacter.get("name") + " wins!")
-        rightCharacter.set("ko", true)
+        //rightCharacter.set("ko", true)
+        this.rightTeamCollection.shift()
       }
+    },
+    draw : function(team){
+      console.log(team + " wins!")
+      newUser.set('draw',newUser.get('draw') + 1)
+    },
+    loss: function(team) {
+      console.log(team + " wins!")
+      newUser.set('loss',newUser.get('win') + 1)
+    },
+    win: function(team) {
+      console.log(team + " wins!")
+      newUser.set('win',newUser.get('win') + 1)
     },
     events: {
       //"click #findNextChar": "findNextChar",
@@ -218,8 +233,7 @@ $(document).ready(function() {
   })
 
   var CharactersView = Backbone.View.extend({
-      //collection: CharacterCollection,
-      el: "#charZone",
+      //el: "#charZone",
       template: _.template($("#template-characterSelect").html()),
       //call render somewhere else
       initialize: function(){
@@ -270,6 +284,8 @@ $(document).ready(function() {
 
   characterList = new CharacterCollection;
 
+
+  newUser = new User;
   var MainAppView = Backbone.View.extend({
     //div in index.jade
     //el: $('#container'),
@@ -286,36 +302,39 @@ $(document).ready(function() {
     },
     removeCharacterFromTeam: function(){
       for(var x = 6; x >= 1; x--){
-        if(this.newUser.get("hero" + x) !== 0){
-          this.newUser.set("hero" + x,0)
+        if(newUser.get("hero" + x) !== 0){
+          newUser.set("hero" + x,0)
           return;
         }
       }
-      console.log(this.newUser)
+      console.log(newUser)
     },
     selectCharacter: function selectCharacter(evt) {
           var characterData = $(evt.currentTarget).data();
           console.log(characterData)
           //alert("Clicked " + characterData.characterImg);
           for(var x = 1; x <= 6; x++){
-            if(this.newUser.get("hero" + x) === 0){
-              this.newUser.set("hero" + x,characterData.characterImg)
-              this.newUser.set('heroName' + x, characterData.characterName)
+            if(newUser.get("hero" + x) === 0){
+              newUser.set("hero" + x,characterData.characterImg)
+              newUser.set('heroName' + x, characterData.characterName)
               return;
             }
           }
-          console.log(this.newUser)
+          console.log(newUser)
     },
     //main app view initializes loginView, creates a div, and then loads the view.
     initialize: function() {
       this.setCurrentView(new LoginView())
-      this.newUser = new User;
-      this.newUserView = new UserView({ model : this.newUser})
-      this.listenTo(this.newUser, "change:heroNum", this.addFightButton)      
-      this.listenTo(this.newUser, "change", this.newUser.render)
+      //newUser = new User;
+      this.newUserView = new UserView({ model : newUser})
+      this.listenTo(newUser, "change:heroNum", this.addFightButton)      
+      this.listenTo(newUser, "change", newUser.render)
+      this.listenTo(newUser,"change:win",this.loadCharacterSelectionRedirect)
+      this.listenTo(newUser,"change:loss",this.loadCharacterSelectionRedirect)
+      this.listenTo(newUser,"change:draw",this.loadCharacterSelectionRedirect)
       characterList.fetch();
       console.log("This is our user : ")
-      console.log(this.newUser)
+      console.log(newUser)
     },
     addFightButton : function(model){
       if(model.get('heroNum') === 6){
@@ -336,8 +355,9 @@ $(document).ready(function() {
     loadCharacterSelection: function(event) {
       event.preventDefault()
       this.setCurrentView(new CharacterView())
-      console.log(characterList);
-      //console.log("the character selection loaded")
+    },
+    loadCharacterSelectionRedirect: function() {
+      this.setCurrentView(new CharactersView({ collection : characterList}))
     },
     loadFightScreen: function(event) {
       event.preventDefault()
@@ -346,7 +366,7 @@ $(document).ready(function() {
       var getThis = characterList.where({name:'Hulk'})
       console.log(getThis)
       for(var x = 1; x <= 6; x++){
-        var preAttributeModel = characterList.findWhere({name: this.newUser.attributes['heroName' + x]})
+        var preAttributeModel = characterList.findWhere({name: newUser.attributes['heroName' + x]})
         preAttributeModel.attribute()
         console.log(preAttributeModel)
         battleCharacters.add(preAttributeModel)
@@ -358,14 +378,17 @@ $(document).ready(function() {
       this.setCurrentView(fightViewer)
     },
     loadCharView : function(event) {
+          /*
           //TODO(justin): this is really nasty and should probably occur outside this function
           event.preventDefault()
+
           //creates character collection
           var characterCol = new CharacterCollection()
           //calls the collection using index.js router.get /api/characters. async:false to prevent render until it gets all the info.
           characterCol.fetch({async: false})
           //creates charactersview with collection
-          this.setCurrentView(new CharactersView({ collection: characterCol}))
+          */
+          this.setCurrentView(new CharactersView({ collection: characterList}))
           //console.log("the character selection loaded")
           //create current user
     },
