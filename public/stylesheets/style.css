@@ -188,6 +188,13 @@ li {
   margin-left: 20px;
 }
 
+#fight-view {
+  height: 40%;
+  padding: 20px;
+
+  background: black;
+}
+
 
 
 
