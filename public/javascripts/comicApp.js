@@ -263,9 +263,9 @@ $(document).ready(function() {
     events: {
       "click #loadSignup": "loadSignup",
       "click #loadLogin": "loadLogin",
-      //"click #loginButton": "loadCharView",
+      "click #loginButton": "loadCharView",
       "click .character": "selectCharacter",
-      "click #loginButton": "loadFightScreen",
+      // "click #loginButton": "loadFightScreen",
       //"click #fightButton": "loadFightScreen"
     },
     selectCharacter: function selectCharacter(evt) {
