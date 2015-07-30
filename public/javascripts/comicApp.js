@@ -1,4 +1,4 @@
-var leftTeam, characterList, fightViewer;
+var leftTeam, characterList, fightViewer, newUser;
 
 $(document).ready(function() {
 
@@ -37,12 +37,13 @@ $(document).ready(function() {
       username: '',
       win: 0,
       loss: 0,
-      hero1: 0,
-      hero2: 0,
-      hero3: 0,
-      hero4: 0,
-      hero5: 0,
-      hero6: 0,
+      draw: 0,
+      hero1: '',
+      hero2: '',
+      hero3: '',
+      hero4: '',
+      hero5: '',
+      hero6: '',
       heroName1: '',
       heroName2: '',
       heroName3: '',
@@ -55,15 +56,20 @@ $(document).ready(function() {
 
   var UserView = Backbone.View.extend({
     el: "#userInfo",
-    template: _.template(
-      '<h2>Team 1</h2>' +
-      '<img src=<%=hero1%>>' +
-      '<img src=<%=hero2%>>' +
-      '<img src=<%=hero3%>> <br>' +
-      '<h2>Team 2</h2>' +
-      '<img src=<%=hero4%>>' +
-      '<img src=<%=hero5%>>' +
-      '<img src=<%=hero6%>>'),
+    template: _.template($('#user-view').html()),
+    /*
+    '<h2>User Team</h2>' +
+    '<img src=<%=hero1%>>' +
+    '<img src=<%=hero2%>>' +
+    '<img src=<%=hero3%>> <br>' +
+    '<h2>Computer Team</h2>' +
+    '<img src=<%=hero4%>>' +
+    '<img src=<%=hero5%>>' +
+    '<img src=<%=hero6%>> <br>' +
+    '<h2> Wins : <%=win%></h2>' +
+    '<h2> Losses : <%=loss%></h2>' +
+    '<h2> Draws : <%=draw%></h2>'
+    */
     initialize: function() {
       this.listenTo(this.model, 'change', this.countHeroes)
       this.listenTo(this.model, 'change', this.render)
@@ -75,7 +81,7 @@ $(document).ready(function() {
     countHeroes: function(model) {
       var count = 0;
       for (var x = 1; x <= 6; x++) {
-        if (model.attributes['hero' + x] !== 0) {
+        if (model.attributes['hero' + x] !== '') {
           count++;
         }
       }
@@ -94,87 +100,213 @@ $(document).ready(function() {
     className: "fight-view",
     template: _.template($("#fight-view").html()),
     initialize: function() {
-      console.log(this.collection.slice(0, 3))
-      console.log(this.collection.slice(3, 6))
-
-      this.leftTeamCollection = new CharacterCollection({
-        collection: this.collection.slice(0, 3)
-      })
-      this.rightTeamCollection = new CharacterCollection({
-        collection: this.collection.slice(3, 6)
-      })
+      $('#userInfo').hide();
+      this.leftTeamCollection = this.collection.slice(0, 3)
+      this.rightTeamCollection = this.collection.slice(3, 6)
+      this.activeLeft = this.collection.models[0].attributes.image.small_url;
+      this.activeRight = this.collection.models[3].attributes.image.small_url;
+      this.round = 1;
+      this.previousRoundMessage = "";
       this.render()
     },
     render: function() {
-      this.$el.html(this.template)
+      this.$el.html(this.template(this.collection))
       console.log("I am logging this:")
       console.log(this)
     },
     findNextChar: function() {
       var leftCharacter;
       var rightCharacter;
-      leftCharacter = leftTeamCollection.findWhere({
-        ko: false
-      })
-      if (leftTeamCollection.where({
-          ko: false
-        }).length === 0) {
-        this.win('right')
+      console.log(this.leftTeamCollection)
+      console.log(this.rightTeamCollection)
+
+      console.log("The left team has " + this.leftTeamCollection.length +
+        " players left.")
+      console.log("The right team has " + this.rightTeamCollection.length +
+        " players left.")
+
+      if (this.leftTeamCollection.length === 0 && this.rightTeamCollection
+        .length === 0) {
+        return this.draw('Nobody')
       }
-      rightCharacter = rightTeamCollection.findWhere({
-        ko: false
-      })
-      if (leftTeamCollection.where({
-          ko: false
-        }).length === 0) {
-        this.win('left')
+
+      if (this.leftTeamCollection.length === 0) {
+        return this.loss('Right')
+      } else {
+        leftCharacter = this.leftTeamCollection[0]
+          //console.log to get the character and then set it to active character
+          // do this before it is rerendered again
       }
-      if ("ko" === false) {
-        this.win(rightTeam)
+
+      if (this.rightTeamCollection.length === 0) {
+        return this.win('Left')
+      } else {
+        rightCharacter = this.rightTeamCollection[0]
       }
+      console.log("right here")
+      console.log(leftCharacter)
+      console.log(rightCharacter)
+        //set this character to active
 
       this.fight(leftCharacter, rightCharacter)
       this.findNextChar()
     },
-    win: function(team) {
-      console.log(team + "wins!")
-    },
     fight: function(leftCharacter, rightCharacter) {
-      console.log(rightCharacter.get("type"))
+      console.log("The right character type is : " + rightCharacter.get(
+        "type"))
+      console.log("The left character type is : " + leftCharacter.get(
+        "type"))
       if (leftCharacter.get("type") === rightCharacter.get("type")) {
         console.log("Draw")
-        leftCharacter.set("ko", true)
-        rightCharacter.set("ko", true)
+        this.leftTeamCollection.shift()
+        this.rightTeamCollection.shift()
       } else if (leftCharacter.get("type") === "strength" &&
         rightCharacter.get("type") ===
         "energy") {
         console.log(leftCharacter.get("name") + " wins!")
-        rightCharacter.set("ko", true)
+        this.rightTeamCollection.shift()
       } else if (leftCharacter.get("type") === "strength" &&
         rightCharacter.get("type") ===
         "magic") {
         console.log(rightCharacter.get("name") + " wins!")
-        leftCharacter.set("ko", true)
+        this.leftTeamCollection.shift()
       } else if (leftCharacter.get("type") === "energy" &&
         rightCharacter.get("type") ===
         "strength") {
         console.log(rightCharacter.get("name") + " wins!")
-        leftCharacter.set("ko", true)
+        this.leftTeamCollection.shift()
       } else if (leftCharacter.get("type") === "energy" &&
         rightCharacter.get("type") ===
         "magic") {
         console.log(leftCharacter.get("name") + " wins!")
-        rightCharacter.set("ko", true)
+        this.rightTeamCollection.shift()
       } else {
         console.log(leftCharacter.get("name") + " wins!")
-        rightCharacter.set("ko", true)
+        this.rightTeamCollection.shift()
       }
-      console.log(rightCharacter)
+    },
+    draw: function(team) {
+      console.log(team + " wins!")
+      newUser.set('draw', newUser.get('draw') + 1)
+    },
+    loss: function(team) {
+      console.log(team + " wins!")
+      newUser.set('loss', newUser.get('win') + 1)
+    },
+    win: function(team) {
+      console.log(team + " wins!")
+      newUser.set('win', newUser.get('win') + 1)
+    },
+    stepThroughFight: function() {
+      // who is fighting
+      var leftCharacter;
+      var rightCharacter;
+
+      console.log("The left team has " + this.leftTeamCollection.length +
+        " players left.")
+      console.log("The right team has " + this.rightTeamCollection.length +
+        " players left.")
+
+      if (this.leftTeamCollection.length === 0 && this.rightTeamCollection
+        .length === 0) {
+        return this.draw('Nobody')
+      }
+
+      if (this.leftTeamCollection.length === 0) {
+        return this.loss('Right')
+      } else {
+        leftCharacter = this.leftTeamCollection[0]
+      }
+
+      if (this.rightTeamCollection.length === 0) {
+        return this.win('Left')
+      } else {
+        rightCharacter = this.rightTeamCollection[0]
+      }
+      console.log("right here")
       console.log(leftCharacter)
+      console.log(rightCharacter)
+        // fight logic
+      console.log("The right character type is : " + rightCharacter.get(
+        "type"))
+      console.log("The left character type is : " + leftCharacter.get(
+        "type"))
+      if (leftCharacter.get("type") === rightCharacter.get("type")) {
+        console.log("Draw")
+        leftCharacter.set('ko', true)
+        rightCharacter.set('ko', true)
+        this.previousRoundMessage = leftCharacter.get("name") +
+          " and " +
+          rightCharacter.get("name") + " are dust!"
+        this.leftTeamCollection.shift()
+        this.rightTeamCollection.shift()
+      } else if (leftCharacter.get("type") === "strength" &&
+        rightCharacter.get("type") === "energy") {
+        console.log(leftCharacter.get("name") + " wins!")
+        rightCharacter.set('ko', true)
+        this.previousRoundMessage = leftCharacter.get("name") +
+          " took " +
+          rightCharacter.get("name") + " to school!"
+        this.rightTeamCollection.shift()
+      } else if (leftCharacter.get("type") === "strength" &&
+        rightCharacter.get("type") === "magic") {
+        console.log(rightCharacter.get("name") + " wins!")
+        leftCharacter.set("ko", true)
+        this.previousRoundMessage = leftCharacter.get("name") +
+          " is a total Jabroni!"
+        this.leftTeamCollection.shift()
+      } else if (leftCharacter.get("type") === "energy" &&
+        rightCharacter.get("type") === "strength") {
+        console.log(rightCharacter.get("name") + " wins!")
+        leftCharacter.set("ko", true)
+        this.previousRoundMessage = leftCharacter.get("name") +
+          " can't handle " +
+          rightCharacter.get("name") + "'s brute strength!"
+        this.leftTeamCollection.shift()
+      } else if (leftCharacter.get("type") === "energy" &&
+        rightCharacter.get("type") === "magic") {
+        console.log(leftCharacter.get("name") + " wins!")
+        rightCharacter.set("ko", true)
+        this.previousRoundMessage = leftCharacter.get("name") +
+          " ran circles around " +
+          rightCharacter.get("name") + "!"
+        this.rightTeamCollection.shift()
+      } else {
+        console.log(leftCharacter.get("name") + " wins!")
+        rightCharacter.set('ko', true)
+        this.previousRoundMessage = leftCharacter.get("name") +
+          " put " +
+          rightCharacter.get("name") + " to sleep!"
+        this.rightTeamCollection.shift()
+      }
+      if (this.leftTeamCollection.length === 0 && this.rightTeamCollection
+        .length === 0) {
+        alert(this.previousRoundMessage + ' \nDraw!')
+        return this.draw('Nobody')
+      }
+
+      if (this.leftTeamCollection.length === 0) {
+        alert(this.previousRoundMessage + ' \nYou Lose!')
+        return this.loss('Right')
+      } else {
+        leftCharacter = this.leftTeamCollection[0]
+        this.activeLeft = leftCharacter.attributes.image.small_url
+      }
+
+      if (this.rightTeamCollection.length === 0) {
+        alert(this.previousRoundMessage + ' \nYou Win!')
+        return this.win('Left')
+      } else {
+        rightCharacter = this.rightTeamCollection[0]
+        this.activeRight = rightCharacter.attributes.image.small_url
+      }
+      this.round++;
+      console.log('Done with a round')
+      this.render()
     },
     events: {
-      "click #findNextChar": "findNextChar",
-      //"click #fight": "fight"
+      "click #slowFight": "stepThroughFight",
+      "click #fight": "findNextChar"
     }
   })
 
@@ -210,8 +342,8 @@ $(document).ready(function() {
   })
 
   var CharactersView = Backbone.View.extend({
-    //collection: CharacterCollection,
-    el: "#charZone",
+    tagName: 'div',
+    className: 'character-view-main',
     template: _.template($("#template-characterSelect").html()),
     //call render somewhere else
     initialize: function() {
@@ -220,7 +352,7 @@ $(document).ready(function() {
     render: function() {
       console.log('rendering');
       //this.$el.html('<table id="chargrid"></table>');
-      var html = '<table id="chargrid"><tr>';
+      var html = '<div id="tableDiv"><table id="chargrid"><tr>';
       //var width isnt being used, should replace 4 in if function
       var width = 4;
       var i = 0;
@@ -237,7 +369,9 @@ $(document).ready(function() {
       })
       html = html + '</tr></table>';
       html = html +
-        "<button id='removeCharacter'>Remove Character</button>"
+        '<div id="charInformation"><p id="charName"></p><p><img id="charImg" src=""></p><p id="charDeck"></p></div></div>'
+      html = html +
+        "<div><button id='removeCharacter'>Remove Character</button></div>";
       this.$el.html(html);
     }
   })
@@ -253,11 +387,15 @@ $(document).ready(function() {
         'data-character-id="<%-id%>"' +
         'data-character-img="<%-image%>"' +
         'data-character-name="<%-name%>"' +
+        'data-character-deck="<%-deck%>"' +
+        'data-character-bigImage="<%-bigImg%>"' +
         '><img src="<%-image%>"></td>');
       this.$el.html(template({
         id: this.model.id,
         image: this.model.get('image').thumb_url,
-        name: this.model.attributes.name
+        name: this.model.attributes.name,
+        deck: this.model.attributes.deck,
+        bigImg: this.model.attributes.image.small_url
       }));
       return this;
     }
@@ -265,6 +403,8 @@ $(document).ready(function() {
 
   characterList = new CharacterCollection;
 
+
+  newUser = new User;
   var MainAppView = Backbone.View.extend({
     //div in index.jade
     //el: $('#container'),
@@ -275,50 +415,64 @@ $(document).ready(function() {
       "click #loadLogin": "loadLogin",
       "click #loginButton": "loadCharView",
       "click .character": "selectCharacter",
+      "mouseover .character": "displayCharacterInfo",
       "click #removeCharacter": "removeCharacterFromTeam",
       //"click #loginButton": "loadFightScreen",
       "click #fightButton": "loadFightScreen"
     },
+    // create display for character information when hovering over the characters
+    displayCharacterInfo: function(evt) {
+      var characterData = $(evt.currentTarget).data();
+      console.log(characterData)
+      $('#charName').html(characterData.characterName)
+      $('#charImg').attr('src', characterData.characterBigimage)
+      $('#charDeck').html(characterData.characterDeck)
+    },
     removeCharacterFromTeam: function() {
       for (var x = 6; x >= 1; x--) {
-        if (this.newUser.get("hero" + x) !== 0) {
-          this.newUser.set("hero" + x, 0)
+        if (newUser.get("hero" + x) !== '') {
+          newUser.set("hero" + x, '')
           return;
         }
       }
-      console.log(this.newUser)
+      console.log(newUser)
     },
     selectCharacter: function selectCharacter(evt) {
       var characterData = $(evt.currentTarget).data();
       console.log(characterData)
         //alert("Clicked " + characterData.characterImg);
       for (var x = 1; x <= 6; x++) {
-        if (this.newUser.get("hero" + x) === 0) {
-          this.newUser.set("hero" + x, characterData.characterImg)
-          this.newUser.set('heroName' + x, characterData.characterName)
+        if (newUser.get("hero" + x) === '') {
+          newUser.set("hero" + x, characterData.characterImg)
+          newUser.set('heroName' + x, characterData.characterName)
           return;
         }
       }
-      console.log(this.newUser)
+      console.log(newUser)
     },
     //main app view initializes loginView, creates a div, and then loads the view.
     initialize: function() {
       this.setCurrentView(new LoginView())
-      this.newUser = new User;
+      $('#userInfo').hide()
       this.newUserView = new UserView({
-        model: this.newUser
+        model: newUser
       })
-      this.listenTo(this.newUser, "change:heroNum", this.addFightButton)
-      this.listenTo(this.newUser, "change", this.newUser.render)
+      this.listenTo(newUser, "change:heroNum", this.addFightButton)
+      this.listenTo(newUser, "change", newUser.render)
+      this.listenTo(newUser, "change:win", this.loadCharacterSelectionRedirect)
+      this.listenTo(newUser, "change:loss", this.loadCharacterSelectionRedirect)
+      this.listenTo(newUser, "change:draw", this.loadCharacterSelectionRedirect)
       characterList.fetch();
       console.log("This is our user : ")
-      console.log(this.newUser)
+      console.log(newUser)
     },
     addFightButton: function(model) {
       if (model.get('heroNum') === 6) {
         console.log("FIGHT!")
-        this.$el.append(
-          '<button id="fightButton">Let\'s get it on!</button>')
+          //this.$el.append('<button id="fightButton">Let\'s get it on!</button>')
+        $('.character-view-main').append(
+          '<div><button id="fightButton">Let\'s get it on!</button></div>'
+        )
       } else {
         $('#fightButton').remove()
       }
@@ -334,8 +488,16 @@ $(document).ready(function() {
     loadCharacterSelection: function(event) {
       event.preventDefault()
       this.setCurrentView(new CharacterView())
-      console.log(characterList);
-      //console.log("the character selection loaded")
+    },
+    loadCharacterSelectionRedirect: function() {
+      for (var x = 1; x <= 6; x++) {
+        newUser.attributes['hero' + x] = ''
+        newUser.attributes['heroName' + x] = ''
+      }
+      $('#userInfo').show();
+      this.setCurrentView(new CharactersView({
+        collection: characterList
+      }))
     },
     loadFightScreen: function(event) {
       event.preventDefault()
@@ -347,7 +509,7 @@ $(document).ready(function() {
       console.log(getThis)
       for (var x = 1; x <= 6; x++) {
         var preAttributeModel = characterList.findWhere({
-          name: this.newUser.attributes['heroName' + x]
+          name: newUser.attributes['heroName' + x]
         })
         preAttributeModel.attribute()
         console.log(preAttributeModel)
@@ -362,20 +524,10 @@ $(document).ready(function() {
       this.setCurrentView(fightViewer)
     },
     loadCharView: function(event) {
-      //TODO(justin): this is really nasty and should probably occur outside this function
-      event.preventDefault()
-        //creates character collection
-      var characterCol = new CharacterCollection()
-        //calls the collection using index.js router.get /api/characters. async:false to prevent render until it gets all the info.
-      characterCol.fetch({
-          async: false
-        })
-        //creates charactersview with collection
+      $('#userInfo').show()
       this.setCurrentView(new CharactersView({
-          collection: characterCol
-        }))
-        //console.log("the character selection loaded")
-        //create current user
+        collection: characterList
+      }))
     },
     setCurrentView: function(newView) {
       if (this.currentView) this.currentView.remove()

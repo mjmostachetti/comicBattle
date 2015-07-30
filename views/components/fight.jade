@@ -1,7 +1,21 @@
 #fightContainer
 
  div(id="fight-view")
-  input(type="button" id="fight" value="fight!")
-  input(type="button" id="findNextChar" value="Next Character")
- 
- 
+  button(id="fight") Quick and Dirty Battle
+  button(id="slowFight") Individual Battle
+  h1!= 'Round : ' + '<%=this.round%>'
+  h1!= '<%=this.previousRoundMessage%>'
+  h2!= "<img src=<%=this.activeLeft%>>" + ' VS ' + "<img src=<%=this.activeRight%>>"
+  #team-battle-info 
+    #user-team
+      h1 User Team
+      each val in [0,1,2]
+        img(src!='<%=this.collection.models['+val+'].attributes.image.thumb_url%>')
+        p!= '<%=this.collection.models[' + val + '].attributes.name%>'
+        p!= 'Character Defeated : ' + '<%=this.collection.models['+ val + '].attributes.ko%>'
+    #computer-team
+      h1 Computer Team
+      each val in [3,4,5]
+        img(src!='<%=this.collection.models['+val+'].attributes.image.thumb_url%>')
+        p!= '<%=this.collection.models[' + val + '].attributes.name%>'
+        p!= 'Character Defeated : ' + '<%=this.collection.models['+ val + '].attributes.ko%>'

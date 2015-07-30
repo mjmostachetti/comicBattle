@@ -67,21 +67,21 @@ router.post('/signup', function(request, response) {
 						}).then(function() {
 							response.render('index', {
 								message: "You just registered!"
-							})
-						})
-					})
-				})
+							});
+						});
+					});
+				});
 			}
-		})
-})
+		});
+});
 
-router.post('components/login', function(request, response) {
-	var username = request.body.username
-	var password = request.body.password
+router.post('/', function(request, response) {
+	var username = request.body.username;
+	var password = request.body.password;
 	db.search('userData', 'value.username: ' + username)
 		.then(function(resp) {
-			var userHash = resp.body.results[0].value.hash
-			var userSalt = resp.body.results[0].value.salt
+			var userHash = resp.body.results[0].value.hash;
+			var userSalt = resp.body.results[0].value.salt;
 			pass.hash(password, userSalt, function(err, hash) {
 				if (userHash === hash) {
 					console.log('logged in');
@@ -90,57 +90,58 @@ router.post('components/login', function(request, response) {
 						message: 'Incorrect info, give it another go.'
 					});
 				}
-			})
-		})
-		//response.render('main')
-})
+			});
+		});
+	//response.render('main')
+});
 
 /*
  * This function is used to fill out our database!
  */
 
-
+// another api key:72e9a1878dcfdf40e3c1db8d52883e44a5ef37ba
+// api key: f6539c8aca297ac9f221c04eb1d0fa3937e02354
 
 // api call for the CharactersCollection
 router.get('/api/characters', function(request, response) {
-	console.log("This is an array of the character IDs : ")
-		//console.log(characterIDs)
+	console.log("This is an array of the character IDs : ");
+	//console.log(characterIDs)
 	var counter = 0;
-	var arrayOfCharacterObjs = []
-		// for each index in the characterID.js array, hit the api for the name, image,powers,id
-		// when all the data is sent back, push to the arrayOfCharacterObjs array
-		// since this is async, we need a counter to actually tell us when these things finish
-		// when the counter === characterIDs.length, send JSON to the frontend and backbone
-		// will render the proper views!
+	var arrayOfCharacterObjs = [];
+	// for each index in the characterID.js array, hit the api for the name, image,powers,id
+	// when all the data is sent back, push to the arrayOfCharacterObjs array
+	// since this is async, we need a counter to actually tell us when these things finish
+	// when the counter === characterIDs.length, send JSON to the frontend and backbone
+	// will render the proper views!
 	characterIDs.forEach(function(item) {
 		http.get('http://www.comicvine.com/api/character/' +
 			'4005-' + item.id +
-			'/?api_key=f6539c8aca297ac9f221c04eb1d0fa3937e02354&' +
+			'/?api_key=72e9a1878dcfdf40e3c1db8d52883e44a5ef37ba&' +
 			'field_list=name,image,powers,deck,id&format=json',
 			function(res) {
 				var writeToThis = '';
 				res.on('data', function(chunk) {
-					writeToThis += chunk
+					writeToThis += chunk;
 				});
 				res.on('end', function() {
-					var charJSON = JSON.parse(writeToThis)
-						//console.log(charJSON.results)
-					var resultsJSON = charJSON.results
+					var charJSON = JSON.parse(writeToThis);
+					//console.log(charJSON.results)
+					var resultsJSON = charJSON.results;
 					counter++;
 					//console.log("The counter is now: " + counter)
 					//console.log("When the counter is: " + characterIDs.length + ", return JSON of all characters.")
-					arrayOfCharacterObjs.push(resultsJSON)
+					arrayOfCharacterObjs.push(resultsJSON);
 					if (counter === characterIDs.length) {
 						response.json(arrayOfCharacterObjs);
 					}
-				})
-			})
+				});
+			});
 
-	})
-})
+	});
+});
 
 
 //define api 'GET' request to return all the users
-router.get('/users')
+router.get('/users');
 
 module.exports = router;

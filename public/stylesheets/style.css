@@ -1,7 +1,7 @@
 
 
 body {
-  padding: 50px;
+  padding: 25px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
@@ -46,17 +46,17 @@ a.hover {
 h1 {
     color: red;
     font-family: 'Bangers';
-    
+    text-align: center;
 }
 
 .login {
     background: blue;
     border-radius: 25px;
-    padding: 15px;
+    padding: 10px;
     opacity: 1;
     color: red;
     font-family: 'Bangers', cursive;
-    width: 30%;
+    text-align: center;
 
 }
 
@@ -153,10 +153,33 @@ li {
 
 }
 
+.character-view-main #chargrid{
+  text-align: center;
+}
 
+#user-container{
+  display: inline-flex;
+  text-align: center;
+  width: 100%;
+  background-color: whitesmoke;
+  border-radius: 25px;
+}
 
+#team1, #team2, #user-stats{
+  width: 33%;
+}
 
+#team-battle-info, #tableDiv {
+  display: inline-flex;
+}
 
+.character-view-main {
+  display : inline-block;
+}
+
+#charInformation, #chargrid {
+  width: 50%;
+}
 
 
 
