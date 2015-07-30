@@ -19,7 +19,6 @@ a.hover {
 
 .span-24 ul {
     list-style: none;
-
 }
 
 /*.right {
@@ -109,7 +108,6 @@ h1 {
     /*float: left;*/
     opacity: none;
     display: inline-block;
-
 }
 
 .row {
@@ -120,7 +118,6 @@ h1 {
     padding: 15px;
     margin: 15px 15px 15px 15px;
     background: black;
-
 }
 
 #options {
@@ -140,7 +137,6 @@ nav li {
 li {
     padding: 10px;
 }
-
 
 /*#selectBG {
   background: url(../../websiteImages/imagesForSite/leaderboardBackground.jpg) no-repeat center center fixed;
@@ -172,9 +168,8 @@ li {
 }
 #userInfo {
   background: black;
-  float: top;
   margin-top: 20px;
-  width: 45%;
+  width: 60%;
   border-radius: 25px;
   padding: 25px;
   border: 2px solid red;
@@ -210,4 +205,10 @@ li {
 
 #charInformation, #chargrid {
   width: 50%;
+}
+
+img {
+  padding-right: 20px;
+
+
 }
