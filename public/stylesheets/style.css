@@ -176,7 +176,7 @@ li {
   background: black;
   float: left;
   margin-top: 20px;
-  width: 45%;
+  width: 60%;
   border-radius: 25px;
   padding: 25px;
   border: 2px solid red;
@@ -193,7 +193,11 @@ li {
   background: black;
 }
 
-
+img {
+  padding-right: 20px;
+ 
+ 
+}
 
 
 
