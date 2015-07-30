@@ -1,13 +1,8 @@
 
-
-<<<<<<< HEAD
 body {
   padding: 25px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
-=======
->>>>>>> a27f118b5ac9410413cf5f840fda7906e2875747
-
 
 a {
   color: #00B7FF;
@@ -17,8 +12,6 @@ a {
 a.hover {
     color: red;
 }
-
-
 
 #back {
     background-color: blue;
@@ -60,11 +53,12 @@ h1 {
     color: red;
     font-family: 'Bangers', cursive;
     text-align: center;
-    width: 45%;
+    width: 100%;
     border: 2px solid red;
-    float: left;
-    margin-top: 25px;
+    /*float: left;*/
+  margin: 0px 25% 0px 0px;
 }
+
 /*.login h1 {
   float: left;
 }*/
@@ -79,8 +73,6 @@ h1 {
 
  /*// ../img/background.jpg //*/
 }
-
-
 
 .hvr-grow {
     cursor: pointer;
@@ -106,9 +98,6 @@ h1 {
     cursor: pointer;
     opacity: none;
 }
-
-
-
 
 #grid{
     height: 800px;
@@ -137,8 +126,6 @@ h1 {
 #options {
     border-bottom: 2px solid #52DDFF;
     background: black;
-
-
 }
 
 nav ul {
@@ -163,9 +150,9 @@ li {
   background-size: cover;
 
 }*/
-
 .character-view-main #chargrid{
   text-align: center;
+  width: 30%
 }
 
 #user-container{
@@ -177,29 +164,15 @@ li {
 }
 
 #team1, #team2, #user-stats{
-  width: 33%;
+  width: 30%;
 }
 
 #team-battle-info, #tableDiv {
   display: inline-flex;
 }
-
-.character-view-main {
-  display : inline-block;
-  background: black;
-  padding: 20px;
-  margin-top: 10%;
-  border-radius: 25px;
-  border: 2px solid red;
-  overflow: auto;
-  margin-left: 20px;
-
-
-}
-
 #userInfo {
   background: black;
-  float: left;
+  float: top;
   margin-top: 20px;
   width: 45%;
   border-radius: 25px;
@@ -211,6 +184,23 @@ li {
   margin-left: 20px;
 }
 
+.character-view-main {
+  display : inline-block;
+  background: black;
+  padding: 20px;
+  margin: 20%, 5%, 5%, 20%;
+  border: 2px solid red;
+  border-radius: 25px;
+  width: 90%;
+  overflow: auto;
+}
+
+.character{
+  display: inline-grid;
+  border: 5px solid grey;
+  margin: 5% 25% 25% 5%;
+  border-radius: 5%;
+}
 #fight-view {
   height: 40%;
   padding: 20px;

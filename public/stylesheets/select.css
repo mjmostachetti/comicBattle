@@ -1,6 +1,6 @@
 
-#select { 
-  background: url(img/Energy_Blast.jpg) no-repeat center center fixed; 
+#select {
+  background: url(img/Energy_Blast.jpg) no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -9,7 +9,7 @@
 }
 /*THESE ARE THE DIFFERENT HTML BACKGROUND IMAGES */
 #saved {
-  background: url(img/MvsDC.jpg) no-repeat center center fixed; 
+  background: url(img/MvsDC.jpg) no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -19,7 +19,7 @@
 }
 
 #leader {
-  background: url(img/leaderboardBackground.jpg) no-repeat center center fixed; 
+  background: url(img/leaderboardBackground.jpg) no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -36,7 +36,7 @@ a  {
 }
 
 a:hover {
-	color: red; 
+	color: red;
 }
 
 
@@ -49,7 +49,7 @@ a:hover {
 
 body {
   font-family: 'Open Sans' , sans-serif;
-  
+
 }
 
 
@@ -72,12 +72,12 @@ header {
 
 
 
- 
+
 /*This will have a header including cyclops*/
 header {
   background-image: url(img/cyclopsHeader.png);
   border-color: #599a68;
-  
+
   width: 100%;
   background-repeat: no-repeat;
   height: 100%;
@@ -175,8 +175,6 @@ p {
   float: left;
   background-color: black;
 
-
-
 }
 
 #left {
@@ -225,12 +223,3 @@ p {
 	border-bottom: solid white;
 	width: 63%;
 }
-
-
-
-
-
-
-
-
-
