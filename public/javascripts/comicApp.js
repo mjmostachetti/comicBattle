@@ -436,6 +436,7 @@ $(document).ready(function() {
         }
       }
       console.log(newUser)
+      console.log(this.newUser)
     },
     selectCharacter: function selectCharacter(evt) {
       var characterData = $(evt.currentTarget).data();

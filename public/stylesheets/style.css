@@ -1,9 +1,12 @@
 
 
+<<<<<<< HEAD
 body {
   padding: 25px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
+=======
+>>>>>>> a27f118b5ac9410413cf5f840fda7906e2875747
 
 
 a {
@@ -26,9 +29,9 @@ a.hover {
 
 }
 
-.right {
+/*.right {
     float: right;
-}
+}*/
 
 .span-25 ul {
     list-style: none;
@@ -50,22 +53,30 @@ h1 {
 }
 
 .login {
-    background: blue;
+    background: navy;
     border-radius: 25px;
     padding: 10px;
     opacity: 1;
     color: red;
     font-family: 'Bangers', cursive;
     text-align: center;
-
+    width: 45%;
+    border: 2px solid red;
+    float: left;
+    margin-top: 25px;
 }
+/*.login h1 {
+  float: left;
+}*/
 
 #BG {
-  background: url(../img/heroHeader.jpg) no-repeat center center fixed; 
+  background: url(../img/leaderboardBackground.jpg) no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
+  height: 100%;
+
  /*// ../img/background.jpg //*/
 }
 
@@ -73,7 +84,7 @@ h1 {
 
 .hvr-grow {
     cursor: pointer;
-    
+
 }
 
 .hvr-pulse {
@@ -88,7 +99,7 @@ h1 {
 #loginButton {
     cursor: pointer;
     font-weight: bold;
-    
+
 }
 
 #signupButton {
@@ -116,18 +127,18 @@ h1 {
     border: 2px solid #52DDFF;
     width: 50px;
     height: 50px;
-    float: left; 
+    float: left;
     padding: 15px;
     margin: 15px 15px 15px 15px;
     background: black;
-     
+
 }
 
 #options {
     border-bottom: 2px solid #52DDFF;
     background: black;
-    
-    
+
+
 }
 
 nav ul {
@@ -144,14 +155,14 @@ li {
 }
 
 
-#selectBG {
-  background: url(../../websiteImages/imagesForSite/heroHeader.jpg) no-repeat center center fixed; 
+/*#selectBG {
+  background: url(../../websiteImages/imagesForSite/leaderboardBackground.jpg) no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
 
-}
+}*/
 
 .character-view-main #chargrid{
   text-align: center;
@@ -175,30 +186,38 @@ li {
 
 .character-view-main {
   display : inline-block;
+  background: black;
+  padding: 20px;
+  margin-top: 10%;
+  border-radius: 25px;
+  border: 2px solid red;
+  overflow: auto;
+  margin-left: 20px;
+
+
+}
+
+#userInfo {
+  background: black;
+  float: left;
+  margin-top: 20px;
+  width: 45%;
+  border-radius: 25px;
+  padding: 25px;
+  border: 2px solid red;
+  color: red;
+  font-family: 'Bangers';
+  overflow: auto;
+  margin-left: 20px;
+}
+
+#fight-view {
+  height: 40%;
+  padding: 20px;
+
+  background: black;
 }
 
 #charInformation, #chargrid {
   width: 50%;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- 
