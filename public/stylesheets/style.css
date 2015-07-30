@@ -1,9 +1,5 @@
 
 
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-}
 
 
 a {
@@ -26,9 +22,9 @@ a.hover {
 
 }
 
-.right {
+/*.right {
     float: right;
-}
+}*/
 
 .span-25 ul {
     list-style: none;
@@ -73,6 +69,8 @@ h1 {
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
+  height: 100%;
+
  /*// ../img/background.jpg //*/
 }
 
@@ -194,8 +192,6 @@ li {
 
   background: black;
 }
-
-
 
 
 
