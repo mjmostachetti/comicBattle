@@ -2338,6 +2338,7 @@
   -moz-osx-font-smoothing: grayscale;
   position: relative;
 }
+
 .hvr-outline-out:before {
   content: '';
   position: absolute;

@@ -226,7 +226,10 @@ li {
 }
 .character:hover {
   border: 5px solid red;
+
 }
+
+
 #fight-view {
   height: 40%;
   padding: 20px;
@@ -301,6 +304,7 @@ img {
   cursor: pointer;
 
 }
+
 #charImg {
   border: 5px solid grey;
 }
