@@ -487,7 +487,6 @@ $(document).ready(function() {
       this.setCurrentView(new SignupView())
     },
     loadCharacterSelection: function(event) {
-      event.preventDefault()
       this.setCurrentView(new CharacterView())
     },
     loadCharacterSelectionRedirect: function() {
