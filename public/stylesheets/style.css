@@ -1,7 +1,7 @@
 
 
 body {
-  padding: 50px;
+  padding: 25px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
@@ -46,7 +46,7 @@ a.hover {
 h1 {
     color: red;
     font-family: 'Bangers';
-    
+    text-align: center;
 }
 
 .login {
@@ -56,7 +56,6 @@ h1 {
     opacity: 1;
     color: red;
     font-family: 'Bangers', cursive;
-    width: 100%;
     text-align: center;
 
 }
@@ -154,9 +153,21 @@ li {
 
 }
 
+.character-view-main #chargrid{
+  text-align: center;
+}
 
+#user-container{
+  display: inline-flex;
+  text-align: center;
+  width: 100%;
+  background-color: whitesmoke;
+  border-radius: 25px;
+}
 
-
+#team1, #team2, #user-stats{
+  width: 33%;
+}
 
 
 

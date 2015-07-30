@@ -57,7 +57,8 @@ $(document).ready(function() {
 
   var UserView = Backbone.View.extend({
     el: "#userInfo",
-    template: _.template(
+    template: _.template($('#user-view').html())
+      /*
       '<h2>User Team</h2>' +
       '<img src=<%=hero1%>>' +
       '<img src=<%=hero2%>>' +
@@ -69,7 +70,8 @@ $(document).ready(function() {
       '<h2> Wins : <%=win%></h2>' +
       '<h2> Losses : <%=loss%></h2>' +
       '<h2> Draws : <%=draw%></h2>'
-      ),
+      */
+    ,
     initialize: function(){
       this.listenTo(this.model,'change',this.countHeroes)
       this.listenTo(this.model,'change',this.render)
@@ -106,6 +108,7 @@ $(document).ready(function() {
       this.activeLeft = this.collection.models[0].attributes.image.small_url;
       this.activeRight = this.collection.models[3].attributes.image.small_url;
       this.round = 1;
+      this.previousRoundMessage = "";
       this.render()
     },
     render: function() {
@@ -223,38 +226,51 @@ $(document).ready(function() {
         console.log("Draw")
         leftCharacter.set('ko',true)
         rightCharacter.set('ko',true)
+        this.previousRoundMessage = leftCharacter.get("name") + " and " + 
+            rightCharacter.get("name") + " are dust!"
         this.leftTeamCollection.shift()
         this.rightTeamCollection.shift()
       } else if (leftCharacter.get("type") === "strength" &&
         rightCharacter.get("type") === "energy"){
           console.log(leftCharacter.get("name") + " wins!")
           rightCharacter.set('ko',true)
+          this.previousRoundMessage = leftCharacter.get("name") + " took " + 
+            rightCharacter.get("name") + " to school!"
           this.rightTeamCollection.shift()
       } else if (leftCharacter.get("type") === "strength" &&
         rightCharacter.get("type") === "magic"){
           console.log(rightCharacter.get("name") + " wins!")
           leftCharacter.set("ko",true)
+          this.previousRoundMessage = leftCharacter.get("name") + " is a total Jabroni!"
           this.leftTeamCollection.shift()
       } else if (leftCharacter.get("type") === "energy" &&
         rightCharacter.get("type") === "strength") {
           console.log(rightCharacter.get("name") + " wins!")
           leftCharacter.set("ko",true)
+          this.previousRoundMessage = leftCharacter.get("name") + " can't handle " + 
+            rightCharacter.get("name") + "'s brute strength!"
           this.leftTeamCollection.shift()
       } else if (leftCharacter.get("type") === "energy" &&
         rightCharacter.get("type") === "magic") {
           console.log(leftCharacter.get("name") + " wins!")
           rightCharacter.set("ko",true)
+          this.previousRoundMessage = leftCharacter.get("name") + " ran circles around " + 
+            rightCharacter.get("name") + "!"
           this.rightTeamCollection.shift()
       } else {
           console.log(leftCharacter.get("name") + " wins!")
           rightCharacter.set('ko',true)
+          this.previousRoundMessage = leftCharacter.get("name") + " put " + 
+            rightCharacter.get("name") + " to sleep!"
           this.rightTeamCollection.shift()
       }
       if(this.leftTeamCollection.length === 0 && this.rightTeamCollection.length === 0){
+        alert(this.previousRoundMessage + ' \nDraw!')
         return this.draw('Nobody')
       }
 
       if(this.leftTeamCollection.length === 0){
+        alert(this.previousRoundMessage + ' \nYou Lose!')
         return this.loss('Right')
       } else{
         leftCharacter = this.leftTeamCollection[0]
@@ -262,6 +278,7 @@ $(document).ready(function() {
       }
 
       if(this.rightTeamCollection.length === 0){
+        alert(this.previousRoundMessage + ' \nYou Win!')
         return this.win('Left')
       } else{
         rightCharacter = this.rightTeamCollection[0]
@@ -309,6 +326,8 @@ $(document).ready(function() {
   })
 
   var CharactersView = Backbone.View.extend({
+      tagName : 'div',
+      className : 'character-view-main',
       template: _.template($("#template-characterSelect").html()),
       //call render somewhere else
       initialize: function(){
@@ -400,7 +419,7 @@ $(document).ready(function() {
     //main app view initializes loginView, creates a div, and then loads the view.
     initialize: function() {
       this.setCurrentView(new LoginView())
-      //newUser = new User;
+      $('#userInfo').hide()
       this.newUserView = new UserView({ model : newUser})
       this.listenTo(newUser, "change:heroNum", this.addFightButton)      
       this.listenTo(newUser, "change", newUser.render)
@@ -458,6 +477,7 @@ $(document).ready(function() {
       this.setCurrentView(fightViewer)
     },
     loadCharView : function(event) {
+      $('#userInfo').show()
       this.setCurrentView(new CharactersView({ collection: characterList}))
     },
     setCurrentView: function(newView) {

@@ -4,6 +4,7 @@
   button(id="fight") Quick and Dirty Battle
   button(id="slowFight") Individual Battle
   h1!= 'Round : ' + '<%=this.round%>'
+  h1!= '<%=this.previousRoundMessage%>'
   h2!= "<img src=<%=this.activeLeft%>>" + ' VS ' + "<img src=<%=this.activeRight%>>"
   h1 User Team
   each val in [0,1,2]
