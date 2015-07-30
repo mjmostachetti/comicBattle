@@ -56,7 +56,8 @@ h1 {
     opacity: 1;
     color: red;
     font-family: 'Bangers', cursive;
-    width: 30%;
+    width: 100%;
+    text-align: center;
 
 }
 

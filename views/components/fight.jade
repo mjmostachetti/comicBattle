@@ -3,12 +3,15 @@
  div(id="fight-view")
   button(id="fight") Quick and Dirty Battle
   button(id="slowFight") Individual Battle
+  h1!= 'Round : ' + '<%=this.round%>'
+  h2!= "<img src=<%=this.activeLeft%>>" + ' VS ' + "<img src=<%=this.activeRight%>>"
   h1 User Team
   each val in [0,1,2]
     img(src!='<%=this.collection.models['+val+'].attributes.image.thumb_url%>')
     p!= '<%=this.collection.models[' + val + '].attributes.name%>'
+    p!= 'Character Defeated : ' + '<%=this.collection.models['+ val + '].attributes.ko%>'
   h1 Computer Team
   each val in [3,4,5]
     img(src!='<%=this.collection.models['+val+'].attributes.image.thumb_url%>')
     p!= '<%=this.collection.models[' + val + '].attributes.name%>'
- 
+    p!= 'Character Defeated : ' + '<%=this.collection.models['+ val + '].attributes.ko%>'

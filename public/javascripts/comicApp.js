@@ -101,18 +101,12 @@ $(document).ready(function() {
     template: _.template($("#fight-view").html()),
     initialize: function() {
       $('#userInfo').hide();
-      console.log(this.collection.slice(0,3))
-      console.log(this.collection.slice(3,6))
-      console.log(this.collection)
-      console.log(typeof this.collection)
       this.leftTeamCollection = this.collection.slice(0,3)
       this.rightTeamCollection = this.collection.slice(3,6)
-      this.listenTo(this.collection,'change',this.test)
+      this.activeLeft = this.collection.models[0].attributes.image.small_url;
+      this.activeRight = this.collection.models[3].attributes.image.small_url;
+      this.round = 1;
       this.render()
-    },
-    test : function(){
-      console.log(this.collection)
-      console.log('test!')
     },
     render: function() {
       this.$el.html(this.template(this.collection))
@@ -136,6 +130,8 @@ $(document).ready(function() {
         return this.loss('Right')
       } else{
         leftCharacter = this.leftTeamCollection[0]
+        //console.log to get the character and then set it to active character
+        // do this before it is rerendered again
       }
 
       if(this.rightTeamCollection.length === 0){
@@ -146,6 +142,7 @@ $(document).ready(function() {
       console.log("right here")
       console.log(leftCharacter)
       console.log(rightCharacter)
+      //set this character to active
       this.fight(leftCharacter, rightCharacter)
       this.findNextChar()
     },
@@ -224,43 +221,53 @@ $(document).ready(function() {
       console.log("The left character type is : " + leftCharacter.get("type"))
       if (leftCharacter.get("type") === rightCharacter.get("type")) {
         console.log("Draw")
+        leftCharacter.set('ko',true)
+        rightCharacter.set('ko',true)
         this.leftTeamCollection.shift()
         this.rightTeamCollection.shift()
       } else if (leftCharacter.get("type") === "strength" &&
-        rightCharacter.get("type") ===
-        "energy") {
-        console.log(leftCharacter.get("name") + " wins!")
-        this.rightTeamCollection.shift()
+        rightCharacter.get("type") === "energy"){
+          console.log(leftCharacter.get("name") + " wins!")
+          rightCharacter.set('ko',true)
+          this.rightTeamCollection.shift()
       } else if (leftCharacter.get("type") === "strength" &&
-        rightCharacter.get("type") ===
-        "magic") {
-        console.log(rightCharacter.get("name") + " wins!")
-        this.leftTeamCollection.shift()
+        rightCharacter.get("type") === "magic"){
+          console.log(rightCharacter.get("name") + " wins!")
+          leftCharacter.set("ko",true)
+          this.leftTeamCollection.shift()
       } else if (leftCharacter.get("type") === "energy" &&
-        rightCharacter.get("type") ===
-        "strength") {
-        console.log(rightCharacter.get("name") + " wins!")
-        this.leftTeamCollection.shift()
+        rightCharacter.get("type") === "strength") {
+          console.log(rightCharacter.get("name") + " wins!")
+          leftCharacter.set("ko",true)
+          this.leftTeamCollection.shift()
       } else if (leftCharacter.get("type") === "energy" &&
-        rightCharacter.get("type") ===
-        "magic") {
-        console.log(leftCharacter.get("name") + " wins!")
-        this.rightTeamCollection.shift()
+        rightCharacter.get("type") === "magic") {
+          console.log(leftCharacter.get("name") + " wins!")
+          rightCharacter.set("ko",true)
+          this.rightTeamCollection.shift()
       } else {
-        console.log(leftCharacter.get("name") + " wins!")
-        this.rightTeamCollection.shift()
+          console.log(leftCharacter.get("name") + " wins!")
+          rightCharacter.set('ko',true)
+          this.rightTeamCollection.shift()
       }
-      //this.collection.remove(this.collection.findWhere({name:'Superman'}))
-      console.log(this.collection.findWhere({name:'Superman'}))
-      // this removes the character from the collection
-      //this.collection.remove(this.collection.findWhere({name:'Superman'}))
-      /*
-      this.collection.findWhere({name:'Superman'}).set({
-        "name":'NOOOOB',
-        "image.url_thumb": "../img/cat.jpg"
-      })
-      */
-      console.log(this.collection)
+      if(this.leftTeamCollection.length === 0 && this.rightTeamCollection.length === 0){
+        return this.draw('Nobody')
+      }
+
+      if(this.leftTeamCollection.length === 0){
+        return this.loss('Right')
+      } else{
+        leftCharacter = this.leftTeamCollection[0]
+        this.activeLeft = leftCharacter.attributes.image.small_url
+      }
+
+      if(this.rightTeamCollection.length === 0){
+        return this.win('Left')
+      } else{
+        rightCharacter = this.rightTeamCollection[0]
+        this.activeRight = rightCharacter.attributes.image.small_url
+      }
+      this.round++;
       console.log('Done with a round')
       this.render()
     },
