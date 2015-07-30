@@ -180,9 +180,9 @@ li {
 }
 
 .character-view-main {
+  padding: 20px;
   display : inline-block;
   background: black;
-  padding: 20px;
   margin: 20%, 5%, 5%, 20%;
   border: 2px solid red;
   border-radius: 25px;
@@ -191,15 +191,25 @@ li {
 }
 
 .character{
+  width: 120px;
+  height: 130px;
   display: inline-grid;
   border: 5px solid grey;
-  margin: 5% 25% 25% 5%;
   border-radius: 5%;
 }
+
+.character img {
+  display: flex;
+  max-width: 100%;
+  min-height: 100%;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
 #fight-view {
   height: 40%;
   padding: 20px;
-
   background: black;
 }
 
@@ -209,6 +219,4 @@ li {
 
 img {
   padding-right: 20px;
-
-
 }
