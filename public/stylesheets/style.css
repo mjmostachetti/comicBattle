@@ -1,12 +1,11 @@
 
 
-<<<<<<< HEAD
+
 body {
   padding: 25px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
-=======
->>>>>>> a27f118b5ac9410413cf5f840fda7906e2875747
+
 
 
 a {
@@ -201,7 +200,7 @@ li {
   background: black;
   float: left;
   margin-top: 20px;
-  width: 45%;
+  width: 60%;
   border-radius: 25px;
   padding: 25px;
   border: 2px solid red;
@@ -221,3 +220,31 @@ li {
 #charInformation, #chargrid {
   width: 50%;
 }
+
+img {
+  padding-right: 20px;
+ 
+ 
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
