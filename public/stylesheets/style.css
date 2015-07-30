@@ -52,19 +52,13 @@ h1 {
     color: red;
     font-family: 'Bangers', cursive;
     text-align: center;
-<<<<<<< HEAD
     width: 80%;
     border: 2px solid red;
     float: left;
     margin-top: 25px;
 
 
-=======
-    width: 100%;
-    border: 2px solid red;
-    /*float: left;*/
-  margin: 0px 25% 0px 0px;
->>>>>>> 28702ca72664554e2ed1bc3689a397d4a54b2c4c
+
 }
 
 /*.login h1 {
@@ -107,6 +101,9 @@ h1 {
   border-radius: 25px;
   margin-left: 120px;
 
+}
+#loginButton:hover {
+  background-color: #52DDFF;
 }
 
 #signupButton {
@@ -182,32 +179,32 @@ li {
 #team-battle-info, #tableDiv {
   display: inline-flex;
 }
-<<<<<<< HEAD
 
 .character-view-main {
   display : inline-block;
   background: black;
   padding: 20px;
-  margin-top: 10%;
+  /*margin-top: 10%;*/
   border-radius: 25px;
   /*border: 2px solid red;*/
   overflow: auto;
   margin-left: 20px;
+  overflow: auto;
 }
 
-=======
->>>>>>> 28702ca72664554e2ed1bc3689a397d4a54b2c4c
 #userInfo {
   background: black;
   margin-top: 20px;
-  width: 80%;
+  margin-bottom: 10%;
+  width: 79%;
   border-radius: 25px;
   padding: 25px;
   border: 2px solid red;
   color: red;
   font-family: 'Bangers';
   overflow: auto;
-  margin-left: 20px;
+  /*margin-left: 20px;*/
+  float: left;
 }
 
 .character-view-main {
@@ -227,6 +224,9 @@ li {
   margin: 5% 25% 25% 5%;
   border-radius: 5%;
 }
+.character:hover {
+  border: 5px solid red;
+}
 #fight-view {
   height: 40%;
   padding: 20px;
@@ -240,7 +240,7 @@ li {
 
 img {
   padding-right: 20px;
-<<<<<<< HEAD
+
  
 }
 
@@ -256,9 +256,15 @@ img {
   padding: 10px;
   font-family: 'Changa One';
   border: none;
-  float: left;
   cursor: pointer;
+  border-radius: 25px;
+  font-size: 20px;
+  float: left;
   
+}
+
+#fightButton:hover {
+  background-color: #52DDFF;
 }
 
 #removeCharacter {
@@ -270,35 +276,85 @@ img {
   float: left;
   margin-right: 15px;
   cursor: pointer;
+  font-size: 20px;
+  border-radius: 25px;
 
 }
-=======
->>>>>>> 28702ca72664554e2ed1bc3689a397d4a54b2c4c
-
+/*MAKES BUTTON ANIMATE AND CHANGE COLOR*/ 
+#removeCharacter:hover {
+  background-color: #52DDFF;
+}
 #charName {
   font-size: 25px;
 }
 
-<<<<<<< HEAD
+
 #charDeck {
   font-size: 19px;
+  overflow: auto;
+}
+/*#chargrid {
+  margin-top: 100px;
+}*/
+
+.character {
+  cursor: pointer;
+
+}
+#charImg {
+  border: 5px solid grey;
+}
+
+tr {
+  margin: 10 10 10 10;
+}
+
+#user-stats p {
+  font-size: 20px;
 }
 
 
 
-
-
-
-
-
-
-
-
-
-
-
- 
-
-=======
+#chargrid {
+  margin-top: 75px;
 }
->>>>>>> 28702ca72664554e2ed1bc3689a397d4a54b2c4c
+
+#fight {
+  background-color: red;
+  text-decoration: none;
+  padding: 10px;
+  font-family: 'Changa One';
+  border: none;
+  cursor: pointer;
+  border-radius: 25px;
+  font-size: 20px;
+  margin-right: 15px;
+
+}
+
+#fight:hover {
+  background-color: #52DDFF;
+}
+
+#slowFight {
+  background-color: red;
+  text-decoration: none;
+  padding: 10px;
+  font-family: 'Changa One';
+  border: none;
+  cursor: pointer;
+  border-radius: 25px;
+  font-size: 20px;
+}
+
+#slowFight:hover {
+  background-color: #52DDFF;
+}
+
+#user-team {
+  float: left;
+}
+
+#computer-team {
+  float: left;
+}

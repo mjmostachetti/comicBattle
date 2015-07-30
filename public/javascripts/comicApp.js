@@ -383,7 +383,7 @@ $(document).ready(function() {
     //call render at some point
     render: function() {
       console.log(this.model)
-      var template = _.template('<td class="character"' +
+      var template = _.template('<td class="character" ' +
         'data-character-id="<%-id%>"' +
         'data-character-img="<%-image%>"' +
         'data-character-name="<%-name%>"' +
