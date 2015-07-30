@@ -59,10 +59,12 @@ h1 {
     color: red;
     font-family: 'Bangers', cursive;
     text-align: center;
-    width: 45%;
+    width: 80%;
     border: 2px solid red;
     float: left;
     margin-top: 25px;
+
+
 }
 /*.login h1 {
   float: left;
@@ -96,8 +98,15 @@ h1 {
 }
 
 #loginButton {
-    cursor: pointer;
-    font-weight: bold;
+  cursor: pointer;
+  font-weight: bold;
+  background-color: red;
+  text-decoration: none;
+  padding: 10px;
+  font-family: 'Changa One';
+  border: none;
+  border-radius: 25px;
+  margin-left: 120px;
 
 }
 
@@ -189,18 +198,16 @@ li {
   padding: 20px;
   margin-top: 10%;
   border-radius: 25px;
-  border: 2px solid red;
+  /*border: 2px solid red;*/
   overflow: auto;
   margin-left: 20px;
-
-
 }
 
 #userInfo {
   background: black;
   float: left;
   margin-top: 20px;
-  width: 60%;
+  width: 80%;
   border-radius: 25px;
   padding: 25px;
   border: 2px solid red;
@@ -224,14 +231,44 @@ li {
 img {
   padding-right: 20px;
  
- 
 }
 
+/*#charImg {
+  height: 100px;
+  width: 100px;
+}*/
 
 
+#fightButton {
+  background-color: red;
+  text-decoration: none;
+  padding: 10px;
+  font-family: 'Changa One';
+  border: none;
+  float: left;
+  cursor: pointer;
+  
+}
 
+#removeCharacter {
+  background-color: red;
+  text-decoration: none;
+  padding: 10px;
+  font-family: 'Changa One';
+  border: none;
+  float: left;
+  margin-right: 15px;
+  cursor: pointer;
 
+}
 
+#charName {
+  font-size: 25px;
+}
+
+#charDeck {
+  font-size: 19px;
+}
 
 
 

@@ -371,7 +371,7 @@ $(document).ready(function() {
       html = html +
         '<div id="charInformation"><p id="charName"></p><p><img id="charImg" src=""></p><p id="charDeck"></p></div></div>'
       html = html +
-        "<div><button id='removeCharacter'>Remove Character</button></div>";
+        "<div><button id='removeCharacter' class='hvr-pulse'>Remove Character</button></div>";
       this.$el.html(html);
     }
   })
@@ -472,7 +472,7 @@ $(document).ready(function() {
         console.log("FIGHT!")
           //this.$el.append('<button id="fightButton">Let\'s get it on!</button>')
         $('.character-view-main').append(
-          '<div><button id="fightButton">Let\'s get it on!</button></div>'
+          '<div><button id="fightButton" class="hvr-pulse">Let\'s get it on!</button></div>'
         )
       } else {
         $('#fightButton').remove()
