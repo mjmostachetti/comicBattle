@@ -1,9 +1,5 @@
 
 
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-}
 
 
 a {
@@ -26,9 +22,9 @@ a.hover {
 
 }
 
-.right {
+/*.right {
     float: right;
-}
+}*/
 
 .span-25 ul {
     list-style: none;
@@ -46,26 +42,35 @@ a.hover {
 h1 {
     color: red;
     font-family: 'Bangers';
+
     
 }
 
 .login {
-    background: blue;
+    background: navy;
     border-radius: 25px;
     padding: 15px;
     opacity: 1;
     color: red;
     font-family: 'Bangers', cursive;
-    width: 30%;
+    width: 45%;
+    border: 2px solid red;
+    float: left;
+    margin-top: 25px;
 
 }
+/*.login h1 {
+  float: left;
+}*/
 
 #BG {
-  background: url(../img/heroHeader.jpg) no-repeat center center fixed; 
+  background: url(../img/leaderboardBackground.jpg) no-repeat center center fixed; 
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
+  height: 100%;
+
  /*// ../img/background.jpg //*/
 }
 
@@ -144,18 +149,49 @@ li {
 }
 
 
-#selectBG {
-  background: url(../../websiteImages/imagesForSite/heroHeader.jpg) no-repeat center center fixed; 
+/*#selectBG {
+  background: url(../../websiteImages/imagesForSite/leaderboardBackground.jpg) no-repeat center center fixed; 
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
 
+}*/
+
+
+
+#charZone {
+  background: black;
+  padding: 20px;
+  margin-top: 10%;
+  border-radius: 25px;
+  border: 2px solid red;
+  overflow: auto;
+  margin-left: 20px;
+ 
+
 }
 
+#userInfo {
+  background: black;
+  float: left;
+  margin-top: 20px;
+  width: 45%;
+  border-radius: 25px;
+  padding: 25px;
+  border: 2px solid red;
+  color: red;
+  font-family: 'Bangers'; 
+  overflow: auto;
+  margin-left: 20px;
+}
 
+#fight-view {
+  height: 40%;
+  padding: 20px;
 
-
+  background: black;
+}
 
 
 
