@@ -331,12 +331,12 @@ $(document).ready(function() {
       template: _.template($("#template-characterSelect").html()),
       //call render somewhere else
       initialize: function(){
-          this.render();
+        this.render();
       },
       render: function(){
         console.log('rendering');
         //this.$el.html('<table id="chargrid"></table>');
-        var html = '<table id="chargrid"><tr>';
+        var html = '<div id="tableDiv"><table id="chargrid"><tr>';
         //var width isnt being used, should replace 4 in if function
         var width = 4;
         var i = 0;
@@ -350,7 +350,8 @@ $(document).ready(function() {
           i++;
         })
         html = html + '</tr></table>';
-        html = html + "<button id='removeCharacter'>Remove Character</button>"
+        html = html + '<div id="charInformation"><p id="charName"></p><p><img id="charImg" src=""></p><p id="charDeck"></p></div></div>'
+        html = html + "<div><button id='removeCharacter'>Remove Character</button></div>";
         this.$el.html(html);
       }
     })
@@ -366,11 +367,15 @@ $(document).ready(function() {
           'data-character-id="<%-id%>"' +
           'data-character-img="<%-image%>"' +
           'data-character-name="<%-name%>"' +
+          'data-character-deck="<%-deck%>"' +
+          'data-character-bigImage="<%-bigImg%>"' +
           '><img src="<%-image%>"></td>');
         this.$el.html(template({
           id: this.model.id, 
           image: this.model.get('image').thumb_url,
-          name: this.model.attributes.name
+          name: this.model.attributes.name,
+          deck: this.model.attributes.deck,
+          bigImg: this.model.attributes.image.small_url
         }));
         return this;
       }
@@ -390,9 +395,18 @@ $(document).ready(function() {
       "click #loadLogin": "loadLogin",
       "click #loginButton" : "loadCharView",
       "click .character": "selectCharacter",
+      "mouseover .character": "displayCharacterInfo",
       "click #removeCharacter" : "removeCharacterFromTeam",
       //"click #loginButton": "loadFightScreen",
       "click #fightButton": "loadFightScreen"
+    },
+    // create display for character information when hovering over the characters
+    displayCharacterInfo : function(evt){
+      var characterData = $(evt.currentTarget).data();
+      console.log(characterData)
+      $('#charName').html(characterData.characterName)
+      $('#charImg').attr('src',characterData.characterBigimage)
+      $('#charDeck').html(characterData.characterDeck)
     },
     removeCharacterFromTeam: function(){
       for(var x = 6; x >= 1; x--){
@@ -433,7 +447,8 @@ $(document).ready(function() {
     addFightButton : function(model){
       if(model.get('heroNum') === 6){
         console.log("FIGHT!")
-        this.$el.append('<button id="fightButton">Let\'s get it on!</button>')
+        //this.$el.append('<button id="fightButton">Let\'s get it on!</button>')
+        $('.character-view-main').append('<div><button id="fightButton">Let\'s get it on!</button></div>')
       }else{
         $('#fightButton').remove()
       }

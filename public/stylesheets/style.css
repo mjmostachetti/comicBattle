@@ -52,7 +52,7 @@ h1 {
 .login {
     background: blue;
     border-radius: 25px;
-    padding: 15px;
+    padding: 10px;
     opacity: 1;
     color: red;
     font-family: 'Bangers', cursive;
@@ -169,6 +169,17 @@ li {
   width: 33%;
 }
 
+#team-battle-info, #tableDiv {
+  display: inline-flex;
+}
+
+.character-view-main {
+  display : inline-block;
+}
+
+#charInformation, #chargrid {
+  width: 50%;
+}
 
 
 
