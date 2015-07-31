@@ -76,18 +76,28 @@ router.post('/signup', function(request, response) {
 });
 
 router.post('/index', function(request, response) {
+	console.log("Receiving a Post request.")
 	var username = request.body.username;
 	var password = request.body.password;
 	db.search('userData', 'value.username: ' + username)
 		.then(function(resp) {
+			console.log(resp.body.results.length)
+			console.log(resp.body.results)
+			if(resp.body.results.length === 0){
+				response.render('index',{
+					message:'Incorrect info. Please try again.'
+				})
+			}
 			var userHash = resp.body.results[0].value.hash;
 			var userSalt = resp.body.results[0].value.salt;
 			pass.hash(password, userSalt, function(err, hash) {
 				if (userHash === hash) {
 					console.log('logged in');
+					response.cookie('name',username)
+					response.render('index')
 				} else {
 					response.render('index', {
-						message: 'Incorrect info, give it another go.'
+						message: 'Incorrect info. Please try again.'
 					});
 				}
 			});

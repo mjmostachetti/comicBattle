@@ -366,7 +366,7 @@ $(document).ready(function() {
     events: {
       "click #loadSignup": "loadSignup",
       "click #loadLogin": "loadLogin",
-      "click #loginButton": "loadCharView",
+      //"click #loginButton": "loadCharView",
       "click .character": "selectCharacter",
       "mouseover .character": "displayCharacterInfo",
       "click #removeCharacter": "removeCharacterFromTeam",
@@ -410,6 +410,7 @@ $(document).ready(function() {
     },
     //main app view initializes loginView, creates a div, and then loads the view.
     initialize: function() {
+      console.log(Cookie.get('name'))
       this.setCurrentView(new LoginView())
       $('#userInfo').hide()
       this.newUserView = new UserView({
