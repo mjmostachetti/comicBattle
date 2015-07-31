@@ -75,7 +75,7 @@ router.post('/signup', function(request, response) {
 		});
 });
 
-router.post('/', function(request, response) {
+router.post('/index', function(request, response) {
 	var username = request.body.username;
 	var password = request.body.password;
 	db.search('userData', 'value.username: ' + username)
