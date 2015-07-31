@@ -405,6 +405,7 @@ $(document).ready(function() {
 
 
   newUser = new User;
+
   var MainAppView = Backbone.View.extend({
     //div in index.jade
     //el: $('#container'),
@@ -524,6 +525,10 @@ $(document).ready(function() {
       this.setCurrentView(fightViewer)
     },
     loadCharView: function(event) {
+      this.$el.removeClass("blue")
+      this.$el.removeClass("login")
+      this.$el.addClass("black")
+      event.preventDefault()
       $('#userInfo').show()
       this.setCurrentView(new CharactersView({
         collection: characterList

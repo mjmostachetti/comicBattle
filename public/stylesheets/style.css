@@ -38,27 +38,27 @@ a.hover {
     color: red;
 }
 
-h1 {
-    color: red;
-    font-family: 'Bangers';
-    text-align: center;
+#comicapp.login {
+    padding: 10px;
+    width: 25%;
+    margin-top: 25px;
 }
 
-.login {
-    background: navy;
-    border-radius: 25px;
-    padding: 10px;
-    opacity: 1;
-    color: red;
-    font-family: 'Bangers', cursive;
-    text-align: center;
-    width: 80%;
-    border: 2px solid red;
-    float: left;
-    margin-top: 25px;
+#comicapp {
+  opacity: 1;
+  color: red;
+  border: 2px solid red;
+  border-radius: 25px;
+  font-family: 'Bangers', cursive;
+  text-align: center;
+}
 
+.blue {
+  background-color: blue;
+}
 
-
+.black {
+  background-color: black;
 }
 
 /*.login h1 {
@@ -208,13 +208,10 @@ li {
 }
 
 .character-view-main {
+  font-family: 'Changa One', sans-serif;
+  color: red;
   padding: 20px;
   display : inline-block;
-  background: black;
-  margin: 20%, 5%, 5%, 20%;
-  border: 2px solid red;
-  border-radius: 25px;
-  width: 90%;
   overflow: auto;
 }
 
@@ -232,7 +229,7 @@ li {
 
 .character img {
   display: flex;
-  min-width: 100%;
+  max-width: 100%;
   min-height: 100%;
   justify-content: center;
   align-items: center;
@@ -302,10 +299,14 @@ img {
   font-size: 19px;
   overflow: auto;
 }
-/*#chargrid {
-  margin-top: 100px;
-}*/
 
+#chargrid {
+  width: 49%;
+}
+
+#charInformation {
+    width: 49%;
+}
 .character {
   cursor: pointer;
 
