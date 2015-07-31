@@ -1,4 +1,25 @@
-- var values = 12
-#character-container
-  each val in values
-    p= val
+- var width = 4
+#tableDiv
+	table#chargrid
+		tr
+			!="<% characters.each(function(c, i) { %>"
+			//- Close and re-open the table row tag every `width` items.
+			!="<% if (i && i % " + width + " === 0) { %>"
+				!="<%= '</tr><tr>' %>"
+			!="<% } %>"
+			td.character(
+				data-character-id!="<%- c.id %>"
+				data-character-img!="<%- c.get('image').thumb_url %>"
+				data-character-name!="<%- c.attributes.name %>"
+				data-character-deck!="<%- c.attributes.deck %>"
+				data-character-bigimage!="<%- c.attributes.image.small_url %>"
+			)
+				img(src!="<%- c.get('image').thumb_url %>")
+			!="<% }) %>"
+	#charInformation
+		p#charName
+		p
+			img#charImg(src="")
+		p#charDeck
+div
+	button#removeCharacter.hvr-pulse Remove Character

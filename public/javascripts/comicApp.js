@@ -350,54 +350,10 @@ $(document).ready(function() {
       this.render();
     },
     render: function() {
-      console.log('rendering');
-      //this.$el.html('<table id="chargrid"></table>');
-      var html = '<div id="tableDiv"><table id="chargrid"><tr>';
-      //var width isnt being used, should replace 4 in if function
-      var width = 4;
-      var i = 0;
-      this.collection.each(function(model) {
-        if (i % 4 === 0 && i !== 0) {
-          html = html + '</tr><tr>';
-        }
-        var characterView = new CharacterView({
-          model: model
-        });
-        characterView.render();
-        html = html + characterView.$el.html();
-        i++;
-      })
-      html = html + '</tr></table>';
-      html = html +
-        '<div id="charInformation"><p id="charName"></p><p><img id="charImg" src=""></p><p id="charDeck"></p></div></div>'
-      html = html +
-        "<div><button id='removeCharacter' class='hvr-pulse'>Remove Character</button></div>";
+      var html = this.template({
+        characters: this.collection
+      });
       this.$el.html(html);
-    }
-  })
-
-  var CharacterView = Backbone.View.extend({
-    tagName: "div",
-    className: "character-view",
-    model: Character,
-    //call render at some point
-    render: function() {
-      console.log(this.model)
-      var template = _.template('<td class="character"  ' +
-        'data-character-id="<%-id%>"' +
-        'data-character-img="<%-image%>"' +
-        'data-character-name="<%-name%>"' +
-        'data-character-deck="<%-deck%>"' +
-        'data-character-bigImage="<%-bigImg%>"' +
-        '><img src="<%-image%>"></td>');
-      this.$el.html(template({
-        id: this.model.id,
-        image: this.model.get('image').thumb_url,
-        name: this.model.attributes.name,
-        deck: this.model.attributes.deck,
-        bigImg: this.model.attributes.image.small_url
-      }));
-      return this;
     }
   })
 
