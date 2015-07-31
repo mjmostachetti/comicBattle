@@ -70,7 +70,7 @@ a.hover {
   color: red;
   border: 2px solid red;
   border-radius: 25px;
-  font-family: 'Bangers', cursive;
+  font-family: 'Bangers', sans-serif;
   text-align: center;
 }
 
