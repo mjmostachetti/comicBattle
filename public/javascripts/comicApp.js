@@ -22,7 +22,7 @@ $(document).ready(function() {
         this.get("name") === "Jean Grey") {
         this.set("type", "strength")
       } else if (this.get("name") === "Superman" || 
-        this.get("name") === "Spider-man" || 
+        this.get("name") === "Spider-Man" || 
         this.get("name") === "Cyclops" ||
         this.get("name") === "Carnage" ||
         this.get("name") === "Rogue" || 
@@ -65,19 +65,6 @@ $(document).ready(function() {
   var UserView = Backbone.View.extend({
     el: "#userInfo",
     template: _.template($('#user-view').html()),
-    /*
-    '<h2>User Team</h2>' +
-    '<img src=<%=hero1%>>' +
-    '<img src=<%=hero2%>>' +
-    '<img src=<%=hero3%>> <br>' +
-    '<h2>Computer Team</h2>' +
-    '<img src=<%=hero4%>>' +
-    '<img src=<%=hero5%>>' +
-    '<img src=<%=hero6%>> <br>' +
-    '<h2> Wins : <%=win%></h2>' +
-    '<h2> Losses : <%=loss%></h2>' +
-    '<h2> Draws : <%=draw%></h2>'
-    */
     initialize: function() {
       this.listenTo(this.model, 'change', this.countHeroes)
       this.listenTo(this.model, 'change', this.render)
@@ -362,6 +349,7 @@ $(document).ready(function() {
         characters: this.collection
       });
       this.$el.html(html);
+      $('#removeCharacter').hide()
     }
   })
 
@@ -424,6 +412,8 @@ $(document).ready(function() {
         model: newUser
       })
       this.listenTo(newUser, "change:heroNum", this.addFightButton)
+      this.listenTo(newUser, "change:heroNum", this.updateUserInstruction)
+      this.listenTo(newUser, "change:heroNum", this.addRemoveButton)
       this.listenTo(newUser, "change", newUser.render)
       this.listenTo(newUser, "change:win", this.loadCharacterSelectionRedirect)
       this.listenTo(newUser, "change:loss", this.loadCharacterSelectionRedirect)
@@ -432,12 +422,47 @@ $(document).ready(function() {
       console.log("This is our user : ")
       console.log(newUser)
     },
+    addRemoveButton : function(model){
+      console.log("heroNum is now : " + model.get('heroNum'))
+      if(model.get('heroNum') > 0){
+        $('#removeCharacter').show()
+      } else{
+        $('#removeCharacter').hide()
+      }
+    },
+    updateUserInstruction : function(model){
+      console.log(model.get('heroNum'))
+      switch(model.get('heroNum')){
+        case 0:
+          $('#userInstruction').html('Pick 3 More Characters For Your Team!')
+          break;
+        case 1:
+          $('#userInstruction').html('Pick 2 More Characters For Your Team!')
+          break;
+        case 2:
+          $('#userInstruction').html('Pick 1 More Characters For Your Team!')
+          break;
+        case 3:
+          $('#userInstruction').html('Pick 3 More Characters For The Computer Team!')
+          break;
+        case 4:
+          $('#userInstruction').html('Pick 2 More Characters For The Computer Team!')
+          break;
+        case 5:
+          $('#userInstruction').html('Pick 1 More Characters For The Computer Team!')
+          break;
+        case 6:
+          $('#userInstruction').html('Click "Let\s Get It On!" Button Below!"')
+          break;
+      }
+      //$('#userInstruction').html()
+    },
     addFightButton: function(model) {
       if (model.get('heroNum') === 6) {
         console.log("FIGHT!")
           //this.$el.append('<button id="fightButton">Let\'s get it on!</button>')
-        $('.character-view-main').append(
-          '<div><button id="fightButton" class="hvr-pulse">Let\'s get it on!</button></div>'
+        $('#tableDiv').append(
+          '<div id="fightButtonDiv"><button id="fightButton" class="hvr-pulse">Let\'s get it on!</button></div>'
         )
       } else {
         $('#fightButton').remove()
@@ -497,6 +522,7 @@ $(document).ready(function() {
       this.setCurrentView(new CharactersView({
         collection: characterList
       }))
+      $('#removeCharacter').hide()
     },
     setCurrentView: function(newView) {
       if (this.currentView) this.currentView.remove()
