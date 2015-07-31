@@ -1,5 +1,5 @@
 input[type="text"] {
-  font-family: 'Changa One';
+  font-family: 'Changa One', sans-serif;
   font-size: 18px;
   appearance: none;
   box-shadow: none;
@@ -10,7 +10,7 @@ input[type="text"]:focus {
 }
 
 input[type="password"] {
-  font-family: 'Changa One';
+  font-family: 'Changa One', sans-serif;
   font-size: 18px;
   appearance: none;
   box-shadow: none;
@@ -116,7 +116,7 @@ a.hover {
   background-color: red;
   text-decoration: none;
   padding: 10px;
-  font-family: 'Changa One';
+  font-family: 'Changa One', sans-serif;
   border: none;
   border-radius: 25px;
   margin-left: 120px;
@@ -136,7 +136,7 @@ a.hover {
     width: 500px;
     border: 5px solid #52DDFF;
     margin: 0 auto;
-    font-family: 'Bangers';
+    font-family: 'Bangers', sans-serif;
     background: white;
     /*float: left;*/
     opacity: none;
@@ -205,7 +205,6 @@ li {
   background: black;
   border-radius: 25px;
   overflow: auto;
-  overflow: auto;
 }
 
 #userInfo {
@@ -217,7 +216,7 @@ li {
   border-radius: 25px;
   border: 2px solid red;
   color: red;
-  font-family: 'Bangers';
+  font-family: 'Bangers', sans-serif;
   overflow: auto;
 }
 
@@ -272,7 +271,7 @@ img {
   background-color: red;
   text-decoration: none;
   padding: 10px;
-  font-family: 'Changa One';
+  font-family: 'Changa One', sans-serif;
   border: none;
   cursor: pointer;
   border-radius: 25px;
@@ -288,7 +287,7 @@ img {
   background-color: red;
   text-decoration: none;
   padding: 10px;
-  font-family: 'Changa One';
+  font-family: 'Changa One', sans-serif;
   border: none;
   float: left;
   margin-right: 15px;
@@ -343,7 +342,7 @@ tr {
   background-color: red;
   text-decoration: none;
   padding: 10px;
-  font-family: 'Changa One';
+  font-family: 'Changa One', sans-serif;
   border: none;
   cursor: pointer;
   border-radius: 25px;
@@ -360,7 +359,7 @@ tr {
   background-color: red;
   text-decoration: none;
   padding: 10px;
-  font-family: 'Changa One';
+  font-family: 'Changa One', sans-serif;
   border: none;
   cursor: pointer;
   border-radius: 25px;
