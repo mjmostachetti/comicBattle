@@ -369,7 +369,7 @@ $(document).ready(function() {
       })
       html = html + '</tr></table>';
       html = html +
-        '<div id="charInformation"><p id="charName"></p><p><img id="charImg" src=""></p><p id="charDeck"></p></div></div>'
+        '<div id="charInformation">Hulk<p id="charName"></p><p><img id="charImg" src="http://static.comicvine.com/uploads/scale_small/14/140903/4127149-11.jpg"></p><p id="charDeck">After being bombarded with a massive dose of gamma radiation while saving a young man\'s life during the testing of an experimental bomb, Dr. Robert Bruce Banner was transformed into the Incredible Hulk: a green behemoth who is the living personification of rage and pure physical strength. He has currently taken on a new persona: Doc Green.</p></div></div>'
       html = html +
         "<div><button id='removeCharacter' class='hvr-pulse'>Remove Character</button></div>";
       this.$el.html(html);
