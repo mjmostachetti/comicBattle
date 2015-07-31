@@ -39,9 +39,9 @@ a.hover {
 }
 
 #comicapp.login {
+    margin: 0 auto;
     padding: 10px;
     width: 25%;
-    margin-top: 25px;
 }
 
 #comicapp {
@@ -72,7 +72,6 @@ a.hover {
   -o-background-size: cover;
   background-size: cover;
   height: 100%;
-
  /*// ../img/background.jpg //*/
 }
 
@@ -255,7 +254,6 @@ img {
   width: 100px;
 }*/
 
-
 #fightButton {
   background-color: red;
   text-decoration: none;
@@ -266,7 +264,6 @@ img {
   border-radius: 25px;
   font-size: 20px;
   float: left;
-
 }
 
 #fightButton:hover {
@@ -290,10 +287,10 @@ img {
 #removeCharacter:hover {
   background-color: #52DDFF;
 }
+
 #charName {
   font-size: 25px;
 }
-
 
 #charDeck {
   font-size: 19px;
@@ -307,9 +304,9 @@ img {
 #charInformation {
     width: 49%;
 }
+
 .character {
   cursor: pointer;
-
 }
 
 #charImg {
@@ -323,8 +320,6 @@ tr {
 #user-stats p {
   font-size: 20px;
 }
-
-
 
 #chargrid {
   margin-top: 75px;
