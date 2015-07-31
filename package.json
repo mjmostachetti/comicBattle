@@ -1,5 +1,5 @@
 {
-  "name": "comicApp",
+  "name": "comicapp",
   "version": "0.0.0",
   "private": true,
   "scripts": {
@@ -16,5 +16,22 @@
     "pwd": "0.0.4",
     "serve-favicon": "~2.2.0",
     "request": "~2.58.0"
-  }
+  },
+  "description": "a fun superhero battle game",
+  "main": "app.js",
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mjmostachetti/comicBattle.git"
+  },
+  "keywords": [
+    "SuperHeroes",
+    "Comics"
+  ],
+  "author": "Michael Lorenzo, Michael Mostachetti, Colin Etchberry, Justin Gordon",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mjmostachetti/comicBattle/issues"
+  },
+  "homepage": "https://github.com/mjmostachetti/comicBattle#readme"
 }
