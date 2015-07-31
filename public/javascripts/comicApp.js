@@ -12,13 +12,21 @@ $(document).ready(function() {
       image: ""
     },
     attribute: function() {
-      if (this.get("name") === "Batman" || this.get("name") ===
-        "daredevil" || this
-        .get("name") === "Hulk" || this.get("name") === "Joker") {
+      if (this.get("name") === "Batman" || 
+        this.get("name") === "daredevil" || 
+        this.get("name") === "Hulk" || 
+        this.get("name") === "Joker" ||
+        this.get("name") === "Catwoman" ||
+        this.get("name") === "Black Widow" ||
+        this.get("name") === "Power Girl" || 
+        this.get("name") === "Jean Grey") {
         this.set("type", "strength")
-      } else if (this.get("name") === "Superman" || this.get("name") ===
-        "Spider-man" || this.get("name") === "Cyclops" ||
-        this.get("name") === "Carnage") {
+      } else if (this.get("name") === "Superman" || 
+        this.get("name") === "Spider-man" || 
+        this.get("name") === "Cyclops" ||
+        this.get("name") === "Carnage" ||
+        this.get("name") === "Rogue" || 
+        this.get("name") === "Storm") {
         this.set("type", "energy")
       } else {
         this.set("type", "magic")
@@ -358,7 +366,7 @@ $(document).ready(function() {
   })
 
   characterList = new CharacterCollection;
-
+  console.log(characterList)
 
   newUser = new User;
 

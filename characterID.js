@@ -60,34 +60,42 @@ module.exports = [
 	"id" : "4563"
 },
 {
+	//Magic
 	"name" : "Wonder Woman",
 	"id" : "2048"
 },
 {
+	//Strength
 	"name" : "Catwoman",
 	"id" : "1698"
 },
 {
+	//Energy
 	"name" : "Rogue",
 	"id" : "1446"
 },
 {
+	//Strength
 	"name" : "Black Widow",
 	"id" : "3200"
 },
 {
+	//Magic
 	"name" : "Invisible Woman",
 	"id" : "2190"
 },
 {
+	//Energy
 	"name" : "Storm",
 	"id" : "1444"
 },
 {
+	//Strength
 	"name" : "Jean Grey",
 	"id" : "3552"
 },
 {
+	//Strength
 	"name" : "Super Girl",
 	"id" : "4915"
 }
