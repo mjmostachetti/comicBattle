@@ -58,5 +58,37 @@ module.exports = [
 	//Magic
 	"name" : "sabretooth",
 	"id" : "4563"
+},
+{
+	"name" : "Wonder Woman",
+	"id" : "2048"
+},
+{
+	"name" : "Catwoman",
+	"id" : "1698"
+},
+{
+	"name" : "Rogue",
+	"id" : "1446"
+},
+{
+	"name" : "Black Widow",
+	"id" : "3200"
+},
+{
+	"name" : "Invisible Woman",
+	"id" : "2190"
+},
+{
+	"name" : "Storm",
+	"id" : "1444"
+},
+{
+	"name" : "Jean Grey",
+	"id" : "3552"
+},
+{
+	"name" : "Super Girl",
+	"id" : "4915"
 }
 ]

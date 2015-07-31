@@ -8,7 +8,7 @@
   h2!= "<img src=<%=this.activeLeft%>>" + ' VS ' + "<img src=<%=this.activeRight%>>"
   #team-battle-info 
     #user-team
-      h1 User Team
+      h1 Your Team
       each val in [0,1,2]
         img(src!='<%=this.collection.models['+val+'].attributes.image.thumb_url%>')
         p!= '<%=this.collection.models[' + val + '].attributes.name%>'
