@@ -394,12 +394,16 @@ $(document).ready(function() {
     selectCharacter: function selectCharacter(evt) {
       var characterData = $(evt.currentTarget).data();
       console.log(characterData)
-        //alert("Clicked " + characterData.characterImg);
+      //alert("Clicked " + characterData.characterImg);
       for (var x = 1; x <= 6; x++) {
-        if (newUser.get("hero" + x) === '') {
-          newUser.set("hero" + x, characterData.characterImg)
-          newUser.set('heroName' + x, characterData.characterName)
-          return;
+        if (newUser.get("hero" + x) === '' &&  
+          this.selectedCharArray.indexOf(characterData.characterName) === -1) {
+            this.selectedCharArray.push(characterData.characterName)
+            console.log("You may not use these characters anymore: ")
+            console.log(this.selectedCharArray)
+            newUser.set("hero" + x, characterData.characterImg)
+            newUser.set('heroName' + x, characterData.characterName)
+            return;
         }
       }
       console.log(newUser)
@@ -411,6 +415,7 @@ $(document).ready(function() {
       this.newUserView = new UserView({
         model: newUser
       })
+      this.selectedCharArray = []
       this.listenTo(newUser, "change:heroNum", this.addFightButton)
       this.listenTo(newUser, "change:heroNum", this.updateUserInstruction)
       this.listenTo(newUser, "change:heroNum", this.addRemoveButton)

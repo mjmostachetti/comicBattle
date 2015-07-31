@@ -198,6 +198,7 @@ li {
 #tableDiv{
   display: block;
   width: 50%;
+  text-align: -webkit-center;
 }
 
 #team-battle-info {
@@ -346,7 +347,7 @@ tr {
 }
 
 #chargrid {
-  margin-top: 75px;
+  margin-top: 25px;
 }
 
 #fight {
