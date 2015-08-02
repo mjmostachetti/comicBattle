@@ -61,9 +61,13 @@ router.post('/signup', function(request, response) {
 							"hash": userHash,
 							"win": 0,
 							"loss": 0,
+							"draw" : 0,
 							"hero1": "",
 							"hero2": "",
-							"hero3": ""
+							"hero3": "",
+							"heroName1": "",
+							"heroName2" : "",
+							"heroName3" : ""
 						}).then(function() {
 							response.render('index', {
 								message: "You just registered!"
@@ -94,7 +98,12 @@ router.post('/index', function(request, response) {
 				if (userHash === hash) {
 					console.log('logged in');
 					response.cookie('name',username)
-					response.render('index')
+					console.log(typeof resp.body.results)
+					console.log(typeof resp)
+					console.log(resp.body.results[0].value)
+					response.render('index', {
+						data : resp.body.results[0].value
+					})
 				} else {
 					response.render('index', {
 						message: 'Incorrect info. Please try again.'
@@ -142,6 +151,7 @@ router.get('/api/characters', function(request, response) {
 					//console.log("When the counter is: " + characterIDs.length + ", return JSON of all characters.")
 					arrayOfCharacterObjs.push(resultsJSON);
 					if (counter === characterIDs.length) {
+						console.log(arrayOfCharacterObjs)
 						response.json(arrayOfCharacterObjs);
 					}
 				});
@@ -152,6 +162,17 @@ router.get('/api/characters', function(request, response) {
 
 
 //define api 'GET' request to return all the users
-router.get('/users');
+router.get('/api/users', function(request,response){
+	db.search('userData', '*').then(function(resp){
+		console.log("This is all of the userData :")
+		console.log(resp.body.results)
+		var userArray = []
+		resp.body.results.forEach(function(item){
+			console.log(item.value)
+			userArray.push(item.value)
+		})
+		response.json(userArray)
+	})
+});
 
 module.exports = router;

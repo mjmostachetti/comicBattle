@@ -1,4 +1,4 @@
-var leftTeam, characterList, fightViewer, newUser;
+var leftTeam, characterList, fightViewer, newUser, newUserCollection;
 
 $(document).ready(function() {
 
@@ -41,7 +41,6 @@ $(document).ready(function() {
 
   var User = Backbone.Model.extend({
     defaults: {
-      id: 0,
       username: '',
       win: 0,
       loss: 0,
@@ -87,7 +86,7 @@ $(document).ready(function() {
 
   var UserCollection = Backbone.Collection.extend({
     model: User,
-    url: '/users'
+    url: '/api/users'
   })
 
   var FightView = Backbone.View.extend({
@@ -342,19 +341,28 @@ $(document).ready(function() {
     template: _.template($("#template-characterSelect").html()),
     //call render somewhere else
     initialize: function() {
+      console.log("Logging from the CharactersView Init")
       this.render();
     },
     render: function() {
+      console.log(this.collection)
+      console.log(newUserCollection)
       var html = this.template({
-        characters: this.collection
+        characters: this.collection,
+        users : newUserCollection
       });
+      console.log(html)
       this.$el.html(html);
+      console.log("This is : ")
+      console.log(this)
       $('#removeCharacter').hide()
     }
   })
 
   characterList = new CharacterCollection;
-  console.log(characterList)
+
+  newUserCollection = new UserCollection;
+
 
   newUser = new User;
 
@@ -424,9 +432,14 @@ $(document).ready(function() {
       this.listenTo(newUser, "change:win", this.loadCharacterSelectionRedirect)
       this.listenTo(newUser, "change:loss", this.loadCharacterSelectionRedirect)
       this.listenTo(newUser, "change:draw", this.loadCharacterSelectionRedirect)
-      characterList.fetch();
+      newUserCollection.fetch({async : false});
+      console.log("These are all of the users : ")
+      console.log(newUserCollection)
+      characterList.fetch({async : false});
       console.log("This is our user : ")
       console.log(newUser)
+
+      this.loadCharView()
     },
     addRemoveButton : function(model){
       console.log("heroNum is now : " + model.get('heroNum'))
@@ -520,13 +533,17 @@ $(document).ready(function() {
       this.setCurrentView(fightViewer)
     },
     loadCharView: function(event) {
+      console.log("Loading Char View")
+      console.log("These are the characters : ")
+      console.log(characterList)
       this.$el.removeClass("blue")
       this.$el.removeClass("login")
       this.$el.addClass("black")
-      event.preventDefault()
+      //event.preventDefault()
       $('#userInfo').show()
       this.setCurrentView(new CharactersView({
-        collection: characterList
+        collection : characterList,
+        users : newUserCollection
       }))
       $('#removeCharacter').hide()
     },
