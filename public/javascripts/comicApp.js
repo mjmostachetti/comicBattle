@@ -181,15 +181,15 @@ $(document).ready(function() {
     },
     draw: function(team) {
       console.log(team + " wins!")
-      signedInUser.set('draw', newUser.get('draw') + 1)
+      signedInUser.set('draw', signedInUser.get('draw') + 1)
     },
     loss: function(team) {
       console.log(team + " wins!")
-      signedInUser.set('loss', newUser.get('win') + 1)
+      signedInUser.set('loss', signedInUser.get('win') + 1)
     },
     win: function(team) {
       console.log(team + " wins!")
-      signedInUser.set('win', newUser.get('win') + 1)
+      signedInUser.set('win', signedInUser.get('win') + 1)
     },
     stepThroughFight: function() {
       // who is fighting
@@ -339,6 +339,21 @@ $(document).ready(function() {
     tagName: 'div',
     className: 'character-view-main',
     template: _.template($("#template-characterSelect").html()),
+    events : {
+      "change #battleOtherUsers" : "loadOpposingTeam"
+    },
+    loadOpposingTeam : function(){
+      console.log("You now want to battle : ")
+      console.log($('#battleOtherUsers').val())
+      var findThisUser = $('#battleOtherUsers').val()
+      findThisUser = newUserCollection.findWhere({ username : findThisUser})
+      console.log(findThisUser)
+      var arr = [4,5,6]
+      arr.forEach(function(num){
+        signedInUser.set("hero" + num,findThisUser.attributes['hero'+(num-3)])
+        signedInUser.set("heroName" + num,findThisUser.attributes['heroName'+(num-3)]) 
+      })
+    },
     //call render somewhere else
     initialize: function() {
       console.log("Logging from the CharactersView Init")
@@ -361,18 +376,23 @@ $(document).ready(function() {
     }
   })
 
+  var UsersDropDownView = Backbone.View.extend({
+
+  })
+
   characterList = new CharacterCollection;
 
   newUserCollection = new UserCollection;
 
 
-  newUser = new User;
+
+
+  //newUser = new User;
 
   var MainAppView = Backbone.View.extend({
     //div in index.jade
     //el: $('#container'),
     el: $('#comicapp'),
-
     events: {
       "click #loadSignup": "loadSignup",
       "click #loadLogin": "loadLogin",
@@ -451,16 +471,14 @@ $(document).ready(function() {
       //this.listenTo(newUser, "change:heroNum", this.addFightButton)
       //this.listenTo(newUser, "change:heroNum", this.updateUserInstruction)
       //this.listenTo(newUser, "change:heroNum", this.addRemoveButton)
-      this.listenTo(newUser, "change", newUser.render)
-      this.listenTo(newUser, "change:win", this.loadCharacterSelectionRedirect)
-      this.listenTo(newUser, "change:loss", this.loadCharacterSelectionRedirect)
-      this.listenTo(newUser, "change:draw", this.loadCharacterSelectionRedirect)
+      //this.listenTo(newUser, "change", newUser.render)
+      //this.listenTo(newUser, "change:win", this.loadCharacterSelectionRedirect)
+      //this.listenTo(newUser, "change:loss", this.loadCharacterSelectionRedirect)
+      //this.listenTo(newUser, "change:draw", this.loadCharacterSelectionRedirect)
       newUserCollection.fetch({async : false});
       console.log("These are all of the users : ")
       console.log(newUserCollection)
       characterList.fetch({async : false});
-      console.log("This is our user : ")
-      console.log(newUser)
       if(Cookies.get('name') !== null){
         console.log("There is a cookie!")
         signedInUser = newUserCollection.findWhere({ username : Cookies.get('name')})
@@ -468,7 +486,9 @@ $(document).ready(function() {
         console.log(signedInUser)
         this.newUserView = new UserView({ model : signedInUser })
         this.listenTo(signedInUser,"update",this.persistToServer)
-        this.listenTo(signedInUser,"change",this.fun)
+        this.listenTo(signedInUser,"change:win",this.fun)
+        this.listenTo(signedInUser,"change:loss",this.fun)
+        this.listenTo(signedInUser,"change:draw",this.fun)
         this.listenTo(signedInUser, "change:heroNum", this.addRemoveButton)
         this.listenTo(signedInUser, "change:heroNum", this.addFightButton)
         this.listenTo(signedInUser, "change:heroNum", this.updateUserInstruction)
@@ -477,6 +497,10 @@ $(document).ready(function() {
         this.listenTo(signedInUser, "change:draw", this.loadCharacterSelectionRedirect)
         this.loadCharView()
         // when a user selects a new user from the dropdown, run this code
+        /*
+        $('#battleOtherUsers').on('change',function(){
+          console.log("Select just changed.")
+        })
         $("#battleOtherUsers").change(function(){
           console.log("You now want to battle : ")
           console.log($('#battleOtherUsers').val())
@@ -489,11 +513,13 @@ $(document).ready(function() {
             signedInUser.set("heroName" + num,findThisUser.attributes['heroName'+(num-3)]) 
           })
         })
+*/
+
       }
     },
     fun : function(model){
       console.log("The logged in user has changed on fx fun.")
-      console.log(model)
+      model.save()
 
     },
     persistToServer : function(model){
@@ -570,23 +596,20 @@ $(document).ready(function() {
       this.setCurrentView(new CharacterView())
     },
     loadCharacterSelectionRedirect: function() {
-      for (var x = 1; x <= 6; x++) {
-        newUser.attributes['hero' + x] = ''
-        newUser.attributes['heroName' + x] = ''
+      for (var x = 4; x <= 6; x++) {
+        signedInUser.attributes['hero' + x] = ''
+        signedInUser.attributes['heroName' + x] = ''
       }
       $('#userInfo').show();
       this.setCurrentView(new CharactersView({
-        collection: characterList
+        collection : characterList,
+        users : newUserCollection
       }))
     },
     loadFightScreen: function(event) {
       event.preventDefault()
       var battleCharacters = new CharacterCollection;
       // search character collection to pull down the characters the user has selected!
-      var getThis = characterList.where({
-        name: 'Hulk'
-      })
-      console.log(getThis)
       for (var x = 1; x <= 6; x++) {
         var preAttributeModel = characterList.findWhere({
           name: signedInUser.attributes['heroName' + x]
