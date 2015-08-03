@@ -1,4 +1,4 @@
-var leftTeam, characterList, fightViewer, newUser, newUserCollection;
+var leftTeam, characterList, fightViewer, newUser, newUserCollection, signedInUser;
 
 $(document).ready(function() {
 
@@ -349,12 +349,10 @@ $(document).ready(function() {
       console.log(newUserCollection)
       var html = this.template({
         characters: this.collection,
-        users : newUserCollection
+        allUsers : newUserCollection,
+        signedInUser : signedInUser
       });
-      console.log(html)
       this.$el.html(html);
-      console.log("This is : ")
-      console.log(this)
       $('#removeCharacter').hide()
     }
   })
@@ -421,9 +419,11 @@ $(document).ready(function() {
       console.log(Cookie.get('name'))
       this.setCurrentView(new LoginView())
       $('#userInfo').hide()
+      /*
       this.newUserView = new UserView({
         model: newUser
       })
+      */
       this.selectedCharArray = []
       this.listenTo(newUser, "change:heroNum", this.addFightButton)
       this.listenTo(newUser, "change:heroNum", this.updateUserInstruction)
@@ -438,8 +438,14 @@ $(document).ready(function() {
       characterList.fetch({async : false});
       console.log("This is our user : ")
       console.log(newUser)
-
-      this.loadCharView()
+      if(Cookie.get('name') !== null){
+        console.log("There is a cookie!")
+        signedInUser = newUserCollection.findWhere({ username : Cookie.get('name')})
+        console.log("This is the signed in user model : ")
+        console.log(signedInUser)
+        this.newUserView = new UserView({ model : signedInUser })
+        this.loadCharView()
+      }
     },
     addRemoveButton : function(model){
       console.log("heroNum is now : " + model.get('heroNum'))

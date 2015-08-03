@@ -1,7 +1,8 @@
 - var width = 5
 #tableDiv
+	h2!="Prepare for Battle, <%= signedInUser.attributes.username %>!"
 	h2#userInstruction Pick 3 More Characters For Your Team!
-	p!="<%= users.models.length %>"
+	p!="<%= allUsers.models.length %>"
 	table#chargrid
 		tr
 			!="<% characters.each(function(c, i) { %>"

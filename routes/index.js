@@ -169,9 +169,21 @@ router.get('/api/users', function(request,response){
 		var userArray = []
 		resp.body.results.forEach(function(item){
 			console.log(item.value)
-			userArray.push(item.value)
+			var charObj = item.value
+			charObj.key = item.path.key
+			userArray.push(charObj)
 		})
 		response.json(userArray)
+	})
+});
+
+router.get('/api/users/:id', function(request,response){
+	var userID = parseInt(request.params.id,10)
+	console.log(userID)
+	console.log(typeof userID)
+	db.search('userData','value.id:' + userID).then(function(resp){
+	  console.log(resp.body)
+	  console.log(resp.body.path.key)
 	})
 });
 
