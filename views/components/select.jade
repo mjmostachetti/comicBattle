@@ -1,8 +1,14 @@
 - var width = 5
+
+//- var users != "<% allUsers.models.length"
 #tableDiv
 	h2!="Prepare for Battle, <%= signedInUser.attributes.username %>!"
 	h2#userInstruction Pick 3 More Characters For Your Team!
-	p!="<%= allUsers.models.length %>"
+	h2!="....Or Pick From 1 of <%= allUsers.length %> Users to Battle!"
+	select
+		!="<% allUsers.each(function(user,index){ %>"
+		option!="<%= user.attributes.username %>"
+		!="<% }) %>"
 	table#chargrid
 		tr
 			!="<% characters.each(function(c, i) { %>"
@@ -21,6 +27,7 @@
 			!="<% }) %>"
 	#removeCharacterDiv
 		button#removeCharacter.hvr-pulse Remove Character
+		button#logout.hvr-pulse Logout?
 #charInformation
 	p#charName Hulk
 	p

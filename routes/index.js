@@ -169,21 +169,20 @@ router.get('/api/users', function(request,response){
 		var userArray = []
 		resp.body.results.forEach(function(item){
 			console.log(item.value)
-			var charObj = item.value
-			charObj.key = item.path.key
-			userArray.push(charObj)
+			userArray.push(item.value)
 		})
 		response.json(userArray)
 	})
 });
 
-router.get('/api/users/:id', function(request,response){
+router.put('/api/users/:id', function(request,response){
 	var userID = parseInt(request.params.id,10)
 	console.log(userID)
 	console.log(typeof userID)
 	db.search('userData','value.id:' + userID).then(function(resp){
-	  console.log(resp.body)
-	  console.log(resp.body.path.key)
+	  console.log(resp.body.results[0])
+	  console.log(resp.body.results[0].path.key)
+	  var userKey = resp.body.results.path.key 
 	})
 });
 

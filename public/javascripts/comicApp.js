@@ -181,15 +181,15 @@ $(document).ready(function() {
     },
     draw: function(team) {
       console.log(team + " wins!")
-      newUser.set('draw', newUser.get('draw') + 1)
+      signedInUser.set('draw', newUser.get('draw') + 1)
     },
     loss: function(team) {
       console.log(team + " wins!")
-      newUser.set('loss', newUser.get('win') + 1)
+      signedInUser.set('loss', newUser.get('win') + 1)
     },
     win: function(team) {
       console.log(team + " wins!")
-      newUser.set('win', newUser.get('win') + 1)
+      signedInUser.set('win', newUser.get('win') + 1)
     },
     stepThroughFight: function() {
       // who is fighting
@@ -377,7 +377,13 @@ $(document).ready(function() {
       "mouseover .character": "displayCharacterInfo",
       "click #removeCharacter": "removeCharacterFromTeam",
       //"click #loginButton": "loadFightScreen",
-      "click #fightButton": "loadFightScreen"
+      "click #fightButton": "loadFightScreen",
+      "click #logout" : "logout"
+    },
+    logout : function(){
+      Cookies.set('name',null)
+      $('#userInfo').hide()
+      this.setCurrentView(new LoginView())
     },
     // create display for character information when hovering over the characters
     displayCharacterInfo: function(evt) {
@@ -389,34 +395,34 @@ $(document).ready(function() {
     },
     removeCharacterFromTeam: function() {
       for (var x = 6; x >= 1; x--) {
-        if (newUser.get("hero" + x) !== '') {
-          newUser.set("hero" + x, '')
+        if (signedInUser.get("hero" + x) !== '') {
+          signedInUser.set("hero" + x, '')
           return;
         }
       }
-      console.log(newUser)
-      console.log(this.newUser)
+      console.log(signedInUser)
+      console.log(this.signedInUser)
     },
     selectCharacter: function selectCharacter(evt) {
       var characterData = $(evt.currentTarget).data();
       console.log(characterData)
       //alert("Clicked " + characterData.characterImg);
       for (var x = 1; x <= 6; x++) {
-        if (newUser.get("hero" + x) === '' &&  
+        if (signedInUser.get("hero" + x) === '' &&  
           this.selectedCharArray.indexOf(characterData.characterName) === -1) {
             this.selectedCharArray.push(characterData.characterName)
             console.log("You may not use these characters anymore: ")
             console.log(this.selectedCharArray)
-            newUser.set("hero" + x, characterData.characterImg)
-            newUser.set('heroName' + x, characterData.characterName)
+            signedInUser.set("hero" + x, characterData.characterImg)
+            signedInUser.set('heroName' + x, characterData.characterName)
             return;
         }
       }
-      console.log(newUser)
+      console.log(signedInUser)
     },
     //main app view initializes loginView, creates a div, and then loads the view.
     initialize: function() {
-      console.log(Cookie.get('name'))
+      console.log(Cookies.get('name'))
       this.setCurrentView(new LoginView())
       $('#userInfo').hide()
       /*
@@ -425,9 +431,9 @@ $(document).ready(function() {
       })
       */
       this.selectedCharArray = []
-      this.listenTo(newUser, "change:heroNum", this.addFightButton)
-      this.listenTo(newUser, "change:heroNum", this.updateUserInstruction)
-      this.listenTo(newUser, "change:heroNum", this.addRemoveButton)
+      //this.listenTo(newUser, "change:heroNum", this.addFightButton)
+      //this.listenTo(newUser, "change:heroNum", this.updateUserInstruction)
+      //this.listenTo(newUser, "change:heroNum", this.addRemoveButton)
       this.listenTo(newUser, "change", newUser.render)
       this.listenTo(newUser, "change:win", this.loadCharacterSelectionRedirect)
       this.listenTo(newUser, "change:loss", this.loadCharacterSelectionRedirect)
@@ -438,14 +444,31 @@ $(document).ready(function() {
       characterList.fetch({async : false});
       console.log("This is our user : ")
       console.log(newUser)
-      if(Cookie.get('name') !== null){
+      if(Cookies.get('name') !== null){
         console.log("There is a cookie!")
-        signedInUser = newUserCollection.findWhere({ username : Cookie.get('name')})
+        signedInUser = newUserCollection.findWhere({ username : Cookies.get('name')})
         console.log("This is the signed in user model : ")
         console.log(signedInUser)
         this.newUserView = new UserView({ model : signedInUser })
+        this.listenTo(signedInUser,"update",this.persistToServer)
+        this.listenTo(signedInUser,"change",this.fun)
+        this.listenTo(signedInUser, "change:heroNum", this.addRemoveButton)
+        this.listenTo(signedInUser, "change:heroNum", this.addFightButton)
+        this.listenTo(signedInUser, "change:heroNum", this.updateUserInstruction)
+        this.listenTo(signedInUser, "change:win", this.loadCharacterSelectionRedirect)
+        this.listenTo(signedInUser, "change:loss", this.loadCharacterSelectionRedirect)
+        this.listenTo(signedInUser, "change:draw", this.loadCharacterSelectionRedirect)
         this.loadCharView()
       }
+    },
+    fun : function(model){
+      console.log("The logged in user has changed on fx fun.")
+      console.log(model)
+
+    },
+    persistToServer : function(model){
+      console.log(model)
+      //model.save()
     },
     addRemoveButton : function(model){
       console.log("heroNum is now : " + model.get('heroNum'))
@@ -524,7 +547,7 @@ $(document).ready(function() {
       console.log(getThis)
       for (var x = 1; x <= 6; x++) {
         var preAttributeModel = characterList.findWhere({
-          name: newUser.attributes['heroName' + x]
+          name: signedInUser.attributes['heroName' + x]
         })
         preAttributeModel.attribute()
         console.log(preAttributeModel)

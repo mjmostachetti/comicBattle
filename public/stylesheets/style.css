@@ -292,7 +292,7 @@ img {
   background-color: #52DDFF;
 }
 
-#removeCharacter {
+#removeCharacter, #logout {
   background-color: red;
   text-decoration: none;
   padding: 10px;
