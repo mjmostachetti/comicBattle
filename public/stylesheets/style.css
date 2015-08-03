@@ -292,7 +292,7 @@ img {
   background-color: #52DDFF;
 }
 
-#removeCharacter, #logout {
+#removeCharacter, #logout, #saveTeam {
   background-color: red;
   text-decoration: none;
   padding: 10px;

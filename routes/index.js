@@ -176,14 +176,49 @@ router.get('/api/users', function(request,response){
 });
 
 router.put('/api/users/:id', function(request,response){
+	var x = 0;
+	var userKey;
+	console.log("Triggered put request.")
+	console.log(typeof request.body)
+	console.log(request.body)
 	var userID = parseInt(request.params.id,10)
-	console.log(userID)
-	console.log(typeof userID)
 	db.search('userData','value.id:' + userID).then(function(resp){
-	  console.log(resp.body.results[0])
-	  console.log(resp.body.results[0].path.key)
-	  var userKey = resp.body.results.path.key 
+	  //console.log(resp.body.results[0])
+	  //console.log(resp.body.results[0].path.key)
+	  userKey = resp.body.results[0].path.key
+	  console.log(userKey)
+		db.merge('userData',userKey, {
+	  	"hero1" : request.body.hero1,
+	  	"hero2" : request.body.hero2,
+	  	"hero3" : request.body.hero3,
+	  	"heroName1" : request.body.heroName1,
+	  	"heroName2" : request.body.heroName2,
+	  	"heroName3" : request.body.heroName3,
+	  	"heroNum" : request.body.heroNum
+	  }).then(function(result){
+	  	console.log("Success")
+	  }).fail(function(err){
+	  	console.log(err)
+	  })
 	})
 });
+
+router.get('/updateMerge',function(request,response){
+  db.merge('userData','0ba9c56efa20d7b5', {
+  	"hero1" : "yes"
+  }
+  //{
+  //	"upsert" : true
+  ).then(function(result){
+  	console.log("Success")
+  	/*
+  	db.search('userData','value.id:' + userID).then(function(resp){
+  		console.log(resp)
+  	})
+		*/
+  }).fail(function(err){
+  	console.log(err)
+  })
+})
 
 module.exports = router;

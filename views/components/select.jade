@@ -5,9 +5,9 @@
 	h2!="Prepare for Battle, <%= signedInUser.attributes.username %>!"
 	h2#userInstruction Pick 3 More Characters For Your Team!
 	h2!="....Or Pick From 1 of <%= allUsers.length %> Users to Battle!"
-	select
+	select#battleOtherUsers
 		!="<% allUsers.each(function(user,index){ %>"
-		option!="<%= user.attributes.username %>"
+		option(value!="<%= user.attributes.username %>")!="<%= user.attributes.username %>"
 		!="<% }) %>"
 	table#chargrid
 		tr
@@ -27,6 +27,7 @@
 			!="<% }) %>"
 	#removeCharacterDiv
 		button#removeCharacter.hvr-pulse Remove Character
+		button#saveTeam.hvr-pulse Save Your Team
 		button#logout.hvr-pulse Logout?
 #charInformation
 	p#charName Hulk

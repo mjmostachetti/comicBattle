@@ -378,7 +378,20 @@ $(document).ready(function() {
       "click #removeCharacter": "removeCharacterFromTeam",
       //"click #loginButton": "loadFightScreen",
       "click #fightButton": "loadFightScreen",
-      "click #logout" : "logout"
+      "click #logout" : "logout",
+      "click #saveTeam" : "saveYourTeam"
+    },
+    saveYourTeam : function(){
+      console.log(signedInUser)
+      // all of these values will be available on the server-side via request.body
+      signedInUser.save({
+        hero1 : signedInUser.get("hero1"),
+        hero2 : signedInUser.get("hero2"),
+        hero3 : signedInUser.get("hero3"),
+        heroName1 : signedInUser.get("heroName1"),
+        heroName2 : signedInUser.get("heroName2"),
+        heroName3 : signedInUser.get("heroName3")
+      })
     },
     logout : function(){
       Cookies.set('name',null)
@@ -459,6 +472,20 @@ $(document).ready(function() {
         this.listenTo(signedInUser, "change:loss", this.loadCharacterSelectionRedirect)
         this.listenTo(signedInUser, "change:draw", this.loadCharacterSelectionRedirect)
         this.loadCharView()
+        // when a user selects a new user from the dropdown, run this code
+        $("#battleOtherUsers").change(function(){
+          console.log("You now want to battle : ")
+          console.log($('#battleOtherUsers').val())
+          var findThisUser = $('#battleOtherUsers').val()
+          findThisUser = newUserCollection.findWhere({ username : findThisUser})
+          //console.log(findThisUser)
+          /*
+          [4,5,6].forEach(function(num){
+            signedInUser.set("hero" + num,findThisUser.attributes.hero1)
+            signedInUser.set("hero" + num,findThisUser.attributes.heroName1) 
+          })
+          */
+        })
       }
     },
     fun : function(model){
