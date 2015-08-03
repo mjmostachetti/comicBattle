@@ -89,7 +89,7 @@ router.post('/index', function(request, response) {
 			console.log(resp.body.results)
 			if(resp.body.results.length === 0){
 				response.render('index',{
-					message:'Incorrect info. Please try again.'
+					message:'Incorrect Username and Password. Please try again.'
 				})
 			}
 			var userHash = resp.body.results[0].value.hash;
@@ -186,6 +186,10 @@ router.put('/api/users/:id', function(request,response){
 	  //console.log(resp.body.results[0])
 	  //console.log(resp.body.results[0].path.key)
 	  userKey = resp.body.results[0].path.key
+	  var herozNum = 0;
+	  if(request.body.heroNum > 3){
+	  	herozNum = 3;
+	  }
 	  console.log(userKey)
 		db.merge('userData',userKey, {
 	  	"hero1" : request.body.hero1,
@@ -194,7 +198,7 @@ router.put('/api/users/:id', function(request,response){
 	  	"heroName1" : request.body.heroName1,
 	  	"heroName2" : request.body.heroName2,
 	  	"heroName3" : request.body.heroName3,
-	  	"heroNum" : request.body.heroNum,
+	  	"heroNum" : herozNum,
 	  	"win" : request.body.win,
 	  	"loss" : request.body.loss,
 	  	"draw" : request.body.draw

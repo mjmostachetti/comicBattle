@@ -6,7 +6,7 @@
 	h2#userInstruction Pick 3 More Characters For Your Team!
 	h2#userInstruction2!="....Or Battle Other Users!"
 	select#battleOtherUsers
-		option(class="opposingTeam") - Select Opposing Team -
+		option(class="opposingTeam") - Select Player to Battle -
 		!="<% allUsers.each(function(user,index){ %>"
 			!="<% if( signedInUser.attributes.username !== user.attributes.username ) { %>"
 				option(value!="<%= user.attributes.username %>" class="opposingTeam")!="<%= user.attributes.username %>"

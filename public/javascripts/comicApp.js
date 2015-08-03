@@ -469,9 +469,9 @@ $(document).ready(function() {
         console.log(signedInUser)
         this.newUserView = new UserView({ model : signedInUser })
         this.listenTo(signedInUser,"update",this.persistToServer)
-        this.listenTo(signedInUser,"change:win",this.fun)
-        this.listenTo(signedInUser,"change:loss",this.fun)
-        this.listenTo(signedInUser,"change:draw",this.fun)
+        this.listenTo(signedInUser,"change:win",this.updateRecord)
+        this.listenTo(signedInUser,"change:loss",this.updateRecord)
+        this.listenTo(signedInUser,"change:draw",this.updateRecord)
         this.listenTo(signedInUser, "change:heroNum", this.addRemoveButton)
         this.listenTo(signedInUser, "change:heroNum", this.addFightButton)
         this.listenTo(signedInUser, "change:heroNum", this.updateUserInstruction)
@@ -481,14 +481,9 @@ $(document).ready(function() {
         this.loadCharView()
       }
     },
-    fun : function(model){
+    updateRecord : function(model){
       console.log("The logged in user has changed on fx fun.")
       model.save()
-
-    },
-    persistToServer : function(model){
-      console.log(model)
-      //model.save()
     },
     addRemoveButton : function(model){
       console.log("heroNum is now : " + model.get('heroNum'))
@@ -613,6 +608,7 @@ $(document).ready(function() {
       } else{
         $('#removeCharacter').hide()       
       }
+      this.updateUserInstruction(signedInUser)
     },
     setCurrentView: function(newView) {
       if (this.currentView) this.currentView.remove()
