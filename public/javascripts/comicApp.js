@@ -353,7 +353,11 @@ $(document).ready(function() {
         signedInUser : signedInUser
       });
       this.$el.html(html);
-      $('#removeCharacter').hide()
+      if(signedInUser.get("heroNum") > 0){
+        $('#removeCharacter').show()
+      } else{
+        $('#removeCharacter').hide()       
+      }
     }
   })
 
@@ -478,13 +482,12 @@ $(document).ready(function() {
           console.log($('#battleOtherUsers').val())
           var findThisUser = $('#battleOtherUsers').val()
           findThisUser = newUserCollection.findWhere({ username : findThisUser})
-          //console.log(findThisUser)
-          /*
-          [4,5,6].forEach(function(num){
-            signedInUser.set("hero" + num,findThisUser.attributes.hero1)
-            signedInUser.set("hero" + num,findThisUser.attributes.heroName1) 
+          console.log(findThisUser)
+          var arr = [4,5,6]
+          arr.forEach(function(num){
+            signedInUser.set("hero" + num,findThisUser.attributes['hero'+(num-3)])
+            signedInUser.set("heroName" + num,findThisUser.attributes['heroName'+(num-3)]) 
           })
-          */
         })
       }
     },
@@ -510,21 +513,33 @@ $(document).ready(function() {
       switch(model.get('heroNum')){
         case 0:
           $('#userInstruction').html('Pick 3 More Characters For Your Team!')
+          $("#userInstruction2").hide()
+          $("#battleOtherUsers").hide()
           break;
         case 1:
           $('#userInstruction').html('Pick 2 More Characters For Your Team!')
+          $("#userInstruction2").hide()
+          $("#battleOtherUsers").hide()
           break;
         case 2:
           $('#userInstruction').html('Pick 1 More Characters For Your Team!')
+          $("#userInstruction2").hide()
+          $("#battleOtherUsers").hide()        
           break;
         case 3:
-          $('#userInstruction').html('Pick 3 More Characters For The Computer Team!')
+          $('#userInstruction').html('Pick 3 More Characters For The Opposing Team!')
+          $("#userInstruction2").show()
+          $("#battleOtherUsers").show()
           break;
         case 4:
-          $('#userInstruction').html('Pick 2 More Characters For The Computer Team!')
+          $('#userInstruction').html('Pick 2 More Characters For The Opposing Team!')
+          $("#userInstruction2").show()
+          $("#battleOtherUsers").show()
           break;
         case 5:
-          $('#userInstruction').html('Pick 1 More Characters For The Computer Team!')
+          $('#userInstruction').html('Pick 1 More Characters For The Opposing Team!')
+          $("#userInstruction2").show()
+          $("#battleOtherUsers").show()
           break;
         case 6:
           $('#userInstruction').html('Click "Let\s Get It On!" Button Below!"')
@@ -601,7 +616,11 @@ $(document).ready(function() {
         collection : characterList,
         users : newUserCollection
       }))
-      $('#removeCharacter').hide()
+      if(signedInUser.get("heroNum") > 0){
+        $('#removeCharacter').show()
+      } else{
+        $('#removeCharacter').hide()       
+      }
     },
     setCurrentView: function(newView) {
       if (this.currentView) this.currentView.remove()

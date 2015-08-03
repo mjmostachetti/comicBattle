@@ -4,10 +4,12 @@
 #tableDiv
 	h2!="Prepare for Battle, <%= signedInUser.attributes.username %>!"
 	h2#userInstruction Pick 3 More Characters For Your Team!
-	h2!="....Or Pick From 1 of <%= allUsers.length %> Users to Battle!"
+	h2#userInstruction2!="....Or Battle Other Users!"
 	select#battleOtherUsers
 		!="<% allUsers.each(function(user,index){ %>"
-		option(value!="<%= user.attributes.username %>")!="<%= user.attributes.username %>"
+			!="<% if( signedInUser.attributes.username !== user.attributes.username ) { %>"
+				option(value!="<%= user.attributes.username %>")!="<%= user.attributes.username %>"
+			!="<% } %>"
 		!="<% }) %>"
 	table#chargrid
 		tr
