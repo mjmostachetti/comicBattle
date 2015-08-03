@@ -443,13 +443,8 @@ $(document).ready(function() {
     selectCharacter: function selectCharacter(evt) {
       var characterData = $(evt.currentTarget).data();
       console.log(characterData)
-      //alert("Clicked " + characterData.characterImg);
       for (var x = 1; x <= 6; x++) {
-        if (signedInUser.get("hero" + x) === '' &&  
-          this.selectedCharArray.indexOf(characterData.characterName) === -1) {
-            this.selectedCharArray.push(characterData.characterName)
-            console.log("You may not use these characters anymore: ")
-            console.log(this.selectedCharArray)
+        if (signedInUser.get("hero" + x) === ''){
             signedInUser.set("hero" + x, characterData.characterImg)
             signedInUser.set('heroName' + x, characterData.characterName)
             return;
@@ -462,19 +457,7 @@ $(document).ready(function() {
       console.log(Cookies.get('name'))
       this.setCurrentView(new LoginView())
       $('#userInfo').hide()
-      /*
-      this.newUserView = new UserView({
-        model: newUser
-      })
-      */
       this.selectedCharArray = []
-      //this.listenTo(newUser, "change:heroNum", this.addFightButton)
-      //this.listenTo(newUser, "change:heroNum", this.updateUserInstruction)
-      //this.listenTo(newUser, "change:heroNum", this.addRemoveButton)
-      //this.listenTo(newUser, "change", newUser.render)
-      //this.listenTo(newUser, "change:win", this.loadCharacterSelectionRedirect)
-      //this.listenTo(newUser, "change:loss", this.loadCharacterSelectionRedirect)
-      //this.listenTo(newUser, "change:draw", this.loadCharacterSelectionRedirect)
       newUserCollection.fetch({async : false});
       console.log("These are all of the users : ")
       console.log(newUserCollection)
@@ -496,25 +479,6 @@ $(document).ready(function() {
         this.listenTo(signedInUser, "change:loss", this.loadCharacterSelectionRedirect)
         this.listenTo(signedInUser, "change:draw", this.loadCharacterSelectionRedirect)
         this.loadCharView()
-        // when a user selects a new user from the dropdown, run this code
-        /*
-        $('#battleOtherUsers').on('change',function(){
-          console.log("Select just changed.")
-        })
-        $("#battleOtherUsers").change(function(){
-          console.log("You now want to battle : ")
-          console.log($('#battleOtherUsers').val())
-          var findThisUser = $('#battleOtherUsers').val()
-          findThisUser = newUserCollection.findWhere({ username : findThisUser})
-          console.log(findThisUser)
-          var arr = [4,5,6]
-          arr.forEach(function(num){
-            signedInUser.set("hero" + num,findThisUser.attributes['hero'+(num-3)])
-            signedInUser.set("heroName" + num,findThisUser.attributes['heroName'+(num-3)]) 
-          })
-        })
-*/
-
       }
     },
     fun : function(model){
@@ -613,11 +577,16 @@ $(document).ready(function() {
       for (var x = 1; x <= 6; x++) {
         var preAttributeModel = characterList.findWhere({
           name: signedInUser.attributes['heroName' + x]
-        })
+        }).clone()
         preAttributeModel.attribute()
-        console.log(preAttributeModel)
+        console.log(preAttributeModel.get("name"))
+        // changing the id before adding to the collection allows us to 
+        // add the same character to battleCharacters
+        preAttributeModel.set("id",x)
+        console.log(preAttributeModel.get("id"))
         battleCharacters.add(preAttributeModel)
       }
+      console.log("These are the battleCharacters : ")
       console.log(battleCharacters)
         //leftTeam = new CharacterCollection(leftTeamObj);
         //rightTeam = new CharacterCollection(rightTeamObj);
