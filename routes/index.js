@@ -61,13 +61,13 @@ router.post('/signup', function(request, response) {
 							"hash": userHash,
 							"win": 0,
 							"loss": 0,
-							"draw" : 0,
+							"draw": 0,
 							"hero1": "",
 							"hero2": "",
 							"hero3": "",
 							"heroName1": "",
-							"heroName2" : "",
-							"heroName3" : ""
+							"heroName2": "",
+							"heroName3": ""
 						}).then(function() {
 							response.render('index', {
 								message: "You just registered!"
@@ -87,9 +87,9 @@ router.post('/index', function(request, response) {
 		.then(function(resp) {
 			console.log(resp.body.results.length)
 			console.log(resp.body.results)
-			if(resp.body.results.length === 0){
-				response.render('index',{
-					message:'Incorrect Username and Password. Please try again.'
+			if (resp.body.results.length === 0) {
+				response.render('index', {
+					message: 'Incorrect Username and Password. Please try again.'
 				})
 			}
 			var userHash = resp.body.results[0].value.hash;
@@ -97,12 +97,12 @@ router.post('/index', function(request, response) {
 			pass.hash(password, userSalt, function(err, hash) {
 				if (userHash === hash) {
 					console.log('logged in');
-					response.cookie('name',username)
+					response.cookie('name', username)
 					console.log(typeof resp.body.results)
 					console.log(typeof resp)
 					console.log(resp.body.results[0].value)
 					response.render('index', {
-						data : resp.body.results[0].value
+						data: resp.body.results[0].value
 					})
 				} else {
 					response.render('index', {
@@ -135,7 +135,7 @@ router.get('/api/characters', function(request, response) {
 	characterIDs.forEach(function(item) {
 		http.get('http://www.comicvine.com/api/character/' +
 			'4005-' + item.id +
-			'/?api_key=72e9a1878dcfdf40e3c1db8d52883e44a5ef37ba&' +
+			'/?api_key=ebad02dbb992233682ea82d4bf408a1466e1e434&' +
 			'field_list=name,image,powers,deck,id&format=json',
 			function(res) {
 				var writeToThis = '';
@@ -162,12 +162,12 @@ router.get('/api/characters', function(request, response) {
 
 
 //define api 'GET' request to return all the users
-router.get('/api/users', function(request,response){
-	db.search('userData', '*').then(function(resp){
+router.get('/api/users', function(request, response) {
+	db.search('userData', '*').then(function(resp) {
 		console.log("This is all of the userData :")
 		console.log(resp.body.results)
 		var userArray = []
-		resp.body.results.forEach(function(item){
+		resp.body.results.forEach(function(item) {
 			console.log(item.value)
 			userArray.push(item.value)
 		})
@@ -175,58 +175,58 @@ router.get('/api/users', function(request,response){
 	})
 });
 
-router.put('/api/users/:id', function(request,response){
+router.put('/api/users/:id', function(request, response) {
 	var x = 0;
 	var userKey;
 	console.log("Triggered put request.")
 	console.log(typeof request.body)
-	console.log(request.body)
-	var userID = parseInt(request.params.id,10)
-	db.search('userData','value.id:' + userID).then(function(resp){
-	  //console.log(resp.body.results[0])
-	  //console.log(resp.body.results[0].path.key)
-	  userKey = resp.body.results[0].path.key
-	  var herozNum = 0;
-	  if(request.body.heroNum > 3){
-	  	herozNum = 3;
-	  }
-	  console.log(userKey)
-		db.merge('userData',userKey, {
-	  	"hero1" : request.body.hero1,
-	  	"hero2" : request.body.hero2,
-	  	"hero3" : request.body.hero3,
-	  	"heroName1" : request.body.heroName1,
-	  	"heroName2" : request.body.heroName2,
-	  	"heroName3" : request.body.heroName3,
-	  	"heroNum" : herozNum,
-	  	"win" : request.body.win,
-	  	"loss" : request.body.loss,
-	  	"draw" : request.body.draw,
-	  	"totalBattles" : request.body.totalBattles
-	  }).then(function(result){
-	  	console.log("Success")
-	  }).fail(function(err){
-	  	console.log(err)
-	  })
+	console.log(request.body) << << << < HEAD
+	var userID = parseInt(request.params.id, 10)
+	db.search('userData', 'value.id:' + userID).then(function(resp) {
+		//console.log(resp.body.results[0])
+		//console.log(resp.body.results[0].path.key)
+		userKey = resp.body.results[0].path.key
+		var herozNum = 0;
+		if (request.body.heroNum > 3) {
+			herozNum = 3;
+		}
+		console.log(userKey)
+		db.merge('userData', userKey, {
+			"hero1": request.body.hero1,
+			"hero2": request.body.hero2,
+			"hero3": request.body.hero3,
+			"heroName1": request.body.heroName1,
+			"heroName2": request.body.heroName2,
+			"heroName3": request.body.heroName3,
+			"heroNum": herozNum,
+			"win": request.body.win,
+			"loss": request.body.loss,
+			"draw": request.body.draw,
+			"totalBattles": request.body.totalBattles
+		}).then(function(result) {
+			console.log("Success")
+		}).fail(function(err) {
+			console.log(err)
+		})
 	})
 });
 
-router.get('/updateMerge',function(request,response){
-  db.merge('userData','0ba9c56efa20d7b5', {
-  	"hero1" : "yes"
-  }
-  //{
-  //	"upsert" : true
-  ).then(function(result){
-  	console.log("Success")
-  	/*
+router.get('/updateMerge', function(request, response) {
+	db.merge('userData', '0ba9c56efa20d7b5', {
+			"hero1": "yes"
+		}
+		//{
+		//	"upsert" : true
+	).then(function(result) {
+		console.log("Success")
+			/*
   	db.search('userData','value.id:' + userID).then(function(resp){
   		console.log(resp)
   	})
 		*/
-  }).fail(function(err){
-  	console.log(err)
-  })
+	}).fail(function(err) {
+		console.log(err)
+	})
 })
 
 module.exports = router;

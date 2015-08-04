@@ -1,4 +1,5 @@
-var leftTeam, characterList, fightViewer, newUser, newUserCollection, signedInUser;
+var leftTeam, characterList, fightViewer, newUser, newUserCollection,
+  signedInUser;
 
 $(document).ready(function() {
 
@@ -12,20 +13,20 @@ $(document).ready(function() {
       image: ""
     },
     attribute: function() {
-      if (this.get("name") === "Batman" || 
-        this.get("name") === "daredevil" || 
-        this.get("name") === "Hulk" || 
+      if (this.get("name") === "Batman" ||
+        this.get("name") === "daredevil" ||
+        this.get("name") === "Hulk" ||
         this.get("name") === "Joker" ||
         this.get("name") === "Catwoman" ||
         this.get("name") === "Black Widow" ||
-        this.get("name") === "Power Girl" || 
+        this.get("name") === "Power Girl" ||
         this.get("name") === "Jean Grey") {
         this.set("type", "strength")
-      } else if (this.get("name") === "Superman" || 
-        this.get("name") === "Spider-Man" || 
+      } else if (this.get("name") === "Superman" ||
+        this.get("name") === "Spider-Man" ||
         this.get("name") === "Cyclops" ||
         this.get("name") === "Carnage" ||
-        this.get("name") === "Rogue" || 
+        this.get("name") === "Rogue" ||
         this.get("name") === "Storm") {
         this.set("type", "energy")
       } else {
@@ -58,7 +59,7 @@ $(document).ready(function() {
       heroName5: '',
       heroName6: '',
       heroNum: 0,
-      totalBattles : 0
+      totalBattles: 0
     }
   })
 
@@ -88,7 +89,7 @@ $(document).ready(function() {
   var UserCollection = Backbone.Collection.extend({
     model: User,
     url: '/api/users',
-    comparator : function(model){
+    comparator: function(model) {
       return -model.get("win")
     }
   })
@@ -345,19 +346,23 @@ $(document).ready(function() {
     tagName: 'div',
     className: 'character-view-main',
     template: _.template($("#template-characterSelect").html()),
-    events : {
-      "change #battleOtherUsers" : "loadOpposingTeam"
+    events: {
+      "change #battleOtherUsers": "loadOpposingTeam"
     },
-    loadOpposingTeam : function(){
+    loadOpposingTeam: function() {
       console.log("You now want to battle : ")
       console.log($('#battleOtherUsers').val())
       var findThisUser = $('#battleOtherUsers').val()
-      findThisUser = newUserCollection.findWhere({ username : findThisUser})
+      findThisUser = newUserCollection.findWhere({
+        username: findThisUser
+      })
       console.log(findThisUser)
-      var arr = [4,5,6]
-      arr.forEach(function(num){
-        signedInUser.set("hero" + num,findThisUser.attributes['hero'+(num-3)])
-        signedInUser.set("heroName" + num,findThisUser.attributes['heroName'+(num-3)]) 
+      var arr = [4, 5, 6]
+      arr.forEach(function(num) {
+        signedInUser.set("hero" + num, findThisUser.attributes[
+          'hero' + (num - 3)])
+        signedInUser.set("heroName" + num, findThisUser.attributes[
+          'heroName' + (num - 3)])
       })
     },
     //call render somewhere else
@@ -370,27 +375,29 @@ $(document).ready(function() {
       console.log(newUserCollection)
       var html = this.template({
         characters: this.collection,
-        allUsers : newUserCollection,
-        signedInUser : signedInUser
+        allUsers: newUserCollection,
+        signedInUser: signedInUser
       });
       this.$el.html(html);
-      if(signedInUser.get("heroNum") > 0){
+      if (signedInUser.get("heroNum") > 0) {
         $('#removeCharacter').show()
-      } else{
-        $('#removeCharacter').hide()       
+      } else {
+        $('#removeCharacter').hide()
       }
     }
   })
 
   var LeaderboardView = Backbone.View.extend({
-    template : _.template($('#template-leaderboard').html()),
-    initialize : function(){
+    template: _.template($('#template-leaderboard').html()),
+    initialize: function() {
       this.render()
     },
-    render : function(){
+    render: function() {
       $("#userInfo").hide();
       console.log(newUserCollection)
-      this.$el.html(this.template({users : newUserCollection}))
+      this.$el.html(this.template({
+        users: newUserCollection
+      }))
     }
   })
 
@@ -398,46 +405,38 @@ $(document).ready(function() {
 
   newUserCollection = new UserCollection;
 
-
-
-
-  //newUser = new User;
-
   var MainAppView = Backbone.View.extend({
     //div in index.jade
-    //el: $('#container'),
     el: $('#comicapp'),
     events: {
       "click #loadSignup": "loadSignup",
       "click #loadLogin": "loadLogin",
-      //"click #loginButton": "loadCharView",
       "click .character": "selectCharacter",
       "mouseover .character": "displayCharacterInfo",
       "click #removeCharacter": "removeCharacterFromTeam",
-      //"click #loginButton": "loadFightScreen",
       "click #fightButton": "loadFightScreen",
-      "click #logout" : "logout",
-      "click #saveTeam" : "saveYourTeam",
-      "click #leaderboard" : "loadLeaderBoardView",
-      "click #returnToCharSelect" : "loadCharView"
+      "click #logout": "logout",
+      "click #saveTeam": "saveYourTeam",
+      "click #leaderboard": "loadLeaderBoardView",
+      "click #returnToCharSelect": "loadCharView"
     },
-    loadLeaderBoardView : function(){
+    loadLeaderBoardView: function() {
       this.setCurrentView(new LeaderboardView())
     },
-    saveYourTeam : function(){
+    saveYourTeam: function() {
       console.log(signedInUser)
-      // all of these values will be available on the server-side via request.body
+        // all of these values will be available on the server-side via request.body
       signedInUser.save({
-        hero1 : signedInUser.get("hero1"),
-        hero2 : signedInUser.get("hero2"),
-        hero3 : signedInUser.get("hero3"),
-        heroName1 : signedInUser.get("heroName1"),
-        heroName2 : signedInUser.get("heroName2"),
-        heroName3 : signedInUser.get("heroName3")
+        hero1: signedInUser.get("hero1"),
+        hero2: signedInUser.get("hero2"),
+        hero3: signedInUser.get("hero3"),
+        heroName1: signedInUser.get("heroName1"),
+        heroName2: signedInUser.get("heroName2"),
+        heroName3: signedInUser.get("heroName3")
       })
     },
-    logout : function(){
-      Cookies.set('name',null)
+    logout: function() {
+      Cookies.set('name', null)
       $('#userInfo').hide()
       this.setCurrentView(new LoginView())
       this.$el.addClass("blue")
@@ -466,10 +465,10 @@ $(document).ready(function() {
       var characterData = $(evt.currentTarget).data();
       console.log(characterData)
       for (var x = 1; x <= 6; x++) {
-        if (signedInUser.get("hero" + x) === ''){
-            signedInUser.set("hero" + x, characterData.characterImg)
-            signedInUser.set('heroName' + x, characterData.characterName)
-            return;
+        if (signedInUser.get("hero" + x) === '') {
+          signedInUser.set("hero" + x, characterData.characterImg)
+          signedInUser.set('heroName' + x, characterData.characterName)
+          return;
         }
       }
       console.log(signedInUser)
@@ -480,20 +479,28 @@ $(document).ready(function() {
       this.setCurrentView(new LoginView())
       $('#userInfo').hide()
       this.selectedCharArray = []
-      newUserCollection.fetch({async : false});
+      newUserCollection.fetch({
+        async: false
+      });
       console.log("These are all of the users : ")
       console.log(newUserCollection)
-      characterList.fetch({async : false});
-      if(Cookies.get('name') !== null){
+      characterList.fetch({
+        async: false
+      });
+      if (Cookies.get('name') !== null) {
         console.log("There is a cookie!")
-        signedInUser = newUserCollection.findWhere({ username : Cookies.get('name')})
+        signedInUser = newUserCollection.findWhere({
+          username: Cookies.get('name')
+        })
         console.log("This is the signed in user model : ")
         console.log(signedInUser)
-        this.newUserView = new UserView({ model : signedInUser })
-        this.listenTo(signedInUser,"update",this.persistToServer)
-        this.listenTo(signedInUser,"change:win",this.updateRecord)
-        this.listenTo(signedInUser,"change:loss",this.updateRecord)
-        this.listenTo(signedInUser,"change:draw",this.updateRecord)
+        this.newUserView = new UserView({
+          model: signedInUser
+        })
+        this.listenTo(signedInUser, "update", this.persistToServer)
+        this.listenTo(signedInUser, "change:win", this.updateRecord)
+        this.listenTo(signedInUser, "change:loss", this.updateRecord)
+        this.listenTo(signedInUser, "change:draw", this.updateRecord)
         this.listenTo(signedInUser, "change:heroNum", this.addRemoveButton)
         this.listenTo(signedInUser, "change:heroNum", this.addFightButton)
         this.listenTo(signedInUser, "change:heroNum", this.updateUserInstruction)
@@ -504,54 +511,62 @@ $(document).ready(function() {
         this.addFightButton()
       }
     },
-    updateRecord : function(model){
+    updateRecord: function(model) {
       console.log("The logged in user has changed on fx fun.")
-      model.set("totalBattles",model.get('win') + model.get('loss') + model.get('draw'))
+      model.set("totalBattles", model.get('win') + model.get('loss') +
+        model.get('draw'))
       model.save()
     },
-    addRemoveButton : function(model){
+    addRemoveButton: function(model) {
       console.log("heroNum is now : " + model.get('heroNum'))
-      if(model.get('heroNum') > 0){
+      if (model.get('heroNum') > 0) {
         $('#removeCharacter').show()
-      } else{
+      } else {
         $('#removeCharacter').hide()
       }
     },
-    updateUserInstruction : function(model){
+    updateUserInstruction: function(model) {
       console.log(model.get('heroNum'))
-      switch(model.get('heroNum')){
+      switch (model.get('heroNum')) {
         case 0:
-          $('#userInstruction').html('Pick 3 More Characters For Your Team!')
+          $('#userInstruction').html(
+            'Pick 3 More Characters For Your Team!')
           $("#userInstruction2").hide()
           $("#battleOtherUsers").hide()
           break;
         case 1:
-          $('#userInstruction').html('Pick 2 More Characters For Your Team!')
+          $('#userInstruction').html(
+            'Pick 2 More Characters For Your Team!')
           $("#userInstruction2").hide()
           $("#battleOtherUsers").hide()
           break;
         case 2:
-          $('#userInstruction').html('Pick 1 More Characters For Your Team!')
+          $('#userInstruction').html(
+            'Pick 1 More Characters For Your Team!')
           $("#userInstruction2").hide()
-          $("#battleOtherUsers").hide()        
+          $("#battleOtherUsers").hide()
           break;
         case 3:
-          $('#userInstruction').html('Pick 3 More Characters For The Opposing Team!')
+          $('#userInstruction').html(
+            'Pick 3 More Characters For The Opposing Team!')
           $("#userInstruction2").show()
           $("#battleOtherUsers").show()
           break;
         case 4:
-          $('#userInstruction').html('Pick 2 More Characters For The Opposing Team!')
+          $('#userInstruction').html(
+            'Pick 2 More Characters For The Opposing Team!')
           $("#userInstruction2").show()
           $("#battleOtherUsers").show()
           break;
         case 5:
-          $('#userInstruction').html('Pick 1 More Characters For The Opposing Team!')
+          $('#userInstruction').html(
+            'Pick 1 More Characters For The Opposing Team!')
           $("#userInstruction2").show()
           $("#battleOtherUsers").show()
           break;
         case 6:
-          $('#userInstruction').html('Click "Let\s Get It On!" Button Below!"')
+          $('#userInstruction').html(
+            'Click "Let\s Get It On!" Button Below!"')
           break;
       }
       //$('#userInstruction').html()
@@ -587,8 +602,8 @@ $(document).ready(function() {
       }
       $('#userInfo').show();
       this.setCurrentView(new CharactersView({
-        collection : characterList,
-        users : newUserCollection
+        collection: characterList,
+        users: newUserCollection
       }))
     },
     loadFightScreen: function(event) {
@@ -601,9 +616,9 @@ $(document).ready(function() {
         }).clone()
         preAttributeModel.attribute()
         console.log(preAttributeModel.get("name"))
-        // changing the id before adding to the collection allows us to 
-        // add the same character to battleCharacters
-        preAttributeModel.set("id",x)
+          // changing the id before adding to the collection allows us to
+          // add the same character to battleCharacters
+        preAttributeModel.set("id", x)
         console.log(preAttributeModel.get("id"))
         battleCharacters.add(preAttributeModel)
       }
@@ -623,16 +638,16 @@ $(document).ready(function() {
       this.$el.removeClass("blue")
       this.$el.removeClass("login")
       this.$el.addClass("black")
-      //event.preventDefault()
+        //event.preventDefault()
       $('#userInfo').show()
       this.setCurrentView(new CharactersView({
-        collection : characterList,
-        users : newUserCollection
+        collection: characterList,
+        users: newUserCollection
       }))
-      if(signedInUser.get("heroNum") > 0){
+      if (signedInUser.get("heroNum") > 0) {
         $('#removeCharacter').show()
-      } else{
-        $('#removeCharacter').hide()       
+      } else {
+        $('#removeCharacter').hide()
       }
       this.updateUserInstruction(signedInUser)
     },
