@@ -180,7 +180,7 @@ router.put('/api/users/:id', function(request, response) {
 	var userKey;
 	console.log("Triggered put request.")
 	console.log(typeof request.body)
-	console.log(request.body) << << << < HEAD
+	console.log(request.body)
 	var userID = parseInt(request.params.id, 10)
 	db.search('userData', 'value.id:' + userID).then(function(resp) {
 		//console.log(resp.body.results[0])
