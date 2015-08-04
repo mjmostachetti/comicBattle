@@ -121,10 +121,12 @@ $(document).ready(function() {
 
       if (this.leftTeamCollection.length === 0 && this.rightTeamCollection
         .length === 0) {
+        alert("Draw!")
         return this.draw('Nobody')
       }
 
       if (this.leftTeamCollection.length === 0) {
+        alert("You lose!")
         return this.loss('Right')
       } else {
         leftCharacter = this.leftTeamCollection[0]
@@ -133,6 +135,7 @@ $(document).ready(function() {
       }
 
       if (this.rightTeamCollection.length === 0) {
+        alert("You win!")
         return this.win('Left')
       } else {
         rightCharacter = this.rightTeamCollection[0]
