@@ -1,3 +1,8 @@
+
+/************
+ Login/Signup
+*************/
+
 input[type="text"] {
   font-family: 'Changa One', sans-serif;
   font-size: 18px;
@@ -22,7 +27,7 @@ input[type="password"]:focus {
 
 body {
   padding: 25px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  font: 14px "Changa One", Helvetica, Arial, sans-serif;
 }
 
 a {
@@ -37,18 +42,14 @@ a.hover {
 #back {
     background-color: blue;
 }
-
-.span-24 ul {
+/* possibly not used anymore, need to check */
+/*.span-24 ul {
     list-style: none;
 }
-
-/*.right {
-    float: right;
-}*/
 
 .span-25 ul {
     list-style: none;
-}
+}*/
 
 .left {
     float: left;
@@ -66,7 +67,6 @@ a.hover {
 }
 
 #comicapp {
-  opacity: 1;
   color: red;
   border: 2px solid red;
   border-radius: 25px;
@@ -75,7 +75,7 @@ a.hover {
 }
 
 .blue {
-  background-color: blue;
+  background-color: navy;
 }
 
 .black {
@@ -310,8 +310,7 @@ img {
 }
 
 #charDeck img {
-  overflow: auto;
-  margin: 0 25% 0 0;
+  overflow: hidden;
   display: block;
   align-items: center;
   text-align: center;
@@ -323,6 +322,8 @@ img {
 
 #charImg {
   border: 5px solid grey;
+  border-radius: 15px;
+  overflow: hidden;
 }
 
 tr {
