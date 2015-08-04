@@ -57,7 +57,8 @@ $(document).ready(function() {
       heroName4: '',
       heroName5: '',
       heroName6: '',
-      heroNum: 0
+      heroNum: 0,
+      totalBattles : 0
     }
   })
 
@@ -379,8 +380,16 @@ $(document).ready(function() {
     }
   })
 
-  var UsersDropDownView = Backbone.View.extend({
-
+  var LeaderboardView = Backbone.View.extend({
+    template : _.template($('#template-leaderboard').html()),
+    initialize : function(){
+      this.render()
+    },
+    render : function(){
+      $("")
+      var sortedUserList = 
+      this.$el.html(this.template)
+    }
   })
 
   characterList = new CharacterCollection;
@@ -407,7 +416,8 @@ $(document).ready(function() {
       "click #fightButton": "loadFightScreen",
       "click #logout" : "logout",
       "click #saveTeam" : "saveYourTeam",
-      "click #leaderboard" : "loadLeaderBoardView"
+      "click #leaderboard" : "loadLeaderBoardView",
+      "click #returnToCharSelect" : "loadCharView"
     },
     loadLeaderBoardView : function(){
       this.setCurrentView(new LeaderboardView())
@@ -428,6 +438,9 @@ $(document).ready(function() {
       Cookies.set('name',null)
       $('#userInfo').hide()
       this.setCurrentView(new LoginView())
+      this.$el.addClass("blue")
+      this.$el.addClass("login")
+      this.$el.removeClass("black")
     },
     // create display for character information when hovering over the characters
     displayCharacterInfo: function(evt) {
@@ -491,6 +504,7 @@ $(document).ready(function() {
     },
     updateRecord : function(model){
       console.log("The logged in user has changed on fx fun.")
+      model.set("totalBattles",model.get('win') + model.get('loss') + model.get('draw'))
       model.save()
     },
     addRemoveButton : function(model){

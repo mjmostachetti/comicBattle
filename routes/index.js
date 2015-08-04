@@ -201,7 +201,8 @@ router.put('/api/users/:id', function(request,response){
 	  	"heroNum" : herozNum,
 	  	"win" : request.body.win,
 	  	"loss" : request.body.loss,
-	  	"draw" : request.body.draw
+	  	"draw" : request.body.draw,
+	  	"totalBattles" : request.body.totalBattles
 	  }).then(function(result){
 	  	console.log("Success")
 	  }).fail(function(err){
