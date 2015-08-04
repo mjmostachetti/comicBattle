@@ -80,7 +80,7 @@ module.exports = [
 	"id" : "3200"
 },
 {
-	//Magic
+	//Magic --
 	"name" : "Invisible Woman",
 	"id" : "2190"
 },
@@ -91,8 +91,8 @@ module.exports = [
 },
 {
 	//Strength
-	"name" : "Jean Grey",
-	"id" : "3552"
+	"name" : "Elektra",
+	"id" : "1802"
 },
 {
 	//Strength

@@ -195,7 +195,13 @@ li {
   width: 30%;
 }
 
-#team-battle-info, #tableDiv {
+#tableDiv{
+  display: block;
+  width: 50%;
+  text-align: -webkit-center;
+}
+
+#team-battle-info {
   display: inline-flex;
 }
 
@@ -223,7 +229,6 @@ li {
   font-family: 'Changa One', sans-serif;
   color: red;
   padding: 20px;
-  display : inline-block;
   overflow: auto;
 }
 
@@ -253,7 +258,7 @@ li {
   background: black;
 }
 
-#charInformation, #chargrid {
+#charInformation{
   width: 50%;
 }
 
@@ -266,6 +271,10 @@ img {
   width: 100px;
 }*/
 
+#fightButtonDiv{
+  padding-top: 10px;
+}
+
 #fightButton {
   background-color: red;
   text-decoration: none;
@@ -275,7 +284,8 @@ img {
   cursor: pointer;
   border-radius: 25px;
   font-size: 20px;
-  float: left;
+  text-align: center;
+  padding-top: 20px;
 }
 
 #fightButton:hover {
@@ -288,16 +298,19 @@ img {
   padding: 10px;
   font-family: 'Changa One', sans-serif;
   border: none;
-  float: left;
   margin-right: 15px;
   cursor: pointer;
   font-size: 20px;
   border-radius: 25px;
-
+  text-align: center;
 }
 /*MAKES BUTTON ANIMATE AND CHANGE COLOR*/
 #removeCharacter:hover {
   background-color: #52DDFF;
+}
+
+#removeCharacterDiv{
+  text-align: center;
 }
 
 #charName {
@@ -335,7 +348,7 @@ tr {
 }
 
 #chargrid {
-  margin-top: 75px;
+  margin-top: 25px;
 }
 
 #fight {
@@ -374,6 +387,10 @@ tr {
   float: left;
 }
 
-#computer-team {
+#computer-team{
   float: left;
+}
+
+#userInstruction{
+  margin: 0;
 }
