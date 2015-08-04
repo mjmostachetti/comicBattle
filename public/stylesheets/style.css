@@ -288,6 +288,8 @@ img {
 
 #charDeck {
   font-size: 19px;
+  width: 400px;
+  margin-left: 10%;
 }
 
 #charDeck img {
@@ -305,8 +307,10 @@ img {
   border: 5px solid grey;
   border-radius: 15px;
   overflow: hidden;
-  height: 350px;
+  height: 450px;
   margin: 0 auto;
+  margin-top: 30px;
+  margin-left: 10%;
 }
 
 tr {
