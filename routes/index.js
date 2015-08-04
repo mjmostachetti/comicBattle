@@ -180,7 +180,7 @@ router.put('/api/users/:id', function(request, response) {
 	var userKey;
 	console.log("Triggered put request.")
 	console.log(typeof request.body)
-	console.log(request.body)
+	console.log(request.body) << << << < HEAD
 	var userID = parseInt(request.params.id, 10)
 	db.search('userData', 'value.id:' + userID).then(function(resp) {
 		//console.log(resp.body.results[0])
@@ -201,7 +201,8 @@ router.put('/api/users/:id', function(request, response) {
 			"heroNum": herozNum,
 			"win": request.body.win,
 			"loss": request.body.loss,
-			"draw": request.body.draw
+			"draw": request.body.draw,
+			"totalBattles": request.body.totalBattles
 		}).then(function(result) {
 			console.log("Success")
 		}).fail(function(err) {
