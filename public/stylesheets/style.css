@@ -30,6 +30,73 @@ body {
   font: 14px "Changa One", Helvetica, Arial, sans-serif;
 }
 
+/***********************
+ comicapp div and title
+***********************/
+.title {
+    text-align: center;
+    color: red;
+}
+
+#comicapp.login {
+    margin: 0 auto;
+    padding: 10px;
+    width: 25%;
+}
+
+.blue {
+  background-color: navy;
+}
+
+.black {
+  background-color: black;
+}
+
+.signup {
+    cursor: pointer;
+    opacity: none;
+}
+
+#loginButton {
+  cursor: pointer;
+  font-weight: bold;
+  background-color: red;
+  font-size: 20px;
+  text-decoration: none;
+  padding: 10px;
+  font-family: 'Changa One', sans-serif;
+  border: none;
+  border-radius: 25px;
+  margin-left: 120px;
+}
+
+#loginButton:hover {
+  background-color: #52DDFF;
+}
+
+#signupButton {
+  cursor: pointer;
+  font-weight: bold;
+  background-color: red;
+  font-size: 20px;
+  text-decoration: none;
+  padding: 10px;
+  font-family: 'Changa One', sans-serif;
+  border: none;
+  border-radius: 25px;
+  margin-left: 120px;
+}
+
+#comicapp {
+  color: red;
+  border: 2px solid red;
+  border-radius: 25px;
+  font-family: 'Bangers', sans-serif;
+  text-align: center;
+  width: 60%;
+  margin: 0 auto;
+}
+
 a {
   color: #00B7FF;
   float: right;
@@ -42,50 +109,6 @@ a.hover {
 #back {
     background-color: blue;
 }
-/* possibly not used anymore, need to check */
-/*.span-24 ul {
-    list-style: none;
-}
-
-.span-25 ul {
-    list-style: none;
-}*/
-
-.left {
-    float: left;
-}
-
-.title {
-    text-align: center;
-    color: red;
-}
-
-#comicapp.login {
-    margin: 0 auto;
-    padding: 10px;
-    width: 25%;
-}
-
-#comicapp {
-  color: red;
-  border: 2px solid red;
-  border-radius: 25px;
-  font-family: 'Bangers', sans-serif;
-  text-align: center;
-}
-
-.blue {
-  background-color: navy;
-}
-
-.black {
-  background-color: black;
-  width: auto;
-}
-
-/*.login h1 {
-  float: left;
-}*/
 
 #BG {
   background: url(../img/leaderboardBackground.jpg) no-repeat center center fixed;
@@ -105,32 +128,6 @@ a.hover {
     cursor: pointer;
 }
 
-.signup {
-    cursor: pointer;
-    opacity: none;
-}
-
-#loginButton {
-  cursor: pointer;
-  font-weight: bold;
-  background-color: red;
-  text-decoration: none;
-  padding: 10px;
-  font-family: 'Changa One', sans-serif;
-  border: none;
-  border-radius: 25px;
-  margin-left: 120px;
-}
-
-#loginButton:hover {
-  background-color: #52DDFF;
-}
-
-#signupButton {
-    cursor: pointer;
-    opacity: none;
-}
-
 #grid{
     height: 800px;
     width: 500px;
@@ -138,7 +135,6 @@ a.hover {
     margin: 0 auto;
     font-family: 'Bangers', sans-serif;
     background: white;
-    /*float: left;*/
     opacity: none;
     display: inline-block;
 }
@@ -156,31 +152,6 @@ a.hover {
 #options {
     border-bottom: 2px solid #52DDFF;
     background: black;
-}
-
-nav ul {
-    list-style: none;
-    text-align: center;
-}
-
-nav li {
-    display: inline-block;
-}
-
-li {
-    padding: 10px;
-}
-
-/*#selectBG {
-  background: url(../../websiteImages/imagesForSite/leaderboardBackground.jpg) no-repeat center center fixed;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-
-}*/
-.character-view-main #chargrid {
-  text-align: center;
 }
 
 #user-container{
@@ -210,14 +181,18 @@ li {
   background: black;
   border-radius: 25px;
   overflow: auto;
+  font-family: 'Changa One', sans-serif;
+  color: red;
+  padding: 20px;
 }
 
 #userInfo {
-  display: inline-flex;
+  display: block;
   background: black;
-  margin-top: 20px;
+  margin-left: auto;
+  margin-right: auto;
   margin-bottom: 20px;
-  width: 100%;
+  width: 60%;
   border-radius: 25px;
   border: 2px solid red;
   color: red;
@@ -225,23 +200,16 @@ li {
   overflow: auto;
 }
 
-.character-view-main {
-  font-family: 'Changa One', sans-serif;
-  color: red;
-  padding: 20px;
-  overflow: auto;
-}
-
 .character{
-  width: 130px;
-  height: 150px;
+  width: 80px;
+  height: 120px;
   display: inline-grid;
-  border: 5px solid grey;
+  border: 3px solid grey;
   border-radius: 5%;
 }
 
 .character:hover {
-  border: 5px solid red;
+  border: 3px solid red;
 }
 
 .character img {
@@ -265,11 +233,6 @@ li {
 img {
   padding-right: 0px;
 }
-
-/*#charImg {
-  height: 100px;
-  width: 100px;
-}*/
 
 #fightButtonDiv{
   padding-top: 10px;
@@ -318,7 +281,6 @@ img {
   font-size: 25px;
 }
 
-
 #charDeck {
   font-size: 19px;
 }
@@ -326,8 +288,8 @@ img {
 #charDeck img {
   overflow: hidden;
   display: block;
-  align-items: center;
-  text-align: center;
+  align-items: right;
+  text-align: right;
 }
 
 .character {
@@ -338,6 +300,8 @@ img {
   border: 5px solid grey;
   border-radius: 15px;
   overflow: hidden;
+  height: 350px;
+  margin: 0 auto;
 }
 
 tr {
