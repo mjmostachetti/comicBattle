@@ -284,6 +284,11 @@ img {
 
 #charName {
   font-size: 25px;
+  margin-left: 10%; 
+}
+
+#charBio {
+  margin-left: 10%;  
 }
 
 #charDeck {
