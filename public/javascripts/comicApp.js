@@ -401,6 +401,7 @@ $(document).ready(function() {
 
 
 
+
   //newUser = new User;
 
   var MainAppView = Backbone.View.extend({
