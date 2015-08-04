@@ -292,7 +292,7 @@ img {
   background-color: #52DDFF;
 }
 
-#removeCharacter, #logout, #saveTeam, #leaderboard {
+#removeCharacter, #logout, #saveTeam, #leaderboard, #returnToCharSelect {
   background-color: red;
   text-decoration: none;
   padding: 10px;
@@ -393,4 +393,20 @@ tr {
 
 #userInstruction{
   margin: 0;
+}
+
+#leaderboardDiv{
+  text-align: center;
+}
+
+.leaderboardList {
+  display:inline-flex;
+  width:75%;
+}
+
+.userTeams{
+  width: 50%;
+}
+.userNames, .userWins{
+  width:25%;
 }
