@@ -1,2 +1,21 @@
 #leaderboardDiv
-  
+    .leaderboardList
+      div.userNames
+        h1 Player Name
+      div.userTeams
+        h1 Team Composition
+      div.userWins
+        h1 Total Wins
+  !="<% users.each(function(user,index){ %>"
+    .leaderboardList
+      div.userNames
+        h2!="<%= user.get('username') %>"
+      div.userTeams
+        img(src!="<%= user.get('hero1') %>")
+        img(src!="<%= user.get('hero2') %>")
+        img(src!="<%= user.get('hero3') %>")
+      div.userWins
+        h2!="<%= user.get('win') %>"
+    br
+  !="<% }) %>"
+  button#returnToCharSelect.hvr-pulse Return to Previous Screen  
