@@ -1,29 +1,45 @@
 - var width = 5
 
-	#tableDiv
-		h2#userInstruction Pick 3 More Characters For Your Team!
-		table#chargrid
-			tr
-				!="<% characters.each(function(c, i) { %>"
-				//- Close and re-open the table row tag every `width` items.
-				!="<% if (i && i % " + width + " === 0) { %>"
-					!="<%= '</tr><tr>' %>"
-				!="<% } %>"
-				td.character(
-					data-character-id!="<%- c.id %>"
-					data-character-img!="<%- c.get('image').thumb_url %>"
-					data-character-name!="<%- c.attributes.name %>"
-					data-character-deck!="<%- c.attributes.deck %>"
-					data-character-bigimage!="<%- c.attributes.image.small_url %>"
-				)
-					img(src!="<%- c.get('image').thumb_url %>")
-				!="<% }) %>"
-		#removeCharacterDiv
-			button#removeCharacter.hvr-pulse Remove Character
-	#charInformation
-		p#charName Hulk
-		p
-			img#charImg(src="http://static.comicvine.com/uploads/scale_small/14/140903/4127149-11.jpg")
-		h2 Character Bio
-		p#charDeck After being bombarded with a massive dose of gamma radiation while saving a young man's life during the testing of an experimental bomb, Dr. Robert Bruce Banner was transformed into the Incredible Hulk: a green behemoth who is the living personification of rage and pure physical strength. He has currently taken on a new persona: Doc Green.
+//- var users != "<% allUsers.models.length"
+#tableDiv
+	h2!="Prepare for Battle, <%= signedInUser.attributes.username %>!"
+	h2#userInstruction Pick 3 More Characters For Your Team!
+	h2#userInstruction2!="....Or Battle Other Users!"
+	select#battleOtherUsers
+		option(class="opposingTeam") - Select Player to Battle -
+		!="<% allUsers.each(function(user,index){ %>"
+			!="<% if( signedInUser.attributes.username !== user.attributes.username ) { %>"
+				option(value!="<%= user.attributes.username %>" class="opposingTeam")!="<%= user.attributes.username %>"
+			!="<% } %>"
+		!="<% }) %>"
+	table#chargrid
+		tr
+			!="<% characters.each(function(c, i) { %>"
+			//- Close and re-open the table row tag every `width` items.
+			!="<% if (i && i % " + width + " === 0) { %>"
+				!="<%= '</tr><tr>' %>"
+			!="<% } %>"
+			td.character(
+				data-character-id!="<%- c.id %>"
+				data-character-img!="<%- c.get('image').thumb_url %>"
+				data-character-name!="<%- c.attributes.name %>"
+				data-character-deck!="<%- c.attributes.deck %>"
+				data-character-bigimage!="<%- c.attributes.image.small_url %>"
+			)
+				img(src!="<%- c.get('image').thumb_url %>")
+			!="<% }) %>"
+	#removeCharacterDiv
+		button#removeCharacter.hvr-pulse Remove Character
+		button#saveTeam.hvr-pulse Save Your Team
+	#leaderboardLogout
+		button#leaderboard.hvr-pulse Leaderboard
+		button#logout.hvr-pulse Logout?	
+	#fightButtonDiv
+		button#fightButton.hvr-pulse Let's get it on!
+#charInformation
+	p#charName Hulk
+	p
+		img#charImg(src="http://static.comicvine.com/uploads/scale_small/14/140903/4127149-11.jpg")
+	h2 Character Bio
+	p#charDeck After being bombarded with a massive dose of gamma radiation while saving a young man's life during the testing of an experimental bomb, Dr. Robert Bruce Banner was transformed into the Incredible Hulk: a green behemoth who is the living personification of rage and pure physical strength. He has currently taken on a new persona: Doc Green.
 
