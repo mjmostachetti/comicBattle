@@ -87,7 +87,10 @@ $(document).ready(function() {
 
   var UserCollection = Backbone.Collection.extend({
     model: User,
-    url: '/api/users'
+    url: '/api/users',
+    comparator : function(model){
+      return -model.get("win")
+    }
   })
 
   var FightView = Backbone.View.extend({
@@ -215,7 +218,6 @@ $(document).ready(function() {
       } else {
         leftCharacter = this.leftTeamCollection[0]
       }
-
       if (this.rightTeamCollection.length === 0) {
         return this.win('Left')
       } else {
@@ -386,9 +388,9 @@ $(document).ready(function() {
       this.render()
     },
     render : function(){
-      $("")
-      var sortedUserList = 
-      this.$el.html(this.template)
+      $("#userInfo").hide();
+      console.log(newUserCollection)
+      this.$el.html(this.template({users : newUserCollection}))
     }
   })
 
