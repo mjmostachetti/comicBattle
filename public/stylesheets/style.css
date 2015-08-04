@@ -292,7 +292,7 @@ img {
   background-color: #52DDFF;
 }
 
-#removeCharacter, #logout, #saveTeam {
+#removeCharacter, #logout, #saveTeam, #leaderboard {
   background-color: red;
   text-decoration: none;
   padding: 10px;
@@ -309,8 +309,9 @@ img {
   background-color: #52DDFF;
 }
 
-#removeCharacterDiv{
+#removeCharacterDiv, #leaderboardLogout, #fightButtonDiv{
   text-align: center;
+  padding-top: 5px;
 }
 
 #charName {

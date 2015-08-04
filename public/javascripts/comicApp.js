@@ -406,7 +406,11 @@ $(document).ready(function() {
       //"click #loginButton": "loadFightScreen",
       "click #fightButton": "loadFightScreen",
       "click #logout" : "logout",
-      "click #saveTeam" : "saveYourTeam"
+      "click #saveTeam" : "saveYourTeam",
+      "click #leaderboard" : "loadLeaderBoardView"
+    },
+    loadLeaderBoardView : function(){
+      this.setCurrentView(new LeaderboardView())
     },
     saveYourTeam : function(){
       console.log(signedInUser)
@@ -482,6 +486,7 @@ $(document).ready(function() {
         this.listenTo(signedInUser, "change:loss", this.loadCharacterSelectionRedirect)
         this.listenTo(signedInUser, "change:draw", this.loadCharacterSelectionRedirect)
         this.loadCharView()
+        this.addFightButton()
       }
     },
     updateRecord : function(model){
@@ -536,14 +541,16 @@ $(document).ready(function() {
       //$('#userInstruction').html()
     },
     addFightButton: function(model) {
-      if (model.get('heroNum') === 6) {
-        console.log("FIGHT!")
+      if (signedInUser.get('heroNum') === 6) {
+        /*console.log("FIGHT!")
           //this.$el.append('<button id="fightButton">Let\'s get it on!</button>')
         $('#tableDiv').append(
           '<div id="fightButtonDiv"><button id="fightButton" class="hvr-pulse">Let\'s get it on!</button></div>'
-        )
+        )*/
+        $('#fightButton').show()
       } else {
-        $('#fightButton').remove()
+        //$('#fightButton').remove()
+        $('#fightButton').hide()
       }
     },
     //handles loading the login view and html elements
