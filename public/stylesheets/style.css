@@ -93,7 +93,7 @@ body {
   border-radius: 25px;
   font-family: 'Bangers', sans-serif;
   text-align: center;
-  width: 80%;
+  width: 100%;
   margin: 0 auto;
 }
 
@@ -162,9 +162,9 @@ a.hover {
   border-radius: 25px;
 }
 
-#team1 p{
-  width: 90;
-  height: 120;
+#team1 img, #team2 img{
+  width: 90px;
+  height: 120px;
 }
 
 #team1, #team2, #user-stats{
@@ -192,17 +192,14 @@ a.hover {
 }
 
 #userInfo {
-  display: block;
+  display: inline-block;
   background: black;
-  margin-left: auto;
-  margin-right: auto;
   margin-bottom: 20px;
-  width: 80%;
+  width: 100%;
   border-radius: 25px;
   border: 2px solid red;
   color: red;
   font-family: 'Bangers', sans-serif;
-  overflow: auto;
 }
 
 .character{
@@ -284,11 +281,11 @@ img {
 
 #charName {
   font-size: 25px;
-  margin-left: 10%; 
+  margin-left: 10%;
 }
 
 #charBio {
-  margin-left: 10%;  
+  margin-left: 10%;
 }
 
 #charDeck {
@@ -389,5 +386,3 @@ tr {
 .userNames, .userWins{
   width:25%;
 }
-
-
