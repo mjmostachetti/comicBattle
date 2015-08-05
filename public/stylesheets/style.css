@@ -95,6 +95,7 @@ body {
   text-align: center;
   width: 100%;
   margin: 0 auto;
+  overflow: hidden;
 }
 
 a {
@@ -128,6 +129,11 @@ a.hover {
     cursor: pointer;
 }
 
+/***********************
+ character select screen
+ and user info
+***********************/
+
 #grid{
     height: 800px;
     width: 500px;
@@ -137,16 +143,6 @@ a.hover {
     background: white;
     opacity: none;
     display: inline-block;
-}
-
-.row {
-    border: 2px solid #52DDFF;
-    width: 50px;
-    height: 50px;
-    float: left;
-    padding: 15px;
-    margin: 15px 15px 15px 15px;
-    background: black;
 }
 
 #options {
@@ -162,23 +158,39 @@ a.hover {
   border-radius: 25px;
 }
 
+#userInfo {
+  display: inline-block;
+  background: black;
+  margin-bottom: 20px;
+  width: 100%;
+  border-radius: 25px;
+  border: 2px solid red;
+  color: red;
+  font-family: 'Bangers', sans-serif;
+}
+
 #team1 img, #team2 img{
   width: 90px;
   height: 120px;
+  padding: 2px;
 }
 
 #team1, #team2, #user-stats{
   width: 30%;
 }
 
+#user-stats p {
+  font-size: 20px;
+}
+
+#chargrid {
+  margin-top: 25px;
+}
+
 #tableDiv{
   display: block;
   width: 50%;
   text-align: -webkit-center;
-}
-
-#team-battle-info {
-  display: inline-flex;
 }
 
 .character-view-main {
@@ -191,21 +203,15 @@ a.hover {
   padding: 20px;
 }
 
-#userInfo {
-  display: inline-block;
-  background: black;
-  margin-bottom: 20px;
-  width: 100%;
-  border-radius: 25px;
-  border: 2px solid red;
-  color: red;
-  font-family: 'Bangers', sans-serif;
-}
+/***********************
+ .character refers to
+ the character portraits
+ in the select grid
+***********************/
 
 .character{
   width: 80px;
   height: 120px;
-  display: inline-grid;
   border: 3px solid grey;
   border-radius: 5%;
 }
@@ -222,18 +228,14 @@ a.hover {
   overflow: hidden;
 }
 
-#fight-view {
-  height: 40%;
-  padding: 20px;
-  background: black;
-}
-
 #charInformation{
   width: 50%;
 }
 
-img {
-  padding-right: 0px;
+#fight-view {
+  height: 40%;
+  padding: 20px;
+  background: black;
 }
 
 #fightButtonDiv{
@@ -315,18 +317,6 @@ img {
   margin-left: 10%;
 }
 
-tr {
-  margin: 10 10 10 10;
-}
-
-#user-stats p {
-  font-size: 20px;
-}
-
-#chargrid {
-  margin-top: 25px;
-}
-
 #fight {
   background-color: red;
   text-decoration: none;
@@ -359,13 +349,29 @@ tr {
   background-color: #52DDFF;
 }
 
-#user-team {
-  float: left;
+#team-battle-info {
+  display: flex;
+  padding: 5px;
+  text-align: center;
+  position: absolute;
+  top: 50px;
+  left: 50px;
+}
+
+/*#user-team{
+  width: 200px;
+  margin-left: 10%;
+}
+
+#user-team img{
+  width: 110px;
+  height: 160px;
 }
 
 #computer-team{
-  float: left;
-}
+  width: 200px;
+  margin-right: 10%;
+}*/
 
 #userInstruction{
   margin: 0;
