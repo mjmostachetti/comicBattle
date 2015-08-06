@@ -343,6 +343,7 @@ a.hover {
   cursor: pointer;
   border-radius: 25px;
   font-size: 20px;
+  margin-left: 15px;
 }
 
 #slowFight:hover {
@@ -392,3 +393,31 @@ a.hover {
 .userNames, .userWins{
   width:25%;
 }
+
+#fightGrid{
+  width: 95%;
+  display: inline-flex;
+  text-align: center;
+}
+
+#user-team{
+  width: 15%;
+}
+
+#twoActivePlayers{
+  width:70%;
+}
+
+#activeLeft, #activeRight{
+  width: 350px;
+  height: 650px;
+}
+
+#computer-team{
+  width:15%;
+}
+
+#topRow{
+  display: -webkit-inline-box;
+}
+
