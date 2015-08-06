@@ -4,7 +4,7 @@
 #tableDiv
 	h2!="Prepare for Battle, <%= signedInUser.attributes.username %>!"
 	h2#userInstruction Pick 3 More Characters For Your Team!
-	h2#userInstruction2!="....Or Battle Other Users!"
+	h2#userInstruction2!="....Or Battle Other Players!"
 	select#battleOtherUsers
 		option(class="opposingTeam") - Select Player to Battle -
 		!="<% allUsers.each(function(user,index){ %>"
@@ -43,7 +43,7 @@
 		button#fightButton.hvr-pulse Let's get it on!
 
 #charInformation
-	p#charName Hulk
+	h1#charName Hulk
 	p
 		img#charImg(src="http://static.comicvine.com/uploads/scale_small/14/140903/4127149-11.jpg")
 	h2#charBio Character Bio

@@ -307,13 +307,16 @@ a.hover {
 }
 
 #charName {
-  font-size: 25px;
+  font-size: 40px;
+  margin: 0;
+  padding-top: 2%
 }
 
 #charDeck {
   font-size: 19px;
   width: 80%;
-  padding-left: 10%
+  padding-left: 10%;
+  padding-bottom: 2%;
 }
 
 #charDeck img {
@@ -452,4 +455,8 @@ a.hover {
 #roundNumHeader{
   font-size: 40px;
   margin: 0px;
+}
+
+#charBio{
+  font-size: 25px;
 }

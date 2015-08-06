@@ -103,7 +103,9 @@ $(document).ready(function() {
       this.leftTeamCollection = this.collection.slice(0, 3)
       this.rightTeamCollection = this.collection.slice(3, 6)
       this.activeLeft = this.collection.models[0].attributes.image.small_url;
+      this.activeLeftName = this.collection.models[0].attributes.name;
       this.activeRight = this.collection.models[3].attributes.image.small_url;
+      this.activeRightName = this.collection.models[3].attributes.name;
       this.round = 1;
       this.previousRoundMessage = "";
       this.render()
@@ -292,6 +294,7 @@ $(document).ready(function() {
       } else {
         leftCharacter = this.leftTeamCollection[0]
         this.activeLeft = leftCharacter.attributes.image.small_url
+        this.activeLeftName = leftCharacter.attributes.name
       }
 
       if (this.rightTeamCollection.length === 0) {
@@ -300,6 +303,7 @@ $(document).ready(function() {
       } else {
         rightCharacter = this.rightTeamCollection[0]
         this.activeRight = rightCharacter.attributes.image.small_url
+        this.activeRightName = rightCharacter.attributes.name
       }
       this.round++;
       console.log('Done with a round')
