@@ -285,6 +285,10 @@ a.hover {
   border-radius: 25px;
   text-align: center;
 }
+
+#returnToCharSelect{
+  margin-bottom: 10px;
+}
 /*MAKES BUTTON ANIMATE AND CHANGE COLOR*/
 #removeCharacter:hover {
   background-color: #52DDFF;
@@ -388,8 +392,18 @@ a.hover {
 .userTeams{
   width: 50%;
 }
+
+.userTeams img {
+  width: 100px;
+  height: 140px;
+  margin: 0px 3px 3px 0px;
+  border: 2px solid grey;
+  border-radius: 5px;
+}
 .userNames, .userWins{
   width:25%;
+  margin-top: auto;
+  margin-bottom: auto;
 }
 
 #fightGrid{
@@ -418,4 +432,3 @@ a.hover {
 #topRow{
   display: -webkit-inline-box;
 }
-
