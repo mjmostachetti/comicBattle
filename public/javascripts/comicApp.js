@@ -566,7 +566,7 @@ $(document).ready(function() {
           break;
         case 6:
           $('#userInstruction').html(
-            'Click "Let\s Get It On!" Button Below!"')
+            'Click "Let\s Get It On!" Button Below!')
           break;
       }
       //$('#userInstruction').html()

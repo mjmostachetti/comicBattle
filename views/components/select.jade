@@ -28,14 +28,20 @@
 			)
 				img(src!="<%- c.get('image').thumb_url %>")
 			!="<% }) %>"
-	#removeCharacterDiv
-		button#removeCharacter.hvr-pulse Remove Character
-		button#saveTeam.hvr-pulse Save Your Team
-	#leaderboardLogout
-		button#leaderboard.hvr-pulse Leaderboard
-		button#logout.hvr-pulse Logout?	
+	#masterOfButtons
+		#removeCharacterDiv
+			div.padButtons
+				button#removeCharacter.hvr-pulse Remove Character
+			div.padButtons
+				button#leaderboard.hvr-pulse Leaderboard
+		#leaderboardLogout
+			div.padButtons
+				button#saveTeam.hvr-pulse Save Your Team
+			div.padButtons
+				button#logout.hvr-pulse Logout?	
 	#fightButtonDiv
 		button#fightButton.hvr-pulse Let's get it on!
+
 #charInformation
 	p#charName Hulk
 	p
