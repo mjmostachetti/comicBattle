@@ -278,6 +278,11 @@ a.hover {
   text-align: center;
 }
 
+#logout{
+  padding-left: 25px;
+  padding-right: 25px;
+}
+
 #returnToCharSelect{
   margin-top: 5px;
   margin-bottom: 10px;
@@ -465,4 +470,24 @@ a.hover {
 
 #charBio{
   font-size: 25px;
+}
+
+#versusRow{
+  display:flex;
+}
+
+#versus{
+  width:20%;
+}
+
+#activeRightName, #activeLeftName{
+  width: 40%;
+}
+
+#activeLeftName{
+  text-align: right;
+}
+
+#activeRightName{
+  text-align: left;
 }

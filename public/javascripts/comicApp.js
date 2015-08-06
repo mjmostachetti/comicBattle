@@ -195,7 +195,7 @@ $(document).ready(function() {
     },
     loss: function(team) {
       console.log(team + " wins!")
-      signedInUser.set('loss', signedInUser.get('win') + 1)
+      signedInUser.set('loss', signedInUser.get('loss') + 1)
     },
     win: function(team) {
       console.log(team + " wins!")
@@ -646,6 +646,11 @@ $(document).ready(function() {
         $('#removeCharacter').show()
       } else {
         $('#removeCharacter').hide()
+      }
+      if (signedInUser.get('heroNum') === 6) {
+        $('#fightButton').show()
+      } else {
+        $('#fightButton').hide()
       }
       this.updateUserInstruction(signedInUser)
     },
