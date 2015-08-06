@@ -17,11 +17,11 @@
         div
           button(id="slowFight" class="hvr-pulse") Round Battle
       #versusRow
-        div
+        div#activeLeftName
           h1!="<%= this.activeLeftName %>"
-        div
+        div#versus
           h1 VS
-        div
+        div#activeRightName
           h1!="<%= this.activeRightName %>"
       div
         img#activeLeft(src!="<%=this.activeLeft%>" )
