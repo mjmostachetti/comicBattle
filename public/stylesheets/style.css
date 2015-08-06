@@ -156,20 +156,20 @@ a.hover {
 #user-container{
   display: inline-flex;
   text-align: center;
-  width: 100%;
+  width: 80%;
   background-color: whitesmoke;
   border-radius: 25px;
+  border: 2px solid red;
 }
 
 #userInfo {
   display: inline-block;
-  background: black;
   margin-bottom: 20px;
   width: 100%;
   border-radius: 25px;
-  border: 2px solid red;
   color: red;
   font-family: 'Bangers', sans-serif;
+  text-align: center;
 }
 
 #team1 img, #team2 img{
@@ -178,7 +178,11 @@ a.hover {
   padding: 2px;
 }
 
-#team1, #team2, #user-stats{
+#team1, #team2{
+  width: 35%;
+}
+
+#user-stats{
   width: 30%;
 }
 
@@ -204,7 +208,7 @@ a.hover {
   overflow: auto;
   font-family: 'Changa One', sans-serif;
   color: red;
-  padding: 20px;
+  width:80%;
 }
 
 /***********************
@@ -293,17 +297,12 @@ a.hover {
 
 #charName {
   font-size: 25px;
-  margin-left: 10%;
-}
-
-#charBio {
-  margin-left: 10%;
 }
 
 #charDeck {
   font-size: 19px;
-  width: 400px;
-  margin-left: 10%;
+  width: 80%;
+  padding-left: 10%
 }
 
 #charDeck img {
