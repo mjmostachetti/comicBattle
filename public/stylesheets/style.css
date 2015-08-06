@@ -477,7 +477,7 @@ a.hover {
 }
 
 #versus{
-  width:20%;
+  width:10%;
 }
 
 #activeRightName, #activeLeftName{
@@ -486,6 +486,12 @@ a.hover {
 
 #activeLeftName{
   text-align: right;
+  width:45%;
+}
+
+#activeLeftNameHeader, #activeRightNameHeader{
+  font-size: 50px;
+  margin:0;
 }
 
 #activeRightName{
