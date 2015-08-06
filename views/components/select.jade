@@ -4,7 +4,7 @@
 #tableDiv
 	h2!="Prepare for Battle, <%= signedInUser.attributes.username %>!"
 	h2#userInstruction Pick 3 More Characters For Your Team!
-	h2#userInstruction2!="....Or Battle Other Users!"
+	h2#userInstruction2!="....Or Battle Other Players!"
 	select#battleOtherUsers
 		option(class="opposingTeam") - Select Player to Battle -
 		!="<% allUsers.each(function(user,index){ %>"
@@ -28,16 +28,22 @@
 			)
 				img(src!="<%- c.get('image').thumb_url %>")
 			!="<% }) %>"
-	#removeCharacterDiv
-		button#removeCharacter.hvr-pulse Remove Character
-		button#saveTeam.hvr-pulse Save Your Team
-	#leaderboardLogout
-		button#leaderboard.hvr-pulse Leaderboard
-		button#logout.hvr-pulse Logout?	
+	#masterOfButtons
+		#removeCharacterDiv
+			div.padButtons
+				button#removeCharacter.hvr-pulse Remove Character
+			div.padButtons
+				button#leaderboard.hvr-pulse Leaderboard
+		#leaderboardLogout
+			div.padButtons
+				button#saveTeam.hvr-pulse Save Your Team
+			div.padButtons
+				button#logout.hvr-pulse Logout?	
 	#fightButtonDiv
 		button#fightButton.hvr-pulse Let's get it on!
+
 #charInformation
-	p#charName Hulk
+	h1#charName Hulk
 	p
 		img#charImg(src="http://static.comicvine.com/uploads/scale_small/14/140903/4127149-11.jpg")
 	h2#charBio Character Bio

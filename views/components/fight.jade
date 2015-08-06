@@ -13,9 +13,16 @@
         div
           button(id="fight" class="hvr-pulse") Instant Battle
         div
-          h1!= 'Round : ' + '<%=this.round%>'
+          h1#roundNumHeader!= 'Round # ' + '<%=this.round%>'
         div
           button(id="slowFight" class="hvr-pulse") Round Battle
+      #versusRow
+        div
+          h1!="<%= this.activeLeftName %>"
+        div
+          h1 VS
+        div
+          h1!="<%= this.activeRightName %>"
       div
         img#activeLeft(src!="<%=this.activeLeft%>" )
         img#activeRight(src!="<%=this.activeRight%>")
