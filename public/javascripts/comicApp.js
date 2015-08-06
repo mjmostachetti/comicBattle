@@ -418,7 +418,7 @@ $(document).ready(function() {
       "click #logout": "logout",
       "click #saveTeam": "saveYourTeam",
       "click #leaderboard": "loadLeaderBoardView",
-      "click #returnToCharSelect": "loadCharView"
+      "click #returnToCharSelect": "loadCharView",
     },
     loadLeaderBoardView: function() {
       this.setCurrentView(new LeaderboardView())
@@ -630,6 +630,7 @@ $(document).ready(function() {
       console.log("These are the characters : ")
       console.log(characterList)
       this.$el.removeClass("blue")
+      this.$el.removeClass("black")
       this.$el.removeClass("login")
         //event.preventDefault()
       $('#userInfo').show()
