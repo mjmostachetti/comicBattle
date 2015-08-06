@@ -647,6 +647,11 @@ $(document).ready(function() {
       } else {
         $('#removeCharacter').hide()
       }
+      if (signedInUser.get('heroNum') === 6) {
+        $('#fightButton').show()
+      } else {
+        $('#fightButton').hide()
+      }
       this.updateUserInstruction(signedInUser)
     },
     setCurrentView: function(newView) {
