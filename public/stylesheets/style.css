@@ -284,6 +284,7 @@ a.hover {
 }
 
 #returnToCharSelect{
+  margin-top: 5px;
   margin-bottom: 10px;
 }
 /*MAKES BUTTON ANIMATE AND CHANGE COLOR*/
@@ -397,15 +398,20 @@ a.hover {
 
 #leaderboardDiv{
   text-align: center;
+  margin-top: 5px;
 }
 
 .leaderboardList {
   display:inline-flex;
   width:75%;
+  border: 3px solid grey;
+  margin: 5px 0 5px 0;
+  border-radius: 25px;
 }
 
 .userTeams{
   width: 50%;
+  padding-top: 5px;
 }
 
 .userTeams img {
