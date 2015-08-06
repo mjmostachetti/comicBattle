@@ -422,6 +422,7 @@ $(document).ready(function() {
     },
     loadLeaderBoardView: function() {
       this.setCurrentView(new LeaderboardView())
+      this.$el.addClass("black")
     },
     saveYourTeam: function() {
       console.log(signedInUser)
@@ -441,7 +442,6 @@ $(document).ready(function() {
       this.setCurrentView(new LoginView())
       this.$el.addClass("blue")
       this.$el.addClass("login")
-      this.$el.removeClass("black")
     },
     // create display for character information when hovering over the characters
     displayCharacterInfo: function(evt) {
@@ -573,14 +573,8 @@ $(document).ready(function() {
     },
     addFightButton: function(model) {
       if (signedInUser.get('heroNum') === 6) {
-        /*console.log("FIGHT!")
-          //this.$el.append('<button id="fightButton">Let\'s get it on!</button>')
-        $('#tableDiv').append(
-          '<div id="fightButtonDiv"><button id="fightButton" class="hvr-pulse">Let\'s get it on!</button></div>'
-        )*/
         $('#fightButton').show()
       } else {
-        //$('#fightButton').remove()
         $('#fightButton').hide()
       }
     },
@@ -637,7 +631,6 @@ $(document).ready(function() {
       console.log(characterList)
       this.$el.removeClass("blue")
       this.$el.removeClass("login")
-      this.$el.addClass("black")
         //event.preventDefault()
       $('#userInfo').show()
       this.setCurrentView(new CharactersView({

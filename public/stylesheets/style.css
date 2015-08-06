@@ -39,22 +39,26 @@ body {
 }
 
 #comicapp.login {
-    margin: 0 auto;
-    padding: 10px;
-    width: 25%;
+  margin: 0 auto;
+  padding: 10px;
+  width: 25%;
 }
 
 .blue {
-  background-color: navy;
+  border: 2px solid red;
+  border-radius: 25px;
+  background-color: #001FE2;
 }
 
 .black {
   background-color: black;
+  border: 2px solid red;
+  border-radius: 25px;
 }
 
 .signup {
-    cursor: pointer;
-    opacity: none;
+  cursor: pointer;
+  opacity: none;
 }
 
 #loginButton {
@@ -89,8 +93,7 @@ body {
 
 #comicapp {
   color: red;
-  border: 2px solid red;
-  border-radius: 25px;
+
   font-family: 'Bangers', sans-serif;
   text-align: center;
   width: 100%;
@@ -196,6 +199,7 @@ a.hover {
 .character-view-main {
   display : inline-flex;
   background: black;
+  border: 2px solid red;
   border-radius: 25px;
   overflow: auto;
   font-family: 'Changa One', sans-serif;
@@ -236,6 +240,12 @@ a.hover {
   height: 40%;
   padding: 20px;
   background: black;
+  border: 2px solid red;
+  border-radius: 25px;
+}
+
+#fight-view img{
+  height: 450px;
 }
 
 #fightButtonDiv{
@@ -312,9 +322,6 @@ a.hover {
   border-radius: 15px;
   overflow: hidden;
   height: 450px;
-  margin: 0 auto;
-  margin-top: 30px;
-  margin-left: 10%;
 }
 
 #fight {
@@ -356,22 +363,14 @@ a.hover {
   position: absolute;
   top: 50px;
   left: 50px;
-}
-
-/*#user-team{
   width: 200px;
-  margin-left: 10%;
 }
 
-#user-team img{
-  width: 110px;
-  height: 160px;
+#team-battle-info img{
+  width: 90px;
+  height: 130px;
+  padding: 3px;
 }
-
-#computer-team{
-  width: 200px;
-  margin-right: 10%;
-}*/
 
 #userInstruction{
   margin: 0;
