@@ -162,15 +162,21 @@ router.get('/api/characters', function(request, response) {
 
 
 //define api 'GET' request to return all the users
-router.get('/api/users', function(request, response) {
-	db.search('userData', '*').then(function(resp) {
+router.get('/api/users', function(request, response) {	
+	db.search('userData', '*',
+		{
+			limit: 100
+		}).then(function(resp) {
 		console.log("This is all of the userData :")
+		console.log(resp.body)
 		console.log(resp.body.results)
+		console.log(resp.body.results.length)
 		var userArray = []
 		resp.body.results.forEach(function(item) {
-			console.log(item.value)
+			//console.log(item.value)
 			userArray.push(item.value)
 		})
+		console.log("done!")
 		response.json(userArray)
 	})
 });
