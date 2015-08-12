@@ -28,6 +28,8 @@ input[type="password"]:focus {
 body {
   padding: 25px;
   font: 14px "Changa One", Helvetica, Arial, sans-serif;
+  text-shadow: 2px 2px 2px black;
+
 }
 
 /***********************
