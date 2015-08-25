@@ -198,8 +198,6 @@ a.hover {
 
 #tableDiv{
   display: block;
-  width: 50%;
-  text-align: -webkit-center;
 }
 
 .character-view-main {
@@ -239,10 +237,6 @@ a.hover {
   overflow: hidden;
 }
 
-#charInformation{
-  width: 50%;
-}
-
 #fight-view {
   height: 40%;
   padding: 20px;
@@ -277,6 +271,7 @@ a.hover {
   font-size: 20px;
   border-radius: 25px;
   text-align: center;
+  color: black;
 }
 
 #logout{
@@ -289,7 +284,7 @@ a.hover {
   margin-bottom: 10px;
 }
 /*MAKES BUTTON ANIMATE AND CHANGE COLOR*/
-#removeCharacter:hover {
+.removeCharacter:hover {
   background-color: #52DDFF;
 }
 
@@ -321,8 +316,8 @@ a.hover {
 
 #charDeck {
   font-size: 19px;
-  width: 80%;
-  padding-left: 10%;
+  padding-left: 5%;
+  padding-right: 5%;
   padding-bottom: 2%;
 }
 

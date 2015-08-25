@@ -125,7 +125,7 @@ router.post('/index', function(request, response) {
 // api call for the CharactersCollection
 router.get('/api/characters', function(request, response) {
 	console.log("This is an array of the character IDs : ");
-	console.log(characterIDs)
+	//console.log(characterIDs)
 	var counter = 0;
 	var arrayOfCharacterObjs = [];
 	// for each index in the characterID.js array, hit the api for the name, image,powers,id
@@ -144,6 +144,10 @@ router.get('/api/characters', function(request, response) {
 					writeToThis += chunk;
 				});
 				res.on('end', function() {
+					/*
+
+					Uncomment if having issues with heroku again. Seems like an IP issue...
+
 					console.log("This is res: ")
 					console.log(res.headers['content-type'])
 					console.log(res.headers)
@@ -152,6 +156,7 @@ router.get('/api/characters', function(request, response) {
 						res.headers['content-type'] = 'application/json'
 						console.log(res.headers)
 					}
+					*/
 					var charJSON = JSON.parse(writeToThis);
 					//console.log(charJSON.results)
 					var resultsJSON = charJSON.results;
@@ -160,7 +165,7 @@ router.get('/api/characters', function(request, response) {
 					//console.log("When the counter is: " + characterIDs.length + ", return JSON of all characters.")
 					arrayOfCharacterObjs.push(resultsJSON);
 					if (counter === characterIDs.length) {
-						console.log(arrayOfCharacterObjs)
+						//console.log(arrayOfCharacterObjs)
 						response.json(arrayOfCharacterObjs);
 					}
 				});
