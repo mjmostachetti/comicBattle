@@ -12,10 +12,11 @@
     "express": "~4.12.2",
     "jade": "~1.9.2",
     "morgan": "~1.5.1",
+    "node-sass": "^3.2.0",
     "orchestrate": "^0.4.4",
     "pwd": "0.0.4",
-    "serve-favicon": "~2.2.0",
-    "request": "~2.58.0"
+    "request": "~2.58.0",
+    "serve-favicon": "~2.2.0"
   },
   "description": "a fun superhero battle game",
   "main": "app.js",
