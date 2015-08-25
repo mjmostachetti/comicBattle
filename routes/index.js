@@ -124,7 +124,7 @@ router.post('/index', function(request, response) {
 // api call for the CharactersCollection
 router.get('/api/characters', function(request, response) {
 	console.log("This is an array of the character IDs : ");
-	//console.log(characterIDs)
+	console.log(characterIDs)
 	var counter = 0;
 	var arrayOfCharacterObjs = [];
 	// for each index in the characterID.js array, hit the api for the name, image,powers,id
