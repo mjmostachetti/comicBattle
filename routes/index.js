@@ -146,6 +146,7 @@ router.get('/api/characters', function(request, response) {
 					console.log("This is res: ")
 					console.log(res.headers['content-type'])
 					console.log(res.headers)
+					console.log(writeToThis)
 					if(res.headers['content-type'] === 'text/html'){
 						res.headers['content-type'] = 'application/json'
 						console.log(res.headers)
