@@ -120,6 +120,7 @@ router.post('/index', function(request, response) {
 
 // another api key:72e9a1878dcfdf40e3c1db8d52883e44a5ef37ba
 // api key: f6539c8aca297ac9f221c04eb1d0fa3937e02354
+// yet another: ebad02dbb992233682ea82d4bf408a1466e1e434
 
 // api call for the CharactersCollection
 router.get('/api/characters', function(request, response) {
@@ -135,7 +136,7 @@ router.get('/api/characters', function(request, response) {
 	characterIDs.forEach(function(item) {
 		http.get('http://www.comicvine.com/api/character/' +
 			'4005-' + item.id +
-			'/?api_key=ebad02dbb992233682ea82d4bf408a1466e1e434&' +
+			'/?api_key=f6539c8aca297ac9f221c04eb1d0fa3937e02354&' +
 			'field_list=name,image,powers,deck,id&format=json',
 			function(res) {
 				var writeToThis = '';
