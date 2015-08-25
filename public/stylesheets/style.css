@@ -155,9 +155,6 @@ a.hover {
 }
 
 #user-container{
-  display: inline-flex;
-  text-align: center;
-  width: 80%;
   background-color: whitesmoke;
   border-radius: 25px;
   border: 2px solid red;
@@ -180,20 +177,12 @@ a.hover {
   padding: 2px;
 }
 
-#team1, #team2{
-  width: 35%;
-}
-
-#user-stats{
-  width: 30%;
-}
-
 #user-stats p {
   font-size: 20px;
 }
 
 #chargrid {
-  margin-top: 25px;
+  margin: auto;
 }
 
 #tableDiv{
