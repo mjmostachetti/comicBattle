@@ -143,6 +143,8 @@ router.get('/api/characters', function(request, response) {
 					writeToThis += chunk;
 				});
 				res.on('end', function() {
+					console.log("This is res: ")
+					console.log(res.headers)
 					var charJSON = JSON.parse(writeToThis);
 					//console.log(charJSON.results)
 					var resultsJSON = charJSON.results;
@@ -233,6 +235,10 @@ router.get('/updateMerge', function(request, response) {
 	}).fail(function(err) {
 		console.log(err)
 	})
+})
+
+router.get('*', function(request,response){
+	response.send("Not Found");
 })
 
 module.exports = router;
