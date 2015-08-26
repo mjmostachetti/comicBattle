@@ -9,6 +9,7 @@ input[type="text"] {
   appearance: none;
   box-shadow: none;
   border-radius: 15px;
+  color:black;
 }
 input[type="text"]:focus {
   outline: none;
@@ -20,6 +21,7 @@ input[type="password"] {
   appearance: none;
   box-shadow: none;
   border-radius: 15px;
+  color:black;
 }
 input[type="password"]:focus {
   outline: none;
@@ -72,7 +74,7 @@ body {
   font-family: 'Changa One', sans-serif;
   border: none;
   border-radius: 25px;
-  margin-left: 120px;
+  color:black;
 }
 
 #loginButton:hover {
@@ -89,7 +91,7 @@ body {
   font-family: 'Changa One', sans-serif;
   border: none;
   border-radius: 25px;
-  margin-left: 120px;
+  color:black;
 }
 
 #comicapp {
