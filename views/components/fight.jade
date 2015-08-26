@@ -10,20 +10,22 @@
       //#team-battle-info 
     #twoActivePlayers.col-md-8
       #topRow.row
-        div.col-md-4
+        div.col-md-4.col-sm-4
           button(id="fight" class="hvr-pulse") Instant Battle
-        div.col-md-4
+        div.col-md-4.col-sm-4
           h1#roundNumHeader!= 'Round # ' + '<%=this.round%>'
-        div.col-md-4
+        div.col-md-4.col-sm-4
           button(id="slowFight" class="hvr-pulse") Round Battle
       #versusRow.row
-        div#activeLeftName.col-md-6
+        div#activeLeftName.col-md-5.col-sm-5
           h1#activeLeftNameHeader!="<%= this.activeLeftName %>"
-        div#activeRightName.col-md-6
+        div.col-md-2.col-sm-2
+          h1 VS
+        div#activeRightName.col-md-5.col-sm-5
           h1#activeRightNameHeader!="<%= this.activeRightName %>"
       div.row
-        img#activeLeft.col-md-6(src!="<%=this.activeLeft%>" )
-        img#activeRight.col-md-6(src!="<%=this.activeRight%>")
+        img#activeLeft.col-md-6.col-sm-6(src!="<%=this.activeLeft%>" )
+        img#activeRight.col-md-6.col-sm-6(src!="<%=this.activeRight%>")
       div.row
         h1.col-md-12!= '<%=this.previousRoundMessage%>'
     #computer-team.col-md-2

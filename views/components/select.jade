@@ -3,8 +3,8 @@
 	.row
 		#tableDiv.col-md-6
 			h2!="Prepare for Battle, <%= signedInUser.attributes.username %>!"
-			h2#userInstruction Pick 3 More Characters For Your Team!
-			h2#userInstruction2!="....Or Battle Other Players!"
+			h3#userInstruction Pick 3 More Characters For Your Team!
+			h3#userInstruction2!="....Or Battle Other Players!"
 			select#battleOtherUsers
 				option(class="opposingTeam") - Select Player to Battle -
 				!="<% allUsers.each(function(user,index){ %>"
@@ -29,18 +29,19 @@
 						img(src!="<%- c.get('image').thumb_url %>")
 					!="<% }) %>"
 			#masterOfButtons
-				#removeCharacterDiv
-					div.padButtons
+				#removeCharacterDiv.row
+					div.padButtons.col-md-6.col-sm-6.col-xs-12
 						button#removeCharacter.hvr-pulse.removeCharacter Remove Character
-					div.padButtons
+					div.padButtons.col-md-6.col-sm-6.col-xs-12
 						button#leaderboard.hvr-pulse Leaderboard
-				#leaderboardLogout
-					div.padButtons
+				#leaderboardLogout.row
+					div.padButtons.col-md-6.col-sm-6.col-xs-12
 						button#saveTeam.hvr-pulse Save Your Team
-					div.padButtons
+					div.padButtons.col-md-6.col-sm-6.col-xs-12
 						button#logout.hvr-pulse Logout?	
-			#fightButtonDiv
-				button#fightButton.hvr-pulse Let's get it on!
+				#fightButtonDiv.row
+					div.padButtons.col-md-12
+						button#fightButton.hvr-pulse Let's get it on!
 
 		#charInformation.col-md-6
 			h1#charName Hulk

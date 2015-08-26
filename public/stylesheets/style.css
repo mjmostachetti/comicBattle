@@ -207,14 +207,7 @@ a.hover {
 ***********************/
 
 .character{
-  width: 80px;
-  height: 120px;
-  border: 3px solid grey;
-  border-radius: 5%;
-}
-
-.character:hover {
-  border: 3px solid red;
+  width: 90px
 }
 
 .character img {
@@ -245,10 +238,6 @@ a.hover {
   color: black;
 }
 
-#fightButton:hover {
-  background-color: #52DDFF;
-}
-
 #removeCharacter, #logout, #saveTeam, #leaderboard, #returnToCharSelect {
   background-color: red;
   text-decoration: none;
@@ -274,26 +263,6 @@ a.hover {
 /*MAKES BUTTON ANIMATE AND CHANGE COLOR*/
 .removeCharacter:hover {
   background-color: #52DDFF;
-}
-
-#removeCharacterDiv, #leaderboardLogout{
-  text-align: center;
-  width:50%;
-}
-
-#removeCharacterDiv{
-  text-align: right;
-  padding-right: 5px;
-}
-
-#leaderboardLogout{
-  text-align: left;
-  padding-left: 5px;
-}
-
-#fightButtonDiv{
-  text-align: center;
-  padding-top: 5px;
 }
 
 #charName {
@@ -325,6 +294,7 @@ a.hover {
   border-radius: 15px;
   overflow: hidden;
   height: 600px;
+  max-width: 100%;
 }
 
 #fight {
@@ -414,10 +384,6 @@ a.hover {
   padding-bottom: 1%;
 }
 
-#masterOfButtons{
-  display: flex;
-}
-
 .padButtons{
   padding-top: 5px;
 }
@@ -434,4 +400,12 @@ a.hover {
 #activeLeftNameHeader, #activeRightNameHeader{
   font-size: 50px;
   margin:0;
+}
+
+#battleOtherUsers{
+  margin: 3%;
+}
+
+#activeLeft, #activeRight{
+  max-width: 100%;
 }
