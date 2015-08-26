@@ -1,16 +1,18 @@
-#login-container
-h1.title COMIC BATTLE!!
-	p#welcome Welcome to Comic Battle! Create an account, choose your team, and fight other users from around the world!
-	h1 Login
-	form#login(action="/index" method="post")
-		h1 Username :
-		input#username(name="username" type="text" required)
-		h1 Password :
-		input#password(name="password" type="password" required)
-		if message
-			p=message
-		br
-		br
-		input#loginButton(type="submit" value="Login" class="hvr-pulse")
-		a#loadSignup(action="/signup" class="hvr-pulse")
-			p dont have an account?
+#login-container.login-container
+	.row
+		.col-md-12
+				h1 Welcome to Comic Battle! 
+				h2#welcome Create an account, choose your team, and fight other users from around the world!
+				h1 Login
+				form#login(action="/index" method="post")
+					h1 Username :
+					input#username(name="username" type="text" required)
+					h1 Password :
+					input#password(name="password" type="password" required)
+					if message
+						p=message
+					br
+					br
+					input#loginButton(type="submit" value="Login" class="hvr-pulse")
+					a#loadSignup(action="/signup" class="hvr-pulse")
+						p dont have an account?
