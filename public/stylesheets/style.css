@@ -29,7 +29,6 @@ body {
   padding: 25px;
   font: 14px "Changa One", Helvetica, Arial, sans-serif;
   text-shadow: 2px 2px 2px black;
-
 }
 
 /***********************
@@ -49,14 +48,13 @@ body {
 .blue {
   border: 2px solid red;
   border-radius: 25px;
-  background-color: #001FE2;
-}
+  background: rgba(0,31,226, .65)}
 
-.black {
-  background-color: black;
+/*.black {
   border: 2px solid red;
   border-radius: 25px;
-}
+  background: rgba(0, 0, 0, .65);
+}*/
 
 .signup {
   cursor: pointer;
@@ -204,7 +202,7 @@ a.hover {
 
 .character-view-main {
   display : inline-flex;
-  background: black;
+  background: rgba(0, 0, 0, .75);
   border: 2px solid red;
   border-radius: 25px;
   overflow: auto;
@@ -246,7 +244,7 @@ a.hover {
 #fight-view {
   height: 40%;
   padding: 20px;
-  background: black;
+  background: rgba(0, 0, 0, .85);
   border: 2px solid red;
   border-radius: 25px;
 }
