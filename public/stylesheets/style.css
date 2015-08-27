@@ -156,7 +156,7 @@ a.hover {
   display: inline-flex;
   text-align: center;
   width: 80%;
-  background-color: whitesmoke;
+  background: rgba(255, 255, 255, .85);
   border-radius: 25px;
   border: 2px solid red;
   padding: .5%;
@@ -432,8 +432,12 @@ a.hover {
   text-align: center;
 }
 
-#user-team{
-  width: 15%;
+#user-team, #computer-team {
+  border: 1px solid red;
+  border-radius: 5px;
+  background: rgba(0, 0, 0, .5);
+  width: 20%;
+  letter-spacing: 2px;
 }
 
 #twoActivePlayers{
@@ -443,10 +447,7 @@ a.hover {
 #activeLeft, #activeRight{
   width: 350px;
   height: 650px;
-}
-
-#computer-team{
-  width:15%;
+  margin: 0 5px 0 5px;
 }
 
 #topRow{
