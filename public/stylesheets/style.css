@@ -55,6 +55,23 @@ body {
   border-left: 2px solid red;
 }
 
+/*MAKES BUTTON ANIMATE AND CHANGE COLOR*/
+.goTime:hover {
+  background-color: #52DDFF;
+}
+
+.button {
+  cursor: pointer;
+  font-weight: bold;
+  background-color: red;
+  font-size: 20px;
+  text-decoration: none;
+  padding: 10px;
+  font-family: 'Changa One', sans-serif;
+  border: none;
+  border-radius: 25px;
+}
+
 #loadSignup {
   margin-left: 5px;
 }
@@ -68,7 +85,13 @@ body {
 .blue {
   border: 2px solid red;
   border-radius: 25px;
-  background: rgba(0,31,226, .65)
+  background: rgba(0, 31, 226, .75)
+}
+
+.black {
+  border: 2px solid red;
+  border-radius: 25px;
+  background: rgba(0, 0, 0, .85);
 }
 
 .signup {
@@ -76,33 +99,7 @@ body {
   opacity: none;
 }
 
-#loginButton {
-  cursor: pointer;
-  font-weight: bold;
-  background-color: red;
-  font-size: 20px;
-  text-decoration: none;
-  padding: 10px;
-  font-family: 'Changa One', sans-serif;
-  border: none;
-  border-radius: 25px;
-  margin-left: 120px;
-}
-
-#loginButton:hover, #signupButton:hover {
-  color: #52DDFF;
-}
-
-#signupButton {
-  cursor: pointer;
-  font-weight: bold;
-  background-color: red;
-  font-size: 20px;
-  text-decoration: none;
-  padding: 10px;
-  font-family: 'Changa One', sans-serif;
-  border: none;
-  border-radius: 25px;
+#loginButton, #signupButton {
   margin-left: 120px;
 }
 
@@ -118,10 +115,6 @@ body {
 a {
   color: red;
   text-decoration: underline;
-}
-
-a.hover {
-    color: red;
 }
 
 #loadLogin {
@@ -175,7 +168,7 @@ a.hover {
   display: inline-flex;
   text-align: center;
   width: 80%;
-  background: rgba(255, 255, 255, .85);
+  background: rgba(0, 0, 0, .75);
   border-radius: 25px;
   border: 2px solid red;
   padding: .5%;
@@ -268,34 +261,6 @@ a.hover {
   border-radius: 25px;
 }
 
-#fightButton {
-  background-color: red;
-  text-decoration: none;
-  padding: 10px;
-  font-family: 'Changa One', sans-serif;
-  border: none;
-  cursor: pointer;
-  border-radius: 25px;
-  font-size: 20px;
-  text-align: center;
-}
-
-#fightButton:hover {
-  background-color: #52DDFF;
-}
-
-#removeCharacter, #logout, #saveTeam, #leaderboard, #returnToCharSelect {
-  background-color: red;
-  text-decoration: none;
-  padding: 10px;
-  font-family: 'Changa One', sans-serif;
-  border: none;
-  cursor: pointer;
-  font-size: 20px;
-  border-radius: 25px;
-  text-align: center;
-}
-
 #logout{
   padding-left: 25px;
   padding-right: 25px;
@@ -304,10 +269,6 @@ a.hover {
 #returnToCharSelect{
   margin-top: 5px;
   margin-bottom: 10px;
-}
-/*MAKES BUTTON ANIMATE AND CHANGE COLOR*/
-#removeCharacter:hover {
-  background-color: #52DDFF;
 }
 
 #removeCharacterDiv, #leaderboardLogout{
@@ -371,7 +332,6 @@ a.hover {
   border-radius: 25px;
   font-size: 20px;
   margin-right: 15px;
-
 }
 
 #fight:hover {
@@ -500,6 +460,7 @@ a.hover {
 }
 
 #activeRightName, #activeLeftName{
+  letter-spacing: 5px;
   width: 40%;
 }
 
