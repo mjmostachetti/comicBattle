@@ -348,7 +348,7 @@ $(document).ready(function() {
 
   var CharactersView = Backbone.View.extend({
     tagName: 'div',
-    className: 'character-view-main',
+    className: 'character-view-main container',
     template: _.template($("#template-characterSelect").html()),
     events: {
       "change #battleOtherUsers": "loadOpposingTeam"

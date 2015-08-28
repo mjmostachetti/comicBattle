@@ -9,6 +9,7 @@ input[type="text"] {
   appearance: none;
   box-shadow: none;
   border-radius: 15px;
+  color:black;
 }
 input[type="text"]:focus {
   outline: none;
@@ -20,6 +21,7 @@ input[type="password"] {
   appearance: none;
   box-shadow: none;
   border-radius: 15px;
+  color:black;
 }
 input[type="password"]:focus {
   outline: none;
@@ -43,6 +45,16 @@ body {
     text-align: center;
     color: red;
 }
+
+#comicapp.login {
+  margin: 0 auto;
+  padding: 10px;
+}
+
+.blue {
+  border: 2px solid red;
+  border-radius: 25px;
+  background-color: #001FE2;
 
 .login-view .left-half {
   float: left;
@@ -70,6 +82,7 @@ body {
   font-family: 'Changa One', sans-serif;
   border: none;
   border-radius: 25px;
+  color:black;
 }
 
 #loadSignup {
@@ -91,6 +104,7 @@ body {
 .black {
   border: 2px solid red;
   border-radius: 25px;
+  color:black;
   background: rgba(0, 0, 0, .85);
 }
 
@@ -165,10 +179,11 @@ a {
 }
 
 #user-container{
+  background-color: black;
   display: inline-flex;
   text-align: center;
   width: 80%;
-  background: rgba(0, 0, 0, .75);
+  background: rgba(0, 0, 0, .85);
   border-radius: 25px;
   border: 2px solid red;
   padding: .5%;
@@ -190,37 +205,26 @@ a {
   padding: 2px;
 }
 
-#team1, #team2{
-  width: 35%;
-}
-
-#user-stats{
-  width: 30%;
-}
-
 #user-stats p {
   font-size: 20px;
 }
 
 #chargrid {
-  margin-top: 25px;
+  margin: auto;
 }
 
 #tableDiv{
   display: block;
-  width: 50%;
-  text-align: -webkit-center;
 }
 
 .character-view-main {
   display : inline-flex;
-  background: rgba(0, 0, 0, .75);
+  background: rgba(0, 0, 0, .85);
   border: 2px solid red;
   border-radius: 25px;
   overflow: auto;
   font-family: 'Changa One', sans-serif;
   color: red;
-  width:80%;
   padding: .5%;
 }
 
@@ -231,14 +235,7 @@ a {
 ***********************/
 
 .character{
-  width: 80px;
-  height: 120px;
-  border: 3px solid grey;
-  border-radius: 5%;
-}
-
-.character:hover {
-  border: 3px solid red;
+  width: 90px
 }
 
 .character img {
@@ -249,16 +246,37 @@ a {
   overflow: hidden;
 }
 
-#charInformation{
-  width: 50%;
-}
-
 #fight-view {
-  height: 40%;
   padding: 20px;
   background: rgba(0, 0, 0, .85);
   border: 2px solid red;
   border-radius: 25px;
+}
+
+#fightButton {
+  background-color: red;
+  text-decoration: none;
+  padding: 10px;
+  font-family: 'Changa One', sans-serif;
+  border: none;
+  cursor: pointer;
+  border-radius: 25px;
+  font-size: 20px;
+  text-align: center;
+  color: black;
+}
+
+#removeCharacter, #logout, #saveTeam, #leaderboard, #returnToCharSelect {
+  background-color: red;
+  text-decoration: none;
+  padding: 10px;
+  font-family: 'Changa One', sans-serif;
+  border: none;
+  cursor: pointer;
+  font-size: 20px;
+  border-radius: 25px;
+  text-align: center;
+  color: black;
 }
 
 #logout{
@@ -271,24 +289,9 @@ a {
   margin-bottom: 10px;
 }
 
-#removeCharacterDiv, #leaderboardLogout{
-  text-align: center;
-  width:50%;
-}
-
-#removeCharacterDiv{
-  text-align: right;
-  padding-right: 5px;
-}
-
-#leaderboardLogout{
-  text-align: left;
-  padding-left: 5px;
-}
-
-#fightButtonDiv{
-  text-align: center;
-  padding-top: 5px;
+/*MAKES BUTTON ANIMATE AND CHANGE COLOR*/
+.removeCharacter:hover {
+  background-color: #52DDFF;
 }
 
 #charName {
@@ -299,8 +302,8 @@ a {
 
 #charDeck {
   font-size: 19px;
-  width: 80%;
-  padding-left: 10%;
+  padding-left: 5%;
+  padding-right: 5%;
   padding-bottom: 2%;
 }
 
@@ -320,17 +323,19 @@ a {
   border-radius: 15px;
   overflow: hidden;
   height: 600px;
+  max-width: 100%;
 }
 
 #fight {
   background-color: red;
   text-decoration: none;
-  padding: 10px;
   font-family: 'Changa One', sans-serif;
   border: none;
   cursor: pointer;
   border-radius: 25px;
   font-size: 20px;
+  color:black;
+  padding: 10px;
   margin-right: 15px;
 }
 
@@ -341,13 +346,13 @@ a {
 #slowFight {
   background-color: red;
   text-decoration: none;
-  padding: 10px;
   font-family: 'Changa One', sans-serif;
   border: none;
   cursor: pointer;
   border-radius: 25px;
   font-size: 20px;
-  margin-left: 15px;
+  color:black;
+  padding: 10px;
 }
 
 #slowFight:hover {
@@ -430,12 +435,7 @@ a {
 }
 
 #topRow{
-  display: -webkit-inline-box;
   padding-bottom: 1%;
-}
-
-#masterOfButtons{
-  display: flex;
 }
 
 .padButtons{
@@ -474,6 +474,10 @@ a {
   margin:0;
 }
 
-#activeRightName{
-  text-align: left;
+#battleOtherUsers{
+  margin: 3%;
+}
+
+#activeLeft, #activeRight{
+  max-width: 100%;
 }
