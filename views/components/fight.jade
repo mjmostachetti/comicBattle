@@ -29,6 +29,12 @@
       div.row
         h1.col-md-12!= '<%=this.previousRoundMessage%>'
     #computer-team.col-md-2
+      div#bothActive
+        img#activeLeft(src!="<%=this.activeLeft%>" )
+        img#activeRight(src!="<%=this.activeRight%>")
+      div
+        h1!= '<%=this.previousRoundMessage%>'
+    #computer-team
       h1 Opposing Team
       each val in [3,4,5]
         img(src!='<%=this.collection.models['+val+'].attributes.image.thumb_url%>')

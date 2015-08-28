@@ -1,14 +1,13 @@
-#signup-container.signup-container
-	.row
-		.col-md-12
-			h1 Sign Up
-			form#signup(action="/signup" method="post")
-				h1 Pick Username :
-				input#username(name="username" type="text" required)
-				h1 Password :
-				input#password(name="password" type="password" required)
-				br
-				br
-				input#signupButton(type="submit" value="Signup")
-			a#loadLogin(action="/login" class="hvr-grow")
-				p already have an account?
+
+#signup-container
+	h1 Sign Up
+	form#signup(action="/signup" method="post")
+		h1 Pick Username :
+		input#username(name="username" type="text" required)
+		h1 Password :
+		input#password(name="password" type="password" required)
+		br
+		br
+		input#signupButton.goTime.button(type="submit" value="Signup" class="hvr-pulse")
+		a#loadLogin(action="/login" class="hvr-pulse")
+			p already have an account?

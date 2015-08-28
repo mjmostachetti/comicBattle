@@ -31,7 +31,11 @@ body {
   padding: 25px;
   font: 14px "Changa One", Helvetica, Arial, sans-serif;
   text-shadow: 2px 2px 2px black;
+}
 
+#welcome {
+  letter-spacing: 2px;
+  font-size: 1.5em;
 }
 
 /***********************
@@ -51,12 +55,57 @@ body {
   border: 2px solid red;
   border-radius: 25px;
   background-color: #001FE2;
+
+.login-view .left-half {
+  float: left;
+  width: 50%;
+  margin-right: 8px;
+}
+
+.login-view .right-half {
+  float: left;
+  border-left: 2px solid red;
+}
+
+/*MAKES BUTTON ANIMATE AND CHANGE COLOR*/
+.goTime:hover {
+  background-color: #52DDFF;
+}
+
+.button {
+  cursor: pointer;
+  font-weight: bold;
+  background-color: red;
+  font-size: 20px;
+  text-decoration: none;
+  padding: 10px;
+  font-family: 'Changa One', sans-serif;
+  border: none;
+  border-radius: 25px;
+  color:black;
+}
+
+#loadSignup {
+  margin-left: 5px;
+}
+
+#comicapp.login {
+  margin: 0 auto;
+  padding: 10px;
+  width: 50%;
+}
+
+.blue {
+  border: 2px solid red;
+  border-radius: 25px;
+  background: rgba(0, 31, 226, .75)
 }
 
 .black {
-  background-color: black;
   border: 2px solid red;
   border-radius: 25px;
+  color:black;
+  background: rgba(0, 0, 0, .85);
 }
 
 .signup {
@@ -64,34 +113,8 @@ body {
   opacity: none;
 }
 
-#loginButton {
-  cursor: pointer;
-  font-weight: bold;
-  background-color: red;
-  font-size: 20px;
-  text-decoration: none;
-  padding: 10px;
-  font-family: 'Changa One', sans-serif;
-  border: none;
-  border-radius: 25px;
-  color:black;
-}
-
-#loginButton:hover {
-  background-color: #52DDFF;
-}
-
-#signupButton {
-  cursor: pointer;
-  font-weight: bold;
-  background-color: red;
-  font-size: 20px;
-  text-decoration: none;
-  padding: 10px;
-  font-family: 'Changa One', sans-serif;
-  border: none;
-  border-radius: 25px;
-  color:black;
+#loginButton, #signupButton {
+  margin-left: 120px;
 }
 
 #comicapp {
@@ -104,12 +127,12 @@ body {
 }
 
 a {
-  color: #00B7FF;
-  float: right;
+  color: red;
+  text-decoration: underline;
 }
 
-a.hover {
-    color: red;
+#loadLogin {
+  margin-left: 10px;
 }
 
 #back {
@@ -156,7 +179,11 @@ a.hover {
 }
 
 #user-container{
-  background-color: whitesmoke;
+  background-color: black;
+  display: inline-flex;
+  text-align: center;
+  width: 80%;
+  background: rgba(0, 0, 0, .85);
   border-radius: 25px;
   border: 2px solid red;
   padding: .5%;
@@ -191,7 +218,8 @@ a.hover {
 }
 
 .character-view-main {
-  background: black;
+  display : inline-flex;
+  background: rgba(0, 0, 0, .85);
   border: 2px solid red;
   border-radius: 25px;
   overflow: auto;
@@ -220,7 +248,7 @@ a.hover {
 
 #fight-view {
   padding: 20px;
-  background: black;
+  background: rgba(0, 0, 0, .85);
   border: 2px solid red;
   border-radius: 25px;
 }
@@ -260,6 +288,7 @@ a.hover {
   margin-top: 5px;
   margin-bottom: 10px;
 }
+
 /*MAKES BUTTON ANIMATE AND CHANGE COLOR*/
 .removeCharacter:hover {
   background-color: #52DDFF;
@@ -307,6 +336,7 @@ a.hover {
   font-size: 20px;
   color:black;
   padding: 10px;
+  margin-right: 15px;
 }
 
 #fight:hover {
@@ -380,6 +410,30 @@ a.hover {
   margin-bottom: auto;
 }
 
+#fightGrid{
+  width: 95%;
+  display: inline-flex;
+  text-align: center;
+}
+
+#user-team, #computer-team {
+  border: 1px solid red;
+  border-radius: 5px;
+  background: rgba(0, 0, 0, .5);
+  width: 20%;
+  letter-spacing: 2px;
+}
+
+#twoActivePlayers{
+  width:70%;
+}
+
+#activeLeft, #activeRight{
+  width: 350px;
+  height: 650px;
+  margin: 0 5px 0 5px;
+}
+
 #topRow{
   padding-bottom: 1%;
 }
@@ -395,6 +449,24 @@ a.hover {
 
 #charBio{
   font-size: 25px;
+}
+
+#versusRow{
+  display:flex;
+}
+
+#versus{
+  width:10%;
+}
+
+#activeRightName, #activeLeftName{
+  letter-spacing: 5px;
+  width: 40%;
+}
+
+#activeLeftName{
+  text-align: right;
+  width:45%;
 }
 
 #activeLeftNameHeader, #activeRightNameHeader{
