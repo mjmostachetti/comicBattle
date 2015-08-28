@@ -31,6 +31,11 @@ body {
   text-shadow: 2px 2px 2px black;
 }
 
+#welcome {
+  letter-spacing: 2px;
+  font-size: 1.5em;
+}
+
 /***********************
  comicapp div and title
 ***********************/
@@ -39,22 +44,32 @@ body {
     color: red;
 }
 
+.login-view .left-half {
+  float: left;
+  width: 50%;
+  margin-right: 8px;
+}
+
+.login-view .right-half {
+  float: left;
+  border-left: 2px solid red;
+}
+
+#loadSignup {
+  margin-left: 5px;
+}
+
 #comicapp.login {
   margin: 0 auto;
   padding: 10px;
-  width: 25%;
+  width: 50%;
 }
 
 .blue {
   border: 2px solid red;
   border-radius: 25px;
-  background: rgba(0,31,226, .65)}
-
-/*.black {
-  border: 2px solid red;
-  border-radius: 25px;
-  background: rgba(0, 0, 0, .65);
-}*/
+  background: rgba(0,31,226, .65)
+}
 
 .signup {
   cursor: pointer;
@@ -74,8 +89,8 @@ body {
   margin-left: 120px;
 }
 
-#loginButton:hover {
-  background-color: #52DDFF;
+#loginButton:hover, #signupButton:hover {
+  color: #52DDFF;
 }
 
 #signupButton {
@@ -101,12 +116,16 @@ body {
 }
 
 a {
-  color: #00B7FF;
-  float: right;
+  color: red;
+  text-decoration: underline;
 }
 
 a.hover {
     color: red;
+}
+
+#loadLogin {
+  margin-left: 10px;
 }
 
 #back {
