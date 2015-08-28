@@ -11,11 +11,11 @@
     #twoActivePlayers
       #topRow
         div
-          button(id="fight" class="hvr-pulse") Instant Battle
+          button(id="fight" class="hvr-pulse button") Instant Battle
         div
           h1#roundNumHeader!= 'Round # ' + '<%=this.round%>'
         div
-          button(id="slowFight" class="hvr-pulse") Round Battle
+          button(id="slowFight" class="hvr-pulse button") Round Battle
       #versusRow
         div#activeLeftName
           h1#activeLeftNameHeader!="<%= this.activeLeftName %>"
