@@ -135,7 +135,7 @@ router.get('/api/characters', function(request, response) {
 	characterIDs.forEach(function(item) {
 		http.get('http://www.comicvine.com/api/character/' +
 			'4005-' + item.id +
-			'/?api_key=ebad02dbb992233682ea82d4bf408a1466e1e434&' +
+			'/?api_key=72e9a1878dcfdf40e3c1db8d52883e44a5ef37ba' +
 			'field_list=name,image,powers,deck,id&format=json',
 			function(res) {
 				var writeToThis = '';
@@ -162,11 +162,10 @@ router.get('/api/characters', function(request, response) {
 
 
 //define api 'GET' request to return all the users
-router.get('/api/users', function(request, response) {	
-	db.search('userData', '*',
-		{
-			limit: 100
-		}).then(function(resp) {
+router.get('/api/users', function(request, response) {
+	db.search('userData', '*', {
+		limit: 100
+	}).then(function(resp) {
 		console.log("This is all of the userData :")
 		console.log(resp.body)
 		console.log(resp.body.results)
