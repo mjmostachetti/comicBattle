@@ -1,34 +1,28 @@
-#fightContainer.container
- div.row(id="fight-view")
+#fightContainer
+ div(id="fight-view")
   #fightGrid
-    #user-team.col-md-2
+    #user-team
       h1 Your Team
       each val in [0,1,2]
         img(src!='<%=this.collection.models['+val+'].attributes.image.thumb_url%>')
         p!= '<%=this.collection.models[' + val + '].attributes.name%>'
         p!= 'Character Defeated : ' + '<%=this.collection.models['+ val + '].attributes.ko%>'
       //#team-battle-info 
-    #twoActivePlayers.col-md-8
-      #topRow.row
-        div.col-md-4.col-sm-4
-          button(id="fight" class="hvr-pulse") Instant Battle
-        div.col-md-4.col-sm-4
+    #twoActivePlayers
+      #topRow
+        div
+          button(id="fight" class="hvr-pulse button") Instant Battle
+        div
           h1#roundNumHeader!= 'Round # ' + '<%=this.round%>'
-        div.col-md-4.col-sm-4
-          button(id="slowFight" class="hvr-pulse") Round Battle
-      #versusRow.row
-        div#activeLeftName.col-md-5.col-sm-5
+        div
+          button(id="slowFight" class="hvr-pulse button") Round Battle
+      #versusRow
+        div#activeLeftName
           h1#activeLeftNameHeader!="<%= this.activeLeftName %>"
-        div.col-md-2.col-sm-2
+        div#versus
           h1 VS
-        div#activeRightName.col-md-5.col-sm-5
+        div#activeRightName
           h1#activeRightNameHeader!="<%= this.activeRightName %>"
-      div.row
-        img#activeLeft.col-md-6.col-sm-6(src!="<%=this.activeLeft%>" )
-        img#activeRight.col-md-6.col-sm-6(src!="<%=this.activeRight%>")
-      div.row
-        h1.col-md-12!= '<%=this.previousRoundMessage%>'
-    #computer-team.col-md-2
       div#bothActive
         img#activeLeft(src!="<%=this.activeLeft%>" )
         img#activeRight(src!="<%=this.activeRight%>")

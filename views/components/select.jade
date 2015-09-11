@@ -1,52 +1,51 @@
 - var width = 5
 
-	.row
-		#tableDiv.col-md-6
-			h2!="Prepare for Battle, <%= signedInUser.attributes.username %>!"
-			h3#userInstruction Pick 3 More Characters For Your Team!
-			h3#userInstruction2!="....Or Battle Other Players!"
-			select#battleOtherUsers
-				option(class="opposingTeam") - Select Player to Battle -
-				!="<% allUsers.each(function(user,index){ %>"
-					!="<% if( signedInUser.attributes.username !== user.attributes.username ) { %>"
-						option(value!="<%= user.attributes.username %>" class="opposingTeam")!="<%= user.attributes.username %>"
-					!="<% } %>"
-				!="<% }) %>"
-			table#chargrid
-				tr
-					!="<% characters.each(function(c, i) { %>"
-					//- Close and re-open the table row tag every `width` items.
-					!="<% if (i && i % " + width + " === 0) { %>"
-						!="<%= '</tr><tr>' %>"
-					!="<% } %>"
-					td.character(
-						data-character-id!="<%- c.id %>"
-						data-character-img!="<%- c.get('image').thumb_url %>"
-						data-character-name!="<%- c.attributes.name %>"
-						data-character-deck!="<%- c.attributes.deck %>"
-						data-character-bigimage!="<%- c.attributes.image.small_url %>"
-					)
-						img(src!="<%- c.get('image').thumb_url %>")
-					!="<% }) %>"
-			#masterOfButtons
-				#removeCharacterDiv.row
-					div.padButtons.col-md-6.col-sm-6.col-xs-12
-						button#removeCharacter.hvr-pulse.removeCharacter.button Remove Character
-					div.padButtons.col-md-6.col-sm-6.col-xs-12
-						button#leaderboard.hvr-pulse.button Leaderboard
-				#leaderboardLogout.row
-					div.padButtons.col-md-6.col-sm-6.col-xs-12
-						button#saveTeam.hvr-pulse.button Save Your Team
-					div.padButtons.col-md-6.col-sm-6.col-xs-12
-						button#logout.hvr-pulse.button Logout?	
-				#fightButtonDiv.row
-					div.padButtons.col-md-12
-						button#fightButton.hvr-pulse.button Let's get it on!
+//- var users != "<% allUsers.models.length"
+#tableDiv
+	h2!="Prepare for Battle, <%= signedInUser.attributes.username %>!"
+	h2#userInstruction Pick 3 More Characters For Your Team!
+	h2#userInstruction2!="....Or Battle Other Players!"
+	select#battleOtherUsers
+		option(class="opposingTeam") - Select Player to Battle -
+		!="<% allUsers.each(function(user,index){ %>"
+			!="<% if( signedInUser.attributes.username !== user.attributes.username ) { %>"
+				option(value!="<%= user.attributes.username %>" class="opposingTeam")!="<%= user.attributes.username %>"
+			!="<% } %>"
+		!="<% }) %>"
+	table#chargrid
+		tr
+			!="<% characters.each(function(c, i) { %>"
+			//- Close and re-open the table row tag every `width` items.
+			!="<% if (i && i % " + width + " === 0) { %>"
+				!="<%= '</tr><tr>' %>"
+			!="<% } %>"
+			td.character(
+				data-character-id!="<%- c.id %>"
+				data-character-img!="<%- c.get('image').thumb_url %>"
+				data-character-name!="<%- c.attributes.name %>"
+				data-character-deck!="<%- c.attributes.deck %>"
+				data-character-bigimage!="<%- c.attributes.image.small_url %>"
+			)
+				img(src!="<%- c.get('image').thumb_url %>")
+			!="<% }) %>"
+	#masterOfButtons
+		#removeCharacterDiv
+			div.padButtons
+				button#removeCharacter.hvr-pulse.button Remove Character
+			div.padButtons
+				button#leaderboard.hvr-pulse.button Leaderboard
+		#leaderboardLogout
+			div.padButtons
+				button#saveTeam.hvr-pulse.button Save Your Team
+			div.padButtons
+				button#logout.hvr-pulse.button Logout?	
+	#fightButtonDiv
+		button#fightButton.goTime.hvr-pulse.button Let's get it on!
 
-		#charInformation.col-md-6
-			h1#charName Hulk
-			p
-				img#charImg(src="http://static.comicvine.com/uploads/scale_small/14/140903/4127149-11.jpg")
-			h2#charBio Character Bio
-			#charDeck 
-				p After being bombarded with a massive dose of gamma radiation while saving a young man's life during the testing of an experimental bomb, Dr. Robert Bruce Banner was transformed into the Incredible Hulk: a green behemoth who is the living personification of rage and pure physical strength. He has currently taken on a new persona: Doc Green.
+#charInformation
+	h1#charName Hulk
+	p
+		img#charImg(src="http://static.comicvine.com/uploads/scale_small/14/140903/4127149-11.jpg")
+	h2#charBio Character Bio
+	#charDeck 
+		p After being bombarded with a massive dose of gamma radiation while saving a young man's life during the testing of an experimental bomb, Dr. Robert Bruce Banner was transformed into the Incredible Hulk: a green behemoth who is the living personification of rage and pure physical strength. He has currently taken on a new persona: Doc Green.
